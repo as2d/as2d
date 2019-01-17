@@ -247,13 +247,13 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   //#region FILLSTYLE
   /**
    * An ArrayBuffer that contains 256 sets of 2 i32 values. For each fillStyle, if the fillStyle is
-   * a string, the second i32 value will be a pointer, otherwise, it's an `<i32>` representing the
+   * a string, the second i32 value will be a pointer, otherwise, it's a `usize` representing the
    * style's objectID
    */
-  private _fillStyleStack: ArrayBuffer = setArrayBufferValue2<i32>(
-    new ArrayBuffer(0xFF * 4 * 2),
-    <i32>StrokeFillStyleType.String,
-    <i32>changetype<usize>(defaultBlack),
+  private _fillStyleStack: ArrayBuffer = setArrayBufferValue2<usize>(
+    new ArrayBuffer(0xFF * sizeof<usize>() * 2),
+    <usize>StrokeFillStyleType.String,
+    changetype<usize>(defaultBlack),
   );
 
   /**
@@ -266,7 +266,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * A private member that contains a single pointer or id value that represents the last
    * fillStyle value written by a drawing operation
    */
-  private _currentFillStyleValue: i32 = <i32>changetype<usize>(defaultBlack);
+  private _currentFillStyleValue: usize = changetype<usize>(defaultBlack);
 
   /**
    * The CanvasRenderingContext2D.fillStyle property of the Canvas 2D API specifies the current text
@@ -274,12 +274,12 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   public get fillStyle(): string | null {
     var index: i32 = this._stackOffset * 2;
-    var fillStyleType: StrokeFillStyleType = <StrokeFillStyleType>LOAD<i32>(
+    var fillStyleType: StrokeFillStyleType = <StrokeFillStyleType>LOAD<usize>(
       this._fillStyleStack,
       index,
     );
     if (fillStyleType == StrokeFillStyleType.String, "current fillStyle is not a string") {
-      return changetype<string>(<usize>LOAD<i32>(this._fillStyleStack, index + 1));
+      return changetype<string>(LOAD<usize>(this._fillStyleStack, index + 1));
     }
     return null;
   }
@@ -288,8 +288,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     if (value == null) value = defaultBlack;
     var index: i32 = this._stackOffset * 2;
     var buff: ArrayBuffer = this._fillStyleStack;
-    STORE<i32>(buff, index, StrokeFillStyleType.String);
-    STORE<i32>(buff, index + 1, <i32>changetype<usize>(value));
+    STORE<usize>(buff, index, <usize>StrokeFillStyleType.String);
+    STORE<usize>(buff, index + 1, changetype<usize>(value));
   }
 
   /**
@@ -300,10 +300,10 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   private _updateFillStyle(): void {
     var buff: ArrayBuffer = this._fillStyleStack;
     var index: i32 = <i32>this._stackOffset * 2;
-    var styleType: StrokeFillStyleType = <StrokeFillStyleType>LOAD<i32>(buff, index);
-    var value: i32 = LOAD<i32>(buff, index + 1);
+    var styleType: StrokeFillStyleType = <StrokeFillStyleType>LOAD<usize>(buff, index);
+    var value: usize = LOAD<usize>(buff, index + 1);
     if (styleType != this._currentFillStyleType || value != this._currentFillStyleValue) {
-      var inst: CanvasInstruction
+      var inst: CanvasInstruction;
       if (styleType == StrokeFillStyleType.String) inst = CanvasInstruction.FillStyle;
       else if (styleType == StrokeFillStyleType.CanvasGradient) inst = CanvasInstruction.FillGradient;
       else inst = CanvasInstruction.FillPattern;

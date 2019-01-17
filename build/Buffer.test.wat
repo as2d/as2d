@@ -13,10 +13,11 @@
  (memory $0 1)
  (data (i32.const 8) "\04\00\00\00#\000\000\000\00")
  (data (i32.const 24) "\04\00\00\00n\00o\00n\00e\00")
- (data (i32.const 40) "\13\00\00\00~\00l\00i\00b\00/\00a\00r\00r\00a\00y\00b\00u\00f\00f\00e\00r\00.\00t\00s\00")
- (data (i32.const 88) "\1c\00\00\00~\00l\00i\00b\00/\00i\00n\00t\00e\00r\00n\00a\00l\00/\00a\00r\00r\00a\00y\00b\00u\00f\00f\00e\00r\00.\00t\00s\00")
- (data (i32.const 152) "\04\00\00\00m\00a\00i\00n\00")
- (data (i32.const 168) "\1f\00\00\00a\00s\00s\00e\00m\00b\00l\00y\00/\00i\00n\00t\00e\00r\00n\00a\00l\00/\00g\00e\00t\00C\00o\00n\00t\00e\00x\00t\00.\00t\00s\00")
+ (data (i32.const 40) "\0f\00\00\001\000\00p\00x\00 \00s\00a\00n\00s\00-\00s\00e\00r\00i\00f\00")
+ (data (i32.const 80) "\13\00\00\00~\00l\00i\00b\00/\00a\00r\00r\00a\00y\00b\00u\00f\00f\00e\00r\00.\00t\00s\00")
+ (data (i32.const 128) "\1c\00\00\00~\00l\00i\00b\00/\00i\00n\00t\00e\00r\00n\00a\00l\00/\00a\00r\00r\00a\00y\00b\00u\00f\00f\00e\00r\00.\00t\00s\00")
+ (data (i32.const 192) "\04\00\00\00m\00a\00i\00n\00")
+ (data (i32.const 208) "\1f\00\00\00a\00s\00s\00e\00m\00b\00l\00y\00/\00i\00n\00t\00e\00r\00n\00a\00l\00/\00g\00e\00t\00C\00o\00n\00t\00e\00x\00t\00.\00t\00s\00")
  (table $0 1 anyfunc)
  (elem (i32.const 0) $null)
  (global $~lib/internal/allocator/AL_BITS i32 (i32.const 3))
@@ -27,6 +28,7 @@
  (global $~lib/internal/arraybuffer/MAX_BLENGTH i32 (i32.const 1073741816))
  (global $assembly/renderer/CanvasRenderingContext2D/defaultBlack i32 (i32.const 8))
  (global $assembly/renderer/CanvasRenderingContext2D/defaultNone i32 (i32.const 24))
+ (global $assembly/renderer/CanvasRenderingContext2D/defaultFont i32 (i32.const 40))
  (global $~lib/allocator/arena/startOffset (mut i32) (i32.const 0))
  (global $~lib/allocator/arena/offset (mut i32) (i32.const 0))
  (global $~lib/map/INITIAL_CAPACITY i32 (i32.const 4))
@@ -46,7 +48,7 @@
  (global $~lib/map/FILL_FACTOR f64 (f64.const 2.6666666666666665))
  (global $assembly/Buffer.test/ctx (mut i32) (i32.const 0))
  (global $assembly/Buffer.test/buff (mut i32) (i32.const 0))
- (global $HEAP_BASE i32 (i32.const 236))
+ (global $HEAP_BASE i32 (i32.const 276))
  (export "memory" (memory $0))
  (export "table" (table $0))
  (export "init" (func $assembly/Buffer.test/init))
@@ -165,7 +167,7 @@
   i32.eqz
   if
    i32.const 0
-   i32.const 88
+   i32.const 128
    i32.const 26
    i32.const 2
    call $~lib/env/abort
@@ -448,7 +450,7 @@
   i32.gt_u
   if
    i32.const 0
-   i32.const 40
+   i32.const 80
    i32.const 16
    i32.const 40
    call $~lib/env/abort
@@ -1001,7 +1003,7 @@
   (local $8 i32)
   (local $9 i32)
   block (result i32)
-   i32.const 52
+   i32.const 60
    call $~lib/memory/memory.allocate
    set_local $2
    get_local $2
@@ -1348,6 +1350,19 @@
    get_local $2
    get_global $assembly/renderer/CanvasRenderingContext2D/defaultNone
    i32.store offset=48
+   get_local $2
+   i32.const 0
+   i32.const 255
+   i32.const 4
+   i32.mul
+   i32.const 0
+   call $~lib/arraybuffer/ArrayBuffer#constructor
+   get_global $assembly/renderer/CanvasRenderingContext2D/defaultFont
+   call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<usize>
+   i32.store offset=52
+   get_local $2
+   get_global $assembly/renderer/CanvasRenderingContext2D/defaultFont
+   i32.store offset=56
    get_local $2
   end
   set_local $9
@@ -2932,7 +2947,7 @@
   i32.eqz
   if
    i32.const 0
-   i32.const 168
+   i32.const 208
    i32.const 12
    i32.const 22
    call $~lib/env/abort
@@ -2943,7 +2958,7 @@
   call $~lib/map/Map<String,CanvasRenderingContext2D>#get
  )
  (func $assembly/Buffer.test/init (; 31 ;) (type $v)
-  i32.const 152
+  i32.const 192
   call $assembly/internal/getContext/getContextById
   set_global $assembly/Buffer.test/ctx
  )
