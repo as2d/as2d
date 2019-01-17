@@ -879,4 +879,46 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     }
   }
   //#endregion
+
+  //#region MITERLIMIT
+  /**
+   * An ArrayBuffer that contains 256 sets of f64 values.
+   */
+  private _miterLimitStack: ArrayBuffer = setArrayBufferValue(
+    new ArrayBuffer(0xFF * sizeof<f64>()),
+    10.0,
+  );
+
+  /**
+   * A private member that contains a single float value that represents the last miterLimit value
+   * written by a drawing operation.
+   */
+  private _currentMiterLimit: f64 = 10.0;
+
+  /**
+   * The CanvasRenderingContext2D.miterLimit property of the Canvas 2D API sets the miter limit
+   * ratio. It establishes a limit on the miter when two lines join at a sharp angle, to let you
+   * control how thick the junction becomes.
+   */
+  public get miterLimit(): f64 {
+    return changetype<f64>(LOAD<usize>(this._miterLimitStack, <i32>this._stackOffset));
+  }
+
+  public set miterLimit(value: f64) {
+    STORE<f64>(this._miterLimitStack, <i32>this._stackOffset, value);
+  }
+
+  /**
+   * An internal function that writes the current miterLimit value on the _miterLimitStack to the
+   * buffer if it currently does not match the last written miterLimit value.
+   */
+  @inline
+  private _updateMiterLimit(): void {
+    var value: f64 = LOAD<f64>(this._miterLimitStack, <i32>this._stackOffset);
+    if (value != this._currentMiterLimit) {
+      this._currentMiterLimit = value;
+      this.write_one(CanvasInstruction.MiterLimit, value);
+    }
+  }
+  //#endregion MITERLIMIT
 }

@@ -73,6 +73,9 @@
  (global $src/shared/LineCap/LineCap.butt (mut i32) (i32.const 0))
  (global $src/shared/LineCap/LineCap.round (mut i32) (i32.const 1))
  (global $src/shared/LineCap/LineCap.square (mut i32) (i32.const 2))
+ (global $src/shared/LineJoin/LineJoin.bevel (mut i32) (i32.const 0))
+ (global $src/shared/LineJoin/LineJoin.round (mut i32) (i32.const 1))
+ (global $src/shared/LineJoin/LineJoin.miter (mut i32) (i32.const 2))
  (global $~lib/internal/hash/FNV_OFFSET i32 (i32.const -2128831035))
  (global $~lib/internal/string/HEADER_SIZE i32 (i32.const 4))
  (global $~lib/internal/hash/FNV_PRIME i32 (i32.const 16777619))
@@ -1054,7 +1057,7 @@
   (local $8 i32)
   (local $9 i32)
   block (result i32)
-   i32.const 104
+   i32.const 160
    call $~lib/memory/memory.allocate
    set_local $2
    get_local $2
@@ -1557,6 +1560,77 @@
    get_local $2
    get_global $src/shared/LineCap/LineCap.butt
    i32.store offset=100
+   get_local $2
+   i32.const 0
+   i32.const 255
+   i32.const 8
+   i32.mul
+   i32.const 0
+   call $~lib/arraybuffer/ArrayBuffer#constructor
+   f64.const 0
+   call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<f64>
+   i32.store offset=104
+   get_local $2
+   f64.const 0
+   f64.store offset=112
+   get_local $2
+   block $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<i32>|inlined.4 (result i32)
+    i32.const 0
+    i32.const 255
+    i32.const 4
+    i32.mul
+    i32.const 0
+    call $~lib/arraybuffer/ArrayBuffer#constructor
+    set_local $7
+    get_global $src/shared/LineJoin/LineJoin.miter
+    set_local $3
+    block
+     i32.const 0
+     set_local $4
+     i32.const 0
+     set_local $6
+     get_local $7
+     get_local $4
+     i32.const 2
+     i32.shl
+     i32.add
+     get_local $6
+     i32.add
+     get_local $3
+     i32.store offset=8
+    end
+    get_local $7
+   end
+   i32.store offset=120
+   get_local $2
+   get_global $src/shared/LineJoin/LineJoin.miter
+   i32.store offset=124
+   get_local $2
+   i32.const 0
+   i32.const 255
+   i32.const 8
+   i32.mul
+   i32.const 0
+   call $~lib/arraybuffer/ArrayBuffer#constructor
+   f64.const 1
+   call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<f64>
+   i32.store offset=128
+   get_local $2
+   f64.const 1
+   f64.store offset=136
+   get_local $2
+   i32.const 0
+   i32.const 255
+   i32.const 8
+   i32.mul
+   i32.const 0
+   call $~lib/arraybuffer/ArrayBuffer#constructor
+   f64.const 10
+   call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<f64>
+   i32.store offset=144
+   get_local $2
+   f64.const 10
+   f64.store offset=152
    get_local $2
   end
   set_local $9
@@ -3142,7 +3216,7 @@
   if
    i32.const 0
    i32.const 208
-   i32.const 12
+   i32.const 26
    i32.const 22
    call $~lib/env/abort
    unreachable
