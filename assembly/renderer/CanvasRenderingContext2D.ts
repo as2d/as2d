@@ -716,8 +716,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   private _currentLineCap: LineCap = LineCap.butt;
 
   /**
-   * The lineCap property of the CanvasRenderingContext2D interface, part of the
-   * Canvas API, lets you set the quality of image smoothing.
+   * The CanvasRenderingContext2D.lineCap property of the Canvas 2D API determines the shape used
+   * to draw the end points of lines.
    */
   public get lineCap(): LineCap {
     return LOAD<LineCap>(this._lineCapStack, <i32>this._stackOffset);
