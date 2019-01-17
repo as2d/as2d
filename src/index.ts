@@ -1,5 +1,6 @@
 import * as as from "assemblyscript/lib/loader";
 import { ICanvasSYS } from "./util/ICanvasSYS";
+import { CanvasPatternRepetition } from "./shared/CanvasPatternRepetition";
 
 type WrappedASModule<T> = ICanvasSYS & as.ASUtil & T;
 
@@ -36,12 +37,24 @@ export function instantiateBuffer<T>(buffer: Buffer, imports: any = {}): Wrapped
         });
       return id;
     },
+    createPattern(cvsobjid: number, objid: number, repetition: CanvasPatternRepetition): number {
+      id += 1;
+      if (!wasm.contexts[cvsobjid]) throw new Error("Cannot find canvas: " + cvsobjid);
+      if (!wasm.images[objid]) throw new Error("Cannot find image: " + objid);
+      wasm.patterns[id] = wasm.contexts[cvsobjid].createPattern(
+        wasm.images[objid],
+        CanvasPatternRepetition[repetition].replace("_", "-"),
+      )!;
+      return id;
+    },
   };
+
   wasm = as.instantiateBuffer<T & ICanvasSYS>(buffer, imports);
   wasm.contexts = {};
   wasm.gradients = {};
   wasm.images = {};
   wasm.loading = {};
+  wasm.patterns = {};
   wasm.useContext = function useContext(name: string, ctx: CanvasRenderingContext2D): number {
     id += 1;
     wasm.contexts[id] = ctx;

@@ -10,6 +10,7 @@ interface IGlueTestSuite {
   addRadialGradient(): number;
   addColorStop(): number;
   createImage(): number;
+  createPattern(): number;
 }
 
 var buff = readFileSync("./build/glue.test.wasm");
@@ -82,5 +83,25 @@ describe("glue code", () => {
   it("should create images remotely", () => {
     var id: number = wasm.createImage();
     expect(wasm.loading[id]).toBeInstanceOf(Promise);
+  });
+
+  it("should create image patterns", () => {
+    wasm.useContext("main", ctx);
+    wasm.init();
+    var imgid: number = wasm.createImage();
+    return wasm.loading[imgid].then(() => {
+      wasm.createPattern();
+      expect(ctx.createPattern).toBeCalled();
+    });
+  });
+
+  it("should index image patterns", () => {
+    wasm.useContext("main", ctx);
+    wasm.init();
+    var imgid: number = wasm.createImage();
+    return wasm.loading[imgid].then(() => {
+      var id: number = wasm.createPattern();
+      expect(wasm.patterns[id]).toBeTruthy();
+    });
   });
 });

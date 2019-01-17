@@ -5,12 +5,20 @@ import { DOMMatrix } from "./DOMMatrix";
 import { CanvasDirection } from "../../src/shared/CanvasDirection";
 import { CanvasPattern } from "./CanvasPattern";
 import { CanvasGradient } from "./CanvasGradient";
+import { Image } from "./Image";
+import { CanvasPatternRepetition } from "../../src/shared/CanvasPatternRepetition";
 
+// @ts-ignore: linked functions can have decorators
 @external("__canvas_sys", "createLinearGradient")
 declare function createLinearGradient(id: i32, x0: f64, y0: f64, x1: f64, y1: f64): i32;
 
+// @ts-ignore: linked functions can have decorators
 @external("__canvas_sys", "createRadialGradient")
 declare function createRadialGradient(id: i32, x0: f64, y0: f64, r0: f64, x1: f64, y1: f64, r1: f64): i32;
+
+// @ts-ignore: linked functions can have decorators
+@external("__canvas_sys", "createPattern")
+declare function createPattern(ctxid: i32, imageid: i32, repetition: CanvasPatternRepetition): i32;
 
 const enum StrokeFillStyleType {
   String,
@@ -19,14 +27,13 @@ const enum StrokeFillStyleType {
 }
 
 const defaultBlack: string = "#000";
+const defaultNone: string = "none";
+
 //#region ARRAYBUFFERINITIALIZER
 /**
  * Utility function for setting the given ArrayBuffer to the identity 2d transform matrix inline.
  *
- * @function
- * @name setArrayBufferIdentity
  * @param ArrayBuffer buff
- * @returns {ArrayBuffer}
  */
 @inline
 function setArrayBufferIdentity(buff: ArrayBuffer): ArrayBuffer {
@@ -41,12 +48,9 @@ function setArrayBufferIdentity(buff: ArrayBuffer): ArrayBuffer {
 
 /**
  * Utility function for setting the given ArrayBuffer's first value to the specified value inline.
- *
- * @function
- * @name setArrayBufferValue<T>
+ * 
  * @param ArrayBuffer buff
  * @param T value
- * @returns {ArrayBuffer}
  */
 @inline
 function setArrayBufferValue<T>(buff: ArrayBuffer, value: T): ArrayBuffer {
@@ -57,11 +61,8 @@ function setArrayBufferValue<T>(buff: ArrayBuffer, value: T): ArrayBuffer {
 /**
  * Utility function for setting the given ArrayBuffer's first value to the specified value inline.
  *
- * @function
- * @name setArrayBufferValue<T>
  * @param ArrayBuffer buff
  * @param T value
- * @returns {ArrayBuffer}
  */
 @inline
 function setArrayBufferValue2<T>(buff: ArrayBuffer, a: T, b: T): ArrayBuffer {
@@ -76,35 +77,31 @@ function setArrayBufferValue2<T>(buff: ArrayBuffer, a: T, b: T): ArrayBuffer {
  * CanvasRenderingContext2D interface, part of the Canvas API, provides the 2D rendering context
  * for the drawing surface of a <canvas> element. It is used for drawing shapes, text, images, and
  * other objects.
- *
- * @class CanvasRenderingContext2D
- * @extends Buffer<CanvasInstruction>
  */
 export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   /**
    * The component's external object id. It initialized to -1, which will never be an actual object
    * id externally. If it actually returns -1, it will cause the host to error saying it cannot
    * find the specified canvas context.
-   *
-   * @private
-   * @name id
-   * @type {i32}
-   * @default -1
    */
   private id: i32 = -1;
 
   /**
    * The virutal stack index offset that keeps track of the number of `save()` and `restore()`
    * stack states.
-   *
-   * @private
-   * @name _stackOffset
-   * @type {u8}
-   * @default 0
    */
   private _stackOffset: u8 = <u8>0;
 
   //#region CREATELINEARGRADIENT
+  /**
+   * The CanvasRenderingContext2D.createLinearGradient() method of the Canvas 2D API creates a
+   * gradient along the line connecting two given coordinates.
+   *
+   * @param {f64} x0 - A float number representing the first x coordinate point of the gradient.
+   * @param {f64} y0 - A float number representing the first y coordinate point of the gradient.
+   * @param {f64} x1 - A float number representing the second x coordinate point of the gradient.
+   * @param {f64} y1 - A float number representing the second y coordinate point of the gradient.
+   */
   public createLinearGradient(x0: f64, y0: f64, x1: f64, y1: f64): CanvasGradient {
     var id: i32 = createLinearGradient(this.id, x0, y0, x1, y1);
     var result: CanvasGradient = new CanvasGradient();
@@ -114,6 +111,17 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   //#endregion CREATELINEARGRADIENT
 
   //#region CREATERADIALGRADIENT
+  /**
+   * The CanvasRenderingContext2D.createRadialGradient() method of the Canvas 2D API creates a
+   * radial gradient using the size and coordinates of two circles.
+   *
+   * @param {f64} x0 - The x-axis coordinate of the start circle.
+   * @param {f64} y0 - The y-axis coordinate of the start circle.
+   * @param {f64} r0 - The radius of the start circle. Must be non-negative and finite.
+   * @param {f64} x1 - The x-axis coordinate of the end circle.
+   * @param {f64} y1 - The y-axis coordinate of the end circle.
+   * @param {f64} r1 - The radius of the end circle. Must be non-negative and finite.
+   */
   public createRadialGradient(x0: f64, y0: f64, r0: f64, x1: f64, y1: f64, r1: f64): CanvasGradient {
     var id: i32 = createRadialGradient(this.id, x0, y0, r0, x1, y1, r1);
     var result: CanvasGradient = new CanvasGradient();
@@ -125,30 +133,18 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   //#region TRANSFORM
   /**
    * An ArrayBuffer that contains 256 sets of transforms. Each transform value is a set of 6 numbers
-   * stored in a repeated pattern of [a0, b0, c0, d0, e0, f0, a1, b1, c1, d1, e1, f1, ...].
-   *
-   * @private
-   * @name _transformStack
-   * @type {ArrayBuffer}
+   * stored in a repeated pattern of [a0, b0, c0, d0, e0, f0, a1, b1, c1, d1, e1, f1
    */
   private _transformStack: ArrayBuffer = setArrayBufferIdentity(new ArrayBuffer(0xFF * 6 * 8));
 
   /**
    * An ArrayBuffer that contains a single transform value that represents the last transform
-   * written by a `setTransform()` operation.
-   *
-   * @private
-   * @name _transformCurrent
-   * @type {ArrayBuffer}
+   * written by a `setTransform()` operation
    */
   private _transformCurrent: ArrayBuffer = setArrayBufferIdentity(new ArrayBuffer(6));
 
   /**
-   * An operation that generates a DOMMatrix reflecting the current transform on the `_transformStack`.
-   *
-   * @private
-   * @name _getTransform
-   * @returns {DOMMatrix}
+   * An operation that generates a DOMMatrix reflecting the current transform on the `_transformStack
    */
   @inline
   private _getTransform(): DOMMatrix {
@@ -165,10 +161,9 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   /**
-   * An operation that sets the current transform on the `_transformStack` to the specified DOMMatrix.
+   * An operation that sets the current transform on the `_transformStack` to the specified
+   * DOMMatrix values.
    *
-   * @private
-   * @name _setTransform
    * @param {f64} a - The a property of the transform matrix.
    * @param {f64} b - The b property of the transform matrix.
    * @param {f64} c - The c property of the transform matrix.
@@ -190,11 +185,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
   /**
    * The CanvasRenderingContext2D.currentTransform property of the Canvas 2D API returns or sets a
-   * DOMMatrix (current specification) object for the current transformation matrix.
-   *
-   * @name CanvasRenderingContext2D#currentTransform
-   * @memberof CanvasRenderingContext2D
-   * @type DOMMatrix
+   * DOMMatrix (current specification) object for the current transformation matrix
   */
   public get currentTransform(): DOMMatrix {
     return this._getTransform();
@@ -206,11 +197,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
   /**
    * The CanvasRenderingContext2D.getTransform() method of the Canvas 2D API gets the current
-   * transformation matrix, and returns a DOMMatrix.
-   *
-   * @name CanvasRenderingContext2D#getTransform()
-   * @memberof CanvasRenderingContext2D
-   * @returns {DOMMatrix}
+   * transformation matrix, and returns a DOMMatrix
    */
   public getTransform(): DOMMatrix {
     return this._getTransform();
@@ -219,34 +206,20 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
   //#region DIRECTION
   /**
-   * An ArrayBuffer that contains 256 sets of CanvasDirection values, stored as `i32` values.
-   *
-   * @private
-   * @name _directionStack
-   * @type {ArrayBuffer}
+   * An ArrayBuffer that contains 256 sets of CanvasDirection values, stored as `i32` values
    */
   private _directionStack: ArrayBuffer
     = setArrayBufferValue<CanvasDirection>(new ArrayBuffer(0xFF * 4), CanvasDirection.inherit);
 
   /**
    * A private member that contains a single CanvasDirection value that represents the last
-   * CanvasDirection value written by a drawing operation.
-   *
-   * @private
-   * @name _currentDirection
-   * @type {CanvasDirection}
-   * @default {CanvasDirection.inherit}
+   * CanvasDirection value written by a drawing operation
    */
   private _currentDirection: CanvasDirection = CanvasDirection.inherit;
 
   /**
    * The CanvasRenderingContext2D.direction property of the Canvas 2D API specifies the current text
-   * direction used to draw text.
-   *
-   * @name CanvasRenderingContext2D#direction
-   * @memberof CanvasRenderingContext2D
-   * @type CanvasDirection
-   * @default {CanvasDirection.inherit}
+   * direction used to draw text
    */
   public get direction(): CanvasDirection {
     return LOAD<CanvasDirection>(this._directionStack, <i32>this._stackOffset);
@@ -258,10 +231,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
   /**
    * An internal function call that writes the current CanvasDirection value on the _directionStack
-   * if it currently does not match the last written CanvasDirection.
-   *
-   * @private
-   * @name _updateDirection
+   * if it currently does not match the last written CanvasDirection
    */
   @inline
   private _updateDirection(): void {
@@ -277,11 +247,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   /**
    * An ArrayBuffer that contains 256 sets of 2 i32 values. For each fillStyle, if the fillStyle is
    * a string, the second i32 value will be a pointer, otherwise, it's an `<i32>` representing the
-   * style's objectID.
-   *
-   * @private
-   * @name _fillStyleStack
-   * @type {ArrayBuffer}
+   * style's objectID
    */
   private _fillStyleStack: ArrayBuffer = setArrayBufferValue2<i32>(
     new ArrayBuffer(0xFF * 4 * 2),
@@ -291,46 +257,34 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
   /**
    * A private member that contains a single StrokeFillStyleType value that represents the last
-   * fillStyle value written by a drawing operation.
-   *
-   * @private
-   * @name _currentFillStyleType
-   * @type {StrokeFillStyleType}
-   * @default {StrokeFillStyleType.String}
+   * fillStyle value written by a drawing operation
    */
   private _currentFillStyleType: StrokeFillStyleType = StrokeFillStyleType.String;
 
   /**
    * A private member that contains a single pointer or id value that represents the last
-   * fillStyle value written by a drawing operation.
-   *
-   * @private
-   * @name _currentFillStyleValue
-   * @type {i32}
-   * @default <i32><usize>"#000"
+   * fillStyle value written by a drawing operation
    */
   private _currentFillStyleValue: i32 = <i32>changetype<usize>(defaultBlack);
 
   /**
    * The CanvasRenderingContext2D.fillStyle property of the Canvas 2D API specifies the current text
-   * representing a CSS Color.
-   *
-   * @name CanvasRenderingContext2D#fillStyle
-   * @memberof CanvasRenderingContext2D
-   * @type string
-   * @default "#000"
+   * representing a CSS Color
    */
-  public get fillStyle(): string {
+  public get fillStyle(): string | null {
     var index: i32 = this._stackOffset * 2;
     var fillStyleType: StrokeFillStyleType = <StrokeFillStyleType>LOAD<i32>(
       this._fillStyleStack,
       index,
     );
-    assert(fillStyleType == StrokeFillStyleType.String, "current fillStyle is not a string");
-    return changetype<string>(<usize>LOAD<i32>(this._fillStyleStack, index + 1));
+    if (fillStyleType == StrokeFillStyleType.String, "current fillStyle is not a string") {
+      return changetype<string>(<usize>LOAD<i32>(this._fillStyleStack, index + 1));
+    }
+    return null;
   }
 
-  public set fillStyle(value: string) {
+  public set fillStyle(value: string | null) {
+    if (value == null) value = defaultBlack;
     var index: i32 = this._stackOffset * 2;
     var buff: ArrayBuffer = this._fillStyleStack;
     STORE<i32>(buff, index, StrokeFillStyleType.String);
@@ -340,9 +294,6 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   /**
    * An internal function call that writes the current fillStyle value on the _fillStyleStack
    * if it currently does not match the last written fillStyle.
-   *
-   * @private
-   * @name _updateFillStyle
    */
   @inline
   private _updateFillStyle(): void {
@@ -363,68 +314,130 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   //#region FILLPATTERN
   /**
    * The CanvasRenderingContext2D.fillPattern property of the Canvas 2D API specifies the current
-   * fillStyle pattern.
-   *
-   * @name CanvasRenderingContext2D#fillPattern
-   * @memberof CanvasRenderingContext2D
-   * @type {CanvasPattern}
-   * @default null
+   * fillStyle pattern
    */
-  public get fillPattern(): CanvasPattern {
+  public get fillPattern(): CanvasPattern | null {
     var index: i32 = this._stackOffset * 2;
     var buff: ArrayBuffer = this._fillStyleStack;
     var fillStyleType: StrokeFillStyleType = <StrokeFillStyleType>LOAD<i32>(
       buff,
       index,
     );
-    assert(fillStyleType == StrokeFillStyleType.CanvasPattern, "current fillStyle is not a string");
-    var result: CanvasPattern = new CanvasPattern();
-    store<i32>(
-      changetype<usize>(result) + offsetof<CanvasPattern>("id"),
-      LOAD<i32>(buff, index + 1),
-    );
-    return result;
+
+    if (fillStyleType == StrokeFillStyleType.CanvasPattern) {
+      var result: CanvasPattern = new CanvasPattern();
+      store<i32>(
+        changetype<usize>(result) + offsetof<CanvasPattern>("id"),
+        LOAD<i32>(buff, index + 1),
+      );
+      return result;
+    }
+
+    return null;
   }
 
-  public set fillPattern(value: CanvasPattern) {
+  public set fillPattern(value: CanvasPattern | null) {
+    if (value == null) {
+      this.fillStyle = defaultBlack;
+      return;
+    }
     var index: i32 = this._stackOffset * 2;
     var buff: ArrayBuffer = this._fillStyleStack;
-    STORE<i32>(buff, index, StrokeFillStyleType.String);
-    STORE<i32>(buff, index + 1, <i32>changetype<usize>(value));
+    STORE<i32>(buff, index, StrokeFillStyleType.CanvasPattern);
+    STORE<i32>(buff, index + 1, load<i32>(changetype<usize>(value) + offsetof<CanvasPattern>("id")));
   }
   //#endregion FILLPATTERN
 
   //#region FILLGRADIENT
   /**
    * The CanvasRenderingContext2D.fillGradient property of the Canvas 2D API specifies the current
-   * fillStyle gradient.
-   *
-   * @name CanvasRenderingContext2D#fillGradient
-   * @memberof CanvasRenderingContext2D
-   * @type {CanvasGradient}
-   * @default null
+   * fillStyle gradient
    */
-  public get fillGradient(): CanvasGradient {
+  public get fillGradient(): CanvasGradient | null {
     var index: i32 = this._stackOffset * 2;
     var buff: ArrayBuffer = this._fillStyleStack;
     var fillStyleType: StrokeFillStyleType = <StrokeFillStyleType>LOAD<i32>(
       buff,
       index,
     );
-    assert(fillStyleType == StrokeFillStyleType.CanvasGradient, "current fillStyle is not a CanvasGradient");
-    var result: CanvasGradient = new CanvasGradient();
-    store<i32>(
-      changetype<usize>(result) + offsetof<CanvasGradient>("id"),
-      LOAD<i32>(buff, index + 1),
-    );
-    return result;
+    if (fillStyleType == StrokeFillStyleType.CanvasGradient) {
+      var result: CanvasGradient = new CanvasGradient();
+      store<i32>(
+        changetype<usize>(result) + offsetof<CanvasGradient>("id"),
+        LOAD<i32>(buff, index + 1),
+      );
+      return result;
+    }
+
+    return null;
   }
 
-  public set fillGradient(value: CanvasGradient) {
+  public set fillGradient(value: CanvasGradient | null) {
+    if (value == null) {
+      this.fillStyle = defaultBlack;
+      return;
+    }
     var index: i32 = this._stackOffset * 2;
     var buff: ArrayBuffer = this._fillStyleStack;
-    STORE<i32>(buff, index, StrokeFillStyleType.String);
-    STORE<i32>(buff, index + 1, <i32>changetype<usize>(value));
+    STORE<i32>(buff, index, StrokeFillStyleType.CanvasGradient);
+    STORE<i32>(buff, index + 1, load<i32>(changetype<usize>(value) + offsetof<CanvasGradient>("id")));
   }
   //#endregion FILLGRADIENT
+
+  //#region CREATEPATTERN
+  /**
+   * The CanvasRenderingContext2D.createPattern() method of the Canvas 2D API creates a pattern
+   * using the specified image and repetition.
+   *
+   * @param {Image} img - A CanvasImageSource to be used as the pattern's Image.
+   * @param {CanvasPatternRepetition} repetition - An enum value indicating how to repeat the pattern's image.
+   */
+  public createPattern(img: Image, repetition: CanvasPatternRepetition): CanvasPattern {
+    var result = new CanvasPattern();
+    var id: i32 = load<i32>(changetype<usize>(img) + offsetof<Image>("_id"));
+    store<i32>(changetype<usize>(result) + offsetof<CanvasPattern>("id"), createPattern(this.id, id, repetition));
+    return result;
+  }
+  //#endregion CREATEPATTERN
+
+  //#region FILTER
+    /**
+   * An ArrayBuffer that contains 256 sets of CanvasDirection values, stored as `i32` values
+   */
+  private _filterStack: ArrayBuffer = setArrayBufferValue(
+    new ArrayBuffer(0xFF * sizeof<usize>()),
+    changetype<usize>(defaultNone),
+  );
+
+  /**
+   * A private member that contains a single CanvasDirection value that represents the last
+   * CanvasDirection value written by a drawing operation
+   */
+  private _currentFilter: string = defaultNone;
+
+  /**
+   * The CanvasRenderingContext2D.direction property of the Canvas 2D API specifies the current text
+   * direction used to draw text
+   */
+  public get filter(): string {
+    return changetype<string>(LOAD<usize>(this._filterStack, <i32>this._stackOffset));
+  }
+
+  public set filter(value: string) {
+    STORE<usize>(this._filterStack, <i32>this._stackOffset, changetype<usize>(value));
+  }
+
+  /**
+   * An internal function call that writes the current CanvasDirection value on the _directionStack
+   * if it currently does not match the last written CanvasDirection
+   */
+  @inline
+  private _updateFilter(): void {
+    var value: string = changetype<string>(LOAD<usize>(this._filterStack, <i32>this._stackOffset));
+    if (value != this._currentFilter) {
+      this._currentFilter = value;
+      this.write_one(CanvasInstruction.Direction, changetype<usize>(value));
+    }
+  }
+  //#endregion FILTER
 }

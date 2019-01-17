@@ -2,12 +2,14 @@ import "allocator/arena";
 import { getContextById } from "./internal/getContext";
 import { CanvasRenderingContext2D } from "./renderer/CanvasRenderingContext2D";
 import { CanvasGradient } from "./renderer/CanvasGradient";
-import { createImageBitmap, Image } from "./renderer/Image";
+import { Image } from "./renderer/Image";
+import { CanvasPatternRepetition } from "../src/shared/CanvasPatternRepetition";
+import { CanvasPattern } from "./renderer/CanvasPattern";
 
 var ctx: CanvasRenderingContext2D;
 var grd: CanvasGradient;
 var img: Image;
-
+var pattern: CanvasPattern;
 export function init(): void {
   ctx = getContextById("main");
 }
@@ -33,6 +35,15 @@ export function addRadialGradient(): i32 {
 }
 
 export function createImage(): number {
-  img = createImageBitmap("http://placekitten.com/400/300");
+  img = new Image();
+  img.src = "http://placekitten.com/400/300";
   return load<i32>(changetype<usize>(img) + offsetof<Image>("_id"));
+}
+
+export function createPattern(): i32 {
+  assert(ctx);
+  assert(img);
+  assert(img.loaded);
+  pattern = ctx.createPattern(img, CanvasPatternRepetition.repeat);
+  return load<i32>(changetype<usize>(pattern) + offsetof<CanvasPattern>("id"));
 }

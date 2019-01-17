@@ -24,6 +24,7 @@ export class Image {
     return this._loaded;
   }
 
+  @inline
   public get src(): string {
     return this._src;
   }
@@ -38,9 +39,4 @@ export function __image_loaded(img: Image, width: i32, height: i32): void {
   store<i32>(changetype<usize>(img) + offsetof<Image>("_width"), width);
   store<i32>(changetype<usize>(img) + offsetof<Image>("_height"), height);
   store<bool>(changetype<usize>(img) + offsetof<Image>("_loaded"), true);
-}
-
-export function createImageBitmap(src: string): Image {
-  
-  return result;
 }
