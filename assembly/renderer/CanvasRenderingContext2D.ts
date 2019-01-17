@@ -216,8 +216,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   /**
-   * An internal function call that writes the current transform value on the _transformStack
-   * to the buffer if it currently does not match the last written transform.
+   * An internal function that writes the current transform value on the _transformStack to the
+   * buffer if it currently does not match the last written transform.
    */
   private _updateTransform(): void {
     var index: i32 = this._stackOffset * 6;
@@ -273,8 +273,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   /**
-   * An internal function call that writes the current CanvasDirection value on the _directionStack
-   * if it currently does not match the last written CanvasDirection
+   * An internal function that writes the current CanvasDirection value on the _directionStack to
+   * the buffer if it currently does not match the last written CanvasDirection.
    */
   @inline
   private _updateDirection(): void {
@@ -335,8 +335,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   /**
-   * An internal function call that writes the current fillStyle value on the _fillStyleStack
-   * to the buffer if it currently does not match the last written fillStyle.
+   * An internal function that writes the current fillStyle value on the _fillStyleStack to the
+   * buffer if it currently does not match the last written fillStyle.
    */
   @inline
   private _updateFillStyle(): void {
@@ -778,8 +778,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   /**
-   * An internal function call that writes the current lineDashOffset value on the _lineDashOffsetStack
-   * if it currently does not match the last written lineDashOffset value.
+   * An internal function that writes the current lineDashOffset value on the _lineDashOffsetStack
+   * to the buffer if it currently does not match the last written lineDashOffset value.
    */
   @inline
   private _updateLineDashOffset(): void {
@@ -804,7 +804,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * A private member that contains a single LineJoin value that represents the last
    * lineJoin value written by a drawing operation.
    */
-  private _currentLineJoin: LineJoin = LineJoin.butt;
+  private _currentLineJoin: LineJoin = LineJoin.miter;
 
   /**
    * The CanvasRenderingContext2D.lineJoin property of the Canvas 2D API determines the shape used
@@ -823,9 +823,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   /**
-   * An internal function call that writes the current lineJoin value on the
-   * _lineJoinStack if it currently does not match the last written
-   * lineJoin value.
+   * An internal function that writes the current lineJoin value on the  _lineJoinStack if it
+   * currently does not match the last written lineJoin value.
    */
   @inline
   private _updateLineJoin(): void {
@@ -868,8 +867,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   /**
-   * An internal function call that writes the current lineWidth value on the _lineWidthStack
-   * if it currently does not match the last written lineWidth value.
+   * An internal function that writes the current lineWidth value on the _lineWidthStack to the
+   * buffer if it currently does not match the last written lineWidth value.
    */
   @inline
   private _updateLineWidth(): void {

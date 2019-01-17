@@ -21,9 +21,6 @@ To run the tests, use `npm start`. This will compile the `./assembly/` folder, a
   - dispose() function
 - Implement Virtual Path
 - Implement the following canvas properties:
-  - lineDashOffset
-  - lineJoin
-  - lineWidth
   - miterLimit
   - shadowBlur
   - shadowColor
