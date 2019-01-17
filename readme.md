@@ -14,19 +14,13 @@ To run the tests, use `npm start`. This will compile the `./assembly/` folder, a
 # TODO:
 - Implement CanvasGradient
   - dispose() function
-- Implement ImageBitmap(s)
+- Implement Image(s)
   - loaded event
-  - loaded property
-  - width property `i32`
-  - height property `i32`
   - dispose() function
 - Implement CanvasPattern(s)
-  - glue for createPattern()
   - dispose() function
 - Implement Virtual Path
 - Implement the following canvas properties:
-  - filter
-  - font
   - globalAlpha
   - globalCompositeOperation
   - imageSmoothingEnabled
@@ -53,26 +47,20 @@ To run the tests, use `npm start`. This will compile the `./assembly/` folder, a
   - clip()
   - closePath()
   - commit()
-  - createLinearGradient()
-  - createPattern()
-  - createRadialGradient()
-  - drawFocusIfNeeded()
   - drawImage()
-  - drawWidgetAsOnScreen()
+  - drawImageSize()
+  - drawImageSource()
   - ellipse()
   - fill()
   - fillRect()
   - fillText()
   - createImageData()
   - getLineDash()
-  - isPointInPath()
-  - isPointInStroke()
   - lineTo()
   - measureText()
   - moveTo()
   - quadraticCurveTo()
   - rect()
-  - removeHitRegion()
   - resetTransform()
   - restore()
   - rotate()
@@ -88,9 +76,11 @@ To run the tests, use `npm start`. This will compile the `./assembly/` folder, a
 
 # Roadmap
 
-- Implement the following functions
+- Implement the following prototype functions
   - getImageData()
   - putImageData()
+  - isPointInPath()
+  - isPointInStroke()
 
 
 # LICENSE
