@@ -10,7 +10,9 @@ import { CanvasPatternRepetition } from "../../src/shared/CanvasPatternRepetitio
 import { GlobalCompositeOperation } from "../../src/shared/GlobalCompositeOperation";
 import { ImageSmoothingQuality } from "../../src/shared/ImageSmoothingQuality";
 import { LineCap } from "../../src/shared/LineCap";
+import { LineJoin } from "../../src/shared/LineJoin";
 
+//#region EXTERNALS
 // @ts-ignore: linked functions can have decorators
 @external("__canvas_sys", "createLinearGradient")
 declare function createLinearGradient(id: i32, x0: f64, y0: f64, x1: f64, y1: f64): i32;
@@ -22,6 +24,8 @@ declare function createRadialGradient(id: i32, x0: f64, y0: f64, r0: f64, x1: f6
 // @ts-ignore: linked functions can have decorators
 @external("__canvas_sys", "createPattern")
 declare function createPattern(ctxid: i32, imageid: i32, repetition: CanvasPatternRepetition): i32;
+//#endregion EXTERNALS
+
 
 const enum StrokeFillStyleType {
   String,
@@ -744,4 +748,136 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     }
   }
   //#endregion LINECAP
+
+  //#region LINEDASHOFFSET
+  /**
+   * An ArrayBuffer that contains 256 sets of f64 values.
+   */
+  private _lineDashOffsetStack: ArrayBuffer = setArrayBufferValue(
+    new ArrayBuffer(0xFF * sizeof<f64>()),
+    0.0,
+  );
+
+  /**
+   * A private member that contains a single float value that represents the last lineDashOffset value
+   * written by a drawing operation.
+   */
+  private _currentLineDashOffset: f64 = 0.0;
+
+  /**
+   * The CanvasRenderingContext2D.lineDashOffset property of the Canvas 2D API sets the line dash
+   * offset, or "phase."
+   */
+  public get lineDashOffset(): f64 {
+    return changetype<f64>(LOAD<usize>(this._lineDashOffsetStack, <i32>this._stackOffset));
+  }
+
+  public set lineDashOffset(value: f64) {
+    if (value != value) return;
+    STORE<f64>(this._lineDashOffsetStack, <i32>this._stackOffset, value);
+  }
+
+  /**
+   * An internal function call that writes the current lineDashOffset value on the _lineDashOffsetStack
+   * if it currently does not match the last written lineDashOffset value.
+   */
+  @inline
+  private _updateLineDashOffset(): void {
+    var value: f64 = LOAD<f64>(this._lineDashOffsetStack, <i32>this._stackOffset);
+    if (value != this._currentLineDashOffset) {
+      this._currentLineDashOffset = value;
+      this.write_one(CanvasInstruction.LineDashOffset, value);
+    }
+  }
+  //#endregion LINEDASHOFFSET
+
+  //#region LINEJOIN
+  /**
+   * An ArrayBuffer that contains 256 sets of LineJoin values.
+   */
+  private _lineJoinStack: ArrayBuffer = setArrayBufferValue<LineJoin>(
+    new ArrayBuffer(0xFF * sizeof<LineJoin>()),
+    LineJoin.miter,
+  );
+
+  /**
+   * A private member that contains a single LineJoin value that represents the last
+   * lineJoin value written by a drawing operation.
+   */
+  private _currentLineJoin: LineJoin = LineJoin.butt;
+
+  /**
+   * The CanvasRenderingContext2D.lineJoin property of the Canvas 2D API determines the shape used
+   * to join two line segments where they meet.
+   *
+   * This property has no effect wherever two connected segments have the same direction, because
+   * no joining area will be added in this case. Degenerate segments with a length of zero (i.e.,
+   * with all endpoints and control points at the exact same position) are also ignored.
+   */
+  public get lineJoin(): LineJoin {
+    return LOAD<LineJoin>(this._lineJoinStack, <i32>this._stackOffset);
+  }
+
+  public set lineJoin(value: LineJoin) {
+    STORE<LineJoin>(this._lineJoinStack, <i32>this._stackOffset, value);
+  }
+
+  /**
+   * An internal function call that writes the current lineJoin value on the
+   * _lineJoinStack if it currently does not match the last written
+   * lineJoin value.
+   */
+  @inline
+  private _updateLineJoin(): void {
+    var value: LineJoin = LOAD<LineJoin>(
+      this._lineJoinStack,
+      <i32>this._stackOffset,
+    );
+    if (value != this._currentLineJoin) {
+      this._currentLineJoin = value;
+      this.write_one(CanvasInstruction.LineJoin, <f64>value);
+    }
+  }
+  //#endregion
+
+  //#region LINEWIDTH
+  /**
+   * An ArrayBuffer that contains 256 sets of f64 values.
+   */
+  private _lineWidthStack: ArrayBuffer = setArrayBufferValue(
+    new ArrayBuffer(0xFF * sizeof<f64>()),
+    1.0,
+  );
+
+  /**
+   * A private member that contains a single float value that represents the last lineWidth value
+   * written by a drawing operation.
+   */
+  private _currentLineWidth: f64 = 1.0;
+
+  /**
+   * The CanvasRenderingContext2D.lineWidth property of the Canvas 2D API sets the line dash
+   * offset, or "phase."
+   */
+  public get lineWidth(): f64 {
+    return changetype<f64>(LOAD<usize>(this._lineWidthStack, <i32>this._stackOffset));
+  }
+
+  public set lineWidth(value: f64) {
+    STORE<f64>(this._lineWidthStack, <i32>this._stackOffset, value);
+  }
+
+  /**
+   * An internal function call that writes the current lineWidth value on the _lineWidthStack
+   * if it currently does not match the last written lineWidth value.
+   */
+  @inline
+  private _updateLineWidth(): void {
+    var value: f64 = LOAD<f64>(this._lineWidthStack, <i32>this._stackOffset);
+    if (value != this._currentLineWidth) {
+      this._currentLineWidth = value;
+      this.write_one(CanvasInstruction.LineWidth, value);
+    }
+  }
+  //#endregion
 }
