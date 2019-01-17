@@ -28,6 +28,7 @@ const enum StrokeFillStyleType {
 
 const defaultBlack: string = "#000";
 const defaultNone: string = "none";
+const defaultFont: string = "10px sans-serif";
 
 //#region ARRAYBUFFERINITIALIZER
 /**
@@ -80,7 +81,7 @@ function setArrayBufferValue2<T>(buff: ArrayBuffer, a: T, b: T): ArrayBuffer {
  */
 export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   /**
-   * The component's external object id. It initialized to -1, which will never be an actual object
+   * The component's external object id. It initializes to -1, which will never be an actual object
    * id externally. If it actually returns -1, it will cause the host to error saying it cannot
    * find the specified canvas context.
    */
@@ -401,8 +402,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   //#endregion CREATEPATTERN
 
   //#region FILTER
-    /**
-   * An ArrayBuffer that contains 256 sets of CanvasDirection values, stored as `i32` values
+  /**
+   * An ArrayBuffer that contains 256 sets of string pointer values.
    */
   private _filterStack: ArrayBuffer = setArrayBufferValue(
     new ArrayBuffer(0xFF * sizeof<usize>()),
@@ -410,14 +411,15 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   );
 
   /**
-   * A private member that contains a single CanvasDirection value that represents the last
-   * CanvasDirection value written by a drawing operation
+   * A private member that contains a single string value that represents the last
+   * filter value written by a drawing operation.
    */
   private _currentFilter: string = defaultNone;
 
   /**
-   * The CanvasRenderingContext2D.direction property of the Canvas 2D API specifies the current text
-   * direction used to draw text
+   * The CanvasRenderingContext2D.filter property of the Canvas 2D API provides filter effects such
+   * as blurring and grayscaling. It is similar to the CSS filter property and accepts the same
+   * values.
    */
   public get filter(): string {
     return changetype<string>(LOAD<usize>(this._filterStack, <i32>this._stackOffset));
@@ -428,16 +430,57 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   /**
-   * An internal function call that writes the current CanvasDirection value on the _directionStack
-   * if it currently does not match the last written CanvasDirection
+   * An internal function call that writes the current filter value on the _filterStack
+   * if it currently does not match the last written filter string value.
    */
   @inline
   private _updateFilter(): void {
     var value: string = changetype<string>(LOAD<usize>(this._filterStack, <i32>this._stackOffset));
     if (value != this._currentFilter) {
       this._currentFilter = value;
-      this.write_one(CanvasInstruction.Direction, changetype<usize>(value));
+      this.write_one(CanvasInstruction.Filter, changetype<usize>(value));
     }
   }
   //#endregion FILTER
+
+  //#region FONT
+  /**
+   * An ArrayBuffer that contains 256 sets of string pointer values.
+   */
+  private _fontStack: ArrayBuffer = setArrayBufferValue(
+    new ArrayBuffer(0xFF * sizeof<usize>()),
+    changetype<usize>(defaultFont),
+  );
+
+  /**
+   * A private member that contains a single string value that represents the last
+   * font value written by a drawing operation.
+   */
+  private _currentFont: string = defaultFont;
+
+  /**
+   * The CanvasRenderingContext2D.font property of the Canvas 2D API specifies the current text
+   * style to use when drawing text. This string uses the same syntax as the CSS font specifier.
+   */
+  public get font(): string {
+    return changetype<string>(LOAD<usize>(this._fontStack, <i32>this._stackOffset));
+  }
+
+  public set font(value: string) {
+    STORE<usize>(this._fontStack, <i32>this._stackOffset, changetype<usize>(value));
+  }
+
+  /**
+   * An internal function call that writes the current font value on the _fontStack
+   * if it currently does not match the last written font string value.
+   */
+  @inline
+  private _updateFont(): void {
+    var value: string = changetype<string>(LOAD<usize>(this._fontStack, <i32>this._stackOffset));
+    if (value != this._currentFont) {
+      this._currentFont = value;
+      this.write_one(CanvasInstruction.Font, changetype<usize>(value));
+    }
+  }
+  //#endregion FONT
 }
