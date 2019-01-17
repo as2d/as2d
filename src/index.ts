@@ -23,10 +23,25 @@ export function instantiateBuffer<T>(buffer: Buffer, imports: any = {}): Wrapped
       if (!wasm.gradients[objid]) throw new Error("Cannot find gradient: " + objid);
       wasm.gradients[objid].addColorStop(offset, wasm.getString(color));
     },
+    loadImage(imgPointer: number, srcPointer: number): number {
+      var src: string = wasm.getString(srcPointer);
+      id += 1;
+      var result: number = id;
+      wasm.loading[result] = fetch(src)
+        .then(e => e.blob())
+        .then(createImageBitmap)
+        .then(e => {
+          wasm.__image_loaded(imgPointer, e.width, e.height);
+          wasm.images[result] = e;
+        });
+      return id;
+    },
   };
   wasm = as.instantiateBuffer<T & ICanvasSYS>(buffer, imports);
   wasm.contexts = {};
   wasm.gradients = {};
+  wasm.images = {};
+  wasm.loading = {};
   wasm.useContext = function useContext(name: string, ctx: CanvasRenderingContext2D): number {
     id += 1;
     wasm.contexts[id] = ctx;

@@ -50,6 +50,7 @@
  (export "init" (func $assembly/Buffer.test/init))
  (export "writeThreeTimes" (func $assembly/Buffer.test/writeThreeTimes))
  (export "__use_context" (func $assembly/internal/getContext/__use_context))
+ (export "__image_loaded" (func $assembly/renderer/ImageBitmap/__image_loaded))
  (export "memory.fill" (func $~lib/memory/memory.fill))
  (export "memory.copy" (func $~lib/memory/memory.copy))
  (export "memory.compare" (func $~lib/memory/memory.compare))
@@ -1327,13 +1328,30 @@
   get_local $9
   call $~lib/map/Map<String,CanvasRenderingContext2D>#set
  )
- (func $~lib/memory/memory.fill (; 16 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $assembly/renderer/ImageBitmap/__image_loaded (; 16 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+  get_local $0
+  i32.const 4
+  i32.add
+  get_local $1
+  i32.store
+  get_local $0
+  i32.const 8
+  i32.add
+  get_local $2
+  i32.store
+  get_local $0
+  i32.const 12
+  i32.add
+  i32.const 1
+  i32.store8
+ )
+ (func $~lib/memory/memory.fill (; 17 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
   get_local $0
   get_local $1
   get_local $2
   call $~lib/internal/memory/memset
  )
- (func $~lib/internal/memory/memcpy (; 17 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/internal/memory/memcpy (; 18 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -2534,7 +2552,7 @@
    i32.store8
   end
  )
- (func $~lib/internal/memory/memmove (; 18 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/internal/memory/memmove (; 19 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   get_local $0
   get_local $1
@@ -2761,13 +2779,13 @@
    end
   end
  )
- (func $~lib/memory/memory.copy (; 19 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/memory/memory.copy (; 20 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
   get_local $0
   get_local $1
   get_local $2
   call $~lib/internal/memory/memmove
  )
- (func $~lib/internal/memory/memcmp (; 20 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/internal/memory/memcmp (; 21 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   get_local $0
   get_local $1
@@ -2821,29 +2839,29 @@
    i32.const 0
   end
  )
- (func $~lib/memory/memory.compare (; 21 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/memory/memory.compare (; 22 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   get_local $0
   get_local $1
   get_local $2
   call $~lib/internal/memory/memcmp
  )
- (func $~lib/allocator/arena/__memory_free (; 22 ;) (type $iv) (param $0 i32)
+ (func $~lib/allocator/arena/__memory_free (; 23 ;) (type $iv) (param $0 i32)
   nop
  )
- (func $~lib/memory/memory.free (; 23 ;) (type $iv) (param $0 i32)
+ (func $~lib/memory/memory.free (; 24 ;) (type $iv) (param $0 i32)
   get_local $0
   call $~lib/allocator/arena/__memory_free
   return
  )
- (func $~lib/allocator/arena/__memory_reset (; 24 ;) (type $v)
+ (func $~lib/allocator/arena/__memory_reset (; 25 ;) (type $v)
   get_global $~lib/allocator/arena/startOffset
   set_global $~lib/allocator/arena/offset
  )
- (func $~lib/memory/memory.reset (; 25 ;) (type $v)
+ (func $~lib/memory/memory.reset (; 26 ;) (type $v)
   call $~lib/allocator/arena/__memory_reset
   return
  )
- (func $~lib/map/Map<String,CanvasRenderingContext2D>#has (; 26 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/map/Map<String,CanvasRenderingContext2D>#has (; 27 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
   get_local $0
   get_local $1
   block $~lib/internal/hash/HASH<String>|inlined.2 (result i32)
@@ -2855,7 +2873,7 @@
   i32.const 0
   i32.ne
  )
- (func $~lib/map/Map<String,CanvasRenderingContext2D>#get (; 27 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/map/Map<String,CanvasRenderingContext2D>#get (; 28 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   get_local $0
   get_local $1
@@ -2874,7 +2892,7 @@
    unreachable
   end
  )
- (func $assembly/internal/getContext/getContextById (; 28 ;) (type $ii) (param $0 i32) (result i32)
+ (func $assembly/internal/getContext/getContextById (; 29 ;) (type $ii) (param $0 i32) (result i32)
   get_global $assembly/internal/getContext/map
   get_local $0
   call $~lib/map/Map<String,CanvasRenderingContext2D>#has
@@ -2891,12 +2909,12 @@
   get_local $0
   call $~lib/map/Map<String,CanvasRenderingContext2D>#get
  )
- (func $assembly/Buffer.test/init (; 29 ;) (type $v)
+ (func $assembly/Buffer.test/init (; 30 ;) (type $v)
   i32.const 136
   call $assembly/internal/getContext/getContextById
   set_global $assembly/Buffer.test/ctx
  )
- (func $assembly/Buffer.test/Writer#writeTest (; 30 ;) (type $iv) (param $0 i32)
+ (func $assembly/Buffer.test/Writer#writeTest (; 31 ;) (type $iv) (param $0 i32)
   (local $1 f64)
   (local $2 f64)
   (local $3 f64)
@@ -2993,14 +3011,14 @@
   get_local $6
   i32.store offset=4
  )
- (func $assembly/Buffer.test/writeThreeTimes (; 31 ;) (type $i) (result i32)
+ (func $assembly/Buffer.test/writeThreeTimes (; 32 ;) (type $i) (result i32)
   get_global $assembly/Buffer.test/buff
   call $assembly/Buffer.test/Writer#writeTest
   get_global $assembly/Buffer.test/buff
   i32.const 0
   i32.add
  )
- (func $start (; 32 ;) (type $v)
+ (func $start (; 33 ;) (type $v)
   (local $0 i32)
   get_global $HEAP_BASE
   get_global $~lib/internal/allocator/AL_MASK
@@ -3034,6 +3052,6 @@
   end
   set_global $assembly/Buffer.test/buff
  )
- (func $null (; 33 ;) (type $v)
+ (func $null (; 34 ;) (type $v)
  )
 )

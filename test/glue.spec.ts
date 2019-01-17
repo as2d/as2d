@@ -9,6 +9,7 @@ interface IGlueTestSuite {
   addLinearGradient(): number;
   addRadialGradient(): number;
   addColorStop(): number;
+  createImage(): number;
 }
 
 var buff = readFileSync("./build/glue.test.wasm");
@@ -76,5 +77,10 @@ describe("glue code", () => {
     wasm.gradients[id].addColorStop = jest.fn(wasm.gradients[id].addColorStop);
     wasm.addColorStop();
     expect(wasm.gradients[id].addColorStop).toBeCalledWith(1.0, "blue");
+  });
+
+  it("should create images remotely", () => {
+    var id: number = wasm.createImage();
+    expect(wasm.loading[id]).toBeInstanceOf(Promise);
   });
 });
