@@ -2,11 +2,11 @@ import "allocator/arena";
 import { getContextById } from "./internal/getContext";
 import { CanvasRenderingContext2D } from "./renderer/CanvasRenderingContext2D";
 import { CanvasGradient } from "./renderer/CanvasGradient";
-import { createImageBitmap, ImageBitmap } from "./renderer/ImageBitmap";
+import { createImageBitmap, Image } from "./renderer/Image";
 
 var ctx: CanvasRenderingContext2D;
 var grd: CanvasGradient;
-var img: ImageBitmap;
+var img: Image;
 
 export function init(): void {
   ctx = getContextById("main");
@@ -23,6 +23,7 @@ export function addLinearGradient(): i32 {
 }
 
 export function addColorStop(): void {
+  assert(grd);
   grd.addColorStop(1.0, "blue");
 }
 
@@ -33,5 +34,5 @@ export function addRadialGradient(): i32 {
 
 export function createImage(): number {
   img = createImageBitmap("http://placekitten.com/400/300");
-  return load<i32>(changetype<usize>(img) + offsetof<ImageBitmap>("_id"));
+  return load<i32>(changetype<usize>(img) + offsetof<Image>("_id"));
 }
