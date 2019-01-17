@@ -51,4 +51,36 @@ export class Buffer<T extends i32> {
     STORE<f64>(buff, index + 5, d);
     this.offset = next;
   }
+
+  @inline
+  protected write_five(inst: T, a: f64, b: f64, c: f64, d: f64, e: f64): void {
+    var buff: ArrayBuffer = this.buffer;
+    var index: i32 = this.offset;
+    var next: i32 = index + 7;
+    STORE<f64>(buff, index, <f64>inst);
+    STORE<f64>(buff, index + 1, <f64>next);
+    STORE<f64>(buff, index + 2, a);
+    STORE<f64>(buff, index + 3, b);
+    STORE<f64>(buff, index + 4, c);
+    STORE<f64>(buff, index + 5, d);
+    STORE<f64>(buff, index + 6, e);
+    this.offset = next;
+  }
+
+  @inline
+  protected write_six(inst: T, a: f64, b: f64, c: f64, d: f64, e: f64, f: f64): void {
+    var buff: ArrayBuffer = this.buffer;
+    var index: i32 = this.offset;
+    var next: i32 = index + 8;
+    STORE<f64>(buff, index, <f64>inst);
+    STORE<f64>(buff, index + 1, <f64>next);
+    STORE<f64>(buff, index + 2, a);
+    STORE<f64>(buff, index + 3, b);
+    STORE<f64>(buff, index + 4, c);
+    STORE<f64>(buff, index + 5, d);
+    STORE<f64>(buff, index + 6, e);
+    STORE<f64>(buff, index + 7, f);
+    this.offset = next;
+  }
 }
+

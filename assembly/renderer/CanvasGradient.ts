@@ -1,3 +1,4 @@
+// @ts-ignore: decorators are valid here
 @external("__canvas_sys", "addColorStop")
 declare function addColorStop(id: i32, offset: f64, color: string): void;
 

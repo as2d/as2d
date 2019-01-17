@@ -7,6 +7,9 @@ import { CanvasPattern } from "./CanvasPattern";
 import { CanvasGradient } from "./CanvasGradient";
 import { Image } from "./Image";
 import { CanvasPatternRepetition } from "../../src/shared/CanvasPatternRepetition";
+import { GlobalCompositeOperation } from "../../src/shared/GlobalCompositeOperation";
+import { ImageSmoothingQuality } from "../../src/shared/ImageSmoothingQuality";
+import { LineCap } from "../../src/shared/LineCap";
 
 // @ts-ignore: linked functions can have decorators
 @external("__canvas_sys", "createLinearGradient")
@@ -36,6 +39,7 @@ const defaultFont: string = "10px sans-serif";
  *
  * @param ArrayBuffer buff
  */
+// @ts-ignore: Decorators are valid here
 @inline
 function setArrayBufferIdentity(buff: ArrayBuffer): ArrayBuffer {
   STORE<f64>(buff, 0, 1.0);
@@ -49,10 +53,11 @@ function setArrayBufferIdentity(buff: ArrayBuffer): ArrayBuffer {
 
 /**
  * Utility function for setting the given ArrayBuffer's first value to the specified value inline.
- * 
+ *
  * @param ArrayBuffer buff
  * @param T value
  */
+// @ts-ignore: Decorators are valid here
 @inline
 function setArrayBufferValue<T>(buff: ArrayBuffer, value: T): ArrayBuffer {
   STORE<T>(buff, 0, value);
@@ -65,6 +70,7 @@ function setArrayBufferValue<T>(buff: ArrayBuffer, value: T): ArrayBuffer {
  * @param ArrayBuffer buff
  * @param T value
  */
+// @ts-ignore: Decorators are valid here
 @inline
 function setArrayBufferValue2<T>(buff: ArrayBuffer, a: T, b: T): ArrayBuffer {
   STORE<T>(buff, 0, a);
@@ -79,6 +85,7 @@ function setArrayBufferValue2<T>(buff: ArrayBuffer, a: T, b: T): ArrayBuffer {
  * for the drawing surface of a <canvas> element. It is used for drawing shapes, text, images, and
  * other objects.
  */
+@sealed
 export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   /**
    * The component's external object id. It initializes to -1, which will never be an actual object
@@ -134,15 +141,15 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   //#region TRANSFORM
   /**
    * An ArrayBuffer that contains 256 sets of transforms. Each transform value is a set of 6 numbers
-   * stored in a repeated pattern of [a0, b0, c0, d0, e0, f0, a1, b1, c1, d1, e1, f1
+   * stored in a repeated pattern of [a0, b0, c0, d0, e0, f0, a1, b1, c1, d1, e1, f1, ...].
    */
-  private _transformStack: ArrayBuffer = setArrayBufferIdentity(new ArrayBuffer(0xFF * 6 * 8));
+  private _transformStack: ArrayBuffer = setArrayBufferIdentity(new ArrayBuffer(0xFF * sizeof<f64>() * 6));
 
   /**
    * An ArrayBuffer that contains a single transform value that represents the last transform
    * written by a `setTransform()` operation
    */
-  private _transformCurrent: ArrayBuffer = setArrayBufferIdentity(new ArrayBuffer(6));
+  private _transformCurrent: ArrayBuffer = setArrayBufferIdentity(new ArrayBuffer(sizeof<f64>() * 6));
 
   /**
    * An operation that generates a DOMMatrix reflecting the current transform on the `_transformStack
@@ -151,13 +158,13 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   private _getTransform(): DOMMatrix {
     var result: DOMMatrix = new DOMMatrix();
     var index: i32 = 6 * <i32>this._stackOffset;
-    var current: ArrayBuffer = this._transformStack;
-    result.m11 = LOAD<f64>(current, index);
-    result.m12 = LOAD<f64>(current, index + 1);
-    result.m21 = LOAD<f64>(current, index + 2);
-    result.m22 = LOAD<f64>(current, index + 3);
-    result.m41 = LOAD<f64>(current, index + 4);
-    result.m42 = LOAD<f64>(current, index + 5);
+    var stack: ArrayBuffer = this._transformStack;
+    result.m11 = LOAD<f64>(stack, index);
+    result.m12 = LOAD<f64>(stack, index + 1);
+    result.m21 = LOAD<f64>(stack, index + 2);
+    result.m22 = LOAD<f64>(stack, index + 3);
+    result.m41 = LOAD<f64>(stack, index + 4);
+    result.m42 = LOAD<f64>(stack, index + 5);
     return result;
   }
 
@@ -175,13 +182,13 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   @inline
   private _setTransform(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64): void {
     var index: i32 = 6 * <i32>this._stackOffset;
-    var current: ArrayBuffer = this._transformStack;
-    STORE<f64>(current, index, a);
-    STORE<f64>(current, index + 1, b);
-    STORE<f64>(current, index + 2, c);
-    STORE<f64>(current, index + 3, d);
-    STORE<f64>(current, index + 4, e);
-    STORE<f64>(current, index + 5, f);
+    var stack: ArrayBuffer = this._transformStack;
+    STORE<f64>(stack, index, a);
+    STORE<f64>(stack, index + 1, b);
+    STORE<f64>(stack, index + 2, c);
+    STORE<f64>(stack, index + 3, d);
+    STORE<f64>(stack, index + 4, e);
+    STORE<f64>(stack, index + 5, f);
   }
 
   /**
@@ -202,6 +209,37 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   public getTransform(): DOMMatrix {
     return this._getTransform();
+  }
+
+  /**
+   * An internal function call that writes the current transform value on the _transformStack
+   * to the buffer if it currently does not match the last written transform.
+   */
+  private _updateTransform(): void {
+    var index: i32 = this._stackOffset * 6;
+    var stack: ArrayBuffer = this._transformStack;
+    var a = LOAD<f64>(stack, index);
+    var b = LOAD<f64>(stack, index + 1);
+    var c = LOAD<f64>(stack, index + 2);
+    var d = LOAD<f64>(stack, index + 3);
+    var e = LOAD<f64>(stack, index + 4);
+    var f = LOAD<f64>(stack, index + 5);
+
+    var current: ArrayBuffer = this._transformCurrent;
+    if ( a != LOAD<f64>(current, 0)
+      || b != LOAD<f64>(current, 1)
+      || c != LOAD<f64>(current, 2)
+      || d != LOAD<f64>(current, 3)
+      || e != LOAD<f64>(current, 4)
+      || f != LOAD<f64>(current, 5)) {
+      this.write_six(CanvasInstruction.SetTransform, a, b, c, d, e, f);
+      STORE<f64>(current, 0, a);
+      STORE<f64>(current, 1, b);
+      STORE<f64>(current, 2, c);
+      STORE<f64>(current, 3, d);
+      STORE<f64>(current, 4, e);
+      STORE<f64>(current, 5, f);
+    }
   }
   //#endregion TRANSFORM
 
@@ -248,7 +286,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   /**
    * An ArrayBuffer that contains 256 sets of 2 i32 values. For each fillStyle, if the fillStyle is
    * a string, the second i32 value will be a pointer, otherwise, it's a `usize` representing the
-   * style's objectID
+   * style's external objectID.
    */
   private _fillStyleStack: ArrayBuffer = setArrayBufferValue2<usize>(
     new ArrayBuffer(0xFF * sizeof<usize>() * 2),
@@ -294,7 +332,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
   /**
    * An internal function call that writes the current fillStyle value on the _fillStyleStack
-   * if it currently does not match the last written fillStyle.
+   * to the buffer if it currently does not match the last written fillStyle.
    */
   @inline
   private _updateFillStyle(): void {
@@ -483,4 +521,227 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     }
   }
   //#endregion FONT
+
+  //#region GLOBALALPHA
+  /**
+   * An ArrayBuffer that contains 256 sets of f64 values.
+   */
+  private _globalAlphaStack: ArrayBuffer = setArrayBufferValue(
+    new ArrayBuffer(0xFF * sizeof<f64>()),
+    1.0,
+  );
+
+  /**
+   * A private member that contains a single float value that represents the last globalAlpha value
+   * written by a drawing operation.
+   */
+  private _currentGlobalAlpha: f64 = 1.0;
+
+  /**
+   * The CanvasRenderingContext2D.globalAlpha property of the Canvas 2D API specifies the alpha
+   * (transparency) value that is applied to shapes and images before they are drawn onto the
+   * canvas.
+   */
+  public get globalAlpha(): f64 {
+    return changetype<f64>(LOAD<usize>(this._globalAlphaStack, <i32>this._stackOffset));
+  }
+
+  public set globalAlpha(value: f64) {
+    if (value != value) return;
+    STORE<f64>(this._globalAlphaStack, <i32>this._stackOffset, min<f64>(1.0, max<f64>(value, 0.0)));
+  }
+
+  /**
+   * An internal function call that writes the current globalAlpha value on the _globalAlphaStack
+   * if it currently does not match the last written globalAlpha value.
+   */
+  @inline
+  private _updateGlobalAlpha(): void {
+    var value: f64 = LOAD<f64>(this._globalAlphaStack, <i32>this._stackOffset);
+    if (value != this._currentGlobalAlpha) {
+      this._currentGlobalAlpha = value;
+      this.write_one(CanvasInstruction.GlobalAlpha, value);
+    }
+  }
+  //#endregion GLOBALALPHA
+
+  //#region GLOBALCOMPOSITEOPERATION
+  /**
+   * An ArrayBuffer that contains 256 sets of GlobalCompositeOperation values.
+   */
+  private _globalCompositeOperationStack: ArrayBuffer = setArrayBufferValue<GlobalCompositeOperation>(
+    new ArrayBuffer(0xFF * sizeof<GlobalCompositeOperation>()),
+    GlobalCompositeOperation.source_over,
+  );
+
+  /**
+   * A private member that contains a single GlobalCompositeOperation value that represents the last
+   * globalCompositeOperation value written by a drawing operation.
+   */
+  private _currentGlobalCompositeOperation: GlobalCompositeOperation = GlobalCompositeOperation.source_over;
+
+  /**
+   * The CanvasRenderingContext2D.globalCompositeOperation property of the Canvas 2D API sets the
+   * type of compositing operation to apply when drawing new shapes.
+   */
+  public get globalCompositeOperation(): GlobalCompositeOperation {
+    return LOAD<GlobalCompositeOperation>(this._globalCompositeOperationStack, <i32>this._stackOffset);
+  }
+
+  public set globalCompositeOperation(value: GlobalCompositeOperation) {
+    STORE<GlobalCompositeOperation>(this._globalCompositeOperationStack, <i32>this._stackOffset, value);
+  }
+
+  /**
+   * An internal function call that writes the current globalCompositeOperation value on the
+   * _globalCompositeOperationStack if it currently does not match the last written
+   * globalCompositeOperation value.
+   */
+  @inline
+  private _updateGlobalCompositeOperation(): void {
+    var value: GlobalCompositeOperation = LOAD<GlobalCompositeOperation>(
+      this._globalCompositeOperationStack,
+      <i32>this._stackOffset,
+    );
+    if (value != this._currentGlobalCompositeOperation) {
+      this._currentGlobalCompositeOperation = value;
+      this.write_one(CanvasInstruction.GlobalCompositeOperation, <f64>value);
+    }
+  }
+  //#endregion GLOBALCOMPOSITEOPERATION
+
+  //#region IMAGESMOOTHINGENABLED
+  /**
+   * An ArrayBuffer that contains 256 sets of bool values.
+   */
+  private _imageSmoothingEnabledStack: ArrayBuffer = setArrayBufferValue<bool>(
+    new ArrayBuffer(0xFF * sizeof<bool>()),
+    true,
+  );
+
+  /**
+   * A private member that contains a single bool value that represents the last
+   * imageSmoothingEnabled value written by a drawing operation.
+   */
+  private _currentImageSmoothingEnabled: bool = true;
+
+  /**
+   * The imageSmoothingEnabled property of the CanvasRenderingContext2D interface, part of the
+   * Canvas API, determines whether scaled images are smoothed (true, default) or not (false). On
+   * getting the imageSmoothingEnabled property, the last value it was set to is returned.
+   */
+  public get imageSmoothingEnabled(): bool {
+    return LOAD<bool>(this._imageSmoothingEnabledStack, <i32>this._stackOffset);
+  }
+
+  public set imageSmoothingEnabled(value: bool) {
+    STORE<bool>(this._imageSmoothingEnabledStack, <i32>this._stackOffset, value);
+  }
+
+  /**
+   * An internal function call that writes the current imageSmoothingEnabled value on the
+   * _imageSmoothingEnabledStack if it currently does not match the last written
+   * imageSmoothingEnabled value.
+   */
+  @inline
+  private _updateImageSmoothingEnabled(): void {
+    var value: bool = LOAD<bool>(this._imageSmoothingEnabledStack, <i32>this._stackOffset);
+    if (value != this._currentImageSmoothingEnabled) {
+      this._currentImageSmoothingEnabled = value;
+      this.write_one(CanvasInstruction.ImageSmoothingEnabled, value ? 1.0 : 0.0);
+    }
+  }
+  //#endregion IMAGESMOOTHINGENABLED
+
+  //#region IMAGESMOOTHINGQUALITY
+  /**
+   * An ArrayBuffer that contains 256 sets of ImageSmoothingQuality values.
+   */
+  private _imageSmoothingQualityStack: ArrayBuffer = setArrayBufferValue<ImageSmoothingQuality>(
+    new ArrayBuffer(0xFF * sizeof<ImageSmoothingQuality>()),
+    ImageSmoothingQuality.low,
+  );
+
+  /**
+   * A private member that contains a single ImageSmoothingQuality value that represents the last
+   * imageSmoothingQuality value written by a drawing operation.
+   */
+  private _currentImageSmoothingQuality: ImageSmoothingQuality = ImageSmoothingQuality.low;
+
+  /**
+   * The imageSmoothingQuality property of the CanvasRenderingContext2D interface, part of the
+   * Canvas API, lets you set the quality of image smoothing.
+   */
+  public get imageSmoothingQuality(): ImageSmoothingQuality {
+    return LOAD<ImageSmoothingQuality>(this._imageSmoothingQualityStack, <i32>this._stackOffset);
+  }
+
+  public set imageSmoothingQuality(value: ImageSmoothingQuality) {
+    STORE<ImageSmoothingQuality>(this._imageSmoothingQualityStack, <i32>this._stackOffset, value);
+  }
+
+  /**
+   * An internal function call that writes the current imageSmoothingQuality value on the
+   * _imageSmoothingQualityStack if it currently does not match the last written
+   * imageSmoothingQuality value, and imageSmoothingEnabled is true.
+   */
+  @inline
+  private _updateImageSmoothingQuality(): void {
+    if (LOAD<bool>(this._imageSmoothingEnabledStack, <i32>this._stackOffset)) {
+      var value: ImageSmoothingQuality = LOAD<ImageSmoothingQuality>(
+        this._imageSmoothingQualityStack,
+        <i32>this._stackOffset,
+      );
+      if (value != this._currentImageSmoothingQuality) {
+        this._currentImageSmoothingQuality = value;
+        this.write_one(CanvasInstruction.ImageSmoothingQuality, <f64>value);
+      }
+    }
+  }
+  //#endregion IMAGESMOOTHINGQUALITY
+
+  //#region LINECAP
+  /**
+   * An ArrayBuffer that contains 256 sets of LineCap values.
+   */
+  private _lineCapStack: ArrayBuffer = setArrayBufferValue<LineCap>(
+    new ArrayBuffer(0xFF * sizeof<LineCap>()),
+    LineCap.butt,
+  );
+
+  /**
+   * A private member that contains a single LineCap value that represents the last
+   * lineCap value written by a drawing operation.
+   */
+  private _currentLineCap: LineCap = LineCap.butt;
+
+  /**
+   * The lineCap property of the CanvasRenderingContext2D interface, part of the
+   * Canvas API, lets you set the quality of image smoothing.
+   */
+  public get lineCap(): LineCap {
+    return LOAD<LineCap>(this._lineCapStack, <i32>this._stackOffset);
+  }
+
+  public set lineCap(value: LineCap) {
+    STORE<LineCap>(this._lineCapStack, <i32>this._stackOffset, value);
+  }
+
+  /**
+   * An internal function call that writes the current lineCap value on the
+   * _lineCapStack if it currently does not match the last written
+   * lineCap value.
+   */
+  @inline
+  private _updateLineCap(): void {
+    var value: LineCap = LOAD<LineCap>(
+      this._lineCapStack,
+      <i32>this._stackOffset,
+    );
+    if (value != this._currentLineCap) {
+      this._currentLineCap = value;
+      this.write_one(CanvasInstruction.LineCap, <f64>value);
+    }
+  }
+  //#endregion LINECAP
 }
