@@ -13,6 +13,7 @@ import { LineCap } from "../../src/shared/LineCap";
 import { LineJoin } from "../../src/shared/LineJoin";
 import { TextAlign } from "../../src/shared/TextAlign";
 import { TextBaseline } from "../../src/shared/TextBaseline";
+import { arraysEqual } from "../internal/util";
 
 //#region EXTERNALS
 // @ts-ignore: linked functions can have decorators
@@ -39,6 +40,8 @@ const defaultBlack: string = "#000";
 const defaultNone: string = "none";
 const defaultFont: string = "10px sans-serif";
 const defaultShadowColor: string = "rgba(0, 0, 0, 0)";
+const defaultLineDash: Float64Array = new Float64Array(0);
+
 //#region ARRAYBUFFERINITIALIZER
 /**
  * Utility function for setting the given ArrayBuffer to the identity 2d transform matrix inline.
@@ -750,6 +753,75 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
   //#endregion LINECAP
 
+  //#region LINEDASH
+  /**
+   * An ArrayBuffer that contains 256 sets of usize pointer values.
+   */
+  private _lineDashStack: ArrayBuffer = setArrayBufferValue<usize>(
+    new ArrayBuffer(0xFF * sizeof<usize>()),
+    changetype<usize>(defaultLineDash),
+  );
+
+  /**
+   * A private member that contains a single LineCap value that represents the last
+   * lineCap value written by a drawing operation.
+   */
+  private _currentLineDash: Float64Array = defaultLineDash;
+
+  /**
+   * The getLineDash() method of the Canvas 2D API's CanvasRenderingContext2D interface gets the
+   * current line dash pattern.
+   */
+  public getLineDash(): Float64Array {
+    return this._getLineDash();
+  }
+
+  /**
+   * The setLineDash() method of the Canvas 2D API's CanvasRenderingContext2D interface sets the
+   * line dash pattern used when stroking lines. It uses a Float64Array of values that specify
+   * alternating lengths of lines and gaps which describe the pattern.
+   *
+   * @param {Float64Array} value - An Array of numbers that specify distances to alternately draw a
+   * line and a gap (in coordinate space units). If the number of elements in the array is odd, the
+   * elements of the array get copied and concatenated. For example, Float64Array [5, 15, 25] will
+   * become Float64Array [5, 15, 25, 5, 15, 25]. If the array is empty, the line dash list is
+   * cleared and line strokes return to being solid.
+   */
+  public setLineDash(value: Float64Array): void {
+    STORE<usize>(this._lineDashStack, <i32>this._stackOffset, changetype<usize>(value));
+  }
+
+  /**
+   * An internal getLineDash function that loops backwards from the current stackOffset until it
+   * doesn't find a null pointer, then returns the reference.
+   */
+  @inline
+  private _getLineDash(): Float64Array {
+    var offset: i32 = this._stackOffset;
+    var pointer: usize = LOAD<usize>(this._lineDashStack, offset);
+    while (changetype<Float64Array>(pointer) == null) {
+      --offset;
+      pointer = LOAD<usize>(this._lineDashStack, offset);
+    }
+    return changetype<Float64Array>(pointer);
+  }
+
+  /**
+   * An internal function that writes the current lineDash value on the _lineDashStack to the buffer
+   * if it currently does not match the last written lineCap value.
+   */
+  @inline
+  private _updateLineDash(): void {
+    var lineDash: Float64Array = this._getLineDash();
+    var current: Float64Array = this._currentLineDash;
+
+    if (!arraysEqual(current, lineDash)) {
+      this._currentLineDash = lineDash;
+      this._writeOne(CanvasInstruction.LineDash, <f64>changetype<usize>(lineDash));
+    }
+  }
+  //#endregion LINEDASH
+
   //#region LINEDASHOFFSET
   /**
    * An ArrayBuffer that contains 256 sets of f64 values.
@@ -1334,4 +1406,245 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     }
   }
   //#endregion TEXTBASELINE
+
+  /**
+   * An ArrayBuffer that contains 256 sets of bool values.
+   */
+  private _saveStack: ArrayBuffer = new ArrayBuffer(0xFF * sizeof<bool>());
+
+  /**
+   * The CanvasRenderingContext2D.save() method of the Canvas 2D API saves the entire state of the
+   * canvas by pushing the current state onto a stack.
+   *
+   * The drawing state that gets saved onto a stack consists of:
+   *
+   * - The current transformation matrix.
+   * - The current clipping region.
+   * - The current dash list.
+   * - The current values of the following attributes: strokeStyle, fillStyle, globalAlpha, lineWidth, lineCap, lineJoin, miterLimit, lineDashOffset, shadowOffsetX, shadowOffsetY, shadowBlur, shadowColor, globalCompositeOperation, font, textAlign, textBaseline, direction, imageSmoothingEnabled.
+   *
+   * @param {bool} hard - Tells the context to perform an actual `save()` operation. Default value is false.
+   */
+  public save(hard: bool = false): void {
+    var offset: i32 = <i32>this._stackOffset;
+    var nextOffset: i32 = offset + 1;
+    if (nextOffset >= u8.MAX_VALUE) unreachable();
+    var transformIndex: i32 = offset * 6;
+    var nextTransformIndex: i32 = transformIndex + 6;
+    var styleIndex: i32 = offset << 1;
+    var nextStyleIndex = styleIndex + 2;
+
+    // currentTransform
+    var target: ArrayBuffer = this._transformStack;
+    STORE<f64>(target, nextTransformIndex, LOAD<f64>(target, transformIndex));
+    STORE<f64>(target, nextTransformIndex + 1, LOAD<f64>(target, transformIndex + 1));
+    STORE<f64>(target, nextTransformIndex + 2, LOAD<f64>(target, transformIndex + 2));
+    STORE<f64>(target, nextTransformIndex + 3, LOAD<f64>(target, transformIndex + 3));
+    STORE<f64>(target, nextTransformIndex + 4, LOAD<f64>(target, transformIndex + 4));
+    STORE<f64>(target, nextTransformIndex + 5, LOAD<f64>(target, transformIndex + 5));
+
+    // direction
+    target = this._directionStack;
+    STORE<CanvasDirection>(target, nextOffset, LOAD<CanvasDirection>(target, offset));
+
+    // fillStyle
+    target = this._fillStyleStack;
+    STORE<usize>(target, nextStyleIndex, LOAD<usize>(target, styleIndex));
+    STORE<usize>(target, nextStyleIndex + 1, LOAD<usize>(target, styleIndex + 1));
+
+    // filter
+    target = this._filterStack;
+    STORE<usize>(target, nextOffset, LOAD<usize>(target, offset));
+
+    // font
+    target = this._fontStack;
+    STORE<usize>(target, nextOffset, LOAD<usize>(target, offset));
+
+    // globalAlpha
+    target = this._globalAlphaStack;
+    STORE<f64>(target, nextOffset, LOAD<f64>(target, offset));
+
+    // globalCompositeOperation
+    target = this._globalCompositeOperationStack;
+    STORE<GlobalCompositeOperation>(target, nextOffset, LOAD<GlobalCompositeOperation>(target, offset));
+
+    // imageSmoothingEnabled
+    target = this._imageSmoothingEnabledStack;
+    STORE<bool>(target, nextOffset, LOAD<bool>(target, offset));
+
+    // imageSmoothingQuality
+    target = this._imageSmoothingQualityStack;
+    STORE<ImageSmoothingQuality>(target, nextOffset, LOAD<ImageSmoothingQuality>(target, offset));
+
+    // lineCap
+    target = this._lineCapStack;
+    STORE<LineCap>(target, nextOffset, LOAD<LineCap>(target, offset));
+
+    // lineDash
+
+    /**
+     * Whenever a save occurs, if it would overwrite a reference that already exists, we must free
+     * it manually.
+     */
+    var nextLineDash: usize = LOAD<usize>(this._lineDashStack, nextOffset);
+    if (changetype<Float64Array>(nextLineDash) != null) {
+      // always free the underlying buffer FIRST
+      memory.free(changetype<usize>(changetype<Float64Array>(nextLineDash).buffer));
+      memory.free(nextLineDash);
+    }
+
+    STORE<usize>(this._lineDashStack, nextOffset, changetype<usize>(null));
+
+    // lineDashOffset
+    target = this._lineDashOffsetStack;
+    STORE<f64>(target, nextOffset, LOAD<f64>(target, offset));
+
+    // lineJoin
+    target = this._lineJoinStack;
+    STORE<LineJoin>(target, nextOffset, LOAD<LineJoin>(target, offset));
+
+    // lineWidth
+    target = this._lineWidthStack;
+    STORE<f64>(target, nextOffset, LOAD<f64>(target, offset));
+
+    // miterLimit
+    target = this._miterLimitStack;
+    STORE<f64>(target, nextOffset, LOAD<f64>(target, offset));
+
+    // shadowBlur
+    target = this._shadowBlurStack;
+    STORE<f64>(target, nextOffset, LOAD<f64>(target, offset));
+
+    // shadowColor
+    target = this._shadowColorStack;
+    STORE<usize>(target, nextOffset, LOAD<usize>(target, offset));
+
+    // shadowOffsetX
+    target = this._shadowOffsetXStack;
+    STORE<f64>(target, nextOffset, LOAD<f64>(target, offset));
+
+    // shadowOffsetY
+    target = this._shadowOffsetYStack;
+    STORE<f64>(target, nextOffset, LOAD<f64>(target, offset));
+
+    // strokeStyle
+    target = this._strokeStyleStack;
+    STORE<usize>(target, nextStyleIndex, LOAD<usize>(target, styleIndex));
+    STORE<usize>(target, nextStyleIndex + 1, LOAD<usize>(target, styleIndex + 1));
+
+    // textBaseline
+    target = this._textBaselineStack;
+    STORE<TextBaseline>(target, nextOffset, LOAD<TextBaseline>(target, offset));
+
+    // textAlign
+    target = this._textAlignStack;
+    STORE<TextAlign>(target, nextOffset, LOAD<TextAlign>(target, offset));
+
+    if (hard) {
+      STORE<bool>(this._saveStack, nextOffset, true);
+      this._writeZero(CanvasInstruction.Save);
+    }
+
+    this._stackOffset = nextOffset;
+  }
+
+  /**
+   * The CanvasRenderingContext2D.restore() method of the Canvas 2D API restores the most recently
+   * saved canvas state by popping the top entry in the drawing state stack. If there is no saved
+   * state, this method does nothing.
+   *
+   * In the case of the hard restore, we need to mirror what the browser will do, and modify the
+   * current stack values instead of just moving the stack pointer.
+   */
+  public restore(): void {
+    if (this._stackOffset == <u8>0) return;
+    var currentOffset: i32 = <i32>this._stackOffset;
+    var nextOffset: i32 = currentOffset - 1;
+    var styleOffset: i32 = nextOffset * 2;
+    var target: ArrayBuffer;
+    var source: ArrayBuffer;
+    var transformOffset: i32 = nextOffset * 6;
+
+    if (LOAD<bool>(this._saveStack, currentOffset)) {
+      target = this._transformCurrent;
+      source = this._transformStack;
+
+      // transformCurrent
+      STORE<f64>(target, 0, LOAD<f64>(source, transformOffset));
+      STORE<f64>(target, 1, LOAD<f64>(source, transformOffset + 1));
+      STORE<f64>(target, 2, LOAD<f64>(source, transformOffset + 2));
+      STORE<f64>(target, 3, LOAD<f64>(source, transformOffset + 3));
+      STORE<f64>(target, 4, LOAD<f64>(source, transformOffset + 4));
+      STORE<f64>(target, 5, LOAD<f64>(source, transformOffset + 5));
+
+      // direction
+      this._currentDirection = LOAD<CanvasDirection>(this._directionStack, nextOffset);
+
+      // fillStyle
+      source = this._fillStyleStack;
+      this._currentFillStyleType = <FillStrokeStyleType>LOAD<usize>(source, styleOffset);
+      this._currentFillStyleValue = LOAD<usize>(source, styleOffset + 1);
+
+      // filter
+      this._currentFilter = changetype<string>(LOAD<usize>(this._filterStack, nextOffset));
+
+      // font
+      this._currentFont = changetype<string>(LOAD<usize>(this._fontStack, nextOffset));
+
+      // globalAlpha
+      this._currentGlobalAlpha = LOAD<f64>(this._globalAlphaStack, nextOffset);
+
+      // globalCompositeOperation
+      this._currentGlobalCompositeOperation = LOAD<GlobalCompositeOperation>(this._globalCompositeOperationStack, nextOffset);
+
+      // imageSmoothingEnabled
+      this._currentImageSmoothingEnabled = LOAD<bool>(this._imageSmoothingEnabledStack, nextOffset);
+
+      // imageSmoothingQuality
+      this._currentImageSmoothingQuality = LOAD<ImageSmoothingQuality>(this._imageSmoothingQualityStack, nextOffset);
+
+      // lineCap
+      this._currentLineCap = LOAD<LineCap>(this._lineCapStack, nextOffset);
+
+      // lineDash
+      this._currentLineDash = changetype<Float64Array>(LOAD<usize>(this._lineDashStack, nextOffset));
+
+      // lineDashOffset
+      this._currentLineDashOffset = LOAD<f64>(this._lineDashOffsetStack, nextOffset);
+
+      // lineJoin
+      this._currentLineJoin = LOAD<LineJoin>(this._lineJoinStack, nextOffset);
+
+      // lineWidth
+      this._currentLineWidth = LOAD<f64>(this._lineWidthStack, nextOffset);
+
+      // miterLimit
+      this._currentMiterLimit = LOAD<f64>(this._miterLimitStack, nextOffset);
+
+      // shadowBlur
+      this._currentShadowBlur = LOAD<f64>(this._shadowBlurStack, nextOffset);
+
+      // shadowColor
+      this._currentShadowColor = changetype<string>(LOAD<usize>(this._shadowColorStack, nextOffset));
+
+      // shadowOffsetX
+      this._currentShadowOffsetX = LOAD<f64>(this._shadowOffsetXStack, nextOffset);
+
+      // shadowOffsetY
+      this._currentShadowOffsetY = LOAD<f64>(this._shadowOffsetYStack, nextOffset);
+
+      // strokeStyle
+      source = this._strokeStyleStack;
+      this._currentStrokeStyleType = <FillStrokeStyleType>LOAD<usize>(source, styleOffset);
+      this._currentStrokeStyleValue = LOAD<usize>(source, styleOffset + 1);
+
+      // textAlign
+      this._currentTextAlign = LOAD<TextAlign>(this._textAlignStack, nextOffset);
+
+      // textBaseline
+      this._currentTextBaseline = LOAD<TextBaseline>(this._textBaselineStack, nextOffset);
+    }
+
+    this._stackOffset = nextOffset;
+  }
 }
