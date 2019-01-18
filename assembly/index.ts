@@ -12,3 +12,4 @@ export { GlobalCompositeOperation } from "../src/shared/GlobalCompositeOperation
 export { ImageSmoothingQuality } from "../src/shared/ImageSmoothingQuality";
 export { LineCap } from "../src/shared/LineCap";
 export { LineJoin } from "../src/shared/LineJoin";
+export { TextAlign } from "../src/shared/TextAlign";

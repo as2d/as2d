@@ -11,6 +11,7 @@ import { GlobalCompositeOperation } from "../../src/shared/GlobalCompositeOperat
 import { ImageSmoothingQuality } from "../../src/shared/ImageSmoothingQuality";
 import { LineCap } from "../../src/shared/LineCap";
 import { LineJoin } from "../../src/shared/LineJoin";
+import { TextAlign } from "../../src/shared/TextAlign";
 
 //#region EXTERNALS
 // @ts-ignore: linked functions can have decorators
@@ -36,7 +37,7 @@ const enum FillStrokeStyleType {
 const defaultBlack: string = "#000";
 const defaultNone: string = "none";
 const defaultFont: string = "10px sans-serif";
-
+const defaultShadowColor: string = "rgba(0, 0, 0, 0)";
 //#region ARRAYBUFFERINITIALIZER
 /**
  * Utility function for setting the given ArrayBuffer to the identity 2d transform matrix inline.
@@ -320,7 +321,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
       this._fillStyleStack,
       index,
     );
-    if (fillStyleType == FillStrokeStyleType.String, "current fillStyle is not a string") {
+    if (fillStyleType == FillStrokeStyleType.String) {
       return changetype<string>(LOAD<usize>(this._fillStyleStack, index + 1));
     }
     return null;
@@ -547,7 +548,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * canvas.
    */
   public get globalAlpha(): f64 {
-    return changetype<f64>(LOAD<usize>(this._globalAlphaStack, <i32>this._stackOffset));
+    return LOAD<f64>(this._globalAlphaStack, <i32>this._stackOffset);
   }
 
   public set globalAlpha(value: f64) {
@@ -768,7 +769,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * offset, or "phase."
    */
   public get lineDashOffset(): f64 {
-    return changetype<f64>(LOAD<usize>(this._lineDashOffsetStack, <i32>this._stackOffset));
+    return LOAD<f64>(this._lineDashOffsetStack, <i32>this._stackOffset);
   }
 
   public set lineDashOffset(value: f64) {
@@ -858,7 +859,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * offset, or "phase."
    */
   public get lineWidth(): f64 {
-    return changetype<f64>(LOAD<usize>(this._lineWidthStack, <i32>this._stackOffset));
+    return LOAD<f64>(this._lineWidthStack, <i32>this._stackOffset);
   }
 
   public set lineWidth(value: f64) {
@@ -900,7 +901,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * control how thick the junction becomes.
    */
   public get miterLimit(): f64 {
-    return changetype<f64>(LOAD<usize>(this._miterLimitStack, <i32>this._stackOffset));
+    return LOAD<f64>(this._miterLimitStack, <i32>this._stackOffset);
   }
 
   public set miterLimit(value: f64) {
@@ -920,4 +921,370 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     }
   }
   //#endregion MITERLIMIT
+
+  //#region SHADOWBLUR
+  /**
+   * An ArrayBuffer that contains 256 sets of f64 values.
+   */
+  private _shadowBlurStack: ArrayBuffer = setArrayBufferValue(
+    new ArrayBuffer(0xFF * sizeof<f64>()),
+    1.0,
+  );
+
+  /**
+   * A private member that contains a single float value that represents the last shadowBlur value
+   * written by a drawing operation.
+   */
+  private _currentShadowBlur: f64 = 0.0;
+
+  /**
+   * The CanvasRenderingContext2D.shadowBlur property of the Canvas 2D API specifies the amount of
+   * blur applied to shadows. The default is 0 (no blur).
+   *
+   * The shadowBlur value is a non-negative float specifying the level of shadow blur, where 0
+   * represents no blur and larger numbers represent increasingly more blur. This value doesn't
+   * correspond to a number of pixels, and is not affected by the current transformation matrix. The
+   * default value is 0. Negative, Infinity, and NaN values are ignored.
+   */
+  public get shadowBlur(): f64 {
+    return LOAD<f64>(this._shadowBlurStack, <i32>this._stackOffset);
+  }
+
+  public set shadowBlur(value: f64) {
+    STORE<f64>(this._shadowBlurStack, <i32>this._stackOffset, value);
+  }
+
+  /**
+   * An internal function that writes the current shadowBlur value on the _shadowBlurStack to the
+   * buffer if it currently does not match the last written shadowBlur value.
+   */
+  @inline
+  private _updateShadowBlur(): void {
+    var value: f64 = LOAD<f64>(this._shadowBlurStack, <i32>this._stackOffset);
+    if (value != this._currentShadowBlur) {
+      this._currentShadowBlur = value;
+      this._writeOne(CanvasInstruction.ShadowBlur, value);
+    }
+  }
+  //#endregion SHADOWBLUR
+
+  //#region SHADOWCOLOR
+  /**
+   * An ArrayBuffer that contains 256 pointers to shadowColor strings.
+   */
+  private _shadowColorStack: ArrayBuffer = setArrayBufferValue<usize>(
+    new ArrayBuffer(0xFF * sizeof<usize>()),
+    changetype<usize>(defaultShadowColor),
+  );
+
+  /**
+   * A private member that contains a single StrokeShadowColorType value that represents the last
+   * shadowColor value written by a drawing operation
+   */
+  private _currentShadowColor: string = defaultShadowColor;
+
+
+  /**
+   * The CanvasRenderingContext2D.shadowColor property of the Canvas 2D API specifies the current text
+   * representing a CSS Color
+   */
+  public get shadowColor(): string | null {
+    return changetype<string>(LOAD<usize>(this._shadowColorStack, this._stackOffset));
+  }
+
+  public set shadowColor(value: string | null) {
+    if (value == null) value = defaultShadowColor;
+    STORE<usize>(this._shadowColorStack, this._stackOffset, changetype<usize>(value));
+  }
+
+  /**
+   * An internal function that writes the current shadowColor value on the _shadowColorStack to the
+   * buffer if it currently does not match the last written shadowColor.
+   */
+  @inline
+  private _updateShadowColor(): void {
+    var value: string = changetype<string>(LOAD<usize>(this._shadowColorStack, <i32>this._stackOffset));
+    if (value != this._currentShadowColor) {
+      this._currentFilter = value;
+      this._writeOne(CanvasInstruction.ShadowColor, changetype<usize>(value));
+    }
+  }
+  //#endregion
+
+  //#region SHADOWOFFSETX
+  /**
+   * An ArrayBuffer that contains 256 sets of f64 values.
+   */
+  private _shadowOffsetXStack: ArrayBuffer = setArrayBufferValue(
+    new ArrayBuffer(0xFF * sizeof<f64>()),
+    1.0,
+  );
+
+  /**
+   * A private member that contains a single float value that represents the last shadowOffsetX value
+   * written by a drawing operation.
+   */
+  private _currentShadowOffsetX: f64 = 0.0;
+
+  /**
+   * The CanvasRenderingContext2D.shadowOffsetX property of the Canvas 2D API specifies the distance
+   * that shadows will be offset horizontally.
+   *
+   * The value is a f64 specifying the distance that shadows will be offset horizontally. Positive
+   * values are to the right, and negative to the left. The default value is 0 (no horizontal
+   * offset). Infinity and NaN values are ignored.
+   */
+  public get shadowOffsetX(): f64 {
+    return LOAD<f64>(this._shadowOffsetXStack, <i32>this._stackOffset);
+  }
+
+  public set shadowOffsetX(value: f64) {
+    STORE<f64>(this._shadowOffsetXStack, <i32>this._stackOffset, value);
+  }
+
+  /**
+   * An internal function that writes the current shadowOffsetX value on the _shadowOffsetXStack to the
+   * buffer if it currently does not match the last written shadowOffsetX value.
+   */
+  @inline
+  private _updateShadowOffsetX(): void {
+    var value: f64 = LOAD<f64>(this._shadowOffsetXStack, <i32>this._stackOffset);
+    if (value != this._currentShadowOffsetX) {
+      this._currentShadowOffsetX = value;
+      this._writeOne(CanvasInstruction.ShadowOffsetX, value);
+    }
+  }
+  //#endregion SHADOWOFFSETX
+
+  //#region SHADOWOFFSETY
+  /**
+   * An ArrayBuffer that contains 256 sets of f64 values.
+   */
+  private _shadowOffsetYStack: ArrayBuffer = setArrayBufferValue(
+    new ArrayBuffer(0xFF * sizeof<f64>()),
+    1.0,
+  );
+
+  /**
+   * A private member that contains a single float value that represents the last shadowOffsetY value
+   * written by a drawing operation.
+   */
+  private _currentShadowOffsetY: f64 = 0.0;
+
+  /**
+   * The CanvasRenderingContext2D.shadowOffsetY property of the Canvas 2D API specifies the distance
+   * that shadows will be offset vertically.
+   *
+   * The value is a f64 specifying the distance that shadows will be offset horizontally. Positive
+   * values are down, and negative are up. The default value is 0 (no vertical offset). Infinity and
+   * NaN values are ignored
+   */
+  public get shadowOffsetY(): f64 {
+    return LOAD<f64>(this._shadowOffsetYStack, <i32>this._stackOffset);
+  }
+
+  public set shadowOffsetY(value: f64) {
+    STORE<f64>(this._shadowOffsetYStack, <i32>this._stackOffset, value);
+  }
+
+  /**
+   * An internal function that writes the current shadowOffsetY value on the _shadowOffsetYStack to the
+   * buffer if it currently does not match the last written shadowOffsetY value.
+   */
+  @inline
+  private _updateShadowOffsetY(): void {
+    var value: f64 = LOAD<f64>(this._shadowOffsetYStack, <i32>this._stackOffset);
+    if (value != this._currentShadowOffsetY) {
+      this._currentShadowOffsetY = value;
+      this._writeOne(CanvasInstruction.ShadowOffsetY, value);
+    }
+  }
+  //#endregion SHADOWOFFSETY
+
+  //#region STROKESTYLE
+  /**
+   * An ArrayBuffer that contains 256 sets of 2 usize values. For each strokeStyle, if the strokeStyle is
+   * a string, the second i32 value will be a pointer, otherwise, it's a `usize` representing the
+   * style's external objectID.
+   */
+  private _strokeStyleStack: ArrayBuffer = setArrayBufferValue2<usize>(
+    new ArrayBuffer(0xFF * sizeof<usize>() * 2),
+    <usize>FillStrokeStyleType.String,
+    changetype<usize>(defaultBlack),
+  );
+
+  /**
+   * A private member that contains a single StrokeFillStyleType value that represents the last
+   * strokeStyle value written by a drawing operation
+   */
+  private _currentStrokeStyleType: FillStrokeStyleType = FillStrokeStyleType.String;
+
+  /**
+   * A private member that contains a single pointer or id value that represents the last
+   * strokeStyle value written by a drawing operation
+   */
+  private _currentStrokeStyleValue: usize = changetype<usize>(defaultBlack);
+
+  /**
+   * The CanvasRenderingContext2D.strokeStyle property of the Canvas 2D API specifies the color,
+   * gradient, or pattern to use for the strokes (outlines) around shapes. The default is #000
+   * (black).
+   */
+  public get strokeStyle(): string | null {
+    var index: i32 = this._stackOffset * 2;
+    var strokeStyleType: FillStrokeStyleType = <FillStrokeStyleType>LOAD<usize>(
+      this._strokeStyleStack,
+      index,
+    );
+    if (strokeStyleType == FillStrokeStyleType.String) {
+      return changetype<string>(LOAD<usize>(this._strokeStyleStack, index + 1));
+    }
+    return null;
+  }
+
+  public set strokeStyle(value: string | null) {
+    if (value == null) value = defaultBlack;
+    var index: i32 = this._stackOffset * 2;
+    var buff: ArrayBuffer = this._strokeStyleStack;
+    STORE<usize>(buff, index, <usize>FillStrokeStyleType.String);
+    STORE<usize>(buff, index + 1, changetype<usize>(value));
+  }
+
+  /**
+   * An internal function that writes the current strokeStyle value on the _strokeStyleStack to the
+   * buffer if it currently does not match the last written strokeStyle.
+   */
+  @inline
+  private _updateStrokeStyle(): void {
+    var buff: ArrayBuffer = this._strokeStyleStack;
+    var index: i32 = <i32>this._stackOffset * 2;
+    var styleType: FillStrokeStyleType = <FillStrokeStyleType>LOAD<usize>(buff, index);
+    var value: usize = LOAD<usize>(buff, index + 1);
+    if (styleType != this._currentStrokeStyleType || value != this._currentStrokeStyleValue) {
+      var inst: CanvasInstruction;
+      if (styleType == FillStrokeStyleType.String) inst = CanvasInstruction.StrokeStyle;
+      else if (styleType == FillStrokeStyleType.CanvasGradient) inst = CanvasInstruction.StrokeGradient;
+      else inst = CanvasInstruction.StrokePattern;
+      this._writeOne(inst, <f64>value);
+    }
+  }
+  //#endregion STROKESTYLE
+
+  //#region STROKEPATTERN
+  /**
+   * The CanvasRenderingContext2D.strokePattern property of the Canvas 2D API specifies pattern to
+   * use for the strokes (outlines) around shapes. The default is null.
+   */
+  public get strokePattern(): CanvasPattern | null {
+    var index: i32 = this._stackOffset * 2;
+    var buff: ArrayBuffer = this._strokeStyleStack;
+    var strokeStyleType: FillStrokeStyleType = <FillStrokeStyleType>LOAD<i32>(
+      buff,
+      index,
+    );
+
+    if (strokeStyleType == FillStrokeStyleType.CanvasPattern) {
+      var result: CanvasPattern = new CanvasPattern();
+      store<i32>(
+        changetype<usize>(result) + offsetof<CanvasPattern>("id"),
+        LOAD<i32>(buff, index + 1),
+      );
+      return result;
+    }
+
+    return null;
+  }
+
+  public set strokePattern(value: CanvasPattern | null) {
+    if (value == null) {
+      this.strokeStyle = defaultBlack;
+      return;
+    }
+    var index: i32 = this._stackOffset * 2;
+    var buff: ArrayBuffer = this._strokeStyleStack;
+    STORE<i32>(buff, index, FillStrokeStyleType.CanvasPattern);
+    STORE<i32>(buff, index + 1, load<i32>(changetype<usize>(value) + offsetof<CanvasPattern>("id")));
+  }
+  //#endregion STROKEPATTERN
+
+  //#region STROKEGRADIENT
+  /**
+   * The CanvasRenderingContext2D.strokeGradient property of the Canvas 2D API specifies the
+   * gradient to use for the strokes (outlines) around shapes. The default is null.
+   */
+  public get strokeGradient(): CanvasGradient | null {
+    var index: i32 = this._stackOffset * 2;
+    var buff: ArrayBuffer = this._strokeStyleStack;
+    var strokeStyleType: FillStrokeStyleType = <FillStrokeStyleType>LOAD<i32>(
+      buff,
+      index,
+    );
+    if (strokeStyleType == FillStrokeStyleType.CanvasGradient) {
+      var result: CanvasGradient = new CanvasGradient();
+      store<i32>(
+        changetype<usize>(result) + offsetof<CanvasGradient>("id"),
+        LOAD<i32>(buff, index + 1),
+      );
+      return result;
+    }
+
+    return null;
+  }
+
+  public set strokeGradient(value: CanvasGradient | null) {
+    if (value == null) {
+      this.strokeStyle = defaultBlack;
+      return;
+    }
+    var index: i32 = this._stackOffset * 2;
+    var buff: ArrayBuffer = this._strokeStyleStack;
+    STORE<i32>(buff, index, FillStrokeStyleType.CanvasGradient);
+    STORE<i32>(buff, index + 1, load<i32>(changetype<usize>(value) + offsetof<CanvasGradient>("id")));
+  }
+  //#endregion STROKEGRADIENT
+
+  //#region TEXTALIGN
+  /**
+   * An ArrayBuffer that contains 256 sets of TextAlign values.
+   */
+  private _textAlignStack: ArrayBuffer = setArrayBufferValue<TextAlign>(
+    new ArrayBuffer(0xFF * sizeof<TextAlign>()),
+    TextAlign.start,
+  );
+
+  /**
+   * A private member that contains a single LineCap value that represents the last
+   * lineCap value written by a drawing operation.
+   */
+  private _currentTextAlign: TextAlign = TextAlign.start;
+
+  /**
+   * The CanvasRenderingContext2D.lineCap property of the Canvas 2D API determines the shape used
+   * to draw the end points of lines.
+   */
+  public get textAlign(): TextAlign {
+    return LOAD<LineCap>(this._textAlignStack, <i32>this._stackOffset);
+  }
+
+  public set textAlign(value: TextAlign) {
+    STORE<TextAlign>(this._textAlignStack, <i32>this._stackOffset, value);
+  }
+
+  /**
+   * An internal function that writes the current textAlign value on the _textAlignStack to the
+   * buffer if it currently does not match the last written textAlign value.
+   */
+  @inline
+  private _updateTextAlign(): void {
+    var value: TextAlign = LOAD<TextAlign>(
+      this._textAlignStack,
+      <i32>this._stackOffset,
+    );
+    if (value != this._currentTextAlign) {
+      this._currentTextAlign = value;
+      this._writeOne(CanvasInstruction.TextAlign, <f64>value);
+    }
+  }
+  //#endregion TEXTALIGN
+
 }
