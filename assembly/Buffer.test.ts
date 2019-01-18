@@ -7,7 +7,7 @@ var ctx: CanvasRenderingContext2D;
 
 class Writer extends Buffer<f64> {
   writeTest(): void {
-    this.write_two(0, 1, 2);
+    this._writeTwo(0, 1, 2);
   }
 }
 

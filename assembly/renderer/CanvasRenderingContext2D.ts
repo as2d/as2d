@@ -27,7 +27,7 @@ declare function createPattern(ctxid: i32, imageid: i32, repetition: CanvasPatte
 //#endregion EXTERNALS
 
 
-const enum StrokeFillStyleType {
+const enum FillStrokeStyleType {
   String,
   CanvasPattern,
   CanvasGradient,
@@ -236,7 +236,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
       || d != LOAD<f64>(current, 3)
       || e != LOAD<f64>(current, 4)
       || f != LOAD<f64>(current, 5)) {
-      this.write_six(CanvasInstruction.SetTransform, a, b, c, d, e, f);
+      this._writeSix(CanvasInstruction.SetTransform, a, b, c, d, e, f);
       STORE<f64>(current, 0, a);
       STORE<f64>(current, 1, b);
       STORE<f64>(current, 2, c);
@@ -281,7 +281,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: CanvasDirection = LOAD<CanvasDirection>(this._directionStack, <i32>this._stackOffset);
     if (value != this._currentDirection) {
       this._currentDirection = value;
-      this.write_one(CanvasInstruction.Direction, <f64>value);
+      this._writeOne(CanvasInstruction.Direction, <f64>value);
     }
   }
   //#endregion DIRECTION
@@ -294,7 +294,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   private _fillStyleStack: ArrayBuffer = setArrayBufferValue2<usize>(
     new ArrayBuffer(0xFF * sizeof<usize>() * 2),
-    <usize>StrokeFillStyleType.String,
+    <usize>FillStrokeStyleType.String,
     changetype<usize>(defaultBlack),
   );
 
@@ -302,7 +302,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * A private member that contains a single StrokeFillStyleType value that represents the last
    * fillStyle value written by a drawing operation
    */
-  private _currentFillStyleType: StrokeFillStyleType = StrokeFillStyleType.String;
+  private _currentFillStyleType: FillStrokeStyleType = FillStrokeStyleType.String;
 
   /**
    * A private member that contains a single pointer or id value that represents the last
@@ -316,11 +316,11 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   public get fillStyle(): string | null {
     var index: i32 = this._stackOffset * 2;
-    var fillStyleType: StrokeFillStyleType = <StrokeFillStyleType>LOAD<usize>(
+    var fillStyleType: FillStrokeStyleType = <FillStrokeStyleType>LOAD<usize>(
       this._fillStyleStack,
       index,
     );
-    if (fillStyleType == StrokeFillStyleType.String, "current fillStyle is not a string") {
+    if (fillStyleType == FillStrokeStyleType.String, "current fillStyle is not a string") {
       return changetype<string>(LOAD<usize>(this._fillStyleStack, index + 1));
     }
     return null;
@@ -330,7 +330,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     if (value == null) value = defaultBlack;
     var index: i32 = this._stackOffset * 2;
     var buff: ArrayBuffer = this._fillStyleStack;
-    STORE<usize>(buff, index, <usize>StrokeFillStyleType.String);
+    STORE<usize>(buff, index, <usize>FillStrokeStyleType.String);
     STORE<usize>(buff, index + 1, changetype<usize>(value));
   }
 
@@ -342,14 +342,14 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   private _updateFillStyle(): void {
     var buff: ArrayBuffer = this._fillStyleStack;
     var index: i32 = <i32>this._stackOffset * 2;
-    var styleType: StrokeFillStyleType = <StrokeFillStyleType>LOAD<usize>(buff, index);
+    var styleType: FillStrokeStyleType = <FillStrokeStyleType>LOAD<usize>(buff, index);
     var value: usize = LOAD<usize>(buff, index + 1);
     if (styleType != this._currentFillStyleType || value != this._currentFillStyleValue) {
       var inst: CanvasInstruction;
-      if (styleType == StrokeFillStyleType.String) inst = CanvasInstruction.FillStyle;
-      else if (styleType == StrokeFillStyleType.CanvasGradient) inst = CanvasInstruction.FillGradient;
+      if (styleType == FillStrokeStyleType.String) inst = CanvasInstruction.FillStyle;
+      else if (styleType == FillStrokeStyleType.CanvasGradient) inst = CanvasInstruction.FillGradient;
       else inst = CanvasInstruction.FillPattern;
-      this.write_one(inst, <f64>value);
+      this._writeOne(inst, <f64>value);
     }
   }
   //#endregion FILLSTYLE
@@ -362,12 +362,12 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   public get fillPattern(): CanvasPattern | null {
     var index: i32 = this._stackOffset * 2;
     var buff: ArrayBuffer = this._fillStyleStack;
-    var fillStyleType: StrokeFillStyleType = <StrokeFillStyleType>LOAD<i32>(
+    var fillStyleType: FillStrokeStyleType = <FillStrokeStyleType>LOAD<i32>(
       buff,
       index,
     );
 
-    if (fillStyleType == StrokeFillStyleType.CanvasPattern) {
+    if (fillStyleType == FillStrokeStyleType.CanvasPattern) {
       var result: CanvasPattern = new CanvasPattern();
       store<i32>(
         changetype<usize>(result) + offsetof<CanvasPattern>("id"),
@@ -386,7 +386,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     }
     var index: i32 = this._stackOffset * 2;
     var buff: ArrayBuffer = this._fillStyleStack;
-    STORE<i32>(buff, index, StrokeFillStyleType.CanvasPattern);
+    STORE<i32>(buff, index, FillStrokeStyleType.CanvasPattern);
     STORE<i32>(buff, index + 1, load<i32>(changetype<usize>(value) + offsetof<CanvasPattern>("id")));
   }
   //#endregion FILLPATTERN
@@ -399,11 +399,11 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   public get fillGradient(): CanvasGradient | null {
     var index: i32 = this._stackOffset * 2;
     var buff: ArrayBuffer = this._fillStyleStack;
-    var fillStyleType: StrokeFillStyleType = <StrokeFillStyleType>LOAD<i32>(
+    var fillStyleType: FillStrokeStyleType = <FillStrokeStyleType>LOAD<i32>(
       buff,
       index,
     );
-    if (fillStyleType == StrokeFillStyleType.CanvasGradient) {
+    if (fillStyleType == FillStrokeStyleType.CanvasGradient) {
       var result: CanvasGradient = new CanvasGradient();
       store<i32>(
         changetype<usize>(result) + offsetof<CanvasGradient>("id"),
@@ -422,7 +422,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     }
     var index: i32 = this._stackOffset * 2;
     var buff: ArrayBuffer = this._fillStyleStack;
-    STORE<i32>(buff, index, StrokeFillStyleType.CanvasGradient);
+    STORE<i32>(buff, index, FillStrokeStyleType.CanvasGradient);
     STORE<i32>(buff, index + 1, load<i32>(changetype<usize>(value) + offsetof<CanvasGradient>("id")));
   }
   //#endregion FILLGRADIENT
@@ -472,15 +472,15 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   /**
-   * An internal function call that writes the current filter value on the _filterStack
-   * if it currently does not match the last written filter string value.
+   * An internal function that writes the current filter value on the _filterStack if it currently
+   * does not match the last written filter string value to the buffer using write_one.
    */
   @inline
   private _updateFilter(): void {
     var value: string = changetype<string>(LOAD<usize>(this._filterStack, <i32>this._stackOffset));
     if (value != this._currentFilter) {
       this._currentFilter = value;
-      this.write_one(CanvasInstruction.Filter, changetype<usize>(value));
+      this._writeOne(CanvasInstruction.Filter, changetype<usize>(value));
     }
   }
   //#endregion FILTER
@@ -513,15 +513,15 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   /**
-   * An internal function call that writes the current font value on the _fontStack
-   * if it currently does not match the last written font string value.
+   * An internal function that writes the current font value on the _fontStack to the buffer if it
+   * currently does not match the last written font string value.
    */
   @inline
   private _updateFont(): void {
     var value: string = changetype<string>(LOAD<usize>(this._fontStack, <i32>this._stackOffset));
     if (value != this._currentFont) {
       this._currentFont = value;
-      this.write_one(CanvasInstruction.Font, changetype<usize>(value));
+      this._writeOne(CanvasInstruction.Font, changetype<usize>(value));
     }
   }
   //#endregion FONT
@@ -556,15 +556,15 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   /**
-   * An internal function call that writes the current globalAlpha value on the _globalAlphaStack
-   * if it currently does not match the last written globalAlpha value.
+   * An internal function that writes the current globalAlpha value on the _globalAlphaStack to the
+   * buffer if it currently does not match the last written globalAlpha value.
    */
   @inline
   private _updateGlobalAlpha(): void {
     var value: f64 = LOAD<f64>(this._globalAlphaStack, <i32>this._stackOffset);
     if (value != this._currentGlobalAlpha) {
       this._currentGlobalAlpha = value;
-      this.write_one(CanvasInstruction.GlobalAlpha, value);
+      this._writeOne(CanvasInstruction.GlobalAlpha, value);
     }
   }
   //#endregion GLOBALALPHA
@@ -597,8 +597,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   /**
-   * An internal function call that writes the current globalCompositeOperation value on the
-   * _globalCompositeOperationStack if it currently does not match the last written
+   * An internal function that writes the current globalCompositeOperation value on the
+   * _globalCompositeOperationStack to the buffer if it currently does not match the last written
    * globalCompositeOperation value.
    */
   @inline
@@ -609,7 +609,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     );
     if (value != this._currentGlobalCompositeOperation) {
       this._currentGlobalCompositeOperation = value;
-      this.write_one(CanvasInstruction.GlobalCompositeOperation, <f64>value);
+      this._writeOne(CanvasInstruction.GlobalCompositeOperation, <f64>value);
     }
   }
   //#endregion GLOBALCOMPOSITEOPERATION
@@ -643,8 +643,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   /**
-   * An internal function call that writes the current imageSmoothingEnabled value on the
-   * _imageSmoothingEnabledStack if it currently does not match the last written
+   * An internal function that writes the current imageSmoothingEnabled value on the
+   * _imageSmoothingEnabledStack to the buffer if it currently does not match the last written
    * imageSmoothingEnabled value.
    */
   @inline
@@ -652,7 +652,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: bool = LOAD<bool>(this._imageSmoothingEnabledStack, <i32>this._stackOffset);
     if (value != this._currentImageSmoothingEnabled) {
       this._currentImageSmoothingEnabled = value;
-      this.write_one(CanvasInstruction.ImageSmoothingEnabled, value ? 1.0 : 0.0);
+      this._writeOne(CanvasInstruction.ImageSmoothingEnabled, value ? 1.0 : 0.0);
     }
   }
   //#endregion IMAGESMOOTHINGENABLED
@@ -685,8 +685,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   /**
-   * An internal function call that writes the current imageSmoothingQuality value on the
-   * _imageSmoothingQualityStack if it currently does not match the last written
+   * An internal function that writes the current imageSmoothingQuality value on the
+   * _imageSmoothingQualityStack to the buffer if it currently does not match the last written
    * imageSmoothingQuality value, and imageSmoothingEnabled is true.
    */
   @inline
@@ -698,7 +698,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
       );
       if (value != this._currentImageSmoothingQuality) {
         this._currentImageSmoothingQuality = value;
-        this.write_one(CanvasInstruction.ImageSmoothingQuality, <f64>value);
+        this._writeOne(CanvasInstruction.ImageSmoothingQuality, <f64>value);
       }
     }
   }
@@ -732,9 +732,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   /**
-   * An internal function call that writes the current lineCap value on the
-   * _lineCapStack if it currently does not match the last written
-   * lineCap value.
+   * An internal function that writes the current lineCap value on the _lineCapStack to the buffer
+   * if it currently does not match the last written lineCap value.
    */
   @inline
   private _updateLineCap(): void {
@@ -744,7 +743,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     );
     if (value != this._currentLineCap) {
       this._currentLineCap = value;
-      this.write_one(CanvasInstruction.LineCap, <f64>value);
+      this._writeOne(CanvasInstruction.LineCap, <f64>value);
     }
   }
   //#endregion LINECAP
@@ -786,7 +785,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: f64 = LOAD<f64>(this._lineDashOffsetStack, <i32>this._stackOffset);
     if (value != this._currentLineDashOffset) {
       this._currentLineDashOffset = value;
-      this.write_one(CanvasInstruction.LineDashOffset, value);
+      this._writeOne(CanvasInstruction.LineDashOffset, value);
     }
   }
   //#endregion LINEDASHOFFSET
@@ -834,7 +833,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     );
     if (value != this._currentLineJoin) {
       this._currentLineJoin = value;
-      this.write_one(CanvasInstruction.LineJoin, <f64>value);
+      this._writeOne(CanvasInstruction.LineJoin, <f64>value);
     }
   }
   //#endregion
@@ -875,7 +874,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: f64 = LOAD<f64>(this._lineWidthStack, <i32>this._stackOffset);
     if (value != this._currentLineWidth) {
       this._currentLineWidth = value;
-      this.write_one(CanvasInstruction.LineWidth, value);
+      this._writeOne(CanvasInstruction.LineWidth, value);
     }
   }
   //#endregion
@@ -917,7 +916,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: f64 = LOAD<f64>(this._miterLimitStack, <i32>this._stackOffset);
     if (value != this._currentMiterLimit) {
       this._currentMiterLimit = value;
-      this.write_one(CanvasInstruction.MiterLimit, value);
+      this._writeOne(CanvasInstruction.MiterLimit, value);
     }
   }
   //#endregion MITERLIMIT

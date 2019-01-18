@@ -28,7 +28,7 @@ export class DOMMatrix {
   public get a():f64 {
     return this.m11;
   }
-  
+
   public set a(value: f64) {
     this.m11 = value;
   }
@@ -36,7 +36,7 @@ export class DOMMatrix {
   public get b():f64 {
     return this.m12;
   }
-  
+
   public set b(value: f64) {
     this.m12 = value;
   }
@@ -44,7 +44,7 @@ export class DOMMatrix {
   public get c():f64 {
     return this.m21;
   }
-  
+
   public set c(value: f64) {
     this.m21 = value;
   }
@@ -52,7 +52,7 @@ export class DOMMatrix {
   public get d():f64 {
     return this.m22;
   }
-  
+
   public set d(value: f64) {
     this.m22 = value;
   }
@@ -60,7 +60,7 @@ export class DOMMatrix {
   public get e():f64 {
     return this.m41;
   }
-  
+
   public set e(value: f64) {
     this.m41 = value;
   }
@@ -68,7 +68,7 @@ export class DOMMatrix {
   public get f():f64 {
     return this.m42;
   }
-  
+
   public set f(value: f64) {
     this.m42 = value;
   }
