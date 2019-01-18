@@ -12,6 +12,7 @@ import { ImageSmoothingQuality } from "../../src/shared/ImageSmoothingQuality";
 import { LineCap } from "../../src/shared/LineCap";
 import { LineJoin } from "../../src/shared/LineJoin";
 import { TextAlign } from "../../src/shared/TextAlign";
+import { TextBaseline } from "../../src/shared/TextBaseline";
 
 //#region EXTERNALS
 // @ts-ignore: linked functions can have decorators
@@ -1259,11 +1260,14 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   private _currentTextAlign: TextAlign = TextAlign.start;
 
   /**
-   * The CanvasRenderingContext2D.lineCap property of the Canvas 2D API determines the shape used
-   * to draw the end points of lines.
+   * The CanvasRenderingContext2D.textAlign property of the Canvas 2D API specifies the current text
+   * alignment used when drawing text.
+   *
+   * The alignment is relative to the x value of the fillText() method. For example, if textAlign is
+   * "center", then the text's left edge will be at x - (textWidth / 2).
    */
   public get textAlign(): TextAlign {
-    return LOAD<LineCap>(this._textAlignStack, <i32>this._stackOffset);
+    return LOAD<TextAlign>(this._textAlignStack, <i32>this._stackOffset);
   }
 
   public set textAlign(value: TextAlign) {
@@ -1287,4 +1291,47 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
   //#endregion TEXTALIGN
 
+  //#region TEXTBASELINE
+  /**
+   * An ArrayBuffer that contains 256 sets of TextBaseline values.
+   */
+  private _textBaselineStack: ArrayBuffer = setArrayBufferValue<TextBaseline>(
+    new ArrayBuffer(0xFF * sizeof<TextBaseline>()),
+    TextBaseline.alphabetic,
+  );
+
+  /**
+   * A private member that contains a single LineCap value that represents the last
+   * lineCap value written by a drawing operation.
+   */
+  private _currentTextBaseline: TextBaseline = TextBaseline.alphabetic;
+
+  /**
+   * The CanvasRenderingContext2D.textBaseline property of the Canvas 2D API specifies the current
+   * text baseline used when drawing text.
+   */
+  public get textBaseline(): TextBaseline {
+    return LOAD<TextBaseline>(this._textBaselineStack, <i32>this._stackOffset);
+  }
+
+  public set textBaseline(value: TextBaseline) {
+    STORE<TextBaseline>(this._textBaselineStack, <i32>this._stackOffset, value);
+  }
+
+  /**
+   * An internal function that writes the current textBaseline value on the _textBaselineStack to the
+   * buffer if it currently does not match the last written textBaseline value.
+   */
+  @inline
+  private _updateTextBaseline(): void {
+    var value: TextBaseline = LOAD<TextBaseline>(
+      this._textBaselineStack,
+      <i32>this._stackOffset,
+    );
+    if (value != this._currentTextBaseline) {
+      this._currentTextBaseline = value;
+      this._writeOne(CanvasInstruction.TextBaseline, <f64>value);
+    }
+  }
+  //#endregion TEXTBASELINE
 }

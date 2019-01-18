@@ -18,5 +18,5 @@ export function init(): void {
 
 export function writeThreeTimes(): usize {
   buff.writeTest();
-  return changetype<usize>(buff) + offsetof<Writer>("buffer");
+  return changetype<usize>(buff) + offsetof<Writer>("_buffer");
 }
