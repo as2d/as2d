@@ -1553,8 +1553,9 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * saved canvas state by popping the top entry in the drawing state stack. If there is no saved
    * state, this method does nothing.
    *
-   * In the case of the hard restore, we need to mirror what the browser will do, and modify the
-   * current stack values instead of just moving the stack pointer.
+   * In the case of the hard restore, this function will mirror what the browser does, and modifies
+   * the last written values instead of just moving the stack pointer. This ensures that the writer
+   * emulates the browser state machine as accurately as possible.
    */
   public restore(): void {
     if (this._stackOffset == <u8>0) return;
