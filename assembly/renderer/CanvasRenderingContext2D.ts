@@ -1687,6 +1687,20 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
   /**
    * An internal function that writes a single path item to the _path. 
+   *
+   * @param {CanvasInstruction} inst - The CanvasInstruction that represents the current pathing
+   * operation that should be written to the path buffer.
+   * @param {bool} updateTransform - The bool value that determines if the PathElement should store
+   * the _currentTransform values.
+   * @param {i32} count - The number of parameters for this PathElement's instruction.
+   * @param {f64} a - The first parameter for this PathElement's instruction.
+   * @param {f64} b - The second parameter for this PathElement's instruction.
+   * @param {f64} c - The third parameter for this PathElement's instruction.
+   * @param {f64} d - The fourth parameter for this PathElement's instruction.
+   * @param {f64} e - The five parameter for this PathElement's instruction.
+   * @param {f64} f - The six parameter for this PathElement's instruction.
+   * @param {f64} g - The seven parameter for this PathElement's instruction.
+   * @param {f64} h - The eighth parameter for this PathElement's instruction.
    */
   @inline
   private _writePath(
@@ -1805,20 +1819,39 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   /**
    * The CanvasRenderingContext2D.arc() method of the Canvas 2D API adds a circular arc to
    * the current sub-path.
+   *
+   * @param {f64} x - The x-axis (horizontal) coordinate of the arc's center.
+   * @param {f64} y - The y-axis (vertical) coordinate of the arc's center.
+   * @param {f64} radius - The arc's radius. Must be non-negative.
+   * @param {f64} startAngle - The angle at which the arc starts, measured clockwise from the positive x-axis
+   * and expressed in radians.
+   * @param {f64} endAngle - The angle at which the arc ends, measured clockwise from the positive x-axis and
+   * expressed in radians.
+   * @param {bool} anticlockwise - An optional bool which, if true, causes the arc to be drawn
+   * counter-clockwise between the start and end angles. The default value is false (clockwise).
    */
   public arc(x: f64, y: f64, radius: f64, startAngle: f64, endAngle: f64 , anticlockwise: bool = false): void {
-    this._writePath(
-      CanvasInstruction.Arc,
-      true,
-      6,
-      x,
-      y,
-      startAngle,
-      endAngle,
-      anticlockwise ? 1.0 : 0.0,
-    );
+    this._writePath(CanvasInstruction.Arc, true, 6, x, y, startAngle, endAngle, anticlockwise ? 1.0 : 0.0);
   }
   //#endregion ARC
+
+  //#region ARCTO
+  /**
+   * The CanvasRenderingContext2D.arcTo() method of the Canvas 2D API adds a circular arc to the current
+   * sub-path, using the given control points and radius. The arc is automatically connected to the
+   * path's latest point with a straight line, if necessary for the specified parameters. This method is
+   * commonly used for making rounded corners.
+   *
+   * @param {f64} x1 - The x-axis coordinate of the first control point.
+   * @param {f64} y1 - The y-axis coordinate of the first control point.
+   * @param {f64} x2 - The x-axis coordinate of the second control point.
+   * @param {f64} y2 - The y-axis coordinate of the second control point.
+   * @param {f64} radius - The arc's radius. Must be non-negative.
+   */
+  public arcTo(x1: f64, y1: f64, x2: f64, y2: f64, radius: f64): void {
+    this._writePath(CanvasInstruction.ArcTo, true, 5, x1, y1, x2, y2, radius);
+  }
+  //#endregion ARCTO
 
   //#region BEGINPATH
   /**
