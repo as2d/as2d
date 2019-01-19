@@ -14,6 +14,7 @@ import { LineJoin } from "../../src/shared/LineJoin";
 import { TextAlign } from "../../src/shared/TextAlign";
 import { TextBaseline } from "../../src/shared/TextBaseline";
 import { arraysEqual } from "../internal/util";
+import { Path2DElement } from "../internal/Path2DElement";
 
 //#region EXTERNALS
 // @ts-ignore: linked functions can have decorators
@@ -87,6 +88,19 @@ function setArrayBufferValue2<T>(buff: ArrayBuffer, a: T, b: T): ArrayBuffer {
   return buff;
 }
 //#endregion ARRAYBUFFERINITIALIZER
+
+/** The path element initializer. */
+function createPathElements(): Path2DElement[] {
+  var path: Path2DElement[] = new Array<Path2DElement>(0xFF);
+  for (var i = 0; i < 0x1000; i++) {
+    path[i] = new Path2DElement();
+  }
+  var el = unchecked(path[0]);
+  el.instruction = CanvasInstruction.BeginPath;
+  el.count = 0;
+  el.updateTransform = true;
+  return path;
+}
 
 /**
  * An AssemblyScript virtual representation of an actual CanvasRenderingContext2D Object. The
@@ -1407,6 +1421,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
   //#endregion TEXTBASELINE
 
+  //#region SAVE
   /**
    * An ArrayBuffer that contains 256 sets of bool values.
    */
@@ -1547,7 +1562,9 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
     this._stackOffset = nextOffset;
   }
+  //#endregion SAVE
 
+  //#region RESTORE
   /**
    * The CanvasRenderingContext2D.restore() method of the Canvas 2D API restores the most recently
    * saved canvas state by popping the top entry in the drawing state stack. If there is no saved
@@ -1648,4 +1665,169 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
     this._stackOffset = nextOffset;
   }
+  //#endregion RESTORE
+
+  //#region PATH
+  /**
+   * An internal array of path items.
+   */
+  private _path: Path2DElement[] = createPathElements();
+
+  /**
+   * The path offset is an index that always points to the next path index to be written to.
+   * Every time beginPath is called, this value should be set to 1.
+   */
+  private _pathOffset: i32 = 1;
+
+  /**
+   * The path buffer offset is an index that always points to the next path item to be written to
+   * the buffer. Every time beginPath is called, this value should be set to 0.
+   */
+  private _pathBufferOffset: i32 = 0;
+
+  /**
+   * An internal function that writes a single path item to the _path. 
+   */
+  @inline
+  private _writePath(
+    inst: CanvasInstruction,
+    updateTransform: bool = false,
+    count: i32 = 0,
+    a: f64 = 0.0,
+    b: f64 = 0.0,
+    c: f64 = 0.0,
+    d: f64 = 0.0,
+    e: f64 = 0.0,
+    f: f64 = 0.0,
+    g: f64 = 0.0,
+    h: f64 = 0.0,
+  ): void {
+    var el: Path2DElement = this._path[this._pathOffset];
+    var index: i32;
+    var current: ArrayBuffer;
+    el.instruction = inst;
+    el.updateTransform = updateTransform;
+    if (updateTransform) {
+      index = this._stackOffset * 6;
+      current = this._transformStack;
+      el.transformA = LOAD<f64>(current, index + 0);
+      el.transformB = LOAD<f64>(current, index + 1);
+      el.transformC = LOAD<f64>(current, index + 2);
+      el.transformD = LOAD<f64>(current, index + 3);
+      el.transformE = LOAD<f64>(current, index + 4);
+      el.transformF = LOAD<f64>(current, index + 5);
+    }
+    el.count = count;
+    el.a = a;
+    el.b = b;
+    el.c = c;
+    el.d = d;
+    el.e = e;
+    el.f = f;
+    el.g = g;
+    el.h = h;
+  }
+
+  /**
+   * An internal function that writes the queued up path items to the buffer. It optionally calls
+   * setTransform if the transform was modified between path calls.
+   */
+  @inline
+  private _updatePath(): void {
+    var end: i32 = this._pathOffset;
+    var i: i32 = this._pathBufferOffset;
+    var el: Path2DElement;
+    var a: f64;
+    var b: f64;
+    var c: f64;
+    var d: f64;
+    var e: f64;
+    var f: f64;
+    var current: ArrayBuffer = this._transformCurrent;
+    for (; i <= end; i++) {
+      el = unchecked(this._path[i]);
+      if (el.updateTransform) {
+        a = el.transformA;
+        b = el.transformB;
+        c = el.transformC;
+        d = el.transformD;
+        e = el.transformE;
+        f = el.transformF;
+
+        if (
+          a != LOAD<f64>(current, 0) ||
+          b != LOAD<f64>(current, 1) ||
+          c != LOAD<f64>(current, 2) ||
+          d != LOAD<f64>(current, 3) ||
+          e != LOAD<f64>(current, 4) ||
+          f != LOAD<f64>(current, 5)
+        ) {
+          this._writeSix(CanvasInstruction.SetTransform, a, b, c, d, e, f);
+          STORE<f64>(current, 0, a);
+          STORE<f64>(current, 1, b);
+          STORE<f64>(current, 2, c);
+          STORE<f64>(current, 3, d);
+          STORE<f64>(current, 4, e);
+          STORE<f64>(current, 5, f); 
+        }
+        switch (el.count) {
+          case 0: {
+            this._writeZero(el.instruction);
+            break;
+          }
+          case 1: {
+            this._writeOne(el.instruction, el.a);
+            break;
+          }
+          case 2: {
+            this._writeTwo(el.instruction, el.a, el.b);
+            break;
+          }
+          case 4: {
+            this._writeFour(el.instruction, el.a, el.b, el.c, el.d);
+            break;
+          }
+          case 5: {
+            this._writeFive(el.instruction, el.a, el.b, el.c, el.d, el.e);
+            break;
+          }
+          case 6: {
+            this._writeSix(el.instruction, el.a, el.b, el.c, el.d, el.e, el.f);
+            break;
+          }
+        }
+      }
+    }
+  }
+  //#endregion PATH
+
+  //#region ARC
+  /**
+   * The CanvasRenderingContext2D.arc() method of the Canvas 2D API adds a circular arc to
+   * the current sub-path.
+   */
+  public arc(x: f64, y: f64, radius: f64, startAngle: f64, endAngle: f64 , anticlockwise: bool = false): void {
+    this._writePath(
+      CanvasInstruction.Arc,
+      true,
+      6,
+      x,
+      y,
+      startAngle,
+      endAngle,
+      anticlockwise ? 1.0 : 0.0,
+    );
+  }
+  //#endregion ARC
+
+  //#region BEGINPATH
+  /**
+   * The CanvasRenderingContext2D.beginPath() method of the Canvas 2D API starts a new path by
+   * emptying the list of sub-paths. Call this method when you want to create a new path.
+   */
+  public beginPath(): void {
+    this._pathOffset = 1;
+    this._pathBufferOffset = 0;
+  }
+  //#endregion BEGINPATH
 }
