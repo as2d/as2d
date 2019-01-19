@@ -1863,4 +1863,23 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     this._pathBufferOffset = 0;
   }
   //#endregion BEGINPATH
+
+  //#region BEZIERCURVETO
+  /**
+   * The CanvasRenderingContext2D.bezierCurveTo() method of the Canvas 2D API adds a cubic Bézier
+   * curve to the current sub-path. It requires three points: the first two are control points and
+   * the third one is the end point. The starting point is the latest point in the current path, which
+   * can be changed using moveTo() before creating the Bézier curve.
+   *
+   * @param {f64} cp1x - The x-axis coordinate of the first control point.
+   * @param {f64} cp1y - The y-axis coordinate of the first control point.
+   * @param {f64} cp2x - The x-axis coordinate of the second control point.
+   * @param {f64} cp2y - The y-axis coordinate of the second control point.
+   * @param {f64} x - The x-axis coordinate of the end point.
+   * @param {f64} y - The y-axis coordinate of the end point.
+   */
+  public bezierCurveTo(cp1x: f64, cp1y: f64, cp2x: f64, cp2y: f64, x: f64, y: f64): void {
+    this._writePath(CanvasInstruction.BezierCurveTo, true, 6, cp1x, cp1y, cp2x, cp2y, x, y);
+  }
+  //#endregion BEZIERCURVETO
 }
