@@ -2537,6 +2537,64 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
   //#endregion STROKETEXT
 
-  // TODO: Implement transform(a, b, c, d, e, f)
-  // TODO: Implement translate(x, y)
+  //#region TRANSFORM
+  /**
+   * The CanvasRenderingContext2D.transform() method of the Canvas 2D API multiplies the current
+   * transformation with the matrix described by the arguments of this method. This lets you scale,
+   * rotate, translate (move), and skew the context.
+   *
+   * @param {f64} a - Horizontal scaling. A value of 1 results in no scaling.
+   * @param {f64} b - Vertical skewing.
+   * @param {f64} c - Horizontal skewing.
+   * @param {f64} d - Vertical scaling. A value of 1 results in no scaling.
+   * @param {f64} e - Horizontal translation (moving).
+   * @param {f64} f - Vertical translation (moving).
+   */
+  public transform(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64): void {
+    var current: ArrayBuffer = this._transformStack;
+    var index: i32 = this._stackOffset * 6;
+    var sa: f64 = LOAD<f64>(current, index);
+    var sb: f64 = LOAD<f64>(current, index + 1);
+    var sc: f64 = LOAD<f64>(current, index + 2);
+    var sd: f64 = LOAD<f64>(current, index + 3);
+    var se: f64 = LOAD<f64>(current, index + 4);
+    var sf: f64 = LOAD<f64>(current, index + 5);
+
+    STORE<f64>(current, index, sa * a + sc * b);
+    STORE<f64>(current, index + 1, sb * a + sd * b);
+    STORE<f64>(current, index + 2, sa * c + sc * d);
+    STORE<f64>(current, index + 3, sb * c + sd * d);
+    STORE<f64>(current, index + 4, sa * e + sc * f + se);
+    STORE<f64>(current, index + 5, sb * e + sd * f + sf);
+  }
+  //#endregion TRANSFORM
+
+  //#region TRANSLATE
+  /**
+   * The CanvasRenderingContext2D.translate() method of the Canvas 2D API adds a translation
+   * transformation to the current matrix.
+   * @param {f64} x - Distance to move in the horizontal direction. Positive values are to the
+   * right, and negative to the left.
+   * @param {f64} y - Distance to move in the vertical direction. Positive values are down, and
+   * negative are up.
+   */
+  public translate(x: f64, y: f64): void {
+    var current: ArrayBuffer = this._transformStack;
+    var index: i32 = this._stackOffset * 6;
+
+    // e = e + a * x + c * y;
+    STORE<f64>(
+      current,
+      index + 5,
+      LOAD<f64>(current, index + 5) + LOAD<f64>(current, index) * x + LOAD<f64>(current, index + 2) * y,
+    );
+
+    // f = f + b * x + d * y;
+    STORE<f64>(
+      current,
+      index + 6,
+      LOAD<f64>(current, index + 6) + LOAD<f64>(current, index + 1) * x + LOAD<f64>(current, index + 3) * y,
+    );
+  }
+  //#endregion TRANSLATE
 }
