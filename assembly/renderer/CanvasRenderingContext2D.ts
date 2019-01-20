@@ -1884,6 +1884,48 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
   //#endregion BEZIERCURVETO
 
+  //#region CLEARRECT
+  /**
+   * The CanvasRenderingContext2D.clearRect() method of the Canvas 2D API erases the pixels in a
+   * rectangular area by setting them to transparent black.
+   *
+   * @param {f64} x - The x-axis coordinate of the rectangle's starting point.
+   * @param {f64} y - The y-axis coordinate of the rectangle's starting point.
+   * @param {f64} width - The rectangle's width. Positive values are to the right, and negative to
+   * the left.
+   * @param {f64} height - The rectangle's height. Positive values are down, and negative are up.
+   */
+  public clearRect(x: f64, y: f64, width: f64, height: f64): void {
+    this._updateTransform();
+    this._writeFour(CanvasInstruction.ClearRect, x, y, width, height);
+  }
+  //#endregion CLEARRECT
+
+  //#region CLIP
+  /**
+   * The CanvasRenderingContext2D.clip() method of the Canvas 2D API turns the current or given path
+   * into the current clipping region. It replaces any previous clipping region. In the image below,
+   * the red outline represents a clipping region shaped like a star. Only those parts of the
+   * checkerboard pattern that are within the clipping region get drawn.
+   */
+  public clip(): void {
+    this._updatePath();
+    this._writePath(CanvasInstruction.Clip, false, 0);
+  }
+  //#endregion CLIP
+
+  //#region CLOSEPATH
+  /**
+   * The CanvasRenderingContext2D.closePath() method of the Canvas 2D API attempts to add a straight
+   * line from the current point to the start of the current sub-path. If the shape has already been
+   * closed or has only one point, this function does nothing. This method doesn't draw anything to
+   * the canvas directly. You can render the path using the stroke() or fill() methods.
+   */
+  public closePath(): void {
+    this._writePath(CanvasInstruction.ClosePath, false, 0);
+  }
+  //#endregion CLOSEPATH
+
   //#region DRAWIMAGE
   /**
    * The CanvasRenderingContext2D.drawImagePosition() method of the Canvas 2D API provides a simple
@@ -2180,5 +2222,5 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   public isPointInPath(x: f64, y: f64, fillRule: FillRule = FillRule.nonzero): bool {
     throw new Error("Function isPointInPath is not implemented.");
   }
-  //#region ISPOINTINPATH
+  //#endregion ISPOINTINPATH
 }
