@@ -2153,6 +2153,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param y - The y-axis coordinate of the point at which to begin drawing the text, in pixels.
    */
   public fillText(text: string, x: f64, y: f64): void {
+    if (text.length == 0) return;
     this._updateDirection();
     this._updateFillStyle();
     this._updateFont();
@@ -2191,6 +2192,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * user agent will adjust the kerning, select a more horizontally condensed font (if one is available or can be generated without loss of quality), or scale down to a smaller font size in order to fit the text in the specified width.
    */
   public fillTextWidth(text: string, x: f64, y: f64, maxWidth: f64): void {
+    if (text.length == 0) return;
+    if (maxWidth <= 0.0) return;
     this._updateDirection();
     this._updateFillStyle();
     this._updateFont();
@@ -2454,4 +2457,86 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     super._writeFour(CanvasInstruction.StrokeRect, x, y, width, height);
   }
   //#endregion STROKERECT
+
+  //#region STROKETEXT
+  /**
+   * The CanvasRenderingContext2D method strokeText(), part of the Canvas 2D API, strokes — that is,
+   * draws the outlines of — the characters of a text string at the specified coordinates. An
+   * optional parameter allows specifying a maximum width for the rendered text, which the user
+   * agent will achieve by condensing the text or by using a lower font size. This method draws
+   * directly to the canvas without modifying the current path, so any subsequent fill() or stroke()
+   * calls will have no effect on it. To use the maxWidth parameter, use the strokeTextWidth
+   * function.
+   *
+   * @param {string} text - A DOMString specifying the text string to render into the context. The
+   * text is rendered using the settings specified by font, textAlign, textBaseline, and direction.
+   * @param {f64} x - The x-axis coordinate of the point at which to begin drawing the text.
+   * @param {f64} y - The y-axis coordinate of the point at which to begin drawing the text.
+   */
+  public strokeText(text: string, x: f64, y: f64): void {
+    this._updateDirection();
+    this._updateFilter();
+    this._updateFont();
+    this._updateGlobalAlpha();
+    this._updateGlobalCompositeOperation();
+    this._updateImageSmoothingEnabled();
+    this._updateImageSmoothingQuality();
+    this._updateLineCap();
+    this._updateLineDash();
+    this._updateLineDashOffset();
+    this._updateLineWidth();
+    this._updateMiterLimit();
+    this._updateShadowBlur();
+    this._updateShadowOffsetX();
+    this._updateShadowOffsetY();
+    this._updateStrokeStyle();
+    this._updateTextBaseline();
+    this._updateTransform();
+    super._writeThree(CanvasInstruction.StrokeText, <f64>changetype<usize>(text), x, y)
+  }
+
+  /**
+   * The CanvasRenderingContext2D method strokeTextWidth(), part of the Canvas 2D API, strokes —
+   * that is, draws the outlines of — the characters of a text string at the specified coordinates.
+   * An optional parameter allows specifying a maximum width for the rendered text, which the user
+   * agent will achieve by condensing the text or by using a lower font size. This method draws
+   * directly to the canvas without modifying the current path, so any subsequent fill() or stroke()
+   * calls will have no effect on it. To use the maxWidth parameter, use the strokeTextWidth
+   * function.
+   *
+   * @param {string} text - A DOMString specifying the text string to render into the context. The
+   * text is rendered using the settings specified by font, textAlign, textBaseline, and direction.
+   * @param {f64} x - The x-axis coordinate of the point at which to begin drawing the text.
+   * @param {f64} y - The y-axis coordinate of the point at which to begin drawing the text.
+   * @param {f64} maxWidth - The maximum width the text may be once rendered. If not specified,
+   * there is no limit to the width of the text. However, if this value is provided, the user agent
+   * will adjust the kerning, select a more horizontally condensed font (if one is available or can
+   * be generated without loss of quality), or scale down to a smaller font size in order to fit the
+   * text in the specified width.
+   */
+  public strokeTextWidth(text: string, x: f64, y: f64, maxWidth: f64): void {
+    this._updateDirection();
+    this._updateFilter();
+    this._updateFont();
+    this._updateGlobalAlpha();
+    this._updateGlobalCompositeOperation();
+    this._updateImageSmoothingEnabled();
+    this._updateImageSmoothingQuality();
+    this._updateLineCap();
+    this._updateLineDash();
+    this._updateLineDashOffset();
+    this._updateLineWidth();
+    this._updateMiterLimit();
+    this._updateShadowBlur();
+    this._updateShadowOffsetX();
+    this._updateShadowOffsetY();
+    this._updateStrokeStyle();
+    this._updateTextBaseline();
+    this._updateTransform();
+    super._writeFour(CanvasInstruction.StrokeText, <f64>changetype<usize>(text), x, y, maxWidth);
+  }
+  //#endregion STROKETEXT
+
+  // TODO: Implement transform(a, b, c, d, e, f)
+  // TODO: Implement translate(x, y)
 }
