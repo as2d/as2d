@@ -12,6 +12,7 @@ and optimized way.
 To run the tests, use `npm start`. This will compile the `./assembly/` folder, and run `jest`.
 
 # TODO:
+
 - Implement CanvasGradient
   - dispose() function
 - Implement Image(s)
