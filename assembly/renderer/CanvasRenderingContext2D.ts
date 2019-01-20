@@ -2041,6 +2041,12 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     this._updateGlobalCompositeOperation();
     this._updateImageSmoothingEnabled();
     this._updateImageSmoothingQuality();
+
+    /**
+     * This function must be called *before* _updateTransform(), because both the path operations and the
+     * fill operations affect the transform. Each pathing operation has it's own transform, and the
+     * transform value when the fill operation occurs might be different.
+     */
     this._updatePath();
     this._updateShadowBlur();
     this._updateShadowColor();
@@ -2050,4 +2056,35 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     super._writeOne(CanvasInstruction.Fill, <f64>fillRule);
   }
   //#endregion FILL
+
+  //#region FILLRECT
+  /**
+   * The CanvasRenderingContext2D.fillRect() method of the Canvas 2D API draws a rectangle that is
+   * filled according to the current fillStyle. This method draws directly to the canvas without
+   * modifying the current path, so any subsequent fill() or stroke() calls will have no effect on
+   * it.
+   *
+   * @param x - The x-axis coordinate of the rectangle's starting point.
+   * @param y - The y-axis coordinate of the rectangle's starting point.
+   * @param width - The rectangle's width. Positive values are to the right, and negative to the
+   * left.
+   * @param height - The rectangle's height. Positive values are down, and negative are up.
+   */
+  public fillRect(x: f64, y: f64, width: f64, height: f64): void {
+    if (width == 0.0) return;
+    if (height == 0.0) return;
+    this._updateFillStyle();
+    this._updateFilter();
+    this._updateGlobalAlpha();
+    this._updateGlobalCompositeOperation();
+    this._updateImageSmoothingEnabled();
+    this._updateImageSmoothingQuality();
+    this._updateShadowBlur();
+    this._updateShadowColor();
+    this._updateShadowOffsetX();
+    this._updateShadowOffsetY();
+    this._updateTransform();
+    super._writeFour(CanvasInstruction.FillRect, x, y, width, height);
+  }
+  //#endregion FILLRECT
 }
