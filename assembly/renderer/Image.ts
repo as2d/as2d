@@ -40,3 +40,14 @@ export function __image_loaded(img: Image, width: i32, height: i32): void {
   store<i32>(changetype<usize>(img) + offsetof<Image>("_height"), height);
   store<bool>(changetype<usize>(img) + offsetof<Image>("_loaded"), true);
 }
+
+/**
+ * Gets the image's external id.
+ *
+ * @param image - The target image.
+ */
+// @ts-ignore: @inline is valid on regular functions
+@inline
+export function getImageID(image: Image): i32 {
+  return load<i32>(changetype<usize>(image) + offsetof<Image>("_id"));
+}

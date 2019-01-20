@@ -5,7 +5,7 @@ import { DOMMatrix } from "./DOMMatrix";
 import { CanvasDirection } from "../../src/shared/CanvasDirection";
 import { CanvasPattern } from "./CanvasPattern";
 import { CanvasGradient } from "./CanvasGradient";
-import { Image } from "./Image";
+import { Image, getImageID } from "./Image";
 import { CanvasPatternRepetition } from "../../src/shared/CanvasPatternRepetition";
 import { GlobalCompositeOperation } from "../../src/shared/GlobalCompositeOperation";
 import { ImageSmoothingQuality } from "../../src/shared/ImageSmoothingQuality";
@@ -15,6 +15,7 @@ import { TextAlign } from "../../src/shared/TextAlign";
 import { TextBaseline } from "../../src/shared/TextBaseline";
 import { arraysEqual } from "../internal/util";
 import { Path2DElement } from "../internal/Path2DElement";
+import { FillRule } from "../../src/shared/FillRule";
 
 //#region EXTERNALS
 // @ts-ignore: linked functions can have decorators
@@ -172,7 +173,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * An ArrayBuffer that contains a single transform value that represents the last transform
    * written by a `setTransform()` operation
    */
-  private _transformCurrent: ArrayBuffer = setArrayBufferIdentity(new ArrayBuffer(sizeof<f64>() * 6));
+  private _currentTransform: ArrayBuffer = setArrayBufferIdentity(new ArrayBuffer(sizeof<f64>() * 6));
 
   /**
    * An operation that generates a DOMMatrix reflecting the current transform on the `_transformStack
@@ -248,7 +249,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var e = LOAD<f64>(stack, index + 4);
     var f = LOAD<f64>(stack, index + 5);
 
-    var current: ArrayBuffer = this._transformCurrent;
+    var current: ArrayBuffer = this._currentTransform;
     if ( a != LOAD<f64>(current, 0)
       || b != LOAD<f64>(current, 1)
       || c != LOAD<f64>(current, 2)
@@ -1584,7 +1585,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var transformOffset: i32 = nextOffset * 6;
 
     if (LOAD<bool>(this._saveStack, currentOffset)) {
-      target = this._transformCurrent;
+      target = this._currentTransform;
       source = this._transformStack;
 
       // transformCurrent
@@ -1757,7 +1758,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var d: f64;
     var e: f64;
     var f: f64;
-    var current: ArrayBuffer = this._transformCurrent;
+    var current: ArrayBuffer = this._currentTransform;
     for (; i <= end; i++) {
       el = unchecked(this._path[i]);
       if (el.updateTransform) {
@@ -1882,4 +1883,164 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     this._writePath(CanvasInstruction.BezierCurveTo, true, 6, cp1x, cp1y, cp2x, cp2y, x, y);
   }
   //#endregion BEZIERCURVETO
+
+  //#region DRAWIMAGE
+  /**
+   * The CanvasRenderingContext2D.drawImagePosition() method of the Canvas 2D API provides a simple
+   * method for drawing an image onto the canvas at a specific position.
+   *
+   * @param {Image} image - An element to draw into the context. The specification permits any canvas
+   * image source (Image).
+   * @param {f64} dx - The x-axis coordinate in the destination canvas at which to place the top-left
+   * corner of the source image.
+   * @param {f64} dy - The y-axis coordinate in the destination canvas at which to place the top-left
+   * corner of the source image.
+   */
+  public drawImage(image: Image, dx: f64, dy: f64): void {
+    if (!image.loaded) return;
+    this._updateFilter();
+    this._updateGlobalAlpha();
+    this._updateGlobalCompositeOperation();
+    this._updateImageSmoothingEnabled();
+    this._updateImageSmoothingQuality();
+    this._updateShadowBlur();
+    this._updateShadowColor();
+    this._updateShadowOffsetX();
+    this._updateShadowOffsetY();
+    this._updateTransform();
+    this._writeNine(
+      CanvasInstruction.DrawImage,
+      <f64>getImageID(image),
+      0.0, 0.0, <f64>image.width, <f64>image.height,
+      dx, dy, <f64>image.width, <f64>image.height,
+    );
+  }
+
+  /**
+   * The CanvasRenderingContext2D.drawImageSize() method of the Canvas 2D API provides a simple
+   * method for drawing an image onto the canvas at a specific position.
+   *
+   * @param {Image} image - An element to draw into the context. The specification permits any canvas
+   * image source (Image).
+   * @param {f64} dx - The x-axis coordinate in the destination canvas at which to place the top-left
+   * corner of the source image.
+   * @param {f64} dy - The y-axis coordinate in the destination canvas at which to place the top-left
+   * corner of the source image.
+   * @param {f64} dWidth - The width to draw the image in the destination canvas. This allows scaling
+   * of the drawn image. If not specified, the image is not scaled in width when drawn.
+   * @param {f64} dHeight - The height to draw the image in the destination canvas. This allows scaling
+   * of the drawn image. If not specified, the image is not scaled in height when drawn.
+   */
+  public drawImageSize(image: Image, dx: f64, dy: f64, dWidth: f64, dHeight: f64): void {
+    if (!image.loaded) return;
+    this._updateFilter();
+    this._updateGlobalAlpha();
+    this._updateGlobalCompositeOperation();
+    this._updateImageSmoothingEnabled();
+    this._updateImageSmoothingQuality();
+    this._updateShadowBlur();
+    this._updateShadowColor();
+    this._updateShadowOffsetX();
+    this._updateShadowOffsetY();
+    this._updateTransform();
+    this._writeNine(
+      CanvasInstruction.DrawImage,
+      <f64>getImageID(image),
+      0.0, 0.0, <f64>image.width, <f64>image.height,
+      dx, dy, dWidth, dHeight,
+    );
+  }
+
+  /**
+   * The CanvasRenderingContext2D.drawImageSource() method of the Canvas 2D API provides a simple
+   * method for drawing an image onto the canvas at a specific position.
+   *
+   * @param {Image} image - An element to draw into the context. The specification permits any canvas
+   * image source (Image).
+   * @param {f64} sx - The x-axis coordinate of the top left corner of the sub-rectangle of the source
+   * image to draw into the destination context.
+   * @param {f64} sy - The y-axis coordinate of the top left corner of the sub-rectangle of the source
+   * image to draw into the destination context.
+   * @param {f64} sWidth - The width of the sub-rectangle of the source image to draw into the
+   * destination context. If not specified, the entire rectangle from the coordinates specified by sx
+   * and sy to the bottom-right corner of the image is used.
+   * @param {f64} sHeight - The height of the sub-rectangle of the source image to draw into the
+   * destination context.
+   * @param {f64} dx - The x-axis coordinate in the destination canvas at which to place the top-left
+   * corner of the source image.
+   * @param {f64} dy - The y-axis coordinate in the destination canvas at which to place the top-left
+   * corner of the source image.
+   * @param {f64} dWidth - The width to draw the image in the destination canvas. This allows scaling
+   * of the drawn image. If not specified, the image is not scaled in width when drawn.
+   * @param {f64} dHeight - The height to draw the image in the destination canvas. This allows scaling
+   * of the drawn image. If not specified, the image is not scaled in height when drawn.
+   */
+  public drawImageSource(image: Image, sx: f64, sy: f64, sWidth: f64, sHeight: f64, dx: f64, dy: f64, dWidth: f64, dHeight: f64): void {
+    if (!image.loaded) return;
+    this._updateFilter();
+    this._updateGlobalAlpha();
+    this._updateGlobalCompositeOperation();
+    this._updateImageSmoothingEnabled();
+    this._updateImageSmoothingQuality();
+    this._updateShadowBlur();
+    this._updateShadowColor();
+    this._updateShadowOffsetX();
+    this._updateShadowOffsetY();
+    this._updateTransform();
+    this._writeNine(
+      CanvasInstruction.DrawImage,
+      <f64>getImageID(image),
+      sx, sy, sWidth, sHeight,
+      dx, dy, dWidth, dHeight,
+    );
+  }
+  //#endregion DRAWIMAGE
+
+  //#region ELLIPSE
+  /**
+   * The CanvasRenderingContext2D.ellipse() method of the Canvas 2D API adds an elliptical arc to the current sub-path.
+   *
+   * @param {f64} x - The x-axis (horizontal) coordinate of the ellipse's center.
+   * @param {f64} y - The y-axis (vertical) coordinate of the ellipse's center.
+   * @param {f64} radiusX - The ellipse's major-axis radius. Must be non-negative.
+   * @param {f64} radiusY - The ellipse's minor-axis radius. Must be non-negative.
+   * @param {f64} rotation - The rotation of the ellipse, expressed in radians.
+   * @param {f64} startAngle - The angle at which the ellipse starts, measured clockwise from the positive x-axis
+   * and expressed in radians.
+   * @param {f64} endAngle - The angle at which the ellipse ends, measured clockwise from the positive x-axis and
+   * expressed in radians.
+   * @param {bool} anticlockwise - An optional Boolean which, if true, draws the ellipse anticlockwise
+   * (counter-clockwise). The default value is false (clockwise).
+   */
+  public ellipse(x: f64, y: f64, radiusX: f64, radiusY: f64, rotation: f64, startAngle: f64, endAngle: f64, anticlockwise: bool = false): void {
+    this._writePath(
+      CanvasInstruction.Ellipse,
+      true, 8,
+      x, y, radiusX, radiusY,
+      rotation, startAngle, endAngle, anticlockwise ? 1.0 : 0.0,
+    );
+  }
+  //#endregion ELLIPSE
+
+  //#region FILL
+  /**
+   * The CanvasRenderingContext2D.fill() method of the Canvas 2D API fills the current or given path
+   * with the current fillStyle.
+   */
+  public fill(fillRule: FillRule = FillRule.nonzero): void {
+    this._updateFillStyle();
+    this._updateFilter();
+    this._updateGlobalAlpha();
+    this._updateGlobalCompositeOperation();
+    this._updateImageSmoothingEnabled();
+    this._updateImageSmoothingQuality();
+    this._updatePath();
+    this._updateShadowBlur();
+    this._updateShadowColor();
+    this._updateShadowOffsetX();
+    this._updateShadowOffsetY();
+    this._updateTransform();
+    super._writeOne(CanvasInstruction.Fill, <f64>fillRule);
+  }
+  //#endregion FILL
 }

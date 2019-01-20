@@ -8,6 +8,7 @@ export { Image } from "./renderer/Image";
 export { CanvasDirection } from "../src/shared/CanvasDirection";
 export { CanvasInstruction } from "../src/shared/CanvasInstruction";
 export { CanvasPatternRepetition } from "../src/shared/CanvasPatternRepetition";
+export { FillRule } from "../src/shared/FillRule";
 export { GlobalCompositeOperation } from "../src/shared/GlobalCompositeOperation";
 export { ImageSmoothingQuality } from "../src/shared/ImageSmoothingQuality";
 export { LineCap } from "../src/shared/LineCap";
