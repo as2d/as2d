@@ -2026,6 +2026,13 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   /**
    * The CanvasRenderingContext2D.fill() method of the Canvas 2D API fills the current or given path
    * with the current fillStyle.
+   *
+   * @param {FillRule} fillRule - The algorithm by which to determine if a point is inside or
+   * outside the filling region.
+   *
+   * Possible values:
+   * - `FillRule.nonzero`: The non-zero winding rule. Default rule.
+   * - `FillRule.evenodd`: The even-odd winding rule.
    */
   public fill(fillRule: FillRule = FillRule.nonzero): void {
     this._updateFillStyle();
