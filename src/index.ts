@@ -47,6 +47,12 @@ export function instantiateBuffer<T>(buffer: Buffer, imports: any = {}): Wrapped
       )!;
       return id;
     },
+    measureText(cvsobjid: number, font: number, text: number): number {
+      if (!wasm.contexts[cvsobjid]) throw new Error("Cannot find canvas: " + cvsobjid);
+      var ctx: CanvasRenderingContext2D = this.contexts[cvsobjid];
+      ctx.font = wasm.getString(font);
+      return ctx.measureText(wasm.getString(text)).width;
+    }
   };
 
   wasm = as.instantiateBuffer<T & ICanvasSYS>(buffer, imports);

@@ -29,6 +29,10 @@ declare function createRadialGradient(id: i32, x0: f64, y0: f64, r0: f64, x1: f6
 // @ts-ignore: linked functions can have decorators
 @external("__canvas_sys", "createPattern")
 declare function createPattern(ctxid: i32, imageid: i32, repetition: CanvasPatternRepetition): i32;
+
+// @ts-ignore: linked functions can have decorators
+@external("__canvas_sys", "measureText")
+declare function measureText(id: i32, font: string, text: string): f64;
 //#endregion EXTERNALS
 
 
@@ -2223,4 +2227,34 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     throw new Error("Function isPointInPath is not implemented.");
   }
   //#endregion ISPOINTINPATH
+
+  //#region LINETO
+  /**
+   * The CanvasRenderingContext2D method lineTo(), part of the Canvas 2D API, adds a straight line
+   * to the current sub-path by connecting the sub-path's last point to the specified (x, y)
+   * coordinates. Like other methods that modify the current path, this method does not directly
+   * render anything. To draw the path onto a canvas, you can use the fill() or stroke() methods.
+   *
+   * @param {f64} x - The x-axis coordinate of the line's end point.
+   * @param {f64} y - The y-axis coordinate of the line's end point.
+   */
+  public lineTo(x: f64, y: f64): void {
+    this._writePath(CanvasInstruction.LineTo, true, 2, x, y);
+  }
+  //#endregion LINETO
+
+  //#region MEASURETEXT
+  /**
+   * The CanvasRenderingContext2D.measureText() method returns a TextMetrics object that contains
+   * information about the measured text (such as its width, for example). The as2d implementation
+   * only returns the resulting width property value.
+   *
+   * @param {string} text - The text string to measure.
+   */
+  public measureText(text: string): f64 {
+    var font: string = changetype<string>(LOAD<usize>(this._fontStack, this._stackOffset));
+    this._currentFont = font;
+    return measureText(this.id, font, text);
+  }
+  //#endregion MEASURETEXT
 }
