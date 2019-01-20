@@ -2284,7 +2284,98 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param y - The y-axis coordinate of the end point.
    */
   public quadraticCurveTo(cpx: f64, cpy: f64, x: f64, y: f64): void {
-    this._writePath(CanvasInstruction.QuadraticCurveTo, cpx, cpy, x, y);
+    this._writePath(CanvasInstruction.QuadraticCurveTo, true, 4, cpx, cpy, x, y);
   }
   //#endregion QUADRATICCURVETO
+
+  //#region RECT
+  /**
+   * The CanvasRenderingContext2D.rect() method of the Canvas 2D API adds a rectangle to the current
+   * path. Like other methods that modify the current path, this method does not directly render
+   * anything. To draw the rectangle onto a canvas, you can use the fill() or stroke() methods.
+   *
+   * @param {f64} x - The x-axis coordinate of the rectangle's starting point.
+   * @param {f64} y - The y-axis coordinate of the rectangle's starting point.
+   * @param {f64} width - The rectangle's width. Positive values are to the right, and negative to
+   * the left.
+   * @param {f64} height - The rectangle's height. Positive values are down, and negative are up.
+   */
+  public rect(x: f64, y: f64, width: f64, height: f64): void {
+    this._writePath(CanvasInstruction.Rect, true, 4, x, y, width, height);
+  }
+  //#endregion RECT
+
+  //#region ROTATE
+  /**
+   * The CanvasRenderingContext2D.rotate() method of the Canvas 2D API adds a rotation to the
+   * transformation matrix.
+   *
+   * @param {f64} angle - The rotation angle, clockwise in radians. You can use
+   * `degree * Math.PI / 180` if you want to calculate from a degree value.
+   */
+  public rotate(angle: f64): void {
+    var index: i32 = this._stackOffset * 6;
+    var current: ArrayBuffer = this._transformStack;
+    var a: f64 = LOAD<f64>(current, index);
+    var b: f64 = LOAD<f64>(current, index + 1);
+    var c: f64 = LOAD<f64>(current, index + 2);
+    var d: f64 = LOAD<f64>(current, index + 3);
+    var cos: f64 = Math.cos(angle);
+    var sin: f64 = Math.sin(angle);
+    STORE<f64>(current, index, a * cos + c * sin);
+    STORE<f64>(current, index + 1, b * cos + d * sin);
+    STORE<f64>(current, index + 2, c * cos - a * sin);
+    STORE<f64>(current, index + 3, d * cos - b * sin);
+  }
+  //#endregion ROTATE
+
+  //#region SCALE
+  /**
+   * The CanvasRenderingContext2D.scale() method of the Canvas 2D API adds a scaling transformation
+   * to the canvas units horizontally and/or vertically. By default, one unit on the canvas is
+   * exactly one pixel. A scaling transformation modifies this behavior. For instance, a scaling
+   * factor of 0.5 results in a unit size of 0.5 pixels; shapes are thus drawn at half the normal
+   * size. Similarly, a scaling factor of 2.0 increases the unit size so that one unit becomes two
+   * pixels; shapes are thus drawn at twice the normal size.
+   *
+   * @param {f64} x - Scaling factor in the horizontal direction. A negative value flips pixels
+   * across the vertical axis. A value of 1 results in no horizontal scaling.
+   * @param {f64} y - Scaling factor in the vertical direction. A negative value flips pixels across
+   * the horizontal axis. A value of 1 results in no vertical scaling.
+   */
+  public scale(x: f64, y: f64): void {
+    var index: i32 = this._stackOffset * 6;
+    var current: ArrayBuffer = this._transformStack;
+    STORE<f64>(current, index, LOAD<f64>(current, index) * x);
+    STORE<f64>(current, index + 1, LOAD<f64>(current, index + 1) * x);
+    STORE<f64>(current, index + 2, LOAD<f64>(current, index + 2) * y);
+    STORE<f64>(current, index + 3, LOAD<f64>(current, index + 3) * y);
+  }
+  //#endregion SCALE
+
+  //#region SETTRANSFORM
+  /**
+   * The CanvasRenderingContext2D.setTransform() method of the Canvas 2D API resets (overrides) the
+   * current transformation to the identity matrix, and then invokes a transformation described by
+   * the arguments of this method. This lets you scale, rotate, translate (move), and skew the
+   * context.
+   *
+   * @param {f64} a - Horizontal scaling. A value of 1 results in no scaling.
+   * @param {f64} b - Vertical skewing.
+   * @param {f64} c - Horizontal skewing.
+   * @param {f64} d - Vertical scaling. A value of 1 results in no scaling.
+   * @param {f64} e - Horizontal translation (moving).
+   * @param {f64} f - Vertical translation (moving).
+   */
+  public setTransform(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64): void {
+    var index: i32 = this._stackOffset * 6;
+    var current: ArrayBuffer = this._transformStack;
+    STORE<f64>(current, index, a);
+    STORE<f64>(current, index + 1, b);
+    STORE<f64>(current, index + 2, c);
+    STORE<f64>(current, index + 3, d);
+    STORE<f64>(current, index + 4, e);
+    STORE<f64>(current, index + 5, f);
+  }
+  //#endregion SETTRANSFORM
 }
