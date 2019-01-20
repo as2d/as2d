@@ -2257,4 +2257,34 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     return measureText(this.id, font, text);
   }
   //#endregion MEASURETEXT
+
+  //#region MOVETO
+  /**
+   * The CanvasRenderingContext2D.moveTo() method of the Canvas 2D API begins a new sub-path at the
+   * point specified by the given (x, y) coordinates.
+   *
+   * @param {f64} x - The x-axis (horizontal) coordinate of the point.
+   * @param {f64} y - The y-axis (vertical) coordinate of the point.
+   */
+  public moveTo(x: f64, y: f64): void {
+    this._writePath(CanvasInstruction.MoveTo, true, 2, x, y);
+  }
+  //#endregion MOVETO
+
+  //#region QUADRATICCURVETO
+  /**
+   * The CanvasRenderingContext2D.quadraticCurveTo() method of the Canvas 2D API adds a quadratic
+   * Bézier curve to the current sub-path. It requires two points: the first one is a control point
+   * and the second one is the end point. The starting point is the latest point in the current
+   * path, which can be changed using moveTo() before creating the quadratic Bézier curve.
+   *
+   * @param cpx - The x-axis coordinate of the control point.
+   * @param cpy - The y-axis coordinate of the control point.
+   * @param x - The x-axis coordinate of the end point.
+   * @param y - The y-axis coordinate of the end point.
+   */
+  public quadraticCurveTo(cpx: f64, cpy: f64, x: f64, y: f64): void {
+    this._writePath(CanvasInstruction.QuadraticCurveTo, cpx, cpy, x, y);
+  }
+  //#endregion QUADRATICCURVETO
 }
