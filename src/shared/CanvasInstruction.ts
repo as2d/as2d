@@ -17,6 +17,7 @@ export const enum CanvasInstruction {
   FillRect,
   FillStyle,
   FillText,
+  FillTextWidth,
   Filter,
   Font,
   GlobalAlpha,

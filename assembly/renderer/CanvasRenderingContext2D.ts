@@ -38,11 +38,11 @@ const enum FillStrokeStyleType {
   CanvasGradient,
 }
 
-const defaultBlack: string = "#000";
-const defaultNone: string = "none";
-const defaultFont: string = "10px sans-serif";
-const defaultShadowColor: string = "rgba(0, 0, 0, 0)";
-const defaultLineDash: Float64Array = new Float64Array(0);
+var defaultBlack: string = "#000";
+var defaultNone: string = "none";
+var defaultFont: string = "10px sans-serif";
+var defaultShadowColor: string = "rgba(0, 0, 0, 0)";
+var defaultLineDash: Float64Array = new Float64Array(0);
 
 //#region ARRAYBUFFERINITIALIZER
 /**
@@ -2087,4 +2087,98 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     super._writeFour(CanvasInstruction.FillRect, x, y, width, height);
   }
   //#endregion FILLRECT
+
+  //#region FILLTEXT
+  /**
+   * The CanvasRenderingContext2D method fillText(), part of the Canvas 2D API, draws a text string
+   * at the specified coordinates, filling the string's characters with the current fillStyle. An
+   * optional parameter allows specifying a maximum width for the rendered text, which the user
+   * agent will achieve by condensing the text or by using a lower font size. This method draws
+   * directly to the canvas without modifying the current path, so any subsequent fill() or stroke()
+   * calls will have no effect on it. The text is rendered using the font and text layout
+   * configuration as defined by the font, textAlign, textBaseline, and direction properties.
+   *
+   * The fillText function can accept an optional maxWidth property. Use the fillTextWidth function
+   * to enable the use of that parameter.
+   *
+   * @param text - A DOMString specifying the text string to render into the context. The text is
+   * rendered using the settings specified by font, textAlign, textBaseline, and direction.
+   * @param x - The x-axis coordinate of the point at which to begin drawing the text, in pixels.
+   * @param y - The y-axis coordinate of the point at which to begin drawing the text, in pixels.
+   */
+  public fillText(text: string, x: f64, y: f64): void {
+    this._updateDirection();
+    this._updateFillStyle();
+    this._updateFont();
+    this._updateGlobalAlpha();
+    this._updateGlobalCompositeOperation();
+    this._updateImageSmoothingEnabled();
+    this._updateImageSmoothingQuality();
+    this._updateShadowBlur();
+    this._updateShadowColor();
+    this._updateShadowOffsetX();
+    this._updateShadowOffsetY();
+    this._updateTextAlign();
+    this._updateTextBaseline();
+    this._updateTransform();
+    super._writeThree(CanvasInstruction.FillText, <f64>changetype<usize>(text), x, y);
+  }
+
+  /**
+   * The CanvasRenderingContext2D method fillText(), part of the Canvas 2D API, draws a text string
+   * at the specified coordinates, filling the string's characters with the current fillStyle. An
+   * optional parameter allows specifying a maximum width for the rendered text, which the user
+   * agent will achieve by condensing the text or by using a lower font size. This method draws
+   * directly to the canvas without modifying the current path, so any subsequent fill() or stroke()
+   * calls will have no effect on it. The text is rendered using the font and text layout
+   * configuration as defined by the font, textAlign, textBaseline, and direction properties.
+   *
+   * The fillText function can accept an optional maxWidth property. Use the fillTextWidth function
+   * to enable the use of that parameter.
+   *
+   * @param text - A DOMString specifying the text string to render into the context. The text is
+   * rendered using the settings specified by font, textAlign, textBaseline, and direction.
+   * @param x - The x-axis coordinate of the point at which to begin drawing the text, in pixels.
+   * @param y - The y-axis coordinate of the point at which to begin drawing the text, in pixels.
+   * @param maxWidth - The maximum number of pixels wide the text may be once rendered. If not
+   * specified, there is no limit to the width of the text. However, if this value is provided, the
+   * user agent will adjust the kerning, select a more horizontally condensed font (if one is available or can be generated without loss of quality), or scale down to a smaller font size in order to fit the text in the specified width.
+   */
+  public fillTextWidth(text: string, x: f64, y: f64, maxWidth: f64): void {
+    this._updateDirection();
+    this._updateFillStyle();
+    this._updateFont();
+    this._updateGlobalAlpha();
+    this._updateGlobalCompositeOperation();
+    this._updateImageSmoothingEnabled();
+    this._updateImageSmoothingQuality();
+    this._updateShadowBlur();
+    this._updateShadowColor();
+    this._updateShadowOffsetX();
+    this._updateShadowOffsetY();
+    this._updateTextAlign();
+    this._updateTextBaseline();
+    this._updateTransform();
+    super._writeFour(CanvasInstruction.FillTextWidth, <f64>changetype<usize>(text), x, y, maxWidth);
+  }
+  //#endregion FILLTEXT
+
+  //#region ISPOINTINPATH
+  /**
+   * The CanvasRenderingContext2D.isPointInPath() method of the Canvas 2D API reports whether or not
+   * the specified point is contained in the current path.
+   *
+   * @param {f64} x - The x-axis coordinate of the point to check.
+   * @param {f64} y - The y-axis coordinate of the point to check.
+   * @param {FillRule} fillRule - The algorithm by which to determine if a point is inside or
+   * outside the path.
+   *
+   * Possible values:
+   * - `FillRule.nonzero`: The non-zero winding rule. Default rule.
+   * - `FillRule.evenodd`: The even-odd winding rule.
+   */
+  public isPointInPath(x: f64, y: f64, fillRule: FillRule = FillRule.nonzero): bool {
+    throw new Error("Function isPointInPath is not implemented.");
+  }
+  //#region ISPOINTINPATH
 }

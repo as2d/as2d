@@ -79,6 +79,28 @@ export class Buffer<T extends i32> {
   }
 
   /**
+   * Write a single instruction to the buffer with three parameters. This results in five values
+   * written to the buffer.
+   *
+   * @param {T} inst - The instruction type to be written to the buffer.
+   * @param {f64} a - The first parameter for the instruction to be written to the buffer.
+   * @param {f64} b - The second parameter for the instruction to be written to the buffer.
+   * @param {f64} c - The third parameter for the instruction to be written to the buffer.
+   */
+  @inline
+  protected _writeThree(inst: T, a: f64, b: f64, c: f64): void {
+    var buff: ArrayBuffer = this._buffer;
+    var index: i32 = this._offset;
+    var next: i32 = index + 5;
+    STORE<f64>(buff, index, <f64>inst);
+    STORE<f64>(buff, index + 1, <f64>next);
+    STORE<f64>(buff, index + 2, a);
+    STORE<f64>(buff, index + 3, b);
+    STORE<f64>(buff, index + 4, c);
+    this._offset = next;
+  }
+
+  /**
    * Write a single instruction to the buffer with four parameters. This results in six values
    * written to the buffer.
    *
