@@ -52,7 +52,7 @@ export function instantiateBuffer<T>(buffer: Buffer, imports: any = {}): Wrapped
       var ctx: CanvasRenderingContext2D = this.contexts[cvsobjid];
       ctx.font = wasm.getString(font);
       return ctx.measureText(wasm.getString(text)).width;
-    }
+    },
   };
 
   wasm = as.instantiateBuffer<T & ICanvasSYS>(buffer, imports);
