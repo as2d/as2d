@@ -2399,6 +2399,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   public stroke(): void {
     if (this._pathOffset == 1) return;
+    if (LOAD<f64>(this._lineWidthStack, this._stackOffset) <= 0.0) return;
     this._updateFilter();
     this._updateGlobalAlpha();
     this._updateGlobalCompositeOperation();
@@ -2419,4 +2420,38 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     super._writeZero(CanvasInstruction.Stroke);
   }
   //#endregion STROKE
+
+  //#region STROKERECT
+  /**
+   * The CanvasRenderingContext2D.strokeRect() method of the Canvas 2D API draws a rectangle that is
+   * stroked (outlined) according to the current strokeStyle and other context settings. This method
+   * draws directly to the canvas without modifying the current path, so any subsequent fill() or
+   * stroke() calls will have no effect on it.
+   *
+   * @param {f64} x - The x-axis coordinate of the rectangle's starting point.
+   * @param {f64} y - The y-axis coordinate of the rectangle's starting point.
+   * @param {f64} width - The rectangle's width. Positive values are to the right, and negative to
+   * the left.
+   * @param {f64} height - The rectangle's height. Positive values are down, and negative are up.
+   */
+  public strokeRect(x: f64, y: f64, width: f64, height: f64): void {
+    this._updateFilter();
+    this._updateGlobalAlpha();
+    this._updateGlobalCompositeOperation();
+    this._updateImageSmoothingEnabled();
+    this._updateImageSmoothingQuality();
+    this._updateLineCap();
+    this._updateLineDash();
+    this._updateLineDashOffset();
+    this._updateLineJoin();
+    this._updateLineWidth();
+    this._updateShadowBlur();
+    this._updateShadowColor();
+    this._updateShadowOffsetX();
+    this._updateShadowOffsetY();
+    this._updateStrokeStyle();
+    this._updateTransform();
+    super._writeFour(CanvasInstruction.StrokeRect, x, y, width, height);
+  }
+  //#endregion STROKERECT
 }
