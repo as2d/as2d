@@ -2305,6 +2305,16 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
   //#endregion RECT
 
+  //#region RESETTRANSFORM
+  /**
+   * The CanvasRenderingContext2D.resetTransform() method of the Canvas 2D API resets the current
+   * transform to the identity matrix.
+   */
+  public resetTransform(): void {
+    this.setTransform(1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
+  }
+  //#endregion RESETTRANSFORM
+
   //#region ROTATE
   /**
    * The CanvasRenderingContext2D.rotate() method of the Canvas 2D API adds a rotation to the
@@ -2378,4 +2388,35 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     STORE<f64>(current, index + 5, f);
   }
   //#endregion SETTRANSFORM
+
+  //#region STROKE
+  /**
+   * The CanvasRenderingContext2D.stroke() method of the Canvas 2D API strokes (outlines) the
+   * current or given path with the current stroke style. Strokes are aligned to the center of a
+   * path; in other words, half of the stroke is drawn on the inner side, and half on the outer
+   * side. The stroke is drawn using the non-zero winding rule, which means that path intersections
+   * will still get filled.
+   */
+  public stroke(): void {
+    if (this._pathOffset == 1) return;
+    this._updateFilter();
+    this._updateGlobalAlpha();
+    this._updateGlobalCompositeOperation();
+    this._updateImageSmoothingEnabled();
+    this._updateImageSmoothingQuality();
+    this._updateLineCap();
+    this._updateLineDash();
+    this._updateLineDashOffset();
+    this._updateLineJoin();
+    this._updateLineWidth();
+    this._updatePath();
+    this._updateShadowBlur();
+    this._updateShadowColor();
+    this._updateShadowOffsetX();
+    this._updateShadowOffsetY();
+    this._updateStrokeStyle();
+    this._updateTransform();
+    super._writeZero(CanvasInstruction.Stroke);
+  }
+  //#endregion STROKE
 }
