@@ -211,4 +211,12 @@ export class Buffer<T extends i32> {
     STORE<f64>(buff, index + 10, i);
     this._offset = next;
   }
+
+  /**
+   * Reset the buffer back to position 0.
+   */
+  @inline
+  protected _resetBuffer(): void {
+    this._offset = 0;
+  }
 }

@@ -2363,7 +2363,7 @@
    if
     i32.const 0
     i32.const 296
-    i32.const 107
+    i32.const 109
     i32.const 41
     call $~lib/env/abort
     unreachable
@@ -3573,8 +3573,6 @@
    i32.mul
    i32.const 0
    call $~lib/arraybuffer/ArrayBuffer#constructor
-   f64.const 1
-   call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<f64>
    i32.store offset=168
    get_local $2
    f64.const 0
@@ -3618,8 +3616,6 @@
    i32.mul
    i32.const 0
    call $~lib/arraybuffer/ArrayBuffer#constructor
-   f64.const 1
-   call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<f64>
    i32.store offset=192
    get_local $2
    f64.const 0
@@ -3631,8 +3627,6 @@
    i32.mul
    i32.const 0
    call $~lib/arraybuffer/ArrayBuffer#constructor
-   f64.const 1
-   call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<f64>
    i32.store offset=208
    get_local $2
    f64.const 0

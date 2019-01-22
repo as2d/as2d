@@ -17,7 +17,12 @@ import { arraysEqual } from "../internal/util";
 import { Path2DElement } from "../internal/Path2DElement";
 import { FillRule } from "../../src/shared/FillRule";
 
+
 //#region EXTERNALS
+// @ts-ignore: linked functions can have decorators
+@external("__canvas_sys", "render")
+declare function render(ctxid: i32, data: usize): void;
+
 // @ts-ignore: linked functions can have decorators
 @external("__canvas_sys", "createLinearGradient")
 declare function createLinearGradient(id: i32, x0: f64, y0: f64, x1: f64, y1: f64): i32;
@@ -1018,10 +1023,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   /**
    * An ArrayBuffer that contains 256 sets of f64 values.
    */
-  private _shadowBlurStack: ArrayBuffer = setArrayBufferValue(
-    new ArrayBuffer(0xFF * sizeof<f64>()),
-    1.0,
-  );
+  private _shadowBlurStack: ArrayBuffer = new ArrayBuffer(0xFF * sizeof<f64>());
 
   /**
    * A private member that contains a single float value that represents the last shadowBlur value
@@ -1107,10 +1109,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   /**
    * An ArrayBuffer that contains 256 sets of f64 values.
    */
-  private _shadowOffsetXStack: ArrayBuffer = setArrayBufferValue(
-    new ArrayBuffer(0xFF * sizeof<f64>()),
-    1.0,
-  );
+  private _shadowOffsetXStack: ArrayBuffer = new ArrayBuffer(0xFF * sizeof<f64>());
 
   /**
    * A private member that contains a single float value that represents the last shadowOffsetX value
@@ -1152,10 +1151,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   /**
    * An ArrayBuffer that contains 256 sets of f64 values.
    */
-  private _shadowOffsetYStack: ArrayBuffer = setArrayBufferValue(
-    new ArrayBuffer(0xFF * sizeof<f64>()),
-    1.0,
-  );
+  private _shadowOffsetYStack: ArrayBuffer = new ArrayBuffer(0xFF * sizeof<f64>());
 
   /**
    * A private member that contains a single float value that represents the last shadowOffsetY value
@@ -1721,7 +1717,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     g: f64 = 0.0,
     h: f64 = 0.0,
   ): void {
-    var el: Path2DElement = this._path[this._pathOffset];
+    var el: Path2DElement = unchecked(this._path[this._pathOffset]);
     var index: i32;
     var current: ArrayBuffer;
     el.instruction = inst;
@@ -1745,6 +1741,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     el.f = f;
     el.g = g;
     el.h = h;
+    ++this._pathOffset;
   }
 
   /**
@@ -1754,7 +1751,6 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   @inline
   private _updatePath(): void {
     var end: i32 = this._pathOffset;
-    var i: i32 = this._pathBufferOffset;
     var el: Path2DElement;
     var a: f64;
     var b: f64;
@@ -1763,7 +1759,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var e: f64;
     var f: f64;
     var current: ArrayBuffer = this._currentTransform;
-    for (; i <= end; i++) {
+    for (var i: i32 = this._pathBufferOffset; i <= end; i++) {
       el = unchecked(this._path[i]);
       if (el.updateTransform) {
         a = el.transformA;
@@ -1787,7 +1783,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
           STORE<f64>(current, 2, c);
           STORE<f64>(current, 3, d);
           STORE<f64>(current, 4, e);
-          STORE<f64>(current, 5, f); 
+          STORE<f64>(current, 5, f);
         }
         switch (el.count) {
           case 0: {
@@ -2081,6 +2077,12 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * - `FillRule.evenodd`: The even-odd winding rule.
    */
   public fill(fillRule: FillRule = FillRule.nonzero): void {
+    /**
+     * If there are no items on the path, there is no reason to fill. Index 1 means the path buffer
+     * is pointing to a single `beginPath()` operation and it does not matter if fill is called at
+     * this point.
+     */
+    if (this._pathOffset == 1) return;
     this._updateFillStyle();
     this._updateFilter();
     this._updateGlobalAlpha();
@@ -2401,7 +2403,15 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * will still get filled.
    */
   public stroke(): void {
+    /**
+     * If there are no items on the path, there is no reason to fill. Index 1 means the path buffer
+     * is pointing to a single `beginPath()` operation and it does not matter if fill is called at
+     * this point.
+     */
     if (this._pathOffset == 1) return;
+    /**
+     * If the lineWidth is zero, there is no line and it does not matter if ctx.stroke() is called.
+     */
     if (LOAD<f64>(this._lineWidthStack, this._stackOffset) <= 0.0) return;
     this._updateFilter();
     this._updateGlobalAlpha();
@@ -2438,6 +2448,10 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param {f64} height - The rectangle's height. Positive values are down, and negative are up.
    */
   public strokeRect(x: f64, y: f64, width: f64, height: f64): void {
+    /**
+     * If the lineWidth is zero, there is no line and it does not matter if ctx.stroke() is called.
+     */
+    if (LOAD<f64>(this._lineWidthStack, this._stackOffset) <= 0.0) return;
     this._updateFilter();
     this._updateGlobalAlpha();
     this._updateGlobalCompositeOperation();
@@ -2597,4 +2611,10 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     );
   }
   //#endregion TRANSLATE
+
+  public commit(): void {
+    this._writeZero(CanvasInstruction.Commit);
+    render(this.id, this._buffer.data);
+    this._resetBuffer();
+  }
 }

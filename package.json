@@ -9,9 +9,10 @@
     "watch:test": "onchange \"build/*.wasm\" \"./src/**/*.ts\" \"./test/**/*.ts\" -- npm run jest",
     "watch:as": "onchange \"assembly/**/*.ts\" -- npm run asbuild:test",
     "jest": "jest",
-    "asbuild:test": "run-p asbuild:glue asbuild:Buffer",
+    "asbuild:test": "run-p asbuild:glue asbuild:Buffer asbuild:CanvasRenderingContext2D",
     "asbuild:glue": "cross-env AS2D_ENV=DEBUG asc assembly/glue.ts assembly/glue.test.ts -b build/glue.test.wasm -t build/glue.test.wat --sourceMap --validate --debug --use Math=JSMath",
     "asbuild:Buffer": "cross-env AS2D_ENV=DEBUG asc assembly/glue.ts assembly/Buffer.test.ts -b build/Buffer.test.wasm -t build/Buffer.test.wat --sourceMap --validate --debug --use Math=JSMath",
+    "asbuild:CanvasRenderingContext2D": "cross-env AS2D_ENV=DEBUG asc assembly/glue.ts assembly/CanvasRenderingContext2D.test.ts -b build/CanvasRenderingContext2D.test.wasm -t build/CanvasRenderingContext2D.test.wat --sourceMap --validate --debug --use Math=JSMath",
     "asbuild:optimized": "asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --sourceMap --validate --optimize"
   },
   "author": "Joshua <tenner.joshua@gmail.com>",
