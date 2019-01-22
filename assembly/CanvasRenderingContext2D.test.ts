@@ -14,6 +14,9 @@ var grd: CanvasGradient;
 var img: Image;
 var ptrn: CanvasPattern;
 
+@external("test", "log")
+declare function log(id: i32, val: f64): void;
+
 export function arc(x: number, y: number, r: number, startAngle: number, endAngle: number, anticlockwise: bool): void {
   assert(ctx);
   ctx.arc(x, y, r, startAngle, endAngle, anticlockwise);
@@ -115,4 +118,29 @@ export function fillPattern(): void {
 export function setTransform(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64): void {
   assert(ctx);
   ctx.setTransform(a, b, c, d, e, f);
+}
+
+export function clearRect(x: f64, y: f64, width: f64, height: f64): void {
+  assert(ctx);
+  ctx.clearRect(x, y, width, height);
+}
+
+export function arcTo(x1: f64, y1: f64, x2: f64, y2: f64, radius: f64): void {
+  assert(ctx);
+  ctx.arcTo(x1, y1, x2, y2, radius);
+}
+
+export function bezierCurveTo(cp1x: f64, cp1y: f64, cp2x: f64, cp2y: f64, x: f64, y: f64): void {
+  assert(ctx);
+  ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+}
+
+export function clip(): void {
+  assert(ctx);
+  ctx.clip();
+}
+
+export function closePath(): void {
+  assert(ctx);
+  ctx.closePath();
 }

@@ -5,6 +5,7 @@ import { CanvasInstruction } from "./shared/CanvasInstruction";
 import { FillRule } from "./shared/FillRule";
 import { ImageSmoothingQuality } from "./shared/ImageSmoothingQuality";
 
+
 type WrappedASModule<T> = ICanvasSYS & as.ASUtil & T;
 
 export function instantiateBuffer<T>(buffer: Buffer, imports: any = {}): WrappedASModule<T> {
@@ -64,13 +65,13 @@ export function instantiateBuffer<T>(buffer: Buffer, imports: any = {}): Wrapped
       var i = 0;
       var strings: { [pointer: number]: string; } = {};
       while (i < 0x10000 && data[i] !== CanvasInstruction.Commit) {
-        switch(data[i]) {
+        switch (data[i]) {
           case CanvasInstruction.Arc: {
-            ctx.arc(data[i + 2], data[i + 3], data[i + 4], data[i + 5], data[i + 6], data[i + 2] === 1);
+            ctx.arc(data[i + 2], data[i + 3], data[i + 4], data[i + 5], data[i + 6], data[i + 7] === 1);
             break;
           }
           case CanvasInstruction.ArcTo: {
-            throw new Error("InstructionError: ArcTo not implemented.");
+            ctx.arcTo(data[i + 2], data[i + 3], data[i + 4], data[i + 5], data[i + 6]);
             break;
           }
           case CanvasInstruction.BeginPath: {
@@ -78,31 +79,23 @@ export function instantiateBuffer<T>(buffer: Buffer, imports: any = {}): Wrapped
             break;
           }
           case CanvasInstruction.BezierCurveTo: {
-            throw new Error("InstructionError: BezierCurveTo not implemented.");
+            ctx.bezierCurveTo(data[i + 2], data[i + 3], data[i + 4], data[i + 5], data[i + 6], data[i + 7]);
             break;
           }
           case CanvasInstruction.Clip: {
-            throw new Error("InstructionError: Clip not implemented.");
+            ctx.clip();
             break;
           }
           case CanvasInstruction.ClosePath: {
-            throw new Error("InstructionError: ClosePath not implemented.");
-            break;
-          }
-          case CanvasInstruction.Commit: {
-            throw new Error("InstructionError: Commit not implemented.");
+            ctx.closePath();
             break;
           }
           case CanvasInstruction.ClearRect: {
-            throw new Error("InstructionError: ClearRect not implemented.");
+            ctx.clearRect(data[i + 2], data[i + 3], data[i + 4], data[i + 5]);
             break;
           }
           case CanvasInstruction.Direction: {
             throw new Error("InstructionError: Direction not implemented.");
-            break;
-          }
-          case CanvasInstruction.DrawFocusIfNeeded: {
-            throw new Error("InstructionError: DrawFocusIfNeeded not implemented.");
             break;
           }
           case CanvasInstruction.DrawImage: {

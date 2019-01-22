@@ -19,6 +19,9 @@ import { FillRule } from "../../src/shared/FillRule";
 
 
 //#region EXTERNALS
+@external("test", "log")
+declare function log(id: i32, val: f64): void;
+
 // @ts-ignore: linked functions can have decorators
 @external("__canvas_sys", "render")
 declare function render(ctxid: i32, data: usize): void;
@@ -1787,6 +1790,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
         }
         switch (el.count) {
           case 0: {
+
             this._writeZero(el.instruction);
             break;
           }
@@ -1832,7 +1836,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * counter-clockwise between the start and end angles. The default value is false (clockwise).
    */
   public arc(x: f64, y: f64, radius: f64, startAngle: f64, endAngle: f64 , anticlockwise: bool = false): void {
-    this._writePath(CanvasInstruction.Arc, true, 6, x, y, startAngle, endAngle, anticlockwise ? 1.0 : 0.0);
+    this._writePath(CanvasInstruction.Arc, true, 6, x, y, radius, startAngle, endAngle, anticlockwise ? 1.0 : 0.0);
   }
   //#endregion ARC
 
@@ -1910,7 +1914,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   public clip(): void {
     this._updatePath();
-    this._writePath(CanvasInstruction.Clip, false, 0);
+    this._writeZero(CanvasInstruction.Clip);
   }
   //#endregion CLIP
 
@@ -1922,7 +1926,9 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * the canvas directly. You can render the path using the stroke() or fill() methods.
    */
   public closePath(): void {
-    this._writePath(CanvasInstruction.ClosePath, false, 0);
+    if (this._pathOffset == 1) return;
+    if (this._path[this._pathOffset - 1].instruction == CanvasInstruction.ClosePath) return;
+    this._writePath(CanvasInstruction.ClosePath, true, 0);
   }
   //#endregion CLOSEPATH
 
