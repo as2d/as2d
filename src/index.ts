@@ -118,11 +118,11 @@ export function instantiateBuffer<T>(buffer: Buffer, imports: any = {}): Wrapped
             break;
           }
           case CanvasInstruction.FillGradient: {
-            throw new Error("InstructionError: FillGradient not implemented.");
+            ctx.fillStyle = wasm.gradients[data[i + 2]];
             break;
           }
           case CanvasInstruction.FillPattern: {
-            throw new Error("InstructionError: FillPattern not implemented.");
+            ctx.fillStyle = wasm.patterns[data[i + 2]];
             break;
           }
           case CanvasInstruction.FillRect: {
@@ -226,23 +226,23 @@ export function instantiateBuffer<T>(buffer: Buffer, imports: any = {}): Wrapped
             break;
           }
           case CanvasInstruction.SetTransform: {
-            throw new Error("InstructionError: SetTransform not implemented.");
+            ctx.setTransform(data[i + 2], data[i + 3], data[i + 4], data[i + 5], data[i + 6], data[i + 7]);
             break;
           }
           case CanvasInstruction.ShadowBlur: {
-            throw new Error("InstructionError: ShadowBlur not implemented.");
+            ctx.shadowBlur = data[i + 2];
             break;
           }
           case CanvasInstruction.ShadowColor: {
-            throw new Error("InstructionError: ShadowColor not implemented.");
+            ctx.shadowColor = strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2]));
             break;
           }
           case CanvasInstruction.ShadowOffsetX: {
-            throw new Error("InstructionError: ShadowOffsetX not implemented.");
+            ctx.shadowOffsetX = data[i + 2];
             break;
           }
           case CanvasInstruction.ShadowOffsetY: {
-            throw new Error("InstructionError: ShadowOffsetY not implemented.");
+            ctx.shadowOffsetY = data[i + 2];
             break;
           }
           case CanvasInstruction.Stroke: {
