@@ -1790,7 +1790,6 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
         }
         switch (el.count) {
           case 0: {
-
             this._writeZero(el.instruction);
             break;
           }
