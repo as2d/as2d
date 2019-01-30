@@ -1,1 +1,1 @@
-interface TypedPropertyDescriptor<T> {}
+interface TypedPropertyDescriptor<T = any> {}
