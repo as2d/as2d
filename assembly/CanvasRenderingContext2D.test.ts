@@ -175,3 +175,8 @@ export function globalCompositeOperation(operation: GlobalCompositeOperation): v
   assert(ctx);
   ctx.globalCompositeOperation = operation;
 }
+
+export function fillRect(x: f64, y: f64, width: f64, height: f64): void {
+  assert(ctx);
+  ctx.fillRect(x, y, width, height);
+}

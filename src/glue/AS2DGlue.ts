@@ -177,7 +177,7 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.FillRect: {
-          throw new Error("InstructionError: FillRect not implemented.");
+          ctx.fillRect(data[i + 2], data[i + 3], data[i + 4], data[i + 5]);
           break;
         }
         case CanvasInstruction.FillStyle: {
