@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "run-s asbuild:test jest watch:all",
+    "test": "run-s asbuild:test jest",
     "watch:all": "run-p watch:as watch:test",
     "watch:test": "onchange \"build/*.wasm\" \"./src/**/*.ts\" \"./__tests__/**/*.ts\" -- npm run jest",
     "watch:as": "onchange \"assembly/**/*.ts\" -- npm run asbuild:test",
