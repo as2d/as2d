@@ -1,5 +1,7 @@
 # as2d
 
+[![Build Status](https://travis-ci.org/as2d/as2d.svg?branch=master)](https://travis-ci.org/as2d/as2d)
+
 THIS IS A WORK IN PROGRESS.
 
 # Description
