@@ -13,6 +13,11 @@ interface ICanvasRenderingContext2DTestSuite {
   fill(): void;
   init(): void;
   commit(): void;
+  ellipse(x: number, y: number, radiusX: number, radiusY: number, rotation: number, startAngle: number, endAngle: number, anticlockwise: number): void;
+  lineTo(x: number, y: number): void;
+  moveTo(x: number, y: number): void;
+  quadraticCurveTo(cpx: number, cpy: number, x: number, y: number): void;
+  rect(x: number, y: number, width: number, height: number): void;
 }
 
 let buff = readFileSync("./build/CanvasRenderingContext2D.test.wasm");
@@ -79,5 +84,40 @@ describe("pathing operations", () => {
     wasm.fill();
     wasm.commit();
     expect(ctx.closePath).toBeCalledTimes(1);
+  });
+
+  it("should call ellipse", () => {
+    wasm.ellipse(1, 2, 3, 4, 5, 6, 7, 1);
+    wasm.fill();
+    wasm.commit();
+    expect(ctx.ellipse).toBeCalledWith(1, 2, 3, 4, 5, 6, 7, true);
+  });
+
+  it("should call lineTo", () => {
+    wasm.lineTo(1, 2);
+    wasm.fill();
+    wasm.commit();
+    expect(ctx.lineTo).toBeCalledWith(1, 2);
+  });
+
+  it("should call moveTo", () => {
+    wasm.moveTo(1, 2);
+    wasm.fill();
+    wasm.commit();
+    expect(ctx.moveTo).toBeCalledWith(1, 2);
+  });
+
+  it("should call quadraticCurveTo", () => {
+    wasm.quadraticCurveTo(1, 2, 3, 4);
+    wasm.fill();
+    wasm.commit();
+    expect(ctx.quadraticCurveTo).toBeCalledWith(1, 2, 3, 4);
+  });
+
+  it("should call rect", () => {
+    wasm.rect(1, 2, 3, 4);
+    wasm.fill();
+    wasm.commit();
+    expect(ctx.rect).toBeCalledWith(1, 2, 3, 4);
   });
 });

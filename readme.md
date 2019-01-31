@@ -20,8 +20,8 @@ To run the tests, use `npm start`. This will compile the `./assembly/` folder, a
   - dispose() function
 - Implement CanvasPattern(s)
   - dispose() function
+- Appropritately test all path instructions `./__tests__/CanvasRenderingContext2D.path.ts`
 - Appropriately test the following functions
-  - fill()
   - fillText()
   - fillTextWidth()
   - fillRect()
@@ -42,7 +42,31 @@ To run the tests, use `npm start`. This will compile the `./assembly/` folder, a
   - putImageData()
   - isPointInPath()
   - isPointInStroke()
+- 100% glue code coverage
 
+# Current Glue Code Coverage
+
+```
+------------------------------|----------|----------|----------|----------|-------------------|
+File                          |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+------------------------------|----------|----------|----------|----------|-------------------|
+All files                     |    47.12 |    41.41 |    60.71 |    48.48 |                   |
+ src                          |    57.14 |    16.67 |    33.33 |    63.64 |                   |
+  index.ts                    |    57.14 |    16.67 |    33.33 |    63.64 |       12,13,17,18 |
+ src/glue                     |     55.5 |    45.33 |    81.25 |    57.67 |                   |
+  AS2DGlue.ts                 |     55.5 |    45.33 |    81.25 |    57.67 |... 30,331,334,335 |
+ src/shared                   |    18.75 |    33.33 |    33.33 |    18.75 |                   |
+  CanvasDirection.ts          |        0 |        0 |        0 |        0 |         5,9,13,17 |
+  CanvasPatternRepetition.ts  |      100 |      100 |      100 |      100 |                   |
+  FillRule.ts                 |      100 |      100 |      100 |      100 |                   |
+  GlobalCompositeOperation.ts |        0 |        0 |        0 |        0 |... 04,108,112,116 |
+  ImageSmoothingQuality.ts    |      100 |      100 |      100 |      100 |                   |
+  LineCap.ts                  |        0 |        0 |        0 |        0 |           1,2,3,4 |
+  LineJoin.ts                 |        0 |        0 |        0 |        0 |        9,15,20,26 |
+  TextAlign.ts                |        0 |        0 |        0 |        0 |  7,11,15,19,23,27 |
+  TextBaseline.ts             |        0 |        0 |        0 |        0 |4,8,12,16,20,24,28 |
+------------------------------|----------|----------|----------|----------|-------------------|
+```
 
 # LICENSE
 

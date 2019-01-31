@@ -268,7 +268,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
       || d != LOAD<f64>(current, 3)
       || e != LOAD<f64>(current, 4)
       || f != LOAD<f64>(current, 5)) {
-      this._writeSix(CanvasInstruction.SetTransform, a, b, c, d, e, f);
+      super._writeSix(CanvasInstruction.SetTransform, a, b, c, d, e, f);
       STORE<f64>(current, 0, a);
       STORE<f64>(current, 1, b);
       STORE<f64>(current, 2, c);
@@ -313,7 +313,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: CanvasDirection = LOAD<CanvasDirection>(this._directionStack, <i32>this._stackOffset);
     if (value != this._currentDirection) {
       this._currentDirection = value;
-      this._writeOne(CanvasInstruction.Direction, <f64>value);
+      super._writeOne(CanvasInstruction.Direction, <f64>value);
     }
   }
   //#endregion DIRECTION
@@ -381,7 +381,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
       if (styleType == FillStrokeStyleType.String) inst = CanvasInstruction.FillStyle;
       else if (styleType == FillStrokeStyleType.CanvasGradient) inst = CanvasInstruction.FillGradient;
       else inst = CanvasInstruction.FillPattern;
-      this._writeOne(inst, <f64>value);
+      super._writeOne(inst, <f64>value);
     }
   }
   //#endregion FILLSTYLE
@@ -512,7 +512,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: string = changetype<string>(LOAD<usize>(this._filterStack, <i32>this._stackOffset));
     if (value != this._currentFilter) {
       this._currentFilter = value;
-      this._writeOne(CanvasInstruction.Filter, changetype<usize>(value));
+      super._writeOne(CanvasInstruction.Filter, changetype<usize>(value));
     }
   }
   //#endregion FILTER
@@ -553,7 +553,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: string = changetype<string>(LOAD<usize>(this._fontStack, <i32>this._stackOffset));
     if (value != this._currentFont) {
       this._currentFont = value;
-      this._writeOne(CanvasInstruction.Font, changetype<usize>(value));
+      super._writeOne(CanvasInstruction.Font, changetype<usize>(value));
     }
   }
   //#endregion FONT
@@ -596,7 +596,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: f64 = LOAD<f64>(this._globalAlphaStack, <i32>this._stackOffset);
     if (value != this._currentGlobalAlpha) {
       this._currentGlobalAlpha = value;
-      this._writeOne(CanvasInstruction.GlobalAlpha, value);
+      super._writeOne(CanvasInstruction.GlobalAlpha, value);
     }
   }
   //#endregion GLOBALALPHA
@@ -641,7 +641,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     );
     if (value != this._currentGlobalCompositeOperation) {
       this._currentGlobalCompositeOperation = value;
-      this._writeOne(CanvasInstruction.GlobalCompositeOperation, <f64>value);
+      super._writeOne(CanvasInstruction.GlobalCompositeOperation, <f64>value);
     }
   }
   //#endregion GLOBALCOMPOSITEOPERATION
@@ -684,7 +684,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: bool = LOAD<bool>(this._imageSmoothingEnabledStack, <i32>this._stackOffset);
     if (value != this._currentImageSmoothingEnabled) {
       this._currentImageSmoothingEnabled = value;
-      this._writeOne(CanvasInstruction.ImageSmoothingEnabled, value ? 1.0 : 0.0);
+      super._writeOne(CanvasInstruction.ImageSmoothingEnabled, value ? 1.0 : 0.0);
     }
   }
   //#endregion IMAGESMOOTHINGENABLED
@@ -730,7 +730,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
       );
       if (value != this._currentImageSmoothingQuality) {
         this._currentImageSmoothingQuality = value;
-        this._writeOne(CanvasInstruction.ImageSmoothingQuality, <f64>value);
+        super._writeOne(CanvasInstruction.ImageSmoothingQuality, <f64>value);
       }
     }
   }
@@ -775,7 +775,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     );
     if (value != this._currentLineCap) {
       this._currentLineCap = value;
-      this._writeOne(CanvasInstruction.LineCap, <f64>value);
+      super._writeOne(CanvasInstruction.LineCap, <f64>value);
     }
   }
   //#endregion LINECAP
@@ -844,7 +844,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
     if (!arraysEqual(current, lineDash)) {
       this._currentLineDash = lineDash;
-      this._writeOne(CanvasInstruction.LineDash, <f64>changetype<usize>(lineDash));
+      super._writeOne(CanvasInstruction.LineDash, <f64>changetype<usize>(lineDash));
     }
   }
   //#endregion LINEDASH
@@ -886,7 +886,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: f64 = LOAD<f64>(this._lineDashOffsetStack, <i32>this._stackOffset);
     if (value != this._currentLineDashOffset) {
       this._currentLineDashOffset = value;
-      this._writeOne(CanvasInstruction.LineDashOffset, value);
+      super._writeOne(CanvasInstruction.LineDashOffset, value);
     }
   }
   //#endregion LINEDASHOFFSET
@@ -934,7 +934,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     );
     if (value != this._currentLineJoin) {
       this._currentLineJoin = value;
-      this._writeOne(CanvasInstruction.LineJoin, <f64>value);
+      super._writeOne(CanvasInstruction.LineJoin, <f64>value);
     }
   }
   //#endregion
@@ -975,7 +975,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: f64 = LOAD<f64>(this._lineWidthStack, <i32>this._stackOffset);
     if (value != this._currentLineWidth) {
       this._currentLineWidth = value;
-      this._writeOne(CanvasInstruction.LineWidth, value);
+      super._writeOne(CanvasInstruction.LineWidth, value);
     }
   }
   //#endregion
@@ -1017,7 +1017,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: f64 = LOAD<f64>(this._miterLimitStack, <i32>this._stackOffset);
     if (value != this._currentMiterLimit) {
       this._currentMiterLimit = value;
-      this._writeOne(CanvasInstruction.MiterLimit, value);
+      super._writeOne(CanvasInstruction.MiterLimit, value);
     }
   }
   //#endregion MITERLIMIT
@@ -1060,7 +1060,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: f64 = LOAD<f64>(this._shadowBlurStack, <i32>this._stackOffset);
     if (value != this._currentShadowBlur) {
       this._currentShadowBlur = value;
-      this._writeOne(CanvasInstruction.ShadowBlur, value);
+      super._writeOne(CanvasInstruction.ShadowBlur, value);
     }
   }
   //#endregion SHADOWBLUR
@@ -1103,7 +1103,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: string = changetype<string>(LOAD<usize>(this._shadowColorStack, <i32>this._stackOffset));
     if (value != this._currentShadowColor) {
       this._currentFilter = value;
-      this._writeOne(CanvasInstruction.ShadowColor, changetype<usize>(value));
+      super._writeOne(CanvasInstruction.ShadowColor, changetype<usize>(value));
     }
   }
   //#endregion
@@ -1145,7 +1145,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: f64 = LOAD<f64>(this._shadowOffsetXStack, <i32>this._stackOffset);
     if (value != this._currentShadowOffsetX) {
       this._currentShadowOffsetX = value;
-      this._writeOne(CanvasInstruction.ShadowOffsetX, value);
+      super._writeOne(CanvasInstruction.ShadowOffsetX, value);
     }
   }
   //#endregion SHADOWOFFSETX
@@ -1187,7 +1187,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: f64 = LOAD<f64>(this._shadowOffsetYStack, <i32>this._stackOffset);
     if (value != this._currentShadowOffsetY) {
       this._currentShadowOffsetY = value;
-      this._writeOne(CanvasInstruction.ShadowOffsetY, value);
+      super._writeOne(CanvasInstruction.ShadowOffsetY, value);
     }
   }
   //#endregion SHADOWOFFSETY
@@ -1256,7 +1256,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
       if (styleType == FillStrokeStyleType.String) inst = CanvasInstruction.StrokeStyle;
       else if (styleType == FillStrokeStyleType.CanvasGradient) inst = CanvasInstruction.StrokeGradient;
       else inst = CanvasInstruction.StrokePattern;
-      this._writeOne(inst, <f64>value);
+      super._writeOne(inst, <f64>value);
     }
   }
   //#endregion STROKESTYLE
@@ -1376,7 +1376,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     );
     if (value != this._currentTextAlign) {
       this._currentTextAlign = value;
-      this._writeOne(CanvasInstruction.TextAlign, <f64>value);
+      super._writeOne(CanvasInstruction.TextAlign, <f64>value);
     }
   }
   //#endregion TEXTALIGN
@@ -1420,7 +1420,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     );
     if (value != this._currentTextBaseline) {
       this._currentTextBaseline = value;
-      this._writeOne(CanvasInstruction.TextBaseline, <f64>value);
+      super._writeOne(CanvasInstruction.TextBaseline, <f64>value);
     }
   }
   //#endregion TEXTBASELINE
@@ -1561,7 +1561,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
     if (hard) {
       STORE<bool>(this._saveStack, nextOffset, true);
-      this._writeZero(CanvasInstruction.Save);
+      super._writeZero(CanvasInstruction.Save);
     }
 
     this._stackOffset = nextOffset;
@@ -1780,7 +1780,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
           e != LOAD<f64>(current, 4) ||
           f != LOAD<f64>(current, 5)
         ) {
-          this._writeSix(CanvasInstruction.SetTransform, a, b, c, d, e, f);
+          super._writeSix(CanvasInstruction.SetTransform, a, b, c, d, e, f);
           STORE<f64>(current, 0, a);
           STORE<f64>(current, 1, b);
           STORE<f64>(current, 2, c);
@@ -1790,28 +1790,31 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
         }
         switch (el.count) {
           case 0: {
-            this._writeZero(el.instruction);
+            super._writeZero(el.instruction);
             break;
           }
           case 1: {
-            this._writeOne(el.instruction, el.a);
+            super._writeOne(el.instruction, el.a);
             break;
           }
           case 2: {
-            this._writeTwo(el.instruction, el.a, el.b);
+            super._writeTwo(el.instruction, el.a, el.b);
             break;
           }
           case 4: {
-            this._writeFour(el.instruction, el.a, el.b, el.c, el.d);
+            super._writeFour(el.instruction, el.a, el.b, el.c, el.d);
             break;
           }
           case 5: {
-            this._writeFive(el.instruction, el.a, el.b, el.c, el.d, el.e);
+            super._writeFive(el.instruction, el.a, el.b, el.c, el.d, el.e);
             break;
           }
           case 6: {
-            this._writeSix(el.instruction, el.a, el.b, el.c, el.d, el.e, el.f);
+            super._writeSix(el.instruction, el.a, el.b, el.c, el.d, el.e, el.f);
             break;
+          }
+          case 8: {
+            super._writeEight(el.instruction, el.a, el.b, el.c, el.d, el.e, el.f, el.g, el.h);
           }
         }
       }
@@ -1900,7 +1903,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   public clearRect(x: f64, y: f64, width: f64, height: f64): void {
     this._updateTransform();
-    this._writeFour(CanvasInstruction.ClearRect, x, y, width, height);
+    super._writeFour(CanvasInstruction.ClearRect, x, y, width, height);
   }
   //#endregion CLEARRECT
 
@@ -1913,7 +1916,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   public clip(): void {
     this._updatePath();
-    this._writeZero(CanvasInstruction.Clip);
+    super._writeZero(CanvasInstruction.Clip);
   }
   //#endregion CLIP
 
@@ -2618,8 +2621,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   //#endregion TRANSLATE
 
   public commit(): void {
-    this._writeZero(CanvasInstruction.Commit);
+    super._writeZero(CanvasInstruction.Commit);
     render(this.id, this._buffer.data);
-    this._resetBuffer();
+    super._resetBuffer();
   }
 }

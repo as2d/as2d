@@ -8,6 +8,7 @@ import { CanvasGradient } from "./renderer/CanvasGradient";
 import { Image } from "./renderer/Image";
 import { CanvasPatternRepetition } from "../src/shared/CanvasPatternRepetition";
 import { CanvasPattern } from "./renderer/CanvasPattern";
+import { GlobalCompositeOperation } from "../src/shared/GlobalCompositeOperation";
 
 var ctx: CanvasRenderingContext2D;
 var grd: CanvasGradient;
@@ -143,4 +144,34 @@ export function clip(): void {
 export function closePath(): void {
   assert(ctx);
   ctx.closePath();
+}
+
+export function ellipse(x: f64, y: f64, radiusX: f64, radiusY: f64, rotation: f64, startAngle: f64, endAngle: f64, anticlockwise: bool): void {
+  assert(ctx);
+  ctx.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
+}
+
+export function lineTo(x: f64, y: f64): void {
+  assert(ctx);
+  ctx.lineTo(x, y);
+}
+
+export function moveTo(x: f64, y: f64): void {
+  assert(ctx);
+  ctx.moveTo(x, y);
+}
+
+export function quadraticCurveTo(cpx: f64, cpy: f64, x: f64, y: f64): void {
+  assert(ctx);
+  ctx.quadraticCurveTo(cpx, cpy, x, y);
+}
+
+export function rect(x: f64, y: f64, width: f64, height: f64): void {
+  assert(ctx);
+  ctx.rect(x, y, width, height);
+}
+
+export function globalCompositeOperation(operation: GlobalCompositeOperation): void {
+  assert(ctx);
+  ctx.globalCompositeOperation = operation;
 }

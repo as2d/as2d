@@ -4,6 +4,7 @@ import { CanvasPatternRepetition } from "../shared/CanvasPatternRepetition";
 import { CanvasInstruction } from "../shared/CanvasInstruction";
 import { FillRule } from "../shared/FillRule";
 import { ImageSmoothingQuality } from "../shared/ImageSmoothingQuality";
+import { GlobalCompositeOperationValue } from "../shared/GlobalCompositeOperationValue";
 
 export class AS2DGlue<T> {
   public wasm: (ASUtil & T & ICanvasSYS) | null = null;
@@ -115,9 +116,10 @@ export class AS2DGlue<T> {
 
   private render(cvsobjid: number, pointer: number): void {
     if (!this.wasm!.contexts[cvsobjid]) throw new Error("Cannot find canvas: " + cvsobjid);
-    var ctx: CanvasRenderingContext2D = this.wasm!.contexts[cvsobjid];
+    var wasm: ASUtil & T & ICanvasSYS = this.wasm!;
+    var ctx: CanvasRenderingContext2D = wasm.contexts[cvsobjid];
     // @ts-ignore: wasm.memory exists
-    var data = new Float64Array(this.wasm!.memory.buffer, pointer, 0x10000);
+    var data = new Float64Array(wasm.memory.buffer, pointer, 0x10000);
     var i = 0;
     var strings: { [pointer: number]: string; } = {};
     while (i < 0x10000 && data[i] !== CanvasInstruction.Commit) {
@@ -159,7 +161,7 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.Ellipse: {
-          throw new Error("InstructionError: Ellipse not implemented.");
+          ctx.ellipse(data[i + 2], data[i + 3], data[i + 4], data[i + 5], data[i + 6], data[i + 7], data[i + 8], data[i + 9] === 1);
           break;
         }
         case CanvasInstruction.Fill: {
@@ -167,11 +169,11 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.FillGradient: {
-          ctx.fillStyle = this.wasm!.gradients[data[i + 2]];
+          ctx.fillStyle = wasm.gradients[data[i + 2]];
           break;
         }
         case CanvasInstruction.FillPattern: {
-          ctx.fillStyle = this.wasm!.patterns[data[i + 2]];
+          ctx.fillStyle = wasm.patterns[data[i + 2]];
           break;
         }
         case CanvasInstruction.FillRect: {
@@ -179,7 +181,7 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.FillStyle: {
-          ctx.fillStyle = strings[data[i + 2]] || (strings[data[i + 2]] = this.wasm!.getString(data[i + 2]));
+          ctx.fillStyle = strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2]));
           break;
         }
         case CanvasInstruction.FillText: {
@@ -191,7 +193,7 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.Filter: {
-          ctx.filter = strings[data[i + 2]] || (strings[data[i + 2]] = this.wasm!.getString(data[i + 2]));
+          ctx.filter = strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2]));
           break;
         }
         case CanvasInstruction.Font: {
@@ -203,7 +205,7 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.GlobalCompositeOperation: {
-          throw new Error("InstructionError: GlobalCompositeOperation not implemented.");
+          ctx.globalCompositeOperation = GlobalCompositeOperationValue[data[i + 2]];
           break;
         }
         case CanvasInstruction.ImageSmoothingEnabled: {
@@ -235,7 +237,7 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.LineTo: {
-          throw new Error("InstructionError: LineTo not implemented.");
+          ctx.lineTo(data[i + 2], data[i + 3]);
           break;
         }
         case CanvasInstruction.LineWidth: {
@@ -247,15 +249,15 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.MoveTo: {
-          throw new Error("InstructionError: MoveTo not implemented.");
+          ctx.moveTo(data[i + 2], data[i + 3]);
           break;
         }
         case CanvasInstruction.QuadraticCurveTo: {
-          throw new Error("InstructionError: QuadraticCurveTo not implemented.");
+          ctx.quadraticCurveTo(data[i + 2], data[i + 3], data[i + 4], data[i + 5]);
           break;
         }
         case CanvasInstruction.Rect: {
-          throw new Error("InstructionError: Rect not implemented.");
+          ctx.rect(data[i + 2], data[i + 3], data[i + 4], data[i + 5]);
           break;
         }
         case CanvasInstruction.Restore: {
@@ -283,7 +285,7 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.ShadowColor: {
-          ctx.shadowColor = strings[data[i + 2]] || (strings[data[i + 2]] = this.wasm!.getString(data[i + 2]));
+          ctx.shadowColor = strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2]));
           break;
         }
         case CanvasInstruction.ShadowOffsetX: {

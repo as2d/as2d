@@ -6,7 +6,7 @@
   "scripts": {
     "start": "run-s asbuild:test jest watch:all",
     "watch:all": "run-p watch:as watch:test",
-    "watch:test": "onchange \"build/*.wasm\" \"./src/**/*.ts\" \"./test/**/*.ts\" -- npm run jest",
+    "watch:test": "onchange \"build/*.wasm\" \"./src/**/*.ts\" \"./__tests__/**/*.ts\" -- npm run jest",
     "watch:as": "onchange \"assembly/**/*.ts\" -- npm run asbuild:test",
     "jest": "jest",
     "asbuild:test": "run-p asbuild:glue asbuild:Buffer asbuild:CanvasRenderingContext2D",
@@ -26,7 +26,7 @@
     "coveralls": "^3.0.2",
     "cross-env": "^5.2.0",
     "jest": "^23.6.0",
-    "jest-canvas-mock": "^1.1.0",
+    "jest-canvas-mock": "^2.0.0-alpha.1",
     "jest-fetch-mock": "^2.1.0",
     "npm-run-all": "^4.1.5",
     "onchange": "^5.2.0",

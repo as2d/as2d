@@ -2,6 +2,7 @@ import { instantiateBuffer, ICanvasSYS } from "../src";
 import { readFileSync } from "fs";
 import { ASUtil } from "assemblyscript/lib/loader";
 import { FillRule } from "../src/shared/FillRule";
+import { GlobalCompositeOperation } from "../src/shared/GlobalCompositeOperation";
 import { ImageSmoothingQuality } from "../src/shared/ImageSmoothingQuality";
 
 interface ICanvasRenderingContext2DTestSuite {
@@ -16,6 +17,7 @@ interface ICanvasRenderingContext2DTestSuite {
   fill(fillRule?: FillRule): void;
   filter(value: number): void;
   globalAlpha(value: number): void;
+  globalCompositeOperation(value: GlobalCompositeOperation): void;
   imageSmoothingEnabled(value: 0 | 1): void;
   imageSmoothingQuality(value: ImageSmoothingQuality): void;
   setTransform(a: number, b: number, c: number, d: number, e: number, f: number): void;
@@ -48,6 +50,10 @@ beforeEach(() => {
   ctx.fillStyle = "#000";
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = "low";
+
+  if (!jest.isMockFunction(ctx.setTransform)) {
+    ctx.setTransform = jest.fn(ctx.setTransform.bind(ctx));
+  }
 });
 
 describe("CanvasRenderingContext2D function", () => {
@@ -74,13 +80,14 @@ describe("CanvasRenderingContext2D function", () => {
   });
 
   it("should update the fillStyle when fill is called", () => {
+    const unchanged: string = ctx.fillStyle as string;
     wasm.arc(0, 1, 2, 3, 4);
     wasm.fillStyle(wasm.newString("blue"));
     wasm.commit();
-    expect(ctx.fillStyle).toBe("#000");
+    expect(ctx.fillStyle).toBe(unchanged);
     wasm.fill();
     wasm.commit();
-    expect(ctx.fillStyle).toBe("blue");
+    expect(ctx.fillStyle).toBe("#0000ff");
   });
 
   it("should update the fillStyle when the fillStyle is set to a gradient", () => {
@@ -124,6 +131,15 @@ describe("CanvasRenderingContext2D function", () => {
     wasm.fill();
     wasm.commit();
     expect(ctx.globalAlpha).toBe(0.5);
+    expect(ctx.fill).toBeCalled();
+  });
+
+  it("should update the globalCompositeOperation value when fill is called", () => {
+    wasm.arc(1, 2, 3, 4, 5);
+    wasm.globalCompositeOperation(GlobalCompositeOperation.color);
+    wasm.fill();
+    wasm.commit();
+    expect(ctx.globalCompositeOperation).toBe("color");
     expect(ctx.fill).toBeCalled();
   });
 
@@ -179,7 +195,7 @@ describe("CanvasRenderingContext2D function", () => {
     wasm.arc(1, 2, 3, 4, 5);
     wasm.fill();
     wasm.commit();
-    expect(ctx.shadowColor).toBe("green");
+    expect(ctx.shadowColor).toBe("#008000");
     expect(ctx.fill).toBeCalled();
   });
 

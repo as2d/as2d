@@ -179,6 +179,38 @@ export class Buffer<T extends i32> {
   }
 
   /**
+   * Write a single instruction to the buffer with eight parameters. This results in ten values
+   * written to the buffer.
+   *
+   * @param {T} inst - The instruction type to be written to the buffer.
+   * @param {f64} a - The first parameter for the instruction to be written to the buffer.
+   * @param {f64} b - The second parameter for the instruction to be written to the buffer.
+   * @param {f64} c - The third parameter for the instruction to be written to the buffer.
+   * @param {f64} d - The fourth parameter for the instruction to be written to the buffer.
+   * @param {f64} e - The fifth parameter for the instruction to be written to the buffer.
+   * @param {f64} f - The sixth parameter for the instruction to be written to the buffer.
+   * @param {f64} g - The seventh parameter for the instruction to be written to the buffer.
+   * @param {f64} h - The eighth parameter for the instruction to be written to the buffer.
+   */
+  @inline
+  protected _writeEight(inst: T, a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64): void {
+    var buff: ArrayBuffer = this._buffer;
+    var index: i32 = this._offset;
+    var next: i32 = index + 10;
+    STORE<f64>(buff, index, <f64>inst);
+    STORE<f64>(buff, index + 1, <f64>next);
+    STORE<f64>(buff, index + 2, a);
+    STORE<f64>(buff, index + 3, b);
+    STORE<f64>(buff, index + 4, c);
+    STORE<f64>(buff, index + 5, d);
+    STORE<f64>(buff, index + 6, e);
+    STORE<f64>(buff, index + 7, f);
+    STORE<f64>(buff, index + 8, g);
+    STORE<f64>(buff, index + 9, h);
+    this._offset = next;
+  }
+
+  /**
    * Write a single instruction to the buffer with nine parameters. This results in eleven values
    * written to the buffer.
    *
