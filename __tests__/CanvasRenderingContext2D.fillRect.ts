@@ -44,10 +44,6 @@ beforeEach(() => {
   ctx = canvas.getContext("2d")!;
   wasm.useContext("main", ctx);
   wasm.init();
-
-  if (!jest.isMockFunction(ctx.setTransform)) {
-    ctx.setTransform = jest.fn(ctx.setTransform.bind(ctx));
-  }
 });
 
 describe("fillRect", () => {

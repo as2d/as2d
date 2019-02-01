@@ -40,7 +40,7 @@ declare function createPattern(ctxid: i32, imageid: i32, repetition: CanvasPatte
 
 // @ts-ignore: linked functions can have decorators
 @external("__canvas_sys", "measureText")
-declare function measureText(id: i32, font: string, text: string): f64;
+declare function measureText(id: i32, text: string): f64;
 //#endregion EXTERNALS
 
 
@@ -2166,6 +2166,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     if (text.length == 0) return;
     this._updateDirection();
     this._updateFillStyle();
+    this._updateFilter();
     this._updateFont();
     this._updateGlobalAlpha();
     this._updateGlobalCompositeOperation();
@@ -2206,6 +2207,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     if (maxWidth <= 0.0) return;
     this._updateDirection();
     this._updateFillStyle();
+    this._updateFilter();
     this._updateFont();
     this._updateGlobalAlpha();
     this._updateGlobalCompositeOperation();
@@ -2265,9 +2267,9 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param {string} text - The text string to measure.
    */
   public measureText(text: string): f64 {
-    var font: string = changetype<string>(LOAD<usize>(this._fontStack, this._stackOffset));
-    this._currentFont = font;
-    return measureText(this.id, font, text);
+    this._updateFont();
+    this.commit();
+    return measureText(this.id, text);
   }
   //#endregion MEASURETEXT
 
@@ -2431,6 +2433,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     this._updateLineDashOffset();
     this._updateLineJoin();
     this._updateLineWidth();
+    this._updateMiterLimit();
     this._updatePath();
     this._updateShadowBlur();
     this._updateShadowColor();
@@ -2470,6 +2473,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     this._updateLineDashOffset();
     this._updateLineJoin();
     this._updateLineWidth();
+    this._updateMiterLimit();
     this._updateShadowBlur();
     this._updateShadowColor();
     this._updateShadowOffsetX();

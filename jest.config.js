@@ -20,7 +20,9 @@ module.exports = {
   // Indicates whether the coverage information should be collected while executing the test
   "collectCoverage": true,
   "collectCoverageFrom": [
-    "src/**/*.ts"
+    "src/glue/**/*.ts",
+    "src/shared/**/*.ts",
+    "src/util/**/*.ts",
   ],
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
@@ -121,7 +123,7 @@ module.exports = {
   // runner: "jest-runner",
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
-  setupFiles: ["ts-jest", "jest-canvas-mock", "jest-fetch-mock", "./mock/createImageBitmap"],
+  setupFiles: ["ts-jest", "./mock/fetch.js", "jest-canvas-mock"],
 
   // The path to a module that runs some code to configure or set up the testing framework before each test
   // setupTestFrameworkScriptFile: null,

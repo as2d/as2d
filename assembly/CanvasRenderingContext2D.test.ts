@@ -9,6 +9,11 @@ import { Image } from "./renderer/Image";
 import { CanvasPatternRepetition } from "../src/shared/CanvasPatternRepetition";
 import { CanvasPattern } from "./renderer/CanvasPattern";
 import { GlobalCompositeOperation } from "../src/shared/GlobalCompositeOperation";
+import { CanvasDirection } from "../src/shared/CanvasDirection";
+import { TextAlign } from "../src/shared/TextAlign";
+import { TextBaseline } from "../src/shared/TextBaseline";
+import { LineCap } from "../src/shared/LineCap";
+import { LineJoin } from "../src/shared/LineJoin";
 
 var ctx: CanvasRenderingContext2D;
 var grd: CanvasGradient;
@@ -32,9 +37,19 @@ export function fillStyle(value: string): void {
   ctx.fillStyle = value;
 }
 
+export function strokeStyle(value: string): void {
+  assert(ctx);
+  ctx.strokeStyle = value;
+}
+
 export function fill(fillRule: FillRule = FillRule.nonzero): void {
   assert(ctx);
   ctx.fill(fillRule);
+}
+
+export function stroke(): void {
+  assert(ctx);
+  ctx.stroke();
 }
 
 export function commit(): void {
@@ -95,6 +110,12 @@ export function fillGradient(): void {
   ctx.fillGradient = grd;
 }
 
+export function strokeGradient(): void {
+  assert(ctx);
+  assert(grd);
+  ctx.strokeGradient = grd;
+}
+
 export function createImage(): i32 {
   img = new Image();
   assert(img);
@@ -114,6 +135,12 @@ export function fillPattern(): void {
   assert(ctx);
   assert(ptrn);
   ctx.fillPattern = ptrn;
+}
+
+export function strokePattern(): void {
+  assert(ctx);
+  assert(ptrn);
+  ctx.strokePattern = ptrn;
 }
 
 export function setTransform(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64): void {
@@ -179,4 +206,94 @@ export function globalCompositeOperation(operation: GlobalCompositeOperation): v
 export function fillRect(x: f64, y: f64, width: f64, height: f64): void {
   assert(ctx);
   ctx.fillRect(x, y, width, height);
+}
+
+export function drawImage(id: i32, dx: f64, dy: f64): void {
+  assert(ctx);
+  assert(img.loaded);
+  assert(load<i32>(changetype<usize>(img) + offsetof<Image>("_id")) == id);
+  ctx.drawImage(img, dx, dy);
+}
+
+export function drawImageSize(id: i32, dx: f64, dy: f64, dWidth: f64, dHeight: f64): void {
+  assert(ctx);
+  assert(img.loaded);
+  assert(load<i32>(changetype<usize>(img) + offsetof<Image>("_id")) == id);
+  ctx.drawImageSize(img, dx, dy, dWidth, dHeight);
+}
+
+export function drawImageSource(id: i32, sx: f64, sy: f64, sWidth: f64, sHeight: f64, dx: f64, dy: f64, dWidth: f64, dHeight: f64): void {
+  assert(ctx);
+  assert(img.loaded);
+  assert(load<i32>(changetype<usize>(img) + offsetof<Image>("_id")) == id);
+  ctx.drawImageSource(img, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+}
+
+export function fillText(text: string, x: f64, y: f64): void {
+  assert(ctx);
+  ctx.fillText(text, x, y);
+}
+
+export function fillTextWidth(text: string, x: f64, y: f64, width: f64): void {
+  assert(ctx);
+  ctx.fillTextWidth(text, x, y, width);
+}
+
+export function direction(value: CanvasDirection): void {
+  assert(ctx);
+  ctx.direction = value;
+}
+
+export function font(value: string): void {
+  assert(ctx);
+  ctx.font = value;
+}
+
+export function textAlign(value: TextAlign): void {
+  assert(ctx);
+  ctx.textAlign = value;
+}
+
+export function textBaseline(value: TextBaseline): void {
+  assert(ctx);
+  ctx.textBaseline = value;
+}
+
+export function measureText(value: string): f64 {
+  assert(ctx);
+  return ctx.measureText(value);
+}
+
+export function lineCap(value: LineCap): void {
+  assert(ctx);
+  ctx.lineCap = value;
+}
+
+export function setLineDash(a: f64, b: f64, c: f64): void {
+  assert(ctx);
+  var array = new Float64Array(3);
+  array[0] = a;
+  array[1] = b;
+  array[2] = c;
+  ctx.setLineDash(array);
+}
+
+export function lineDashOffset(value: f64): void {
+  assert(ctx);
+  ctx.lineDashOffset = value;
+}
+
+export function lineJoin(value: LineJoin): void {
+  assert(ctx);
+  ctx.lineJoin = value;
+}
+
+export function lineWidth(value: f64): void {
+  assert(ctx);
+  ctx.lineWidth = value;
+}
+
+export function miterLimit(value: f64): void {
+  assert(ctx);
+  ctx.miterLimit = value;
 }

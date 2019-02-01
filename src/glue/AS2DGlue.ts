@@ -5,6 +5,11 @@ import { CanvasInstruction } from "../shared/CanvasInstruction";
 import { FillRule } from "../shared/FillRule";
 import { ImageSmoothingQuality } from "../shared/ImageSmoothingQuality";
 import { GlobalCompositeOperationValue } from "../shared/GlobalCompositeOperationValue";
+import { CanvasDirection } from "../shared/CanvasDirection";
+import { TextAlign } from "../shared/TextAlign";
+import { TextBaseline } from "../shared/TextBaseline";
+import { LineCap } from "../shared/LineCap";
+import { LineJoin } from "../shared/LineJoin";
 
 export class AS2DGlue<T> {
   public wasm: (ASUtil & T & ICanvasSYS) | null = null;
@@ -107,10 +112,9 @@ export class AS2DGlue<T> {
     return this.id;
   }
 
-  public measureText(cvsobjid: number, font: number, text: number): number {
+  public measureText(cvsobjid: number, text: number): number {
     if (!this.wasm!.contexts[cvsobjid]) throw new Error("Cannot find canvas: " + cvsobjid);
     var ctx: CanvasRenderingContext2D = this.wasm!.contexts[cvsobjid];
-    ctx.font = this.wasm!.getString(font);
     return ctx.measureText(this.wasm!.getString(text)).width;
   }
 
@@ -153,11 +157,11 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.Direction: {
-          throw new Error("InstructionError: Direction not implemented.");
+          ctx.direction = CanvasDirection[data[i + 2]] as "rtl" | "ltr" | "inherit";
           break;
         }
         case CanvasInstruction.DrawImage: {
-          throw new Error("InstructionError: DrawImage not implemented.");
+          ctx.drawImage(wasm.images[data[i + 2]], data[i + 3], data[i + 4], data[i + 5], data[i + 6], data[i + 7], data[i + 8], data[i + 9], data[i + 10]);
           break;
         }
         case CanvasInstruction.Ellipse: {
@@ -185,11 +189,20 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.FillText: {
-          throw new Error("InstructionError: FillText not implemented.");
+          ctx.fillText(
+            strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2])),
+            data[i + 3],
+            data[i + 4],
+          );
           break;
         }
         case CanvasInstruction.FillTextWidth: {
-          throw new Error("InstructionError: FillTextWidth not implemented.");
+          ctx.fillText(
+            strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2])),
+            data[i + 3],
+            data[i + 4],
+            data[i + 5],
+          );
           break;
         }
         case CanvasInstruction.Filter: {
@@ -197,7 +210,7 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.Font: {
-          throw new Error("InstructionError: Font not implemented.");
+          ctx.font = strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2]));
           break;
         }
         case CanvasInstruction.GlobalAlpha: {
@@ -221,19 +234,20 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.LineCap: {
-          throw new Error("InstructionError: LineCap not implemented.");
+          ctx.lineCap = LineCap[data[i + 2]] as CanvasLineCap;
           break;
         }
         case CanvasInstruction.LineDash: {
-          throw new Error("InstructionError: LineDash not implemented.");
+          // @ts-ignore: Float64Array is not a valid TypedArrayConstructor, and setLineDash accepts Float64Array
+          ctx.setLineDash(wasm.getArray(Float64Array, data[i + 2]));
           break;
         }
         case CanvasInstruction.LineDashOffset: {
-          throw new Error("InstructionError: LineDashOffset not implemented.");
+          ctx.lineDashOffset = data[i + 2];
           break;
         }
         case CanvasInstruction.LineJoin: {
-          throw new Error("InstructionError: LineJoin not implemented.");
+          ctx.lineJoin = LineJoin[data[i + 2]] as CanvasLineJoin;
           break;
         }
         case CanvasInstruction.LineTo: {
@@ -241,11 +255,11 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.LineWidth: {
-          throw new Error("InstructionError: LineWidth not implemented.");
+          ctx.lineWidth = data[i + 2];
           break;
         }
         case CanvasInstruction.MiterLimit: {
-          throw new Error("InstructionError: MiterLimit not implemented.");
+          ctx.miterLimit = data[i + 2];
           break;
         }
         case CanvasInstruction.MoveTo: {
@@ -297,15 +311,15 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.Stroke: {
-          throw new Error("InstructionError: Stroke not implemented.");
+          ctx.stroke();
           break;
         }
         case CanvasInstruction.StrokeGradient: {
-          throw new Error("InstructionError: StrokeGradient not implemented.");
+          ctx.strokeStyle = wasm.gradients[data[i + 2]];
           break;
         }
         case CanvasInstruction.StrokePattern: {
-          throw new Error("InstructionError: StrokePattern not implemented.");
+          ctx.strokeStyle = wasm.patterns[data[i + 2]];
           break;
         }
         case CanvasInstruction.StrokeRect: {
@@ -313,7 +327,7 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.StrokeStyle: {
-          throw new Error("InstructionError: StrokeStyle not implemented.");
+          ctx.strokeStyle = strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2]));
           break;
         }
         case CanvasInstruction.StrokeText: {
@@ -321,11 +335,11 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.TextAlign: {
-          throw new Error("InstructionError: TextAlign not implemented.");
+          ctx.textAlign = TextAlign[data[i + 2]] as CanvasTextAlign;
           break;
         }
         case CanvasInstruction.TextBaseline: {
-          throw new Error("InstructionError: TextBaseline not implemented.");
+          ctx.textBaseline = TextBaseline[data[i + 2]] as CanvasTextBaseline;
           break;
         }
         case CanvasInstruction.Translate: {
