@@ -122,7 +122,6 @@ export class AS2DGlue<T> {
     if (!this.wasm!.contexts[cvsobjid]) throw new Error("Cannot find canvas: " + cvsobjid);
     var wasm: ASUtil & T & ICanvasSYS = this.wasm!;
     var ctx: CanvasRenderingContext2D = wasm.contexts[cvsobjid];
-    // @ts-ignore: wasm.memory exists
     var data = new Float64Array(wasm.memory.buffer, pointer, 0x10000);
     var i = 0;
     var strings: { [pointer: number]: string; } = {};
@@ -229,10 +228,6 @@ export class AS2DGlue<T> {
           ctx.imageSmoothingQuality = ImageSmoothingQuality[data[i + 2]] as "low" | "medium" | "high";
           break;
         }
-        case CanvasInstruction.Inspect: {
-          throw new Error("InstructionError: Inspect not implemented.");
-          break;
-        }
         case CanvasInstruction.LineCap: {
           ctx.lineCap = LineCap[data[i + 2]] as CanvasLineCap;
           break;
@@ -278,16 +273,8 @@ export class AS2DGlue<T> {
           throw new Error("InstructionError: Restore not implemented.");
           break;
         }
-        case CanvasInstruction.Rotate: {
-          throw new Error("InstructionError: Rotate not implemented.");
-          break;
-        }
         case CanvasInstruction.Save: {
           throw new Error("InstructionError: Save not implemented.");
-          break;
-        }
-        case CanvasInstruction.Scale: {
-          throw new Error("InstructionError: Scale not implemented.");
           break;
         }
         case CanvasInstruction.SetTransform: {
@@ -323,7 +310,7 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.StrokeRect: {
-          throw new Error("InstructionError: StrokeRect not implemented.");
+          ctx.strokeRect(data[i + 2], data[i + 3], data[i + 4], data[i + 5]);
           break;
         }
         case CanvasInstruction.StrokeStyle: {
@@ -340,14 +327,6 @@ export class AS2DGlue<T> {
         }
         case CanvasInstruction.TextBaseline: {
           ctx.textBaseline = TextBaseline[data[i + 2]] as CanvasTextBaseline;
-          break;
-        }
-        case CanvasInstruction.Translate: {
-          throw new Error("InstructionError: Translate not implemented.");
-          break;
-        }
-        case CanvasInstruction.Transform: {
-          throw new Error("InstructionError: Transform not implemented.");
           break;
         }
       }

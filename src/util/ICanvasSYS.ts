@@ -7,4 +7,5 @@
     gradients: { [id: number]: CanvasGradient; };
     images: { [id: number]: ImageBitmap; };
     loading: { [id: number]: Promise<any>; };
+    memory: WebAssembly.Memory;
   }

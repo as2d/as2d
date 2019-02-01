@@ -253,6 +253,7 @@
  (export "lineJoin" (func $assembly/CanvasRenderingContext2D.test/lineJoin))
  (export "lineWidth" (func $assembly/CanvasRenderingContext2D.test/lineWidth))
  (export "miterLimit" (func $assembly/CanvasRenderingContext2D.test/miterLimit))
+ (export "strokeRect" (func $assembly/CanvasRenderingContext2D.test/strokeRect))
  (export "__use_context" (func $assembly/internal/getContext/__use_context))
  (export "__image_loaded" (func $assembly/renderer/Image/__image_loaded))
  (export "memory.fill" (func $~lib/memory/memory.fill))
@@ -23818,7 +23819,1914 @@
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:miterLimit
  )
- (func $start (; 150 ;) (type $v)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#strokeRect (; 150 ;) (type $iFFFFv) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64)
+  (local $5 i32)
+  (local $6 i32)
+  (local $7 i32)
+  (local $8 f64)
+  (local $9 i32)
+  (local $10 i32)
+  (local $11 f64)
+  (local $12 i32)
+  (local $13 i32)
+  (local $14 i32)
+  (local $15 i32)
+  (local $16 i32)
+  block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.147 (result f64)
+   get_local $0
+   i32.load offset=136
+   set_local $7
+   get_local $0
+   i32.load8_u offset=12
+   set_local $6
+   i32.const 0
+   set_local $5
+   get_local $7
+   get_local $6
+   i32.const 3
+   i32.shl
+   i32.add
+   get_local $5
+   i32.add
+   f64.load offset=8
+  end
+  f64.const 0
+  f64.le
+  if
+   return
+  end
+  block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.31 (result i32)
+   get_local $0
+   i32.load offset=44
+   set_local $5
+   get_local $0
+   i32.load8_u offset=12
+   set_local $6
+   i32.const 0
+   set_local $7
+   get_local $5
+   get_local $6
+   i32.const 2
+   i32.shl
+   i32.add
+   get_local $7
+   i32.add
+   i32.load offset=8
+  end
+  set_local $7
+  get_local $7
+  get_local $0
+  i32.load offset=48
+  call $~lib/string/String.__ne
+  if
+   get_local $0
+   get_local $7
+   i32.store offset=48
+   get_global $src/shared/CanvasInstruction/CanvasInstruction.Filter
+   set_local $6
+   get_local $7
+   f64.convert_u/i32
+   set_local $8
+   get_local $0
+   i32.load
+   set_local $5
+   get_local $0
+   i32.load offset=4
+   set_local $9
+   get_local $9
+   i32.const 3
+   i32.add
+   set_local $10
+   block
+    get_local $6
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $12
+    get_local $5
+    get_local $9
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $12
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $9
+    i32.const 1
+    i32.add
+    set_local $12
+    get_local $10
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $13
+    get_local $5
+    get_local $12
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $13
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $9
+    i32.const 2
+    i32.add
+    set_local $13
+    i32.const 0
+    set_local $12
+    get_local $5
+    get_local $13
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $12
+    i32.add
+    get_local $8
+    f64.store offset=8
+   end
+   get_local $0
+   get_local $10
+   i32.store offset=4
+  end
+  block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.148 (result f64)
+   get_local $0
+   i32.load offset=60
+   set_local $7
+   get_local $0
+   i32.load8_u offset=12
+   set_local $10
+   i32.const 0
+   set_local $9
+   get_local $7
+   get_local $10
+   i32.const 3
+   i32.shl
+   i32.add
+   get_local $9
+   i32.add
+   f64.load offset=8
+  end
+  set_local $8
+  get_local $8
+  get_local $0
+  f64.load offset=64
+  f64.ne
+  if
+   get_local $0
+   get_local $8
+   f64.store offset=64
+   get_global $src/shared/CanvasInstruction/CanvasInstruction.GlobalAlpha
+   set_local $9
+   get_local $0
+   i32.load
+   set_local $10
+   get_local $0
+   i32.load offset=4
+   set_local $7
+   get_local $7
+   i32.const 3
+   i32.add
+   set_local $5
+   block
+    get_local $9
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $6
+    get_local $10
+    get_local $7
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $6
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $7
+    i32.const 1
+    i32.add
+    set_local $6
+    get_local $5
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $12
+    get_local $10
+    get_local $6
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $12
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $7
+    i32.const 2
+    i32.add
+    set_local $12
+    i32.const 0
+    set_local $6
+    get_local $10
+    get_local $12
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $6
+    i32.add
+    get_local $8
+    f64.store offset=8
+   end
+   get_local $0
+   get_local $5
+   i32.store offset=4
+  end
+  block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.24 (result i32)
+   get_local $0
+   i32.load offset=72
+   set_local $5
+   get_local $0
+   i32.load8_u offset=12
+   set_local $7
+   i32.const 0
+   set_local $10
+   get_local $5
+   get_local $7
+   i32.const 2
+   i32.shl
+   i32.add
+   get_local $10
+   i32.add
+   i32.load offset=8
+  end
+  set_local $10
+  get_local $10
+  get_local $0
+  i32.load offset=76
+  i32.ne
+  if
+   get_local $0
+   get_local $10
+   i32.store offset=76
+   get_global $src/shared/CanvasInstruction/CanvasInstruction.GlobalCompositeOperation
+   set_local $7
+   get_local $10
+   f64.convert_s/i32
+   set_local $8
+   get_local $0
+   i32.load
+   set_local $5
+   get_local $0
+   i32.load offset=4
+   set_local $9
+   get_local $9
+   i32.const 3
+   i32.add
+   set_local $6
+   block
+    get_local $7
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $12
+    get_local $5
+    get_local $9
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $12
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $9
+    i32.const 1
+    i32.add
+    set_local $12
+    get_local $6
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $13
+    get_local $5
+    get_local $12
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $13
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $9
+    i32.const 2
+    i32.add
+    set_local $13
+    i32.const 0
+    set_local $12
+    get_local $5
+    get_local $13
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $12
+    i32.add
+    get_local $8
+    f64.store offset=8
+   end
+   get_local $0
+   get_local $6
+   i32.store offset=4
+  end
+  block $~lib/internal/arraybuffer/LOAD<bool,bool>|inlined.24 (result i32)
+   get_local $0
+   i32.load offset=80
+   set_local $10
+   get_local $0
+   i32.load8_u offset=12
+   set_local $6
+   i32.const 0
+   set_local $9
+   get_local $10
+   get_local $6
+   i32.const 0
+   i32.shl
+   i32.add
+   get_local $9
+   i32.add
+   i32.load8_u offset=8
+  end
+  set_local $9
+  get_local $9
+  i32.const 0
+  i32.ne
+  get_local $0
+  i32.load8_u offset=84
+  i32.const 0
+  i32.ne
+  i32.ne
+  if
+   get_local $0
+   get_local $9
+   i32.const 0
+   i32.ne
+   i32.store8 offset=84
+   get_global $src/shared/CanvasInstruction/CanvasInstruction.ImageSmoothingEnabled
+   set_local $6
+   get_local $9
+   i32.const 0
+   i32.ne
+   if (result f64)
+    f64.const 1
+   else    
+    f64.const 0
+   end
+   set_local $8
+   get_local $0
+   i32.load
+   set_local $10
+   get_local $0
+   i32.load offset=4
+   set_local $5
+   get_local $5
+   i32.const 3
+   i32.add
+   set_local $7
+   block
+    get_local $6
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $12
+    get_local $10
+    get_local $5
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $12
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $5
+    i32.const 1
+    i32.add
+    set_local $12
+    get_local $7
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $13
+    get_local $10
+    get_local $12
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $13
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $5
+    i32.const 2
+    i32.add
+    set_local $13
+    i32.const 0
+    set_local $12
+    get_local $10
+    get_local $13
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $12
+    i32.add
+    get_local $8
+    f64.store offset=8
+   end
+   get_local $0
+   get_local $7
+   i32.store offset=4
+  end
+  block $~lib/internal/arraybuffer/LOAD<bool,bool>|inlined.26 (result i32)
+   get_local $0
+   i32.load offset=80
+   set_local $5
+   get_local $0
+   i32.load8_u offset=12
+   set_local $7
+   i32.const 0
+   set_local $9
+   get_local $5
+   get_local $7
+   i32.const 0
+   i32.shl
+   i32.add
+   get_local $9
+   i32.add
+   i32.load8_u offset=8
+  end
+  i32.const 0
+  i32.ne
+  if
+   block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.25 (result i32)
+    get_local $0
+    i32.load offset=88
+    set_local $9
+    get_local $0
+    i32.load8_u offset=12
+    set_local $7
+    i32.const 0
+    set_local $5
+    get_local $9
+    get_local $7
+    i32.const 2
+    i32.shl
+    i32.add
+    get_local $5
+    i32.add
+    i32.load offset=8
+   end
+   set_local $5
+   get_local $5
+   get_local $0
+   i32.load offset=92
+   i32.ne
+   if
+    get_local $0
+    get_local $5
+    i32.store offset=92
+    get_global $src/shared/CanvasInstruction/CanvasInstruction.ImageSmoothingQuality
+    set_local $7
+    get_local $5
+    f64.convert_s/i32
+    set_local $8
+    get_local $0
+    i32.load
+    set_local $9
+    get_local $0
+    i32.load offset=4
+    set_local $10
+    get_local $10
+    i32.const 3
+    i32.add
+    set_local $6
+    block
+     get_local $7
+     f64.convert_s/i32
+     set_local $11
+     i32.const 0
+     set_local $12
+     get_local $9
+     get_local $10
+     i32.const 3
+     i32.shl
+     i32.add
+     get_local $12
+     i32.add
+     get_local $11
+     f64.store offset=8
+    end
+    block
+     get_local $10
+     i32.const 1
+     i32.add
+     set_local $12
+     get_local $6
+     f64.convert_s/i32
+     set_local $11
+     i32.const 0
+     set_local $13
+     get_local $9
+     get_local $12
+     i32.const 3
+     i32.shl
+     i32.add
+     get_local $13
+     i32.add
+     get_local $11
+     f64.store offset=8
+    end
+    block
+     get_local $10
+     i32.const 2
+     i32.add
+     set_local $13
+     i32.const 0
+     set_local $12
+     get_local $9
+     get_local $13
+     i32.const 3
+     i32.shl
+     i32.add
+     get_local $12
+     i32.add
+     get_local $8
+     f64.store offset=8
+    end
+    get_local $0
+    get_local $6
+    i32.store offset=4
+   end
+  end
+  block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.26 (result i32)
+   get_local $0
+   i32.load offset=96
+   set_local $5
+   get_local $0
+   i32.load8_u offset=12
+   set_local $6
+   i32.const 0
+   set_local $10
+   get_local $5
+   get_local $6
+   i32.const 2
+   i32.shl
+   i32.add
+   get_local $10
+   i32.add
+   i32.load offset=8
+  end
+  set_local $10
+  get_local $10
+  get_local $0
+  i32.load offset=100
+  i32.ne
+  if
+   get_local $0
+   get_local $10
+   i32.store offset=100
+   get_global $src/shared/CanvasInstruction/CanvasInstruction.LineCap
+   set_local $6
+   get_local $10
+   f64.convert_s/i32
+   set_local $8
+   get_local $0
+   i32.load
+   set_local $5
+   get_local $0
+   i32.load offset=4
+   set_local $9
+   get_local $9
+   i32.const 3
+   i32.add
+   set_local $7
+   block
+    get_local $6
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $12
+    get_local $5
+    get_local $9
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $12
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $9
+    i32.const 1
+    i32.add
+    set_local $12
+    get_local $7
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $13
+    get_local $5
+    get_local $12
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $13
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $9
+    i32.const 2
+    i32.add
+    set_local $13
+    i32.const 0
+    set_local $12
+    get_local $5
+    get_local $13
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $12
+    i32.add
+    get_local $8
+    f64.store offset=8
+   end
+   get_local $0
+   get_local $7
+   i32.store offset=4
+  end
+  block $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#_getLineDash|inlined.1 (result i32)
+   get_local $0
+   i32.load8_u offset=12
+   set_local $10
+   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.32 (result i32)
+    get_local $0
+    i32.load offset=104
+    set_local $7
+    i32.const 0
+    set_local $9
+    get_local $7
+    get_local $10
+    i32.const 2
+    i32.shl
+    i32.add
+    get_local $9
+    i32.add
+    i32.load offset=8
+   end
+   set_local $9
+   block $break|0
+    loop $continue|0
+     get_local $9
+     i32.const 0
+     i32.eq
+     if
+      block
+       get_local $10
+       i32.const 1
+       i32.sub
+       set_local $10
+       block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.33 (result i32)
+        get_local $0
+        i32.load offset=104
+        set_local $7
+        i32.const 0
+        set_local $5
+        get_local $7
+        get_local $10
+        i32.const 2
+        i32.shl
+        i32.add
+        get_local $5
+        i32.add
+        i32.load offset=8
+       end
+       set_local $9
+      end
+      br $continue|0
+     end
+    end
+   end
+   get_local $9
+  end
+  set_local $9
+  get_local $0
+  i32.load offset=108
+  set_local $10
+  block $assembly/internal/util/arraysEqual|inlined.3 (result i32)
+   block $~lib/internal/typedarray/TypedArray<f64>#get:length|inlined.9 (result i32)
+    get_local $10
+    i32.load offset=8
+    i32.const 3
+    i32.shr_u
+   end
+   set_local $7
+   i32.const 1
+   set_local $5
+   get_local $7
+   block $~lib/internal/typedarray/TypedArray<f64>#get:length|inlined.11 (result i32)
+    get_local $9
+    i32.load offset=8
+    i32.const 3
+    i32.shr_u
+   end
+   i32.eq
+   if
+    block $break|2
+     i32.const 0
+     set_local $6
+     loop $repeat|2
+      get_local $6
+      get_local $7
+      i32.lt_s
+      i32.eqz
+      br_if $break|2
+      get_local $10
+      get_local $6
+      call $~lib/internal/typedarray/TypedArray<f64>#__unchecked_get
+      get_local $9
+      get_local $6
+      call $~lib/internal/typedarray/TypedArray<f64>#__unchecked_get
+      f64.ne
+      if
+       i32.const 0
+       set_local $5
+       br $break|2
+      end
+      get_local $6
+      i32.const 1
+      i32.add
+      set_local $6
+      br $repeat|2
+      unreachable
+     end
+     unreachable
+    end
+   else    
+    i32.const 0
+    set_local $5
+   end
+   get_local $5
+  end
+  i32.const 0
+  i32.ne
+  i32.eqz
+  if
+   get_local $0
+   get_local $9
+   i32.store offset=108
+   get_global $src/shared/CanvasInstruction/CanvasInstruction.LineDash
+   set_local $5
+   get_local $9
+   f64.convert_u/i32
+   set_local $8
+   get_local $0
+   i32.load
+   set_local $7
+   get_local $0
+   i32.load offset=4
+   set_local $6
+   get_local $6
+   i32.const 3
+   i32.add
+   set_local $12
+   block
+    get_local $5
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $13
+    get_local $7
+    get_local $6
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $13
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $6
+    i32.const 1
+    i32.add
+    set_local $13
+    get_local $12
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $14
+    get_local $7
+    get_local $13
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $14
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $6
+    i32.const 2
+    i32.add
+    set_local $14
+    i32.const 0
+    set_local $13
+    get_local $7
+    get_local $14
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $13
+    i32.add
+    get_local $8
+    f64.store offset=8
+   end
+   get_local $0
+   get_local $12
+   i32.store offset=4
+  end
+  block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.149 (result f64)
+   get_local $0
+   i32.load offset=112
+   set_local $10
+   get_local $0
+   i32.load8_u offset=12
+   set_local $9
+   i32.const 0
+   set_local $12
+   get_local $10
+   get_local $9
+   i32.const 3
+   i32.shl
+   i32.add
+   get_local $12
+   i32.add
+   f64.load offset=8
+  end
+  set_local $8
+  get_local $8
+  get_local $0
+  f64.load offset=120
+  f64.ne
+  if
+   get_local $0
+   get_local $8
+   f64.store offset=120
+   get_global $src/shared/CanvasInstruction/CanvasInstruction.LineDashOffset
+   set_local $12
+   get_local $0
+   i32.load
+   set_local $9
+   get_local $0
+   i32.load offset=4
+   set_local $10
+   get_local $10
+   i32.const 3
+   i32.add
+   set_local $6
+   block
+    get_local $12
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $7
+    get_local $9
+    get_local $10
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $7
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $10
+    i32.const 1
+    i32.add
+    set_local $7
+    get_local $6
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $5
+    get_local $9
+    get_local $7
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $5
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $10
+    i32.const 2
+    i32.add
+    set_local $5
+    i32.const 0
+    set_local $7
+    get_local $9
+    get_local $5
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $7
+    i32.add
+    get_local $8
+    f64.store offset=8
+   end
+   get_local $0
+   get_local $6
+   i32.store offset=4
+  end
+  block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.27 (result i32)
+   get_local $0
+   i32.load offset=128
+   set_local $6
+   get_local $0
+   i32.load8_u offset=12
+   set_local $10
+   i32.const 0
+   set_local $9
+   get_local $6
+   get_local $10
+   i32.const 2
+   i32.shl
+   i32.add
+   get_local $9
+   i32.add
+   i32.load offset=8
+  end
+  set_local $9
+  get_local $9
+  get_local $0
+  i32.load offset=132
+  i32.ne
+  if
+   get_local $0
+   get_local $9
+   i32.store offset=132
+   get_global $src/shared/CanvasInstruction/CanvasInstruction.LineJoin
+   set_local $10
+   get_local $9
+   f64.convert_s/i32
+   set_local $8
+   get_local $0
+   i32.load
+   set_local $6
+   get_local $0
+   i32.load offset=4
+   set_local $12
+   get_local $12
+   i32.const 3
+   i32.add
+   set_local $7
+   block
+    get_local $10
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $5
+    get_local $6
+    get_local $12
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $5
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $12
+    i32.const 1
+    i32.add
+    set_local $5
+    get_local $7
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $13
+    get_local $6
+    get_local $5
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $13
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $12
+    i32.const 2
+    i32.add
+    set_local $13
+    i32.const 0
+    set_local $5
+    get_local $6
+    get_local $13
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $5
+    i32.add
+    get_local $8
+    f64.store offset=8
+   end
+   get_local $0
+   get_local $7
+   i32.store offset=4
+  end
+  block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.150 (result f64)
+   get_local $0
+   i32.load offset=136
+   set_local $9
+   get_local $0
+   i32.load8_u offset=12
+   set_local $7
+   i32.const 0
+   set_local $12
+   get_local $9
+   get_local $7
+   i32.const 3
+   i32.shl
+   i32.add
+   get_local $12
+   i32.add
+   f64.load offset=8
+  end
+  set_local $8
+  get_local $8
+  get_local $0
+  f64.load offset=144
+  f64.ne
+  if
+   get_local $0
+   get_local $8
+   f64.store offset=144
+   get_global $src/shared/CanvasInstruction/CanvasInstruction.LineWidth
+   set_local $12
+   get_local $0
+   i32.load
+   set_local $7
+   get_local $0
+   i32.load offset=4
+   set_local $9
+   get_local $9
+   i32.const 3
+   i32.add
+   set_local $6
+   block
+    get_local $12
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $10
+    get_local $7
+    get_local $9
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $10
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $9
+    i32.const 1
+    i32.add
+    set_local $10
+    get_local $6
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $5
+    get_local $7
+    get_local $10
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $5
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $9
+    i32.const 2
+    i32.add
+    set_local $5
+    i32.const 0
+    set_local $10
+    get_local $7
+    get_local $5
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $10
+    i32.add
+    get_local $8
+    f64.store offset=8
+   end
+   get_local $0
+   get_local $6
+   i32.store offset=4
+  end
+  block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.151 (result f64)
+   get_local $0
+   i32.load offset=152
+   set_local $6
+   get_local $0
+   i32.load8_u offset=12
+   set_local $9
+   i32.const 0
+   set_local $7
+   get_local $6
+   get_local $9
+   i32.const 3
+   i32.shl
+   i32.add
+   get_local $7
+   i32.add
+   f64.load offset=8
+  end
+  set_local $8
+  get_local $8
+  get_local $0
+  f64.load offset=160
+  f64.ne
+  if
+   get_local $0
+   get_local $8
+   f64.store offset=160
+   get_global $src/shared/CanvasInstruction/CanvasInstruction.MiterLimit
+   set_local $7
+   get_local $0
+   i32.load
+   set_local $9
+   get_local $0
+   i32.load offset=4
+   set_local $6
+   get_local $6
+   i32.const 3
+   i32.add
+   set_local $12
+   block
+    get_local $7
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $10
+    get_local $9
+    get_local $6
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $10
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $6
+    i32.const 1
+    i32.add
+    set_local $10
+    get_local $12
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $5
+    get_local $9
+    get_local $10
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $5
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $6
+    i32.const 2
+    i32.add
+    set_local $5
+    i32.const 0
+    set_local $10
+    get_local $9
+    get_local $5
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $10
+    i32.add
+    get_local $8
+    f64.store offset=8
+   end
+   get_local $0
+   get_local $12
+   i32.store offset=4
+  end
+  block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.152 (result f64)
+   get_local $0
+   i32.load offset=168
+   set_local $12
+   get_local $0
+   i32.load8_u offset=12
+   set_local $6
+   i32.const 0
+   set_local $9
+   get_local $12
+   get_local $6
+   i32.const 3
+   i32.shl
+   i32.add
+   get_local $9
+   i32.add
+   f64.load offset=8
+  end
+  set_local $8
+  get_local $8
+  get_local $0
+  f64.load offset=176
+  f64.ne
+  if
+   get_local $0
+   get_local $8
+   f64.store offset=176
+   get_global $src/shared/CanvasInstruction/CanvasInstruction.ShadowBlur
+   set_local $9
+   get_local $0
+   i32.load
+   set_local $6
+   get_local $0
+   i32.load offset=4
+   set_local $12
+   get_local $12
+   i32.const 3
+   i32.add
+   set_local $7
+   block
+    get_local $9
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $10
+    get_local $6
+    get_local $12
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $10
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $12
+    i32.const 1
+    i32.add
+    set_local $10
+    get_local $7
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $5
+    get_local $6
+    get_local $10
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $5
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $12
+    i32.const 2
+    i32.add
+    set_local $5
+    i32.const 0
+    set_local $10
+    get_local $6
+    get_local $5
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $10
+    i32.add
+    get_local $8
+    f64.store offset=8
+   end
+   get_local $0
+   get_local $7
+   i32.store offset=4
+  end
+  block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.34 (result i32)
+   get_local $0
+   i32.load offset=184
+   set_local $7
+   get_local $0
+   i32.load8_u offset=12
+   set_local $12
+   i32.const 0
+   set_local $6
+   get_local $7
+   get_local $12
+   i32.const 2
+   i32.shl
+   i32.add
+   get_local $6
+   i32.add
+   i32.load offset=8
+  end
+  set_local $6
+  get_local $6
+  get_local $0
+  i32.load offset=188
+  call $~lib/string/String.__ne
+  if
+   get_local $0
+   get_local $6
+   i32.store offset=48
+   get_global $src/shared/CanvasInstruction/CanvasInstruction.ShadowColor
+   set_local $12
+   get_local $6
+   f64.convert_u/i32
+   set_local $8
+   get_local $0
+   i32.load
+   set_local $7
+   get_local $0
+   i32.load offset=4
+   set_local $9
+   get_local $9
+   i32.const 3
+   i32.add
+   set_local $10
+   block
+    get_local $12
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $5
+    get_local $7
+    get_local $9
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $5
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $9
+    i32.const 1
+    i32.add
+    set_local $5
+    get_local $10
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $13
+    get_local $7
+    get_local $5
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $13
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $9
+    i32.const 2
+    i32.add
+    set_local $13
+    i32.const 0
+    set_local $5
+    get_local $7
+    get_local $13
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $5
+    i32.add
+    get_local $8
+    f64.store offset=8
+   end
+   get_local $0
+   get_local $10
+   i32.store offset=4
+  end
+  block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.153 (result f64)
+   get_local $0
+   i32.load offset=192
+   set_local $6
+   get_local $0
+   i32.load8_u offset=12
+   set_local $10
+   i32.const 0
+   set_local $9
+   get_local $6
+   get_local $10
+   i32.const 3
+   i32.shl
+   i32.add
+   get_local $9
+   i32.add
+   f64.load offset=8
+  end
+  set_local $8
+  get_local $8
+  get_local $0
+  f64.load offset=200
+  f64.ne
+  if
+   get_local $0
+   get_local $8
+   f64.store offset=200
+   get_global $src/shared/CanvasInstruction/CanvasInstruction.ShadowOffsetX
+   set_local $9
+   get_local $0
+   i32.load
+   set_local $10
+   get_local $0
+   i32.load offset=4
+   set_local $6
+   get_local $6
+   i32.const 3
+   i32.add
+   set_local $7
+   block
+    get_local $9
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $12
+    get_local $10
+    get_local $6
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $12
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $6
+    i32.const 1
+    i32.add
+    set_local $12
+    get_local $7
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $5
+    get_local $10
+    get_local $12
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $5
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $6
+    i32.const 2
+    i32.add
+    set_local $5
+    i32.const 0
+    set_local $12
+    get_local $10
+    get_local $5
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $12
+    i32.add
+    get_local $8
+    f64.store offset=8
+   end
+   get_local $0
+   get_local $7
+   i32.store offset=4
+  end
+  block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.154 (result f64)
+   get_local $0
+   i32.load offset=208
+   set_local $7
+   get_local $0
+   i32.load8_u offset=12
+   set_local $6
+   i32.const 0
+   set_local $10
+   get_local $7
+   get_local $6
+   i32.const 3
+   i32.shl
+   i32.add
+   get_local $10
+   i32.add
+   f64.load offset=8
+  end
+  set_local $8
+  get_local $8
+  get_local $0
+  f64.load offset=216
+  f64.ne
+  if
+   get_local $0
+   get_local $8
+   f64.store offset=216
+   get_global $src/shared/CanvasInstruction/CanvasInstruction.ShadowOffsetY
+   set_local $10
+   get_local $0
+   i32.load
+   set_local $6
+   get_local $0
+   i32.load offset=4
+   set_local $7
+   get_local $7
+   i32.const 3
+   i32.add
+   set_local $9
+   block
+    get_local $10
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $12
+    get_local $6
+    get_local $7
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $12
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $7
+    i32.const 1
+    i32.add
+    set_local $12
+    get_local $9
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $5
+    get_local $6
+    get_local $12
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $5
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $7
+    i32.const 2
+    i32.add
+    set_local $5
+    i32.const 0
+    set_local $12
+    get_local $6
+    get_local $5
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $12
+    i32.add
+    get_local $8
+    f64.store offset=8
+   end
+   get_local $0
+   get_local $9
+   i32.store offset=4
+  end
+  get_local $0
+  i32.load offset=224
+  set_local $9
+  get_local $0
+  i32.load8_u offset=12
+  i32.const 2
+  i32.mul
+  set_local $7
+  block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.35 (result i32)
+   i32.const 0
+   set_local $6
+   get_local $9
+   get_local $7
+   i32.const 2
+   i32.shl
+   i32.add
+   get_local $6
+   i32.add
+   i32.load offset=8
+  end
+  set_local $6
+  block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.36 (result i32)
+   get_local $7
+   i32.const 1
+   i32.add
+   set_local $10
+   i32.const 0
+   set_local $12
+   get_local $9
+   get_local $10
+   i32.const 2
+   i32.shl
+   i32.add
+   get_local $12
+   i32.add
+   i32.load offset=8
+  end
+  set_local $12
+  get_local $6
+  get_local $0
+  i32.load offset=228
+  i32.ne
+  tee_local $10
+  if (result i32)
+   get_local $10
+  else   
+   get_local $12
+   get_local $0
+   i32.load offset=232
+   i32.ne
+  end
+  if
+   get_local $6
+   get_global $assembly/renderer/CanvasRenderingContext2D/FillStrokeStyleType.String
+   i32.eq
+   if
+    get_global $src/shared/CanvasInstruction/CanvasInstruction.StrokeStyle
+    set_local $10
+   else    
+    get_local $6
+    get_global $assembly/renderer/CanvasRenderingContext2D/FillStrokeStyleType.CanvasGradient
+    i32.eq
+    if
+     get_global $src/shared/CanvasInstruction/CanvasInstruction.StrokeGradient
+     set_local $10
+    else     
+     get_global $src/shared/CanvasInstruction/CanvasInstruction.StrokePattern
+     set_local $10
+    end
+   end
+   get_local $12
+   f64.convert_u/i32
+   set_local $8
+   get_local $0
+   i32.load
+   set_local $5
+   get_local $0
+   i32.load offset=4
+   set_local $13
+   get_local $13
+   i32.const 3
+   i32.add
+   set_local $14
+   block
+    get_local $10
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $15
+    get_local $5
+    get_local $13
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $15
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $13
+    i32.const 1
+    i32.add
+    set_local $15
+    get_local $14
+    f64.convert_s/i32
+    set_local $11
+    i32.const 0
+    set_local $16
+    get_local $5
+    get_local $15
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $16
+    i32.add
+    get_local $11
+    f64.store offset=8
+   end
+   block
+    get_local $13
+    i32.const 2
+    i32.add
+    set_local $16
+    i32.const 0
+    set_local $15
+    get_local $5
+    get_local $16
+    i32.const 3
+    i32.shl
+    i32.add
+    get_local $15
+    i32.add
+    get_local $8
+    f64.store offset=8
+   end
+   get_local $0
+   get_local $14
+   i32.store offset=4
+  end
+  get_local $0
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#_updateTransform
+  get_global $src/shared/CanvasInstruction/CanvasInstruction.StrokeRect
+  set_local $12
+  get_local $0
+  i32.load
+  set_local $6
+  get_local $0
+  i32.load offset=4
+  set_local $7
+  get_local $7
+  i32.const 6
+  i32.add
+  set_local $9
+  block
+   get_local $12
+   f64.convert_s/i32
+   set_local $8
+   i32.const 0
+   set_local $10
+   get_local $6
+   get_local $7
+   i32.const 3
+   i32.shl
+   i32.add
+   get_local $10
+   i32.add
+   get_local $8
+   f64.store offset=8
+  end
+  block
+   get_local $7
+   i32.const 1
+   i32.add
+   set_local $10
+   get_local $9
+   f64.convert_s/i32
+   set_local $8
+   i32.const 0
+   set_local $14
+   get_local $6
+   get_local $10
+   i32.const 3
+   i32.shl
+   i32.add
+   get_local $14
+   i32.add
+   get_local $8
+   f64.store offset=8
+  end
+  block
+   get_local $7
+   i32.const 2
+   i32.add
+   set_local $14
+   i32.const 0
+   set_local $10
+   get_local $6
+   get_local $14
+   i32.const 3
+   i32.shl
+   i32.add
+   get_local $10
+   i32.add
+   get_local $1
+   f64.store offset=8
+  end
+  block
+   get_local $7
+   i32.const 3
+   i32.add
+   set_local $10
+   i32.const 0
+   set_local $14
+   get_local $6
+   get_local $10
+   i32.const 3
+   i32.shl
+   i32.add
+   get_local $14
+   i32.add
+   get_local $2
+   f64.store offset=8
+  end
+  block
+   get_local $7
+   i32.const 4
+   i32.add
+   set_local $14
+   i32.const 0
+   set_local $10
+   get_local $6
+   get_local $14
+   i32.const 3
+   i32.shl
+   i32.add
+   get_local $10
+   i32.add
+   get_local $3
+   f64.store offset=8
+  end
+  block
+   get_local $7
+   i32.const 5
+   i32.add
+   set_local $10
+   i32.const 0
+   set_local $14
+   get_local $6
+   get_local $10
+   i32.const 3
+   i32.shl
+   i32.add
+   get_local $14
+   i32.add
+   get_local $4
+   f64.store offset=8
+  end
+  get_local $0
+  get_local $9
+  i32.store offset=4
+ )
+ (func $assembly/CanvasRenderingContext2D.test/strokeRect (; 151 ;) (type $FFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
+  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 328
+   i32.const 302
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_local $0
+  get_local $1
+  get_local $2
+  get_local $3
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#strokeRect
+ )
+ (func $start (; 152 ;) (type $v)
   get_global $HEAP_BASE
   get_global $~lib/internal/allocator/AL_MASK
   i32.add
@@ -23837,9 +25745,9 @@
   call $~lib/map/Map<String,CanvasRenderingContext2D>#constructor
   set_global $assembly/internal/getContext/map
  )
- (func $null (; 151 ;) (type $v)
+ (func $null (; 153 ;) (type $v)
  )
- (func $assembly/CanvasRenderingContext2D.test/fill|trampoline (; 152 ;) (type $iv) (param $0 i32)
+ (func $assembly/CanvasRenderingContext2D.test/fill|trampoline (; 154 ;) (type $iv) (param $0 i32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -23854,7 +25762,7 @@
   get_local $0
   call $assembly/CanvasRenderingContext2D.test/fill
  )
- (func $~setargc (; 153 ;) (type $iv) (param $0 i32)
+ (func $~setargc (; 155 ;) (type $iv) (param $0 i32)
   get_local $0
   set_global $~argc
  )

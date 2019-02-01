@@ -297,3 +297,8 @@ export function miterLimit(value: f64): void {
   assert(ctx);
   ctx.miterLimit = value;
 }
+
+export function strokeRect(x: f64, y: f64, width: f64, height: f64): void {
+  assert(ctx);
+  ctx.strokeRect(x, y, width, height);
+}

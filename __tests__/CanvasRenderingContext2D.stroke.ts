@@ -121,7 +121,6 @@ describe("CanvasRenderingContext2D function", () => {
     wasm.filter(wasm.newString("invert(100%)"));
     drawOperation();
     expect(ctx.filter).toBe("invert(100%)");
-    expect(ctx.stroke).toBeCalled();
     drawOperationExpect();
   });
 
@@ -136,7 +135,6 @@ describe("CanvasRenderingContext2D function", () => {
     wasm.globalCompositeOperation(GlobalCompositeOperation.color);
     drawOperation();
     expect(ctx.globalCompositeOperation).toBe("color");
-    expect(ctx.stroke).toBeCalled();
     drawOperationExpect();
   });
 
@@ -233,20 +231,20 @@ describe("CanvasRenderingContext2D function", () => {
     wasm.shadowOffsetX(1);
     drawOperation();
     expect(ctx.shadowOffsetX).toBe(1);
-    expect(ctx.stroke).toBeCalled();
+    drawOperationExpect();
   });
 
   it("should update the shadowOffsetY value when stroke is called", () => {
     wasm.shadowOffsetY(1);
     drawOperation();
     expect(ctx.shadowOffsetY).toBe(1);
-    expect(ctx.stroke).toBeCalled();
+    drawOperationExpect();
   });
 
   it("should update the transform value when stroke is called", () => {
     wasm.setTransform(1, 2, 3, 4, 5, 6);
     drawOperation();
     expect(ctx.setTransform).toBeCalledWith(1, 2, 3, 4, 5, 6);
-    expect(ctx.stroke).toBeCalled();
+    drawOperationExpect();
   });
 });
