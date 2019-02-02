@@ -2,7 +2,8 @@
   "name": "as2d",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "start": "run-s asbuild:test jest watch:all",
     "test": "run-s asbuild:test jest",
@@ -10,6 +11,8 @@
     "watch:test": "onchange \"build/*.wasm\" \"./src/**/*.ts\" \"./__tests__/**/*.ts\" -- npm run jest",
     "watch:as": "onchange \"assembly/**/*.ts\" -- npm run asbuild:test",
     "jest": "jest",
+    "build:all": "run-p asbuild:test build:src",
+    "build:src": "tsc",
     "asbuild:test": "run-p asbuild:glue asbuild:Buffer asbuild:CanvasRenderingContext2D",
     "asbuild:glue": "asc assembly/glue.ts assembly/glue.test.ts -b build/glue.test.wasm -t build/glue.test.wat --sourceMap --validate --debug --use Math=JSMath",
     "asbuild:Buffer": "asc assembly/glue.ts assembly/Buffer.test.ts -b build/Buffer.test.wasm -t build/Buffer.test.wat --sourceMap --validate --debug --use Math=JSMath",
