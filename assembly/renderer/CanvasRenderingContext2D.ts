@@ -2510,9 +2510,11 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     this._updateLineCap();
     this._updateLineDash();
     this._updateLineDashOffset();
+    this._updateLineJoin();
     this._updateLineWidth();
     this._updateMiterLimit();
     this._updateShadowBlur();
+    this._updateShadowColor();
     this._updateShadowOffsetX();
     this._updateShadowOffsetY();
     this._updateStrokeStyle();
@@ -2551,15 +2553,17 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     this._updateLineCap();
     this._updateLineDash();
     this._updateLineDashOffset();
+    this._updateLineJoin();
     this._updateLineWidth();
     this._updateMiterLimit();
     this._updateShadowBlur();
+    this._updateShadowColor();
     this._updateShadowOffsetX();
     this._updateShadowOffsetY();
     this._updateStrokeStyle();
     this._updateTextBaseline();
     this._updateTransform();
-    super._writeFour(CanvasInstruction.StrokeText, <f64>changetype<usize>(text), x, y, maxWidth);
+    super._writeFour(CanvasInstruction.StrokeTextWidth, <f64>changetype<usize>(text), x, y, maxWidth);
   }
   //#endregion STROKETEXT
 

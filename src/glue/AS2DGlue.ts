@@ -318,7 +318,20 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.StrokeText: {
-          throw new Error("InstructionError: StrokeText not implemented.");
+          ctx.strokeText(
+            strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2])),
+            data[i + 3],
+            data[i + 4],
+          );
+          break;
+        }
+        case CanvasInstruction.StrokeTextWidth: {
+          ctx.strokeText(
+            strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2])),
+            data[i + 3],
+            data[i + 4],
+            data[i + 5],
+          );
           break;
         }
         case CanvasInstruction.TextAlign: {

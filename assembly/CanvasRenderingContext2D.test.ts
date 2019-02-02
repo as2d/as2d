@@ -302,3 +302,8 @@ export function strokeRect(x: f64, y: f64, width: f64, height: f64): void {
   assert(ctx);
   ctx.strokeRect(x, y, width, height);
 }
+
+export function strokeText(text: string, x: f64, y: number): void {
+  assert(ctx);
+  ctx.strokeText(text, x, y);
+}

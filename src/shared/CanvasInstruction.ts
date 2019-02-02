@@ -50,6 +50,7 @@ export const enum CanvasInstruction {
   StrokeRect,
   StrokeStyle,
   StrokeText,
+  StrokeTextWidth,
   TextAlign,
   TextBaseline,
   Translate,
