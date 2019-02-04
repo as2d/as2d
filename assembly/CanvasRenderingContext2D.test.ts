@@ -208,24 +208,21 @@ export function fillRect(x: f64, y: f64, width: f64, height: f64): void {
   ctx.fillRect(x, y, width, height);
 }
 
-export function drawImage(id: i32, dx: f64, dy: f64): void {
+export function drawImage(dx: f64, dy: f64): void {
   assert(ctx);
   assert(img.loaded);
-  assert(load<i32>(changetype<usize>(img) + offsetof<Image>("_id")) == id);
   ctx.drawImage(img, dx, dy);
 }
 
-export function drawImageSize(id: i32, dx: f64, dy: f64, dWidth: f64, dHeight: f64): void {
+export function drawImageSize(dx: f64, dy: f64, dWidth: f64, dHeight: f64): void {
   assert(ctx);
   assert(img.loaded);
-  assert(load<i32>(changetype<usize>(img) + offsetof<Image>("_id")) == id);
   ctx.drawImageSize(img, dx, dy, dWidth, dHeight);
 }
 
-export function drawImageSource(id: i32, sx: f64, sy: f64, sWidth: f64, sHeight: f64, dx: f64, dy: f64, dWidth: f64, dHeight: f64): void {
+export function drawImageSource(sx: f64, sy: f64, sWidth: f64, sHeight: f64, dx: f64, dy: f64, dWidth: f64, dHeight: f64): void {
   assert(ctx);
   assert(img.loaded);
-  assert(load<i32>(changetype<usize>(img) + offsetof<Image>("_id")) == id);
   ctx.drawImageSource(img, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 }
 
@@ -306,4 +303,9 @@ export function strokeRect(x: f64, y: f64, width: f64, height: f64): void {
 export function strokeText(text: string, x: f64, y: number): void {
   assert(ctx);
   ctx.strokeText(text, x, y);
+}
+
+export function strokeTextWidth(text: string, x: f64, y: f64, width: f64): void {
+  assert(ctx);
+  ctx.strokeTextWidth(text, x, y, width);
 }

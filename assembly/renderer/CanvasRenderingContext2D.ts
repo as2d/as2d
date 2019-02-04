@@ -2518,6 +2518,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     this._updateShadowOffsetX();
     this._updateShadowOffsetY();
     this._updateStrokeStyle();
+    this._updateTextAlign();
     this._updateTextBaseline();
     this._updateTransform();
     super._writeThree(CanvasInstruction.StrokeText, <f64>changetype<usize>(text), x, y)
@@ -2561,6 +2562,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     this._updateShadowOffsetX();
     this._updateShadowOffsetY();
     this._updateStrokeStyle();
+    this._updateTextAlign();
     this._updateTextBaseline();
     this._updateTransform();
     super._writeFour(CanvasInstruction.StrokeTextWidth, <f64>changetype<usize>(text), x, y, maxWidth);

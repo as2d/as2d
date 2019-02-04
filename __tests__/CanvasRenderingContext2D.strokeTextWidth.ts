@@ -2,20 +2,20 @@ import { run } from "./__setup__/index";
 import { WASMModule } from "./__setup__/ISetupConfig";
 
 run({
-  name: "strokeRect",
-  async beforeEach(_ctx: CanvasRenderingContext2D, _wasm: WASMModule, _shared: any): Promise<any> {
+  name: "strokeTextWidth",
+  beforeEach(_ctx: CanvasRenderingContext2D, _wasm: WASMModule, _shared: any): any {
 
   },
-  async drawFunc(_ctx: CanvasRenderingContext2D, wasm: WASMModule, _shared: any): Promise<any> {
-    wasm.strokeRect(1, 2, 3, 4);
+  drawFunc(_ctx: CanvasRenderingContext2D, wasm: WASMModule, _shared: any): any {
+    wasm.strokeTextWidth(wasm.newString("test!"), 100, 200, 300);
   },
   expectFunc(ctx: CanvasRenderingContext2D, _wasm: WASMModule, _shared: any): any {
-    expect(ctx.strokeRect).toBeCalledWith(1, 2, 3, 4);
+    expect(ctx.strokeText).toBeCalledWith("test!", 100, 200, 300);
   },
-  direction: false,
+  direction: true,
   fillStyle: false,
   filter: true,
-  font: false,
+  font: true,
   globalAlpha: true,
   globalCompositeOperation: true,
   imageSmoothingEnabled: true,
@@ -31,7 +31,7 @@ run({
   shadowOffsetX: true,
   shadowOffsetY: true,
   strokeStyle: true,
-  textAlign: false,
-  textBaseline: false,
+  textAlign: true,
+  textBaseline: true,
   transform: true,
 });

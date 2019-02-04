@@ -97,6 +97,7 @@ export class AS2DGlue<T> {
       .then(e => {
         this.wasm!.__image_loaded(imgPointer, e.width, e.height);
         this.wasm!.images[result] = e;
+        return e;
       });
     return this.id;
   }
