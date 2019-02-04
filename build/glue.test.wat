@@ -20,6 +20,7 @@
  (import "__canvas_sys" "createRadialGradient" (func $assembly/renderer/CanvasRenderingContext2D/createRadialGradient (param i32 f64 f64 f64 f64 f64 f64) (result i32)))
  (import "__canvas_sys" "loadImage" (func $assembly/renderer/Image/loadImage (param i32 i32) (result i32)))
  (import "__canvas_sys" "createPattern" (func $assembly/renderer/CanvasRenderingContext2D/createPattern (param i32 i32 i32) (result i32)))
+ (import "__canvas_sys" "render" (func $assembly/renderer/CanvasRenderingContext2D/render (param i32 i32)))
  (memory $0 1)
  (data (i32.const 8) "\04\00\00\00#\000\000\000\00")
  (data (i32.const 24) "\04\00\00\00n\00o\00n\00e\00")
@@ -185,6 +186,8 @@
  (export "addRadialGradient" (func $assembly/glue.test/addRadialGradient))
  (export "createImage" (func $assembly/glue.test/createImage))
  (export "createPattern" (func $assembly/glue.test/createPattern))
+ (export "setBadID" (func $assembly/glue.test/setBadID))
+ (export "commit" (func $assembly/glue.test/commit))
  (export "__use_context" (func $assembly/internal/getContext/__use_context))
  (export "__image_loaded" (func $assembly/renderer/Image/__image_loaded))
  (export "memory.fill" (func $~lib/memory/memory.fill))
@@ -194,7 +197,7 @@
  (export "memory.free" (func $~lib/memory/memory.free))
  (export "memory.reset" (func $~lib/memory/memory.reset))
  (start $start)
- (func $~lib/internal/arraybuffer/computeSize (; 6 ;) (type $ii) (param $0 i32) (result i32)
+ (func $~lib/internal/arraybuffer/computeSize (; 7 ;) (type $ii) (param $0 i32) (result i32)
   i32.const 1
   i32.const 32
   get_local $0
@@ -206,7 +209,7 @@
   i32.sub
   i32.shl
  )
- (func $~lib/allocator/arena/__memory_allocate (; 7 ;) (type $ii) (param $0 i32) (result i32)
+ (func $~lib/allocator/arena/__memory_allocate (; 8 ;) (type $ii) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -285,7 +288,7 @@
   set_global $~lib/allocator/arena/offset
   get_local $1
  )
- (func $~lib/internal/arraybuffer/allocateUnsafe (; 8 ;) (type $ii) (param $0 i32) (result i32)
+ (func $~lib/internal/arraybuffer/allocateUnsafe (; 9 ;) (type $ii) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   get_local $0
@@ -314,7 +317,7 @@
   i32.store
   get_local $1
  )
- (func $~lib/internal/memory/memset (; 9 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/internal/memory/memset (; 10 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i64)
@@ -568,12 +571,12 @@
    end
   end
  )
- (func $~lib/memory/memory.allocate (; 10 ;) (type $ii) (param $0 i32) (result i32)
+ (func $~lib/memory/memory.allocate (; 11 ;) (type $ii) (param $0 i32) (result i32)
   get_local $0
   call $~lib/allocator/arena/__memory_allocate
   return
  )
- (func $~lib/internal/typedarray/TypedArray<f64>#constructor (; 11 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/internal/typedarray/TypedArray<f64>#constructor (; 12 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -638,7 +641,7 @@
   i32.store offset=8
   get_local $0
  )
- (func $~lib/arraybuffer/ArrayBuffer#constructor (; 12 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/arraybuffer/ArrayBuffer#constructor (; 13 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -648,7 +651,7 @@
   if
    i32.const 0
    i32.const 248
-   i32.const 16
+   i32.const 47
    i32.const 40
    call $~lib/env/abort
    unreachable
@@ -674,7 +677,7 @@
   end
   get_local $3
  )
- (func $~lib/map/Map<String,CanvasRenderingContext2D>#clear (; 13 ;) (type $iv) (param $0 i32)
+ (func $~lib/map/Map<String,CanvasRenderingContext2D>#clear (; 14 ;) (type $iv) (param $0 i32)
   get_local $0
   i32.const 0
   i32.const 16
@@ -702,7 +705,7 @@
   i32.const 0
   i32.store offset=20
  )
- (func $~lib/map/Map<String,CanvasRenderingContext2D>#constructor (; 14 ;) (type $ii) (param $0 i32) (result i32)
+ (func $~lib/map/Map<String,CanvasRenderingContext2D>#constructor (; 15 ;) (type $ii) (param $0 i32) (result i32)
   (local $1 i32)
   get_local $0
   if (result i32)
@@ -738,7 +741,7 @@
   call $~lib/map/Map<String,CanvasRenderingContext2D>#clear
   get_local $0
  )
- (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<usize> (; 15 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<usize> (; 16 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   i32.const 0
@@ -756,7 +759,7 @@
   i32.store offset=8
   get_local $0
  )
- (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<f64> (; 16 ;) (type $iFi) (param $0 i32) (param $1 f64) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<f64> (; 17 ;) (type $iFi) (param $0 i32) (param $1 f64) (result i32)
   (local $2 i32)
   (local $3 i32)
   i32.const 0
@@ -774,7 +777,7 @@
   f64.store offset=8
   get_local $0
  )
- (func $~lib/array/Array<Path2DElement>#constructor (; 17 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/array/Array<Path2DElement>#constructor (; 18 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -833,7 +836,7 @@
   call $~lib/internal/memory/memset
   get_local $0
  )
- (func $~lib/internal/memory/memcpy (; 18 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/internal/memory/memcpy (; 19 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -2034,7 +2037,7 @@
    i32.store8
   end
  )
- (func $~lib/internal/memory/memmove (; 19 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/internal/memory/memmove (; 20 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   get_local $0
   get_local $1
@@ -2261,10 +2264,10 @@
    end
   end
  )
- (func $~lib/allocator/arena/__memory_free (; 20 ;) (type $iv) (param $0 i32)
+ (func $~lib/allocator/arena/__memory_free (; 21 ;) (type $iv) (param $0 i32)
   nop
  )
- (func $~lib/internal/arraybuffer/reallocateUnsafe (; 21 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/internal/arraybuffer/reallocateUnsafe (; 22 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -2366,7 +2369,7 @@
   end
   get_local $0
  )
- (func $~lib/array/Array<Path2DElement>#__set (; 22 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/array/Array<Path2DElement>#__set (; 23 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -2422,7 +2425,7 @@
   get_local $2
   i32.store offset=8
  )
- (func $~lib/array/Array<Path2DElement>#__unchecked_get (; 23 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/array/Array<Path2DElement>#__unchecked_get (; 24 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   get_local $0
@@ -2439,7 +2442,7 @@
   i32.add
   i32.load offset=8
  )
- (func $assembly/renderer/CanvasRenderingContext2D/createPathElements (; 24 ;) (type $i) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/createPathElements (; 25 ;) (type $i) (result i32)
   (local $0 i32)
   (local $1 i32)
   (local $2 i32)
@@ -2541,7 +2544,7 @@
   i32.store8 offset=60
   get_local $0
  )
- (func $~lib/internal/hash/hashStr (; 25 ;) (type $ii) (param $0 i32) (result i32)
+ (func $~lib/internal/hash/hashStr (; 26 ;) (type $ii) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -2583,7 +2586,7 @@
   end
   get_local $1
  )
- (func $~lib/internal/string/compareUnsafe (; 26 ;) (type $iiiiii) (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (result i32)
+ (func $~lib/internal/string/compareUnsafe (; 27 ;) (type $iiiiii) (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (result i32)
   (local $5 i32)
   (local $6 i32)
   (local $7 i32)
@@ -2636,7 +2639,7 @@
   end
   get_local $5
  )
- (func $~lib/string/String.__eq (; 27 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/string/String.__eq (; 28 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   get_local $0
@@ -2680,7 +2683,7 @@
   call $~lib/internal/string/compareUnsafe
   i32.eqz
  )
- (func $~lib/map/Map<String,CanvasRenderingContext2D>#find (; 28 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/map/Map<String,CanvasRenderingContext2D>#find (; 29 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
   get_local $0
@@ -2731,7 +2734,7 @@
   end
   i32.const 0
  )
- (func $~lib/map/Map<String,CanvasRenderingContext2D>#rehash (; 29 ;) (type $iiv) (param $0 i32) (param $1 i32)
+ (func $~lib/map/Map<String,CanvasRenderingContext2D>#rehash (; 30 ;) (type $iiv) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -2871,7 +2874,7 @@
   i32.load offset=20
   i32.store offset=16
  )
- (func $~lib/map/Map<String,CanvasRenderingContext2D>#set (; 30 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/map/Map<String,CanvasRenderingContext2D>#set (; 31 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -2975,7 +2978,7 @@
    i32.store offset=8
   end
  )
- (func $assembly/internal/getContext/__use_context (; 31 ;) (type $iiv) (param $0 i32) (param $1 i32)
+ (func $assembly/internal/getContext/__use_context (; 32 ;) (type $iiv) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -3804,7 +3807,7 @@
   get_local $9
   call $~lib/map/Map<String,CanvasRenderingContext2D>#set
  )
- (func $assembly/renderer/Image/__image_loaded (; 32 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $assembly/renderer/Image/__image_loaded (; 33 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
   get_local $0
   i32.const 4
   i32.add
@@ -3821,19 +3824,19 @@
   i32.const 1
   i32.store8
  )
- (func $~lib/memory/memory.fill (; 33 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/memory/memory.fill (; 34 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
   get_local $0
   get_local $1
   get_local $2
   call $~lib/internal/memory/memset
  )
- (func $~lib/memory/memory.copy (; 34 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/memory/memory.copy (; 35 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
   get_local $0
   get_local $1
   get_local $2
   call $~lib/internal/memory/memmove
  )
- (func $~lib/internal/memory/memcmp (; 35 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/internal/memory/memcmp (; 36 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   get_local $0
   get_local $1
@@ -3887,26 +3890,26 @@
    i32.const 0
   end
  )
- (func $~lib/memory/memory.compare (; 36 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/memory/memory.compare (; 37 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   get_local $0
   get_local $1
   get_local $2
   call $~lib/internal/memory/memcmp
  )
- (func $~lib/memory/memory.free (; 37 ;) (type $iv) (param $0 i32)
+ (func $~lib/memory/memory.free (; 38 ;) (type $iv) (param $0 i32)
   get_local $0
   call $~lib/allocator/arena/__memory_free
   return
  )
- (func $~lib/allocator/arena/__memory_reset (; 38 ;) (type $v)
+ (func $~lib/allocator/arena/__memory_reset (; 39 ;) (type $v)
   get_global $~lib/allocator/arena/startOffset
   set_global $~lib/allocator/arena/offset
  )
- (func $~lib/memory/memory.reset (; 39 ;) (type $v)
+ (func $~lib/memory/memory.reset (; 40 ;) (type $v)
   call $~lib/allocator/arena/__memory_reset
   return
  )
- (func $~lib/map/Map<String,CanvasRenderingContext2D>#has (; 40 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/map/Map<String,CanvasRenderingContext2D>#has (; 41 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
   get_local $0
   get_local $1
   block $~lib/internal/hash/HASH<String>|inlined.2 (result i32)
@@ -3918,7 +3921,7 @@
   i32.const 0
   i32.ne
  )
- (func $~lib/map/Map<String,CanvasRenderingContext2D>#get (; 41 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/map/Map<String,CanvasRenderingContext2D>#get (; 42 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   get_local $0
   get_local $1
@@ -3937,7 +3940,7 @@
    unreachable
   end
  )
- (func $assembly/internal/getContext/getContextById (; 42 ;) (type $ii) (param $0 i32) (result i32)
+ (func $assembly/internal/getContext/getContextById (; 43 ;) (type $ii) (param $0 i32) (result i32)
   get_global $assembly/internal/getContext/map
   get_local $0
   call $~lib/map/Map<String,CanvasRenderingContext2D>#has
@@ -3954,12 +3957,12 @@
   get_local $0
   call $~lib/map/Map<String,CanvasRenderingContext2D>#get
  )
- (func $assembly/glue.test/init (; 43 ;) (type $v)
+ (func $assembly/glue.test/init (; 44 ;) (type $v)
   i32.const 328
   call $assembly/internal/getContext/getContextById
   set_global $assembly/glue.test/ctx
  )
- (func $assembly/glue.test/getCtxId (; 44 ;) (type $i) (result i32)
+ (func $assembly/glue.test/getCtxId (; 45 ;) (type $i) (result i32)
   get_global $assembly/glue.test/ctx
   i32.eqz
   if
@@ -3975,7 +3978,7 @@
   i32.add
   i32.load
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#createLinearGradient (; 45 ;) (type $iFFFFi) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#createLinearGradient (; 46 ;) (type $iFFFFi) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (result i32)
   (local $5 i32)
   (local $6 i32)
   (local $7 i32)
@@ -4004,7 +4007,7 @@
   i32.store
   get_local $7
  )
- (func $assembly/glue.test/addLinearGradient (; 46 ;) (type $i) (result i32)
+ (func $assembly/glue.test/addLinearGradient (; 47 ;) (type $i) (result i32)
   get_global $assembly/glue.test/ctx
   f64.const 0
   f64.const 0
@@ -4017,7 +4020,7 @@
   i32.add
   i32.load
  )
- (func $assembly/renderer/CanvasGradient/CanvasGradient#addColorStop (; 47 ;) (type $iFiv) (param $0 i32) (param $1 f64) (param $2 i32)
+ (func $assembly/renderer/CanvasGradient/CanvasGradient#addColorStop (; 48 ;) (type $iFiv) (param $0 i32) (param $1 f64) (param $2 i32)
   get_local $0
   i32.load
   get_local $1
@@ -4028,7 +4031,7 @@
   get_local $2
   call $assembly/renderer/CanvasGradient/addColorStop
  )
- (func $assembly/glue.test/addColorStop (; 48 ;) (type $v)
+ (func $assembly/glue.test/addColorStop (; 49 ;) (type $v)
   get_global $assembly/glue.test/grd
   i32.eqz
   if
@@ -4044,7 +4047,7 @@
   i32.const 464
   call $assembly/renderer/CanvasGradient/CanvasGradient#addColorStop
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#createRadialGradient (; 49 ;) (type $iFFFFFFi) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#createRadialGradient (; 50 ;) (type $iFFFFFFi) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (result i32)
   (local $7 i32)
   (local $8 i32)
   (local $9 i32)
@@ -4075,7 +4078,7 @@
   i32.store
   get_local $9
  )
- (func $assembly/glue.test/addRadialGradient (; 50 ;) (type $i) (result i32)
+ (func $assembly/glue.test/addRadialGradient (; 51 ;) (type $i) (result i32)
   get_global $assembly/glue.test/ctx
   f64.const 0
   f64.const 0
@@ -4090,7 +4093,7 @@
   i32.add
   i32.load
  )
- (func $assembly/renderer/Image/Image#set:src (; 51 ;) (type $iiv) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/Image/Image#set:src (; 52 ;) (type $iiv) (param $0 i32) (param $1 i32)
   get_local $0
   get_local $1
   i32.store offset=16
@@ -4100,7 +4103,7 @@
   call $assembly/renderer/Image/loadImage
   i32.store
  )
- (func $assembly/glue.test/createImage (; 52 ;) (type $F) (result f64)
+ (func $assembly/glue.test/createImage (; 53 ;) (type $F) (result f64)
   (local $0 i32)
   block (result i32)
    i32.const 20
@@ -4133,7 +4136,7 @@
   i32.load
   f64.convert_s/i32
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#createPattern (; 53 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#createPattern (; 54 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -4163,7 +4166,7 @@
   i32.store
   get_local $4
  )
- (func $assembly/glue.test/createPattern (; 54 ;) (type $i) (result i32)
+ (func $assembly/glue.test/createPattern (; 55 ;) (type $i) (result i32)
   (local $0 i32)
   get_global $assembly/glue.test/ctx
   i32.eqz
@@ -4214,7 +4217,112 @@
   i32.add
   i32.load
  )
- (func $start (; 55 ;) (type $v)
+ (func $assembly/glue.test/setBadID (; 56 ;) (type $v)
+  get_global $assembly/glue.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 52
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/glue.test/ctx
+  i32.const 8
+  i32.add
+  i32.const -1
+  i32.store
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#commit (; 57 ;) (type $iv) (param $0 i32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  (local $5 f64)
+  (local $6 i32)
+  (local $7 i32)
+  get_global $src/shared/CanvasInstruction/CanvasInstruction.Commit
+  set_local $1
+  get_local $0
+  i32.load
+  set_local $2
+  get_local $0
+  i32.load offset=4
+  set_local $3
+  get_local $3
+  i32.const 2
+  i32.add
+  set_local $4
+  block
+   get_local $1
+   f64.convert_s/i32
+   set_local $5
+   i32.const 0
+   set_local $6
+   get_local $2
+   get_local $3
+   i32.const 3
+   i32.shl
+   i32.add
+   get_local $6
+   i32.add
+   get_local $5
+   f64.store offset=8
+  end
+  block
+   get_local $3
+   i32.const 1
+   i32.add
+   set_local $6
+   get_local $4
+   f64.convert_s/i32
+   set_local $5
+   i32.const 0
+   set_local $7
+   get_local $2
+   get_local $6
+   i32.const 3
+   i32.shl
+   i32.add
+   get_local $7
+   i32.add
+   get_local $5
+   f64.store offset=8
+  end
+  get_local $0
+  get_local $4
+  i32.store offset=4
+  get_local $0
+  i32.load offset=8
+  block $~lib/arraybuffer/ArrayBuffer#get:data|inlined.0 (result i32)
+   get_local $0
+   i32.load
+   set_local $4
+   get_local $4
+   get_global $~lib/internal/arraybuffer/HEADER_SIZE
+   i32.add
+  end
+  call $assembly/renderer/CanvasRenderingContext2D/render
+  get_local $0
+  i32.const 0
+  i32.store offset=4
+ )
+ (func $assembly/glue.test/commit (; 58 ;) (type $v)
+  get_global $assembly/glue.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 57
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/glue.test/ctx
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#commit
+ )
+ (func $start (; 59 ;) (type $v)
   get_global $HEAP_BASE
   get_global $~lib/internal/allocator/AL_MASK
   i32.add
@@ -4233,6 +4341,6 @@
   call $~lib/map/Map<String,CanvasRenderingContext2D>#constructor
   set_global $assembly/internal/getContext/map
  )
- (func $null (; 56 ;) (type $v)
+ (func $null (; 60 ;) (type $v)
  )
 )

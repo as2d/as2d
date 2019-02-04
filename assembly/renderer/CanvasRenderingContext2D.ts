@@ -19,8 +19,6 @@ import { FillRule } from "../../src/shared/FillRule";
 
 
 //#region EXTERNALS
-@external("test", "log")
-declare function log(id: i32, val: f64): void;
 
 // @ts-ignore: linked functions can have decorators
 @external("__canvas_sys", "render")
@@ -205,7 +203,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   /**
-   * An operation that sets the current transform on the `_transformStack` to the specified
+   * An function that sets the current transform on the `_transformStack` to the specified
    * DOMMatrix values.
    *
    * @param {f64} a - The a property of the transform matrix.
@@ -1447,7 +1445,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   public save(hard: bool = false): void {
     var offset: i32 = <i32>this._stackOffset;
     var nextOffset: i32 = offset + 1;
-    if (nextOffset >= u8.MAX_VALUE) unreachable();
+    if (nextOffset >= <i32>u8.MAX_VALUE) unreachable();
     var transformIndex: i32 = offset * 6;
     var nextTransformIndex: i32 = transformIndex + 6;
     var styleIndex: i32 = offset << 1;
@@ -1564,7 +1562,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
       super._writeZero(CanvasInstruction.Save);
     }
 
-    this._stackOffset = nextOffset;
+    this._stackOffset = <u8>nextOffset;
   }
   //#endregion SAVE
 
@@ -1665,9 +1663,10 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
       // textBaseline
       this._currentTextBaseline = LOAD<TextBaseline>(this._textBaselineStack, nextOffset);
+      super._writeZero(CanvasInstruction.Restore);
     }
 
-    this._stackOffset = nextOffset;
+    this._stackOffset = <u8>nextOffset;
   }
   //#endregion RESTORE
 

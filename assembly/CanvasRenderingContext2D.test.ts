@@ -20,9 +20,6 @@ var grd: CanvasGradient;
 var img: Image;
 var ptrn: CanvasPattern;
 
-@external("test", "log")
-declare function log(id: i32, val: f64): void;
-
 export function arc(x: number, y: number, r: number, startAngle: number, endAngle: number, anticlockwise: bool): void {
   assert(ctx);
   ctx.arc(x, y, r, startAngle, endAngle, anticlockwise);
@@ -308,4 +305,14 @@ export function strokeText(text: string, x: f64, y: number): void {
 export function strokeTextWidth(text: string, x: f64, y: f64, width: f64): void {
   assert(ctx);
   ctx.strokeTextWidth(text, x, y, width);
+}
+
+export function save(hard: bool): void {
+  assert(ctx);
+  ctx.save(hard);
+}
+
+export function restore(): void {
+  assert(ctx);
+  ctx.restore();
 }

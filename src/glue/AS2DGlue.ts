@@ -271,11 +271,11 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.Restore: {
-          throw new Error("InstructionError: Restore not implemented.");
+          ctx.restore();
           break;
         }
         case CanvasInstruction.Save: {
-          throw new Error("InstructionError: Save not implemented.");
+          ctx.save();
           break;
         }
         case CanvasInstruction.SetTransform: {

@@ -11,6 +11,8 @@ interface IGlueTestSuite {
   addColorStop(): number;
   createImage(): number;
   createPattern(): number;
+  setBadID(): void;
+  commit(): void;
 }
 
 var buff = readFileSync("./build/glue.test.wasm");
@@ -103,5 +105,12 @@ describe("glue code", () => {
       var id: number = wasm.createPattern();
       expect(wasm.patterns[id]).toBeTruthy();
     });
+  });
+
+  it("should be unable to find the canvas if it's not instantiated", () => {
+    wasm.useContext("main", ctx);
+    wasm.init();
+    wasm.setBadID();
+    expect(() => wasm.commit()).toThrow();
   });
 });

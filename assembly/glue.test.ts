@@ -47,3 +47,13 @@ export function createPattern(): i32 {
   pattern = ctx.createPattern(img, CanvasPatternRepetition.repeat);
   return load<i32>(changetype<usize>(pattern) + offsetof<CanvasPattern>("id"));
 }
+
+export function setBadID(): void {
+  assert(ctx);
+  store<i32>(changetype<usize>(ctx) + offsetof<CanvasRenderingContext2D>("id"), -1);
+}
+
+export function commit(): void {
+  assert(ctx);
+  ctx.commit();
+}

@@ -58,4 +58,6 @@ export interface ICanvasRenderingContext2DTestSuite {
   drawImageSource(sx: number, sy: number, sWidth: number, sHeight: number, x: number, y: number, width: number, height: number): void;
   fillRect(x: number, y: number, width: number, height: number): void;
   strokeRect(x: number, y: number, width: number, height: number): void;
+  save(hard: number): void;
+  restore(): void;
 }
