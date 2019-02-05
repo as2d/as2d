@@ -193,6 +193,12 @@
  (export "setImageSmoothingEnabled" (func $assembly/save-restore.test/setImageSmoothingEnabled))
  (export "setImageSmoothingQuality" (func $assembly/save-restore.test/setImageSmoothingQuality))
  (export "getImageSmoothingQuality" (func $assembly/save-restore.test/getImageSmoothingQuality))
+ (export "getLineCap" (func $assembly/save-restore.test/getLineCap))
+ (export "setLineCap" (func $assembly/save-restore.test/setLineCap))
+ (export "getLineDashOffset" (func $assembly/save-restore.test/getLineDashOffset))
+ (export "setLineDashOffset" (func $assembly/save-restore.test/setLineDashOffset))
+ (export "getLineJoin" (func $assembly/save-restore.test/getLineJoin))
+ (export "setLineJoin" (func $assembly/save-restore.test/setLineJoin))
  (export "__use_context" (func $assembly/internal/getContext/__use_context))
  (export "__image_loaded" (func $assembly/renderer/Image/__image_loaded))
  (export "memory.fill" (func $~lib/memory/memory.fill))
@@ -6796,7 +6802,229 @@
   get_global $assembly/save-restore.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:imageSmoothingQuality
  )
- (func $start (; 88 ;) (type $v)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:lineCap (; 88 ;) (type $ii) (param $0 i32) (result i32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  get_local $0
+  i32.load offset=96
+  set_local $1
+  get_local $0
+  i32.load8_u offset=12
+  set_local $2
+  i32.const 0
+  set_local $3
+  get_local $1
+  get_local $2
+  i32.const 2
+  i32.shl
+  i32.add
+  get_local $3
+  i32.add
+  i32.load offset=8
+ )
+ (func $assembly/save-restore.test/getLineCap (; 89 ;) (type $i) (result i32)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 142
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:lineCap
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineCap (; 90 ;) (type $iiv) (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  get_local $0
+  i32.load offset=96
+  set_local $2
+  get_local $0
+  i32.load8_u offset=12
+  set_local $3
+  i32.const 0
+  set_local $4
+  get_local $2
+  get_local $3
+  i32.const 2
+  i32.shl
+  i32.add
+  get_local $4
+  i32.add
+  get_local $1
+  i32.store offset=8
+ )
+ (func $assembly/save-restore.test/setLineCap (; 91 ;) (type $iv) (param $0 i32)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 147
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  get_local $0
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineCap
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:lineDashOffset (; 92 ;) (type $iF) (param $0 i32) (result f64)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  get_local $0
+  i32.load offset=112
+  set_local $1
+  get_local $0
+  i32.load8_u offset=12
+  set_local $2
+  i32.const 0
+  set_local $3
+  get_local $1
+  get_local $2
+  i32.const 3
+  i32.shl
+  i32.add
+  get_local $3
+  i32.add
+  f64.load offset=8
+ )
+ (func $assembly/save-restore.test/getLineDashOffset (; 93 ;) (type $F) (result f64)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 152
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:lineDashOffset
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineDashOffset (; 94 ;) (type $iFv) (param $0 i32) (param $1 f64)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  get_local $1
+  get_local $1
+  f64.ne
+  if
+   return
+  end
+  get_local $0
+  i32.load offset=112
+  set_local $2
+  get_local $0
+  i32.load8_u offset=12
+  set_local $3
+  i32.const 0
+  set_local $4
+  get_local $2
+  get_local $3
+  i32.const 3
+  i32.shl
+  i32.add
+  get_local $4
+  i32.add
+  get_local $1
+  f64.store offset=8
+ )
+ (func $assembly/save-restore.test/setLineDashOffset (; 95 ;) (type $Fv) (param $0 f64)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 157
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  get_local $0
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineDashOffset
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:lineJoin (; 96 ;) (type $ii) (param $0 i32) (result i32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  get_local $0
+  i32.load offset=128
+  set_local $1
+  get_local $0
+  i32.load8_u offset=12
+  set_local $2
+  i32.const 0
+  set_local $3
+  get_local $1
+  get_local $2
+  i32.const 2
+  i32.shl
+  i32.add
+  get_local $3
+  i32.add
+  i32.load offset=8
+ )
+ (func $assembly/save-restore.test/getLineJoin (; 97 ;) (type $i) (result i32)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 162
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:lineJoin
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineJoin (; 98 ;) (type $iiv) (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  get_local $0
+  i32.load offset=128
+  set_local $2
+  get_local $0
+  i32.load8_u offset=12
+  set_local $3
+  i32.const 0
+  set_local $4
+  get_local $2
+  get_local $3
+  i32.const 2
+  i32.shl
+  i32.add
+  get_local $4
+  i32.add
+  get_local $1
+  i32.store offset=8
+ )
+ (func $assembly/save-restore.test/setLineJoin (; 99 ;) (type $iv) (param $0 i32)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 167
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  get_local $0
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineJoin
+ )
+ (func $start (; 100 ;) (type $v)
   get_global $HEAP_BASE
   get_global $~lib/internal/allocator/AL_MASK
   i32.add
@@ -6815,6 +7043,6 @@
   call $~lib/map/Map<String,CanvasRenderingContext2D>#constructor
   set_global $assembly/internal/getContext/map
  )
- (func $null (; 89 ;) (type $v)
+ (func $null (; 101 ;) (type $v)
  )
 )

@@ -1,4 +1,4 @@
-import { CanvasDirection, GlobalCompositeOperation, ImageSmoothingQuality } from "../../src";
+import { CanvasDirection, GlobalCompositeOperation, ImageSmoothingQuality, LineCap, LineJoin } from "../../src";
 
 export interface ISaveRestoreTestSuite {
   getDirection(): CanvasDirection;
@@ -23,4 +23,10 @@ export interface ISaveRestoreTestSuite {
   setImageSmoothingEnabled(value: number): void;
   setImageSmoothingQuality(value: ImageSmoothingQuality): void;
   setTransform(a: number, b: number, c: number, d: number, e: number, f: number): void;
+  setLineCap(value: LineCap): void;
+  getLineCap(): LineCap;
+  setLineDashOffset(value: number): void;
+  getLineDashOffset(): number;
+  setLineJoin(value: LineJoin): void;
+  getLineJoin(): LineJoin;
 }

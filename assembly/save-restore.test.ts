@@ -137,3 +137,33 @@ export function getImageSmoothingQuality(): ImageSmoothingQuality {
   assert(ctx);
   return ctx.imageSmoothingQuality;
 }
+
+export function getLineCap(): LineCap {
+  assert(ctx);
+  return ctx.lineCap;
+}
+
+export function setLineCap(value: LineCap): void {
+  assert(ctx);
+  ctx.lineCap = value;
+}
+
+export function getLineDashOffset(): f64 {
+  assert(ctx);
+  return ctx.lineDashOffset;
+}
+
+export function setLineDashOffset(value: f64): void {
+  assert(ctx);
+  ctx.lineDashOffset = value;
+}
+
+export function getLineJoin(): LineJoin {
+  assert(ctx);
+  return ctx.lineJoin;
+}
+
+export function setLineJoin(value: LineJoin): void {
+  assert(ctx);
+  ctx.lineJoin = value;
+}
