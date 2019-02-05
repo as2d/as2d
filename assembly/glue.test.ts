@@ -1,10 +1,12 @@
 import "allocator/arena";
-import { getContextById } from "./internal/getContext";
-import { CanvasRenderingContext2D } from "./renderer/CanvasRenderingContext2D";
-import { CanvasGradient } from "./renderer/CanvasGradient";
-import { Image } from "./renderer/Image";
-import { CanvasPatternRepetition } from "../src/shared/CanvasPatternRepetition";
-import { CanvasPattern } from "./renderer/CanvasPattern";
+import {
+  CanvasGradient,
+  CanvasPattern,
+  CanvasPatternRepetition,
+  CanvasRenderingContext2D,
+  Image,
+  getContextById,
+} from "./index";
 
 var ctx: CanvasRenderingContext2D;
 var grd: CanvasGradient;

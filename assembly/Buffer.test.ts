@@ -1,7 +1,9 @@
 import "allocator/arena";
-import { getContextById } from "./internal/getContext";
-import { CanvasRenderingContext2D } from "./renderer/CanvasRenderingContext2D";
-import { Buffer } from "./internal/Buffer";
+import {
+  Buffer,
+  CanvasRenderingContext2D,
+  getContextById,
+} from "./index";
 
 var ctx: CanvasRenderingContext2D;
 

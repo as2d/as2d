@@ -1,19 +1,21 @@
 import "allocator/arena";
 
-import { CanvasRenderingContext2D } from "./renderer/CanvasRenderingContext2D";
-import { getContextById } from "./internal/getContext";
-import { FillRule } from "../src/shared/FillRule";
-import { ImageSmoothingQuality } from "../src/shared/ImageSmoothingQuality";
-import { CanvasGradient } from "./renderer/CanvasGradient";
-import { Image } from "./renderer/Image";
-import { CanvasPatternRepetition } from "../src/shared/CanvasPatternRepetition";
-import { CanvasPattern } from "./renderer/CanvasPattern";
-import { GlobalCompositeOperation } from "../src/shared/GlobalCompositeOperation";
-import { CanvasDirection } from "../src/shared/CanvasDirection";
-import { TextAlign } from "../src/shared/TextAlign";
-import { TextBaseline } from "../src/shared/TextBaseline";
-import { LineCap } from "../src/shared/LineCap";
-import { LineJoin } from "../src/shared/LineJoin";
+import {
+  CanvasDirection,
+  CanvasGradient,
+  CanvasPattern,
+  CanvasPatternRepetition,
+  CanvasRenderingContext2D,
+  FillRule,
+  GlobalCompositeOperation,
+  Image,
+  ImageSmoothingQuality,
+  LineCap,
+  LineJoin,
+  TextAlign,
+  TextBaseline,
+  getContextById,
+ } from "./index";
 
 var ctx: CanvasRenderingContext2D;
 var grd: CanvasGradient;
