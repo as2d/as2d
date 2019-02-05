@@ -51,11 +51,11 @@
  (data (i32.const 184) "\1c\00\00\00~\00l\00i\00b\00/\00i\00n\00t\00e\00r\00n\00a\00l\00/\00a\00r\00r\00a\00y\00b\00u\00f\00f\00e\00r\00.\00t\00s\00")
  (data (i32.const 248) "\13\00\00\00~\00l\00i\00b\00/\00a\00r\00r\00a\00y\00b\00u\00f\00f\00e\00r\00.\00t\00s\00")
  (data (i32.const 296) "\0d\00\00\00~\00l\00i\00b\00/\00a\00r\00r\00a\00y\00.\00t\00s\00")
- (data (i32.const 328) ")\00\00\00a\00s\00s\00e\00m\00b\00l\00y\00/\00C\00a\00n\00v\00a\00s\00R\00e\00n\00d\00e\00r\00i\00n\00g\00C\00o\00n\00t\00e\00x\00t\002\00D\00.\00t\00e\00s\00t\00.\00t\00s\00")
- (data (i32.const 416) "\04\00\00\00m\00a\00i\00n\00")
- (data (i32.const 432) "\1f\00\00\00a\00s\00s\00e\00m\00b\00l\00y\00/\00i\00n\00t\00e\00r\00n\00a\00l\00/\00g\00e\00t\00C\00o\00n\00t\00e\00x\00t\00.\00t\00s\00")
- (data (i32.const 504) "\00\00\00\00")
- (data (i32.const 512) "\1e\00\00\00h\00t\00t\00p\00:\00/\00/\00p\00l\00a\00c\00e\00k\00i\00t\00t\00e\00n\00.\00c\00o\00m\00/\004\000\000\00/\003\000\000\00")
+ (data (i32.const 328) "\1f\00\00\00a\00s\00s\00e\00m\00b\00l\00y\00/\00d\00r\00a\00w\00-\00f\00u\00n\00c\00t\00i\00o\00n\00s\00.\00t\00e\00s\00t\00.\00t\00s\00")
+ (data (i32.const 400) "\04\00\00\00m\00a\00i\00n\00")
+ (data (i32.const 416) "\1f\00\00\00a\00s\00s\00e\00m\00b\00l\00y\00/\00i\00n\00t\00e\00r\00n\00a\00l\00/\00g\00e\00t\00C\00o\00n\00t\00e\00x\00t\00.\00t\00s\00")
+ (data (i32.const 488) "\00\00\00\00")
+ (data (i32.const 496) "\1e\00\00\00h\00t\00t\00p\00:\00/\00/\00p\00l\00a\00c\00e\00k\00i\00t\00t\00e\00n\00.\00c\00o\00m\00/\004\000\000\00/\003\000\000\00")
  (table $0 1 anyfunc)
  (elem (i32.const 0) $null)
  (global $~lib/internal/allocator/AL_BITS i32 (i32.const 3))
@@ -188,78 +188,78 @@
  (global $~lib/map/EMPTY i32 (i32.const 1))
  (global $~lib/map/FREE_FACTOR f64 (f64.const 0.75))
  (global $~lib/map/FILL_FACTOR f64 (f64.const 2.6666666666666665))
- (global $assembly/CanvasRenderingContext2D.test/ctx (mut i32) (i32.const 0))
- (global $assembly/CanvasRenderingContext2D.test/grd (mut i32) (i32.const 0))
- (global $assembly/CanvasRenderingContext2D.test/img (mut i32) (i32.const 0))
- (global $assembly/CanvasRenderingContext2D.test/ptrn (mut i32) (i32.const 0))
+ (global $assembly/draw-functions.test/ctx (mut i32) (i32.const 0))
+ (global $assembly/draw-functions.test/grd (mut i32) (i32.const 0))
+ (global $assembly/draw-functions.test/img (mut i32) (i32.const 0))
+ (global $assembly/draw-functions.test/ptrn (mut i32) (i32.const 0))
  (global $src/shared/CanvasPatternRepetition/CanvasPatternRepetition.repeat (mut i32) (i32.const 0))
  (global $src/shared/CanvasPatternRepetition/CanvasPatternRepetition.repeat_x (mut i32) (i32.const 1))
  (global $src/shared/CanvasPatternRepetition/CanvasPatternRepetition.repeat_y (mut i32) (i32.const 2))
  (global $src/shared/CanvasPatternRepetition/CanvasPatternRepetition.no_repeat (mut i32) (i32.const 3))
  (global $~lib/builtins/u8.MAX_VALUE i32 (i32.const 255))
- (global $HEAP_BASE i32 (i32.const 576))
+ (global $HEAP_BASE i32 (i32.const 560))
  (global $src/shared/FillRule/FillRule.nonzero (mut i32) (i32.const 0))
  (global $src/shared/FillRule/FillRule.evenodd (mut i32) (i32.const 1))
  (global $~argc (mut i32) (i32.const 0))
  (export "memory" (memory $0))
  (export "table" (table $0))
- (export "arc" (func $assembly/CanvasRenderingContext2D.test/arc))
- (export "init" (func $assembly/CanvasRenderingContext2D.test/init))
- (export "fillStyle" (func $assembly/CanvasRenderingContext2D.test/fillStyle))
- (export "strokeStyle" (func $assembly/CanvasRenderingContext2D.test/strokeStyle))
+ (export "arc" (func $assembly/draw-functions.test/arc))
+ (export "init" (func $assembly/draw-functions.test/init))
+ (export "fillStyle" (func $assembly/draw-functions.test/fillStyle))
+ (export "strokeStyle" (func $assembly/draw-functions.test/strokeStyle))
  (export "_setargc" (func $~setargc))
- (export "fill" (func $assembly/CanvasRenderingContext2D.test/fill|trampoline))
- (export "stroke" (func $assembly/CanvasRenderingContext2D.test/stroke))
- (export "commit" (func $assembly/CanvasRenderingContext2D.test/commit))
- (export "filter" (func $assembly/CanvasRenderingContext2D.test/filter))
- (export "globalAlpha" (func $assembly/CanvasRenderingContext2D.test/globalAlpha))
- (export "imageSmoothingEnabled" (func $assembly/CanvasRenderingContext2D.test/imageSmoothingEnabled))
- (export "imageSmoothingQuality" (func $assembly/CanvasRenderingContext2D.test/imageSmoothingQuality))
- (export "shadowBlur" (func $assembly/CanvasRenderingContext2D.test/shadowBlur))
- (export "shadowColor" (func $assembly/CanvasRenderingContext2D.test/shadowColor))
- (export "shadowOffsetY" (func $assembly/CanvasRenderingContext2D.test/shadowOffsetY))
- (export "shadowOffsetX" (func $assembly/CanvasRenderingContext2D.test/shadowOffsetX))
- (export "createRadialGradient" (func $assembly/CanvasRenderingContext2D.test/createRadialGradient))
- (export "fillGradient" (func $assembly/CanvasRenderingContext2D.test/fillGradient))
- (export "strokeGradient" (func $assembly/CanvasRenderingContext2D.test/strokeGradient))
- (export "createImage" (func $assembly/CanvasRenderingContext2D.test/createImage))
- (export "createPattern" (func $assembly/CanvasRenderingContext2D.test/createPattern))
- (export "fillPattern" (func $assembly/CanvasRenderingContext2D.test/fillPattern))
- (export "strokePattern" (func $assembly/CanvasRenderingContext2D.test/strokePattern))
- (export "setTransform" (func $assembly/CanvasRenderingContext2D.test/setTransform))
- (export "clearRect" (func $assembly/CanvasRenderingContext2D.test/clearRect))
- (export "arcTo" (func $assembly/CanvasRenderingContext2D.test/arcTo))
- (export "bezierCurveTo" (func $assembly/CanvasRenderingContext2D.test/bezierCurveTo))
- (export "clip" (func $assembly/CanvasRenderingContext2D.test/clip))
- (export "closePath" (func $assembly/CanvasRenderingContext2D.test/closePath))
- (export "ellipse" (func $assembly/CanvasRenderingContext2D.test/ellipse))
- (export "lineTo" (func $assembly/CanvasRenderingContext2D.test/lineTo))
- (export "moveTo" (func $assembly/CanvasRenderingContext2D.test/moveTo))
- (export "quadraticCurveTo" (func $assembly/CanvasRenderingContext2D.test/quadraticCurveTo))
- (export "rect" (func $assembly/CanvasRenderingContext2D.test/rect))
- (export "globalCompositeOperation" (func $assembly/CanvasRenderingContext2D.test/globalCompositeOperation))
- (export "fillRect" (func $assembly/CanvasRenderingContext2D.test/fillRect))
- (export "drawImage" (func $assembly/CanvasRenderingContext2D.test/drawImage))
- (export "drawImageSize" (func $assembly/CanvasRenderingContext2D.test/drawImageSize))
- (export "drawImageSource" (func $assembly/CanvasRenderingContext2D.test/drawImageSource))
- (export "fillText" (func $assembly/CanvasRenderingContext2D.test/fillText))
- (export "fillTextWidth" (func $assembly/CanvasRenderingContext2D.test/fillTextWidth))
- (export "direction" (func $assembly/CanvasRenderingContext2D.test/direction))
- (export "font" (func $assembly/CanvasRenderingContext2D.test/font))
- (export "textAlign" (func $assembly/CanvasRenderingContext2D.test/textAlign))
- (export "textBaseline" (func $assembly/CanvasRenderingContext2D.test/textBaseline))
- (export "measureText" (func $assembly/CanvasRenderingContext2D.test/measureText))
- (export "lineCap" (func $assembly/CanvasRenderingContext2D.test/lineCap))
- (export "setLineDash" (func $assembly/CanvasRenderingContext2D.test/setLineDash))
- (export "lineDashOffset" (func $assembly/CanvasRenderingContext2D.test/lineDashOffset))
- (export "lineJoin" (func $assembly/CanvasRenderingContext2D.test/lineJoin))
- (export "lineWidth" (func $assembly/CanvasRenderingContext2D.test/lineWidth))
- (export "miterLimit" (func $assembly/CanvasRenderingContext2D.test/miterLimit))
- (export "strokeRect" (func $assembly/CanvasRenderingContext2D.test/strokeRect))
- (export "strokeText" (func $assembly/CanvasRenderingContext2D.test/strokeText))
- (export "strokeTextWidth" (func $assembly/CanvasRenderingContext2D.test/strokeTextWidth))
- (export "save" (func $assembly/CanvasRenderingContext2D.test/save))
- (export "restore" (func $assembly/CanvasRenderingContext2D.test/restore))
+ (export "fill" (func $assembly/draw-functions.test/fill|trampoline))
+ (export "stroke" (func $assembly/draw-functions.test/stroke))
+ (export "commit" (func $assembly/draw-functions.test/commit))
+ (export "filter" (func $assembly/draw-functions.test/filter))
+ (export "globalAlpha" (func $assembly/draw-functions.test/globalAlpha))
+ (export "imageSmoothingEnabled" (func $assembly/draw-functions.test/imageSmoothingEnabled))
+ (export "imageSmoothingQuality" (func $assembly/draw-functions.test/imageSmoothingQuality))
+ (export "shadowBlur" (func $assembly/draw-functions.test/shadowBlur))
+ (export "shadowColor" (func $assembly/draw-functions.test/shadowColor))
+ (export "shadowOffsetY" (func $assembly/draw-functions.test/shadowOffsetY))
+ (export "shadowOffsetX" (func $assembly/draw-functions.test/shadowOffsetX))
+ (export "createRadialGradient" (func $assembly/draw-functions.test/createRadialGradient))
+ (export "fillGradient" (func $assembly/draw-functions.test/fillGradient))
+ (export "strokeGradient" (func $assembly/draw-functions.test/strokeGradient))
+ (export "createImage" (func $assembly/draw-functions.test/createImage))
+ (export "createPattern" (func $assembly/draw-functions.test/createPattern))
+ (export "fillPattern" (func $assembly/draw-functions.test/fillPattern))
+ (export "strokePattern" (func $assembly/draw-functions.test/strokePattern))
+ (export "setTransform" (func $assembly/draw-functions.test/setTransform))
+ (export "clearRect" (func $assembly/draw-functions.test/clearRect))
+ (export "arcTo" (func $assembly/draw-functions.test/arcTo))
+ (export "bezierCurveTo" (func $assembly/draw-functions.test/bezierCurveTo))
+ (export "clip" (func $assembly/draw-functions.test/clip))
+ (export "closePath" (func $assembly/draw-functions.test/closePath))
+ (export "ellipse" (func $assembly/draw-functions.test/ellipse))
+ (export "lineTo" (func $assembly/draw-functions.test/lineTo))
+ (export "moveTo" (func $assembly/draw-functions.test/moveTo))
+ (export "quadraticCurveTo" (func $assembly/draw-functions.test/quadraticCurveTo))
+ (export "rect" (func $assembly/draw-functions.test/rect))
+ (export "globalCompositeOperation" (func $assembly/draw-functions.test/globalCompositeOperation))
+ (export "fillRect" (func $assembly/draw-functions.test/fillRect))
+ (export "drawImage" (func $assembly/draw-functions.test/drawImage))
+ (export "drawImageSize" (func $assembly/draw-functions.test/drawImageSize))
+ (export "drawImageSource" (func $assembly/draw-functions.test/drawImageSource))
+ (export "fillText" (func $assembly/draw-functions.test/fillText))
+ (export "fillTextWidth" (func $assembly/draw-functions.test/fillTextWidth))
+ (export "direction" (func $assembly/draw-functions.test/direction))
+ (export "font" (func $assembly/draw-functions.test/font))
+ (export "textAlign" (func $assembly/draw-functions.test/textAlign))
+ (export "textBaseline" (func $assembly/draw-functions.test/textBaseline))
+ (export "measureText" (func $assembly/draw-functions.test/measureText))
+ (export "lineCap" (func $assembly/draw-functions.test/lineCap))
+ (export "setLineDash" (func $assembly/draw-functions.test/setLineDash))
+ (export "lineDashOffset" (func $assembly/draw-functions.test/lineDashOffset))
+ (export "lineJoin" (func $assembly/draw-functions.test/lineJoin))
+ (export "lineWidth" (func $assembly/draw-functions.test/lineWidth))
+ (export "miterLimit" (func $assembly/draw-functions.test/miterLimit))
+ (export "strokeRect" (func $assembly/draw-functions.test/strokeRect))
+ (export "strokeText" (func $assembly/draw-functions.test/strokeText))
+ (export "strokeTextWidth" (func $assembly/draw-functions.test/strokeTextWidth))
+ (export "save" (func $assembly/draw-functions.test/save))
+ (export "restore" (func $assembly/draw-functions.test/restore))
  (export "__use_context" (func $assembly/internal/getContext/__use_context))
  (export "__image_loaded" (func $assembly/renderer/Image/__image_loaded))
  (export "memory.fill" (func $~lib/memory/memory.fill))
@@ -4179,8 +4179,8 @@
   i32.add
   i32.store offset=260
  )
- (func $assembly/CanvasRenderingContext2D.test/arc (; 41 ;) (type $FFFFFiv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/arc (; 41 ;) (type $FFFFFiv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -4190,7 +4190,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   get_local $2
@@ -4237,7 +4237,7 @@
   i32.eqz
   if
    i32.const 0
-   i32.const 432
+   i32.const 416
    i32.const 26
    i32.const 22
    call $~lib/env/abort
@@ -4247,10 +4247,10 @@
   get_local $0
   call $~lib/map/Map<String,CanvasRenderingContext2D>#get
  )
- (func $assembly/CanvasRenderingContext2D.test/init (; 45 ;) (type $v)
-  i32.const 416
+ (func $assembly/draw-functions.test/init (; 45 ;) (type $v)
+  i32.const 400
   call $assembly/internal/getContext/getContextById
-  set_global $assembly/CanvasRenderingContext2D.test/ctx
+  set_global $assembly/draw-functions.test/ctx
  )
  (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillStyle (; 46 ;) (type $iiv) (param $0 i32) (param $1 i32)
   (local $2 i32)
@@ -4303,8 +4303,8 @@
   get_local $1
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/fillStyle (; 47 ;) (type $iv) (param $0 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/fillStyle (; 47 ;) (type $iv) (param $0 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -4314,7 +4314,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillStyle
  )
@@ -4369,8 +4369,8 @@
   get_local $1
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/strokeStyle (; 49 ;) (type $iv) (param $0 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/strokeStyle (; 49 ;) (type $iv) (param $0 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -4380,7 +4380,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokeStyle
  )
@@ -7427,8 +7427,8 @@
   get_local $3
   i32.store offset=4
  )
- (func $assembly/CanvasRenderingContext2D.test/fill (; 53 ;) (type $iv) (param $0 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/fill (; 53 ;) (type $iv) (param $0 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -7438,7 +7438,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#fill
  )
@@ -10685,8 +10685,8 @@
   get_local $8
   i32.store offset=4
  )
- (func $assembly/CanvasRenderingContext2D.test/stroke (; 56 ;) (type $v)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/stroke (; 56 ;) (type $v)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -10696,7 +10696,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#stroke
  )
  (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#commit (; 57 ;) (type $iv) (param $0 i32)
@@ -10773,8 +10773,8 @@
   i32.const 0
   i32.store offset=4
  )
- (func $assembly/CanvasRenderingContext2D.test/commit (; 58 ;) (type $v)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/commit (; 58 ;) (type $v)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -10784,7 +10784,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#commit
  )
  (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:filter (; 59 ;) (type $iiv) (param $0 i32) (param $1 i32)
@@ -10809,8 +10809,8 @@
   get_local $1
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/filter (; 60 ;) (type $iv) (param $0 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/filter (; 60 ;) (type $iv) (param $0 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -10820,7 +10820,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:filter
  )
@@ -10859,8 +10859,8 @@
   get_local $4
   f64.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/globalAlpha (; 62 ;) (type $Fv) (param $0 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/globalAlpha (; 62 ;) (type $Fv) (param $0 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -10870,7 +10870,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:globalAlpha
  )
@@ -10896,8 +10896,8 @@
   get_local $1
   i32.store8 offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/imageSmoothingEnabled (; 64 ;) (type $iv) (param $0 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/imageSmoothingEnabled (; 64 ;) (type $iv) (param $0 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -10907,7 +10907,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:imageSmoothingEnabled
  )
@@ -10933,8 +10933,8 @@
   get_local $1
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/imageSmoothingQuality (; 66 ;) (type $iv) (param $0 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/imageSmoothingQuality (; 66 ;) (type $iv) (param $0 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -10944,7 +10944,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:imageSmoothingQuality
  )
@@ -10970,8 +10970,8 @@
   get_local $1
   f64.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/shadowBlur (; 68 ;) (type $Fv) (param $0 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/shadowBlur (; 68 ;) (type $Fv) (param $0 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -10981,7 +10981,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowBlur
  )
@@ -11014,8 +11014,8 @@
   get_local $1
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/shadowColor (; 70 ;) (type $iv) (param $0 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/shadowColor (; 70 ;) (type $iv) (param $0 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -11025,7 +11025,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowColor
  )
@@ -11051,8 +11051,8 @@
   get_local $1
   f64.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/shadowOffsetY (; 72 ;) (type $Fv) (param $0 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/shadowOffsetY (; 72 ;) (type $Fv) (param $0 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -11062,7 +11062,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowOffsetY
  )
@@ -11088,8 +11088,8 @@
   get_local $1
   f64.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/shadowOffsetX (; 74 ;) (type $Fv) (param $0 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/shadowOffsetX (; 74 ;) (type $Fv) (param $0 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -11099,7 +11099,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowOffsetX
  )
@@ -11134,8 +11134,8 @@
   i32.store
   get_local $9
  )
- (func $assembly/CanvasRenderingContext2D.test/createRadialGradient (; 76 ;) (type $FFFFFFi) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (result i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/createRadialGradient (; 76 ;) (type $FFFFFFi) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (result i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -11145,7 +11145,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   get_local $2
@@ -11153,8 +11153,8 @@
   get_local $4
   get_local $5
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#createRadialGradient
-  set_global $assembly/CanvasRenderingContext2D.test/grd
-  get_global $assembly/CanvasRenderingContext2D.test/grd
+  set_global $assembly/draw-functions.test/grd
+  get_global $assembly/draw-functions.test/grd
   i32.eqz
   if
    i32.const 0
@@ -11164,7 +11164,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/grd
+  get_global $assembly/draw-functions.test/grd
   i32.const 0
   i32.add
   i32.load
@@ -11228,8 +11228,8 @@
   get_local $4
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/fillGradient (; 78 ;) (type $v)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/fillGradient (; 78 ;) (type $v)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -11239,7 +11239,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/grd
+  get_global $assembly/draw-functions.test/grd
   i32.eqz
   if
    i32.const 0
@@ -11249,8 +11249,8 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
-  get_global $assembly/CanvasRenderingContext2D.test/grd
+  get_global $assembly/draw-functions.test/ctx
+  get_global $assembly/draw-functions.test/grd
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillGradient
  )
  (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokeGradient (; 79 ;) (type $iiv) (param $0 i32) (param $1 i32)
@@ -11312,8 +11312,8 @@
   get_local $4
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/strokeGradient (; 80 ;) (type $v)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/strokeGradient (; 80 ;) (type $v)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -11323,7 +11323,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/grd
+  get_global $assembly/draw-functions.test/grd
   i32.eqz
   if
    i32.const 0
@@ -11333,8 +11333,8 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
-  get_global $assembly/CanvasRenderingContext2D.test/grd
+  get_global $assembly/draw-functions.test/ctx
+  get_global $assembly/draw-functions.test/grd
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokeGradient
  )
  (func $assembly/renderer/Image/Image#set:src (; 81 ;) (type $iiv) (param $0 i32) (param $1 i32)
@@ -11347,7 +11347,7 @@
   call $assembly/renderer/Image/loadImage
   i32.store
  )
- (func $assembly/CanvasRenderingContext2D.test/createImage (; 82 ;) (type $i) (result i32)
+ (func $assembly/draw-functions.test/createImage (; 82 ;) (type $i) (result i32)
   (local $0 i32)
   block (result i32)
    i32.const 20
@@ -11366,12 +11366,12 @@
    i32.const 0
    i32.store8 offset=12
    get_local $0
-   i32.const 504
+   i32.const 488
    i32.store offset=16
    get_local $0
   end
-  set_global $assembly/CanvasRenderingContext2D.test/img
-  get_global $assembly/CanvasRenderingContext2D.test/img
+  set_global $assembly/draw-functions.test/img
+  get_global $assembly/draw-functions.test/img
   i32.eqz
   if
    i32.const 0
@@ -11381,10 +11381,10 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/img
-  i32.const 512
+  get_global $assembly/draw-functions.test/img
+  i32.const 496
   call $assembly/renderer/Image/Image#set:src
-  get_global $assembly/CanvasRenderingContext2D.test/img
+  get_global $assembly/draw-functions.test/img
   i32.const 0
   i32.add
   i32.load
@@ -11419,9 +11419,9 @@
   i32.store
   get_local $4
  )
- (func $assembly/CanvasRenderingContext2D.test/createPattern (; 84 ;) (type $i) (result i32)
+ (func $assembly/draw-functions.test/createPattern (; 84 ;) (type $i) (result i32)
   (local $0 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -11431,7 +11431,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/img
+  get_global $assembly/draw-functions.test/img
   i32.eqz
   if
    i32.const 0
@@ -11442,7 +11442,7 @@
    unreachable
   end
   block $assembly/renderer/Image/Image#get:loaded|inlined.0 (result i32)
-   get_global $assembly/CanvasRenderingContext2D.test/img
+   get_global $assembly/draw-functions.test/img
    set_local $0
    get_local $0
    i32.load8_u offset=12
@@ -11460,12 +11460,12 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
-  get_global $assembly/CanvasRenderingContext2D.test/img
+  get_global $assembly/draw-functions.test/ctx
+  get_global $assembly/draw-functions.test/img
   get_global $src/shared/CanvasPatternRepetition/CanvasPatternRepetition.repeat
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#createPattern
-  set_global $assembly/CanvasRenderingContext2D.test/ptrn
-  get_global $assembly/CanvasRenderingContext2D.test/ptrn
+  set_global $assembly/draw-functions.test/ptrn
+  get_global $assembly/draw-functions.test/ptrn
   i32.const 0
   i32.add
   i32.load
@@ -11529,8 +11529,8 @@
   get_local $4
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/fillPattern (; 86 ;) (type $v)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/fillPattern (; 86 ;) (type $v)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -11540,7 +11540,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ptrn
+  get_global $assembly/draw-functions.test/ptrn
   i32.eqz
   if
    i32.const 0
@@ -11550,8 +11550,8 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
-  get_global $assembly/CanvasRenderingContext2D.test/ptrn
+  get_global $assembly/draw-functions.test/ctx
+  get_global $assembly/draw-functions.test/ptrn
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillPattern
  )
  (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokePattern (; 87 ;) (type $iiv) (param $0 i32) (param $1 i32)
@@ -11613,8 +11613,8 @@
   get_local $4
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/strokePattern (; 88 ;) (type $v)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/strokePattern (; 88 ;) (type $v)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -11624,7 +11624,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ptrn
+  get_global $assembly/draw-functions.test/ptrn
   i32.eqz
   if
    i32.const 0
@@ -11634,8 +11634,8 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
-  get_global $assembly/CanvasRenderingContext2D.test/ptrn
+  get_global $assembly/draw-functions.test/ctx
+  get_global $assembly/draw-functions.test/ptrn
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokePattern
  )
  (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#setTransform (; 89 ;) (type $iFFFFFFv) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64)
@@ -11740,8 +11740,8 @@
   get_local $6
   f64.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/setTransform (; 90 ;) (type $FFFFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/setTransform (; 90 ;) (type $FFFFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -11751,7 +11751,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   get_local $2
@@ -11890,8 +11890,8 @@
   get_local $8
   i32.store offset=4
  )
- (func $assembly/CanvasRenderingContext2D.test/clearRect (; 92 ;) (type $FFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/clearRect (; 92 ;) (type $FFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -11901,7 +11901,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   get_local $2
@@ -12099,8 +12099,8 @@
   i32.add
   i32.store offset=260
  )
- (func $assembly/CanvasRenderingContext2D.test/arcTo (; 94 ;) (type $FFFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/arcTo (; 94 ;) (type $FFFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -12110,7 +12110,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   get_local $2
@@ -12306,8 +12306,8 @@
   i32.add
   i32.store offset=260
  )
- (func $assembly/CanvasRenderingContext2D.test/bezierCurveTo (; 96 ;) (type $FFFFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/bezierCurveTo (; 96 ;) (type $FFFFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -12317,7 +12317,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   get_local $2
@@ -13788,8 +13788,8 @@
   get_local $10
   i32.store offset=4
  )
- (func $assembly/CanvasRenderingContext2D.test/clip (; 98 ;) (type $v)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/clip (; 98 ;) (type $v)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -13799,7 +13799,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#clip
  )
  (func $~lib/array/Array<Path2DElement>#__get (; 99 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
@@ -14055,8 +14055,8 @@
   i32.add
   i32.store offset=260
  )
- (func $assembly/CanvasRenderingContext2D.test/closePath (; 101 ;) (type $v)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/closePath (; 101 ;) (type $v)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -14066,7 +14066,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#closePath
  )
  (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#ellipse (; 102 ;) (type $iFFFFFFFiv) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (param $7 f64) (param $8 i32)
@@ -14261,8 +14261,8 @@
   i32.add
   i32.store offset=260
  )
- (func $assembly/CanvasRenderingContext2D.test/ellipse (; 103 ;) (type $FFFFFFFiv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (param $7 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/ellipse (; 103 ;) (type $FFFFFFFiv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (param $7 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -14272,7 +14272,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   get_local $2
@@ -14483,8 +14483,8 @@
   i32.add
   i32.store offset=260
  )
- (func $assembly/CanvasRenderingContext2D.test/lineTo (; 105 ;) (type $FFv) (param $0 f64) (param $1 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/lineTo (; 105 ;) (type $FFv) (param $0 f64) (param $1 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -14494,7 +14494,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#lineTo
@@ -14699,8 +14699,8 @@
   i32.add
   i32.store offset=260
  )
- (func $assembly/CanvasRenderingContext2D.test/moveTo (; 107 ;) (type $FFv) (param $0 f64) (param $1 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/moveTo (; 107 ;) (type $FFv) (param $0 f64) (param $1 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -14710,7 +14710,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#moveTo
@@ -14909,8 +14909,8 @@
   i32.add
   i32.store offset=260
  )
- (func $assembly/CanvasRenderingContext2D.test/quadraticCurveTo (; 109 ;) (type $FFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/quadraticCurveTo (; 109 ;) (type $FFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -14920,7 +14920,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   get_local $2
@@ -15121,8 +15121,8 @@
   i32.add
   i32.store offset=260
  )
- (func $assembly/CanvasRenderingContext2D.test/rect (; 111 ;) (type $FFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/rect (; 111 ;) (type $FFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -15132,7 +15132,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   get_local $2
@@ -15161,8 +15161,8 @@
   get_local $1
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/globalCompositeOperation (; 113 ;) (type $iv) (param $0 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/globalCompositeOperation (; 113 ;) (type $iv) (param $0 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -15172,7 +15172,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:globalCompositeOperation
  )
@@ -16376,8 +16376,8 @@
   get_local $6
   i32.store offset=4
  )
- (func $assembly/CanvasRenderingContext2D.test/fillRect (; 115 ;) (type $FFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/fillRect (; 115 ;) (type $FFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -16387,7 +16387,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   get_local $2
@@ -17576,9 +17576,9 @@
   get_local $6
   i32.store offset=4
  )
- (func $assembly/CanvasRenderingContext2D.test/drawImage (; 117 ;) (type $FFv) (param $0 f64) (param $1 f64)
+ (func $assembly/draw-functions.test/drawImage (; 117 ;) (type $FFv) (param $0 f64) (param $1 f64)
   (local $2 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -17589,7 +17589,7 @@
    unreachable
   end
   block $assembly/renderer/Image/Image#get:loaded|inlined.1 (result i32)
-   get_global $assembly/CanvasRenderingContext2D.test/img
+   get_global $assembly/draw-functions.test/img
    set_local $2
    get_local $2
    i32.load8_u offset=12
@@ -17607,8 +17607,8 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
-  get_global $assembly/CanvasRenderingContext2D.test/img
+  get_global $assembly/draw-functions.test/ctx
+  get_global $assembly/draw-functions.test/img
   get_local $0
   get_local $1
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#drawImage
@@ -18781,9 +18781,9 @@
   get_local $8
   i32.store offset=4
  )
- (func $assembly/CanvasRenderingContext2D.test/drawImageSize (; 119 ;) (type $FFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
+ (func $assembly/draw-functions.test/drawImageSize (; 119 ;) (type $FFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
   (local $4 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -18794,7 +18794,7 @@
    unreachable
   end
   block $assembly/renderer/Image/Image#get:loaded|inlined.4 (result i32)
-   get_global $assembly/CanvasRenderingContext2D.test/img
+   get_global $assembly/draw-functions.test/img
    set_local $4
    get_local $4
    i32.load8_u offset=12
@@ -18812,8 +18812,8 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
-  get_global $assembly/CanvasRenderingContext2D.test/img
+  get_global $assembly/draw-functions.test/ctx
+  get_global $assembly/draw-functions.test/img
   get_local $0
   get_local $1
   get_local $2
@@ -19968,9 +19968,9 @@
   get_local $12
   i32.store offset=4
  )
- (func $assembly/CanvasRenderingContext2D.test/drawImageSource (; 121 ;) (type $FFFFFFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (param $7 f64)
+ (func $assembly/draw-functions.test/drawImageSource (; 121 ;) (type $FFFFFFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (param $7 f64)
   (local $8 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -19981,7 +19981,7 @@
    unreachable
   end
   block $assembly/renderer/Image/Image#get:loaded|inlined.7 (result i32)
-   get_global $assembly/CanvasRenderingContext2D.test/img
+   get_global $assembly/draw-functions.test/img
    set_local $8
    get_local $8
    i32.load8_u offset=12
@@ -19999,8 +19999,8 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
-  get_global $assembly/CanvasRenderingContext2D.test/img
+  get_global $assembly/draw-functions.test/ctx
+  get_global $assembly/draw-functions.test/img
   get_local $0
   get_local $1
   get_local $2
@@ -21588,8 +21588,8 @@
   get_local $4
   i32.store offset=4
  )
- (func $assembly/CanvasRenderingContext2D.test/fillText (; 123 ;) (type $iFFv) (param $0 i32) (param $1 f64) (param $2 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/fillText (; 123 ;) (type $iFFv) (param $0 i32) (param $1 f64) (param $2 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -21599,7 +21599,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   get_local $2
@@ -23205,8 +23205,8 @@
   get_local $5
   i32.store offset=4
  )
- (func $assembly/CanvasRenderingContext2D.test/fillTextWidth (; 125 ;) (type $iFFFv) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/fillTextWidth (; 125 ;) (type $iFFFv) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -23216,7 +23216,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   get_local $2
@@ -23245,8 +23245,8 @@
   get_local $1
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/direction (; 127 ;) (type $iv) (param $0 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/direction (; 127 ;) (type $iv) (param $0 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -23256,7 +23256,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:direction
  )
@@ -23282,8 +23282,8 @@
   get_local $1
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/font (; 129 ;) (type $iv) (param $0 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/font (; 129 ;) (type $iv) (param $0 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -23293,7 +23293,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:font
  )
@@ -23319,8 +23319,8 @@
   get_local $1
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/textAlign (; 131 ;) (type $iv) (param $0 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/textAlign (; 131 ;) (type $iv) (param $0 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -23330,7 +23330,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:textAlign
  )
@@ -23356,8 +23356,8 @@
   get_local $1
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/textBaseline (; 133 ;) (type $iv) (param $0 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/textBaseline (; 133 ;) (type $iv) (param $0 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -23367,7 +23367,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:textBaseline
  )
@@ -23487,8 +23487,8 @@
   get_local $1
   call $assembly/renderer/CanvasRenderingContext2D/measureText
  )
- (func $assembly/CanvasRenderingContext2D.test/measureText (; 135 ;) (type $iF) (param $0 i32) (result f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/measureText (; 135 ;) (type $iF) (param $0 i32) (result f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -23498,7 +23498,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#measureText
  )
@@ -23524,8 +23524,8 @@
   get_local $1
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/lineCap (; 137 ;) (type $iv) (param $0 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/lineCap (; 137 ;) (type $iv) (param $0 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -23535,7 +23535,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineCap
  )
@@ -23594,9 +23594,9 @@
   get_local $1
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/setLineDash (; 140 ;) (type $FFFv) (param $0 f64) (param $1 f64) (param $2 f64)
+ (func $assembly/draw-functions.test/setLineDash (; 140 ;) (type $FFFv) (param $0 f64) (param $1 f64) (param $2 f64)
   (local $3 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -23622,7 +23622,7 @@
   i32.const 2
   get_local $2
   call $~lib/internal/typedarray/TypedArray<f64>#__set
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $3
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#setLineDash
  )
@@ -23654,8 +23654,8 @@
   get_local $1
   f64.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/lineDashOffset (; 142 ;) (type $Fv) (param $0 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/lineDashOffset (; 142 ;) (type $Fv) (param $0 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -23665,7 +23665,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineDashOffset
  )
@@ -23691,8 +23691,8 @@
   get_local $1
   i32.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/lineJoin (; 144 ;) (type $iv) (param $0 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/lineJoin (; 144 ;) (type $iv) (param $0 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -23702,7 +23702,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineJoin
  )
@@ -23728,8 +23728,8 @@
   get_local $1
   f64.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/lineWidth (; 146 ;) (type $Fv) (param $0 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/lineWidth (; 146 ;) (type $Fv) (param $0 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -23739,7 +23739,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineWidth
  )
@@ -23765,8 +23765,8 @@
   get_local $1
   f64.store offset=8
  )
- (func $assembly/CanvasRenderingContext2D.test/miterLimit (; 148 ;) (type $Fv) (param $0 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/miterLimit (; 148 ;) (type $Fv) (param $0 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -23776,7 +23776,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:miterLimit
  )
@@ -25669,8 +25669,8 @@
   get_local $9
   i32.store offset=4
  )
- (func $assembly/CanvasRenderingContext2D.test/strokeRect (; 150 ;) (type $FFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/strokeRect (; 150 ;) (type $FFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -25680,7 +25680,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   get_local $2
@@ -27935,8 +27935,8 @@
   get_local $4
   i32.store offset=4
  )
- (func $assembly/CanvasRenderingContext2D.test/strokeText (; 152 ;) (type $iFFv) (param $0 i32) (param $1 f64) (param $2 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/strokeText (; 152 ;) (type $iFFv) (param $0 i32) (param $1 f64) (param $2 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -27946,7 +27946,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   get_local $2
@@ -30217,8 +30217,8 @@
   get_local $5
   i32.store offset=4
  )
- (func $assembly/CanvasRenderingContext2D.test/strokeTextWidth (; 154 ;) (type $iFFFv) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/strokeTextWidth (; 154 ;) (type $iFFFv) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -30228,7 +30228,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   get_local $1
   get_local $2
@@ -31205,8 +31205,8 @@
   get_local $3
   i32.store8 offset=12
  )
- (func $assembly/CanvasRenderingContext2D.test/save (; 156 ;) (type $iv) (param $0 i32)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/save (; 156 ;) (type $iv) (param $0 i32)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -31216,7 +31216,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#save
  )
@@ -31907,8 +31907,8 @@
   get_local $2
   i32.store8 offset=12
  )
- (func $assembly/CanvasRenderingContext2D.test/restore (; 158 ;) (type $v)
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+ (func $assembly/draw-functions.test/restore (; 158 ;) (type $v)
+  get_global $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
@@ -31918,7 +31918,7 @@
    call $~lib/env/abort
    unreachable
   end
-  get_global $assembly/CanvasRenderingContext2D.test/ctx
+  get_global $assembly/draw-functions.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#restore
  )
  (func $start (; 159 ;) (type $v)
@@ -31942,7 +31942,7 @@
  )
  (func $null (; 160 ;) (type $v)
  )
- (func $assembly/CanvasRenderingContext2D.test/fill|trampoline (; 161 ;) (type $iv) (param $0 i32)
+ (func $assembly/draw-functions.test/fill|trampoline (; 161 ;) (type $iv) (param $0 i32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -31955,7 +31955,7 @@
    set_local $0
   end
   get_local $0
-  call $assembly/CanvasRenderingContext2D.test/fill
+  call $assembly/draw-functions.test/fill
  )
  (func $~setargc (; 162 ;) (type $iv) (param $0 i32)
   get_local $0

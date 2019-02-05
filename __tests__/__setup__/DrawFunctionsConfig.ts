@@ -1,10 +1,10 @@
 import { ASUtil } from "assemblyscript/lib/loader";
 import { ICanvasSYS } from "../../src";
-import { ICanvasRenderingContext2DTestSuite } from "./CanvasRenderingContext2DTestSuite";
+import { IDrawFunctionsTestSuite } from "./DrawFunctionsTestSuite";
 
-export type WASMModule = ASUtil & ICanvasSYS & ICanvasRenderingContext2DTestSuite;
+export type WASMModule = ASUtil & ICanvasSYS & IDrawFunctionsTestSuite;
 
-export interface ISetupConfig {
+export interface IDrawFunctionConfig {
   drawFunc(ctx: CanvasRenderingContext2D, wasm: WASMModule, shared: any): void;
   expectFunc(ctx: CanvasRenderingContext2D, wasm: WASMModule, shared: any): void;
   beforeEach(ctx: CanvasRenderingContext2D, wasm: WASMModule, shared: any): any;

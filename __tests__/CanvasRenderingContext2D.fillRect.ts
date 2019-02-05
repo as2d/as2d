@@ -1,5 +1,5 @@
-import { run } from "./__setup__/index";
-import { WASMModule } from "./__setup__/ISetupConfig";
+import { run } from "./__setup__/drawFunctions";
+import { WASMModule } from "./__setup__/DrawFunctionsConfig";
 
 run({
   name: "fillRect",

@@ -1,31 +1,14 @@
 import { instantiateBuffer, ICanvasSYS } from "../src";
 import { readFileSync } from "fs";
 import { ASUtil } from "assemblyscript/lib/loader";
+import { IDrawFunctionsTestSuite } from "./__setup__/DrawFunctionsTestSuite";
 
-
-interface ICanvasRenderingContext2DTestSuite {
-  arc(a: number, b: number, c: number, d: number, e: number, f: number): void;
-  arcTo(a: number, b: number, c: number, d: number, e: number): void;
-  bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number): void;
-  clip(): void;
-  closePath(): void;
-  setTransform(a: number, b: number, c: number, d: number, e: number, f: number): void;
-  fill(): void;
-  init(): void;
-  commit(): void;
-  ellipse(x: number, y: number, radiusX: number, radiusY: number, rotation: number, startAngle: number, endAngle: number, anticlockwise: number): void;
-  lineTo(x: number, y: number): void;
-  moveTo(x: number, y: number): void;
-  quadraticCurveTo(cpx: number, cpy: number, x: number, y: number): void;
-  rect(x: number, y: number, width: number, height: number): void;
-}
-
-let buff = readFileSync("./build/CanvasRenderingContext2D.test.wasm");
-let wasm: ASUtil & ICanvasSYS & ICanvasRenderingContext2DTestSuite;
+let buff = readFileSync("./build/draw-functions.test.wasm");
+let wasm: ASUtil & ICanvasSYS & IDrawFunctionsTestSuite;
 let ctx: CanvasRenderingContext2D;
 
 beforeEach(() => {
-  wasm = instantiateBuffer<ICanvasRenderingContext2DTestSuite>(buff, {
+  wasm = instantiateBuffer<IDrawFunctionsTestSuite>(buff, {
     test: {
       log: console.log.bind(console),
       logStr(ptr: number) {

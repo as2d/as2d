@@ -25,28 +25,35 @@ If you want to watch your builds use `npm start`.
   - dispose() function
 - Implement CanvasPattern(s)
   - dispose() function
-- Appropriately test the following functions
-  - fillText()
-  - fillTextWidth()
-  - fillRect()
-  - stroke()
-  - strokeText()
-  - strokeTextWidth()
-  - strokeRect()
-  - clip()
-  - drawImage()
-  - drawImageSize()
-  - drawImageSource()
-
-
-# Roadmap
-
 - Implement the following prototype functions
   - getImageData()
   - putImageData()
   - isPointInPath()
   - isPointInStroke()
 - 100% glue code coverage
+- Save/Restore testing
+  - currentTransform
+  - direction
+  - fillStyle
+  - filter
+  - font
+  - globalAlpha
+  - globalCompositeOperation
+  - imageSmoothingEnabled
+  - imageSmoothingQuality
+  - lineCap
+  - lineDash
+  - lineDashOffset
+  - lineJoin
+  - lineWidth
+  - miterLimit
+  - shadowBlur
+  - shadowColor
+  - shadowOffsetX
+  - shadowOffsetY
+  - strokeStyle
+  - textAlign
+  - textBaseline
 
 # LICENSE
 

@@ -1,14 +1,14 @@
 import { instantiateBuffer } from "../src";
 import { readFileSync } from "fs";
-import { WASMModule } from "./__setup__/ISetupConfig";
-import { ICanvasRenderingContext2DTestSuite } from "./__setup__/CanvasRenderingContext2DTestSuite";
+import { WASMModule } from "./__setup__/DrawFunctionsConfig";
+import { IDrawFunctionsTestSuite } from "./__setup__/DrawFunctionsTestSuite";
 
 let ctx: CanvasRenderingContext2D;
-let buff = readFileSync("./build/CanvasRenderingContext2D.test.wasm");
+let buff = readFileSync("./build/draw-functions.test.wasm");
 let wasm: WASMModule;
 
 beforeEach(() => {
-  wasm = instantiateBuffer<ICanvasRenderingContext2DTestSuite>(buff, {
+  wasm = instantiateBuffer<IDrawFunctionsTestSuite>(buff, {
     test: {
       log: console.log.bind(console),
       logStr(ptr: number) {

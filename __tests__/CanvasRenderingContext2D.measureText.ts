@@ -1,47 +1,20 @@
 import { instantiateBuffer, ICanvasSYS } from "../src";
 import { readFileSync } from "fs";
 import { ASUtil } from "assemblyscript/lib/loader";
-import { GlobalCompositeOperation } from "../src/shared/GlobalCompositeOperation";
-import { ImageSmoothingQuality } from "../src/shared/ImageSmoothingQuality";
-import { CanvasDirection } from "../src/shared/CanvasDirection";
-import { TextAlign } from "../src/shared/TextAlign";
-import { TextBaseline } from "../src/shared/TextBaseline";
+// import { GlobalCompositeOperation } from "../src/shared/GlobalCompositeOperation";
+// import { ImageSmoothingQuality } from "../src/shared/ImageSmoothingQuality";
+// import { CanvasDirection } from "../src/shared/CanvasDirection";
+// import { TextAlign } from "../src/shared/TextAlign";
+// import { TextBaseline } from "../src/shared/TextBaseline";
+import { IDrawFunctionsTestSuite } from "./__setup__/DrawFunctionsTestSuite";
 
-interface ICanvasRenderingContext2DTestSuite {
-  arc(x: number, y: number, r: number, startAngle: number, endAngle: number): void;
-  createImage(): number;
-  createPattern(): number;
-  createRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number): number;
-  fillGradient(): void;
-  fillPattern(): void;
-  init(): void;
-  fillStyle(value: number): void;
-  fillRect(x: number, y: number, width: number, height: number): void;
-  filter(value: number): void;
-  globalAlpha(value: number): void;
-  globalCompositeOperation(value: GlobalCompositeOperation): void;
-  imageSmoothingEnabled(value: 0 | 1): void;
-  imageSmoothingQuality(value: ImageSmoothingQuality): void;
-  setTransform(a: number, b: number, c: number, d: number, e: number, f: number): void;
-  shadowBlur(value: number): void;
-  shadowColor(value: number): void;
-  shadowOffsetX(value: number): void;
-  shadowOffsetY(value: number): void;
-  commit(): void;
-  fillText(text: number, x: number, y: number): void;
-  direction(value: CanvasDirection): void;
-  font(value: number): void;
-  textAlign(value: TextAlign): void;
-  textBaseline(value: TextBaseline): void;
-  measureText(value: number): number;
-}
 
-let buff = readFileSync("./build/CanvasRenderingContext2D.test.wasm");
-let wasm: ASUtil & ICanvasSYS & ICanvasRenderingContext2DTestSuite;
+let buff = readFileSync("./build/draw-functions.test.wasm");
+let wasm: ASUtil & ICanvasSYS & IDrawFunctionsTestSuite;
 let ctx: CanvasRenderingContext2D;
 
 beforeEach(() => {
-  wasm = instantiateBuffer<ICanvasRenderingContext2DTestSuite>(buff, {
+  wasm = instantiateBuffer<IDrawFunctionsTestSuite>(buff, {
     test: {
       log: console.log.bind(console),
       logStr(ptr: number) {

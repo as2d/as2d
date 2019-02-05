@@ -1,7 +1,7 @@
 import { instantiateBuffer, instantiateStreaming, instantiate } from "../src";
 import { readFileSync } from "fs";
 
-const buff = readFileSync("./build/CanvasRenderingContext2D.test.wasm");
+const buff = readFileSync("./build/draw-functions.test.wasm");
 
 /**
  * This is awful code smell. However, in order to get 100% test coverage, the instantiate method
@@ -34,7 +34,8 @@ describe("module instantiation", () => {
   });
 
   it("should instantiate the module from a promise", async () => {
-    const result = await instantiateStreaming(fetch("./build/CanvasRenderingContext2D.test.wasm"), {});
+    // this fetch call is useless, it's used to fake test instantiateStreaming
+    const result = await instantiateStreaming(fetch("./build/draw-functions.test.wasm"), {});
     expect(result).toBeTruthy();
   });
 });

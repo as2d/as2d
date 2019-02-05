@@ -1,15 +1,15 @@
 import { instantiateBuffer, CanvasDirection, GlobalCompositeOperation, GlobalCompositeOperationValue, ImageSmoothingQuality, LineCap, LineJoin, TextAlign, TextBaseline } from "../../src";
-import { ICanvasRenderingContext2DTestSuite } from "./CanvasRenderingContext2DTestSuite";
+import { IDrawFunctionsTestSuite } from "./DrawFunctionsTestSuite";
 import { readFileSync } from "fs";
-import { ISetupConfig, WASMModule } from "./ISetupConfig";
+import { IDrawFunctionConfig, WASMModule } from "./DrawFunctionsConfig";
 import { compositeOperations } from "./compositeOperations";
 
 let canvas: HTMLCanvasElement;
 let ctx: CanvasRenderingContext2D;
-let buff = readFileSync("./build/CanvasRenderingContext2D.test.wasm");
+let buff = readFileSync("./build/draw-functions.test.wasm");
 let wasm: WASMModule;
 
-export function run(config: ISetupConfig): void {
+export function run(config: IDrawFunctionConfig): void {
   const should = (desc: string, condition: boolean) => config.name + " should " + (condition ? "" : "not ") + desc;
 
   beforeEach(() => {
@@ -17,7 +17,7 @@ export function run(config: ISetupConfig): void {
     canvas.width = 400;
     canvas.height = 300;
     ctx = canvas.getContext("2d")!;
-    wasm = instantiateBuffer<ICanvasRenderingContext2DTestSuite>(buff, {
+    wasm = instantiateBuffer<IDrawFunctionsTestSuite>(buff, {
       test: {
         log: console.log.bind(console),
         logStr(ptr: number) {
