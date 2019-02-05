@@ -199,6 +199,10 @@
  (export "setLineDashOffset" (func $assembly/save-restore.test/setLineDashOffset))
  (export "getLineJoin" (func $assembly/save-restore.test/getLineJoin))
  (export "setLineJoin" (func $assembly/save-restore.test/setLineJoin))
+ (export "getLineWidth" (func $assembly/save-restore.test/getLineWidth))
+ (export "setLineWidth" (func $assembly/save-restore.test/setLineWidth))
+ (export "getMiterLimit" (func $assembly/save-restore.test/getMiterLimit))
+ (export "setMiterLimit" (func $assembly/save-restore.test/setMiterLimit))
  (export "__use_context" (func $assembly/internal/getContext/__use_context))
  (export "__image_loaded" (func $assembly/renderer/Image/__image_loaded))
  (export "memory.fill" (func $~lib/memory/memory.fill))
@@ -7024,7 +7028,151 @@
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineJoin
  )
- (func $start (; 100 ;) (type $v)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:lineWidth (; 100 ;) (type $iF) (param $0 i32) (result f64)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  get_local $0
+  i32.load offset=136
+  set_local $1
+  get_local $0
+  i32.load8_u offset=12
+  set_local $2
+  i32.const 0
+  set_local $3
+  get_local $1
+  get_local $2
+  i32.const 3
+  i32.shl
+  i32.add
+  get_local $3
+  i32.add
+  f64.load offset=8
+ )
+ (func $assembly/save-restore.test/getLineWidth (; 101 ;) (type $F) (result f64)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 172
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:lineWidth
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineWidth (; 102 ;) (type $iFv) (param $0 i32) (param $1 f64)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  get_local $0
+  i32.load offset=136
+  set_local $2
+  get_local $0
+  i32.load8_u offset=12
+  set_local $3
+  i32.const 0
+  set_local $4
+  get_local $2
+  get_local $3
+  i32.const 3
+  i32.shl
+  i32.add
+  get_local $4
+  i32.add
+  get_local $1
+  f64.store offset=8
+ )
+ (func $assembly/save-restore.test/setLineWidth (; 103 ;) (type $Fv) (param $0 f64)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 177
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  get_local $0
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineWidth
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:miterLimit (; 104 ;) (type $iF) (param $0 i32) (result f64)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  get_local $0
+  i32.load offset=152
+  set_local $1
+  get_local $0
+  i32.load8_u offset=12
+  set_local $2
+  i32.const 0
+  set_local $3
+  get_local $1
+  get_local $2
+  i32.const 3
+  i32.shl
+  i32.add
+  get_local $3
+  i32.add
+  f64.load offset=8
+ )
+ (func $assembly/save-restore.test/getMiterLimit (; 105 ;) (type $F) (result f64)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 182
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:miterLimit
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:miterLimit (; 106 ;) (type $iFv) (param $0 i32) (param $1 f64)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  get_local $0
+  i32.load offset=152
+  set_local $2
+  get_local $0
+  i32.load8_u offset=12
+  set_local $3
+  i32.const 0
+  set_local $4
+  get_local $2
+  get_local $3
+  i32.const 3
+  i32.shl
+  i32.add
+  get_local $4
+  i32.add
+  get_local $1
+  f64.store offset=8
+ )
+ (func $assembly/save-restore.test/setMiterLimit (; 107 ;) (type $Fv) (param $0 f64)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 187
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  get_local $0
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:miterLimit
+ )
+ (func $start (; 108 ;) (type $v)
   get_global $HEAP_BASE
   get_global $~lib/internal/allocator/AL_MASK
   i32.add
@@ -7043,6 +7191,6 @@
   call $~lib/map/Map<String,CanvasRenderingContext2D>#constructor
   set_global $assembly/internal/getContext/map
  )
- (func $null (; 101 ;) (type $v)
+ (func $null (; 109 ;) (type $v)
  )
 )

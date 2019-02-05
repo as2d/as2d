@@ -167,3 +167,23 @@ export function setLineJoin(value: LineJoin): void {
   assert(ctx);
   ctx.lineJoin = value;
 }
+
+export function getLineWidth(): f64 {
+  assert(ctx);
+  return ctx.lineWidth;
+}
+
+export function setLineWidth(value: f64): void {
+  assert(ctx);
+  ctx.lineWidth = value;
+}
+
+export function getMiterLimit(): f64 {
+  assert(ctx);
+  return ctx.miterLimit;
+}
+
+export function setMiterLimit(value: f64): void {
+  assert(ctx);
+  ctx.miterLimit = value;
+}

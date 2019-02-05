@@ -9,6 +9,10 @@ export interface ISaveRestoreTestSuite {
   getGlobalCompositeOperation(): GlobalCompositeOperation;
   getImageSmoothingEnabled(): number;
   getImageSmoothingQuality(): ImageSmoothingQuality;
+  getLineCap(): LineCap;
+  getLineDashOffset(): number;
+  getLineJoin(): LineJoin;
+  getLineWidth(): number;
   getTransform(): number;
   hardSave(): void;
   init(): void;
@@ -22,11 +26,11 @@ export interface ISaveRestoreTestSuite {
   setGlobalCompositeOperation(value: GlobalCompositeOperation): void;
   setImageSmoothingEnabled(value: number): void;
   setImageSmoothingQuality(value: ImageSmoothingQuality): void;
-  setTransform(a: number, b: number, c: number, d: number, e: number, f: number): void;
   setLineCap(value: LineCap): void;
-  getLineCap(): LineCap;
   setLineDashOffset(value: number): void;
-  getLineDashOffset(): number;
   setLineJoin(value: LineJoin): void;
-  getLineJoin(): LineJoin;
+  setLineWidth(value: number): void;
+  setTransform(a: number, b: number, c: number, d: number, e: number, f: number): void;
+  setMiterLimit(value: number): void;
+  getMiterLimit(): number;
 }
