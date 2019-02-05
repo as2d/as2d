@@ -1,4 +1,4 @@
-import { CanvasDirection } from "../../src";
+import { CanvasDirection, GlobalCompositeOperation } from "../../src";
 
 export interface ISaveRestoreTestSuite {
   getDirection(): CanvasDirection;
@@ -16,4 +16,6 @@ export interface ISaveRestoreTestSuite {
   setFilter(value: number): void;
   getGlobalAlpha(): number;
   setGlobalAlpha(value: number): void;
+  setGlobalCompositeOperation(value: GlobalCompositeOperation): void;
+  getGlobalCompositeOperation(): GlobalCompositeOperation;
 }

@@ -186,6 +186,8 @@
  (export "setFont" (func $assembly/save-restore.test/setFont))
  (export "getGlobalAlpha" (func $assembly/save-restore.test/getGlobalAlpha))
  (export "setGlobalAlpha" (func $assembly/save-restore.test/setGlobalAlpha))
+ (export "getGlobalCompositeOperation" (func $assembly/save-restore.test/getGlobalCompositeOperation))
+ (export "setGlobalCompositeOperation" (func $assembly/save-restore.test/setGlobalCompositeOperation))
  (export "__use_context" (func $assembly/internal/getContext/__use_context))
  (export "__image_loaded" (func $assembly/renderer/Image/__image_loaded))
  (export "memory.fill" (func $~lib/memory/memory.fill))
@@ -6556,7 +6558,79 @@
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:globalAlpha
  )
- (func $start (; 75 ;) (type $v)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:globalCompositeOperation (; 75 ;) (type $ii) (param $0 i32) (result i32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  get_local $0
+  i32.load offset=72
+  set_local $1
+  get_local $0
+  i32.load8_u offset=12
+  set_local $2
+  i32.const 0
+  set_local $3
+  get_local $1
+  get_local $2
+  i32.const 2
+  i32.shl
+  i32.add
+  get_local $3
+  i32.add
+  i32.load offset=8
+ )
+ (func $assembly/save-restore.test/getGlobalCompositeOperation (; 76 ;) (type $i) (result i32)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 107
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:globalCompositeOperation
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:globalCompositeOperation (; 77 ;) (type $iiv) (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  get_local $0
+  i32.load offset=72
+  set_local $2
+  get_local $0
+  i32.load8_u offset=12
+  set_local $3
+  i32.const 0
+  set_local $4
+  get_local $2
+  get_local $3
+  i32.const 2
+  i32.shl
+  i32.add
+  get_local $4
+  i32.add
+  get_local $1
+  i32.store offset=8
+ )
+ (func $assembly/save-restore.test/setGlobalCompositeOperation (; 78 ;) (type $iv) (param $0 i32)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 112
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  get_local $0
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:globalCompositeOperation
+ )
+ (func $start (; 79 ;) (type $v)
   get_global $HEAP_BASE
   get_global $~lib/internal/allocator/AL_MASK
   i32.add
@@ -6575,6 +6649,6 @@
   call $~lib/map/Map<String,CanvasRenderingContext2D>#constructor
   set_global $assembly/internal/getContext/map
  )
- (func $null (; 76 ;) (type $v)
+ (func $null (; 80 ;) (type $v)
  )
 )

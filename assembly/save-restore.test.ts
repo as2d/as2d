@@ -102,3 +102,13 @@ export function setGlobalAlpha(value: f64): void {
   assert(ctx);
   ctx.globalAlpha = value;
 }
+
+export function getGlobalCompositeOperation(): GlobalCompositeOperation {
+  assert(ctx);
+  return ctx.globalCompositeOperation;
+}
+
+export function setGlobalCompositeOperation(value: GlobalCompositeOperation): void {
+  assert(ctx);
+  ctx.globalCompositeOperation = value;
+}
