@@ -37,5 +37,27 @@ export function run<T>(config: ISaveRestoreConfig<T>): void {
         ? config.verifyEquality(initial, final)
         : initial === final).toBeTruthy();
     });
+
+    it(config.name + " property should change with each hard save and restore", () => {
+      const initial: T = config.getValue(wasm);
+
+      for (let i = 0; i < config.values.length; i++) {
+        wasm.hardSave();
+        config.setValue(wasm, config.values[i]);
+      }
+
+      for (let i = config.values.length - 1; i >= 0; i--) {
+        const actual: T = config.getValue(wasm);
+        expect(config.verifyEquality
+          ? config.verifyEquality(actual, config.values[i])
+          : actual === config.values[i]).toBeTruthy();
+        wasm.restore();
+      }
+
+      const final: T = config.getValue(wasm);
+      expect(config.verifyEquality
+        ? config.verifyEquality(initial, final)
+        : initial === final).toBeTruthy();
+    });
   });
 }

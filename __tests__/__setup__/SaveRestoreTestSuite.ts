@@ -1,4 +1,4 @@
-import { CanvasDirection, GlobalCompositeOperation } from "../../src";
+import { CanvasDirection, GlobalCompositeOperation, ImageSmoothingQuality } from "../../src";
 
 export interface ISaveRestoreTestSuite {
   getDirection(): CanvasDirection;
@@ -18,4 +18,9 @@ export interface ISaveRestoreTestSuite {
   setGlobalAlpha(value: number): void;
   setGlobalCompositeOperation(value: GlobalCompositeOperation): void;
   getGlobalCompositeOperation(): GlobalCompositeOperation;
+  getImageSmoothingEnabled(): number;
+  setImageSmoothingEnabled(value: number): void;
+  getImageSmoothingQuality(): ImageSmoothingQuality;
+  setImageSmoothingQuality(value: ImageSmoothingQuality): void;
+  hardSave(): void;
 }

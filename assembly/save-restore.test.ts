@@ -30,6 +30,11 @@ export function save(): void {
   ctx.save();
 }
 
+export function hardSave(): void {
+  assert(ctx);
+  ctx.save(true);
+}
+
 export function restore(): void {
   assert(ctx);
   ctx.restore();
@@ -111,4 +116,24 @@ export function getGlobalCompositeOperation(): GlobalCompositeOperation {
 export function setGlobalCompositeOperation(value: GlobalCompositeOperation): void {
   assert(ctx);
   ctx.globalCompositeOperation = value;
+}
+
+export function getImageSmoothingEnabled(): bool {
+  assert(ctx);
+  return ctx.imageSmoothingEnabled
+}
+
+export function setImageSmoothingEnabled(value: bool): void {
+  assert(ctx);
+  ctx.imageSmoothingEnabled = value;
+}
+
+export function setImageSmoothingQuality(value: ImageSmoothingQuality): void {
+  assert(ctx);
+  ctx.imageSmoothingQuality = value;
+}
+
+export function getImageSmoothingQuality(): ImageSmoothingQuality {
+  assert(ctx);
+  return ctx.imageSmoothingQuality;
 }
