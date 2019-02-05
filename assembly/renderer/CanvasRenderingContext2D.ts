@@ -61,7 +61,6 @@ var defaultLineDash: Float64Array = new Float64Array(0);
  * @param ArrayBuffer buff
  */
 // @ts-ignore: Decorators are valid here
-@inline
 function setArrayBufferIdentity(buff: ArrayBuffer): ArrayBuffer {
   STORE<f64>(buff, 0, 1.0);
   STORE<f64>(buff, 1, 0.0);
@@ -79,7 +78,6 @@ function setArrayBufferIdentity(buff: ArrayBuffer): ArrayBuffer {
  * @param T value
  */
 // @ts-ignore: Decorators are valid here
-@inline
 function setArrayBufferValue<T>(buff: ArrayBuffer, value: T): ArrayBuffer {
   STORE<T>(buff, 0, value);
   return buff;
@@ -92,7 +90,6 @@ function setArrayBufferValue<T>(buff: ArrayBuffer, value: T): ArrayBuffer {
  * @param T value
  */
 // @ts-ignore: Decorators are valid here
-@inline
 function setArrayBufferValue2<T>(buff: ArrayBuffer, a: T, b: T): ArrayBuffer {
   STORE<T>(buff, 0, a);
   STORE<T>(buff, 1, b);
