@@ -1,0 +1,9 @@
+__tests__
+build
+coverage
+mock
+node_modules
+src
+.travis.yml
+jest.config.js
+tsconfig.json
