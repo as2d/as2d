@@ -3,24 +3,24 @@ import { CanvasDirection, GlobalCompositeOperation, ImageSmoothingQuality } from
 export interface ISaveRestoreTestSuite {
   getDirection(): CanvasDirection;
   getFillStyle(): number;
+  getFilter(): number;
   getFont(): number;
+  getGlobalAlpha(): number;
+  getGlobalCompositeOperation(): GlobalCompositeOperation;
+  getImageSmoothingEnabled(): number;
+  getImageSmoothingQuality(): ImageSmoothingQuality;
   getTransform(): number;
+  hardSave(): void;
   init(): void;
   restore(): void;
   save(): void;
   setDirection(value: CanvasDirection): void;
   setFillStyle(value: number): void;
-  setFont(font: number): void;
-  setTransform(a: number, b: number, c: number, d: number, e: number, f: number): void;
-  getFilter(): number;
   setFilter(value: number): void;
-  getGlobalAlpha(): number;
+  setFont(font: number): void;
   setGlobalAlpha(value: number): void;
   setGlobalCompositeOperation(value: GlobalCompositeOperation): void;
-  getGlobalCompositeOperation(): GlobalCompositeOperation;
-  getImageSmoothingEnabled(): number;
   setImageSmoothingEnabled(value: number): void;
-  getImageSmoothingQuality(): ImageSmoothingQuality;
   setImageSmoothingQuality(value: ImageSmoothingQuality): void;
-  hardSave(): void;
+  setTransform(a: number, b: number, c: number, d: number, e: number, f: number): void;
 }
