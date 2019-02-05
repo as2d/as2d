@@ -2,6 +2,10 @@
 @external("__canvas_sys", "addColorStop")
 declare function addColorStop(id: i32, offset: f64, color: string): void;
 
+// @ts-ignore: decorators are valid here
+@external("__canvas_sys", "disposeCanvasGradient")
+declare function disposeCanvasGradient(id: i32): void;
+
 /**
  * The CanvasGradient interface represents an opaque object describing a gradient. It is returned
  * by the methods CanvasRenderingContext2D.createLinearGradient() or
@@ -25,5 +29,12 @@ export class CanvasGradient {
    */
   public addColorStop(offset: f64, color: string): void {
     addColorStop(this.id, max<f64>(min(offset, 0.0), 1.0), color);
+  }
+
+  /**
+   * This method frees the CanvasGradient from the host's gradient index.
+   */
+  public dispose(): void {
+    disposeCanvasGradient(this.id);
   }
 }

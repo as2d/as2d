@@ -28,7 +28,7 @@ beforeEach(() => {
   wasm.init();
 });
 
-describe("fillText", () => {
+describe("measureText", () => {
   it("should call measureText text", () => {
     var i = wasm.measureText(wasm.newString("test"));
     expect(ctx.measureText).toBeCalledWith("test");

@@ -2,6 +2,10 @@
 @external("__canvas_sys", "loadImage")
 declare function loadImage(img: Image, src: string): i32;
 
+// @ts-ignore
+@external("__canvas_sys", "disposeImage")
+declare function disposeImage(id: i32): void;
+
 export class Image {
   private _id: i32 = -1;
   private _width: i32 = 0;
@@ -32,6 +36,10 @@ export class Image {
   public set src(value: string) {
     this._src = value;
     this._id = loadImage(this, value);
+  }
+
+  public dispose(): void {
+    disposeImage(this._id);
   }
 }
 

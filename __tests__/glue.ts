@@ -4,15 +4,19 @@ import { ASUtil } from "assemblyscript/lib/loader";
 import { ICanvasSYS } from "../src/util/ICanvasSYS";
 
 interface IGlueTestSuite {
-  init(): void;
-  getCtxId(): number;
+  addColorStop(): number;
   addLinearGradient(): number;
   addRadialGradient(): number;
-  addColorStop(): number;
+  commit(): void;
   createImage(): number;
   createPattern(): number;
+  disposeImage(): void;
+  disposePattern(): void;
+  getCtxId(): number;
+  init(): void;
+  measureText(): void;
   setBadID(): void;
-  commit(): void;
+  disposeGradient(): void;
 }
 
 var buff = readFileSync("./build/glue.test.wasm");
@@ -112,5 +116,95 @@ describe("glue code", () => {
     wasm.init();
     wasm.setBadID();
     expect(() => wasm.commit()).toThrow();
+  });
+
+  it("should dispose patterns", () => {
+    wasm.useContext("main", ctx);
+    wasm.init();
+    var imgid: number = wasm.createImage();
+    return wasm.loading[imgid].then(() => {
+      var id: number = wasm.createPattern();
+      expect(wasm.patterns[id]).toBeTruthy();
+      wasm.disposePattern();
+      expect(wasm.patterns[id]).toBeFalsy();
+    });
+  });
+
+  it("should throw if canvas id is bad when calling measureText", () => {
+    wasm.useContext("main", ctx);
+    wasm.init();
+    wasm.setBadID();
+    expect(() => wasm.measureText()).toThrow();
+  });
+
+  it("should dispose images", () => {
+    wasm.useContext("main", ctx);
+    var img = wasm.createImage();
+    expect(wasm.loading[img]).toBeInstanceOf(Promise);
+    wasm.loading[img].then(() => {
+      expect(wasm.images[img]).toBeInstanceOf(ImageBitmap);
+      wasm.disposeImage();
+    });
+  });
+
+  it("should fail to create image patterns if the canvas doesn't exist", () => {
+    wasm.useContext("main", ctx);
+    wasm.init();
+    var imgid: number = wasm.createImage();
+    return wasm.loading[imgid].then(() => {
+      wasm.setBadID();
+      expect(() => wasm.createPattern()).toThrow();
+    });
+  });
+
+  it("should fail to create image patterns if the image is disposed", () => {
+    wasm.useContext("main", ctx);
+    wasm.init();
+    var imgid: number = wasm.createImage();
+    return wasm.loading[imgid].then(() => {
+      wasm.disposeImage();
+      expect(() => wasm.createPattern()).toThrow();
+    });
+  });
+
+  it("should dispose canvas gradients", () => {
+    wasm.useContext("main", ctx);
+    wasm.init();
+    var grdid: number = wasm.addLinearGradient();
+    expect(wasm.gradients[grdid]).toBeInstanceOf(CanvasGradient);
+    wasm.disposeGradient();
+    expect(wasm.gradients[grdid]).toBeFalsy();
+  });
+
+  it("should dispose canvas gradients", () => {
+    wasm.useContext("main", ctx);
+    wasm.init();
+    var grdid: number = wasm.addLinearGradient();
+    expect(wasm.gradients[grdid]).toBeInstanceOf(CanvasGradient);
+    wasm.disposeGradient();
+    expect(wasm.gradients[grdid]).toBeFalsy();
+  });
+
+  it("addColorStop should throw if canvas gradient is disposed", () => {
+    wasm.useContext("main", ctx);
+    wasm.init();
+    var grdid: number = wasm.addLinearGradient();
+    expect(wasm.gradients[grdid]).toBeInstanceOf(CanvasGradient);
+    wasm.disposeGradient();
+    expect(() => wasm.addColorStop()).toThrow();
+  });
+
+  it("should throw if creating a RadialGradient and canvas doesn't exist", () => {
+    wasm.useContext("main", ctx);
+    wasm.init();
+    wasm.setBadID();
+    expect(() => wasm.addRadialGradient()).toThrow();
+  });
+
+  it("should throw if creating a LinearGradient and canvas doesn't exist", () => {
+    wasm.useContext("main", ctx);
+    wasm.init();
+    wasm.setBadID();
+    expect(() => wasm.addLinearGradient()).toThrow();
   });
 });

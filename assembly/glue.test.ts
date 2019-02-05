@@ -57,3 +57,23 @@ export function commit(): void {
   assert(ctx);
   ctx.commit();
 }
+
+export function disposePattern(): void {
+  assert(pattern);
+  pattern.dispose();
+}
+
+export function measureText(): void {
+  assert(ctx);
+  ctx.measureText("testing!");
+}
+
+export function disposeImage(): void {
+  assert(img);
+  img.dispose();
+}
+
+export function disposeGradient(): void {
+  assert(grd);
+  grd.dispose();
+}

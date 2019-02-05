@@ -12,8 +12,8 @@ import { LineCap } from "../shared/LineCap";
 import { LineJoin } from "../shared/LineJoin";
 
 export class AS2DGlue<T> {
-  public wasm: (ASUtil & T & ICanvasSYS) | null = null;
   public imports: any = null;
+  public wasm: (ASUtil & T & ICanvasSYS) | null = null;
   private id: number = -1;
 
   public instantiateBuffer(buffer: any, imports: any): ASUtil & T & ICanvasSYS {
@@ -42,11 +42,14 @@ export class AS2DGlue<T> {
 
   private hookImports(): void {
     this.imports.__canvas_sys = {
-      createLinearGradient: this.createLinearGradient.bind(this),
-      createRadialGradient: this.createRadialGradient.bind(this),
       addColorStop: this.addColorStop.bind(this),
-      loadImage: this.loadImage.bind(this),
+      createLinearGradient: this.createLinearGradient.bind(this),
       createPattern: this.createPattern.bind(this),
+      createRadialGradient: this.createRadialGradient.bind(this),
+      disposeCanvasGradient: this.disposeCanvasGradient.bind(this),
+      disposeCanvasPattern: this.disposeCanvasPattern.bind(this),
+      disposeImage: this.disposeImage.bind(this),
+      loadImage: this.loadImage.bind(this),
       measureText: this.measureText.bind(this),
       render: this.render.bind(this),
     };
@@ -114,7 +117,8 @@ export class AS2DGlue<T> {
   }
 
   public measureText(cvsobjid: number, text: number): number {
-    if (!this.wasm!.contexts[cvsobjid]) throw new Error("Cannot find canvas: " + cvsobjid);
+    // The canvas exists, because render was already called
+    // if (!this.wasm!.contexts[cvsobjid]) throw new Error("Cannot find canvas: " + cvsobjid);
     var ctx: CanvasRenderingContext2D = this.wasm!.contexts[cvsobjid];
     return ctx.measureText(this.wasm!.getString(text)).width;
   }
@@ -346,5 +350,17 @@ export class AS2DGlue<T> {
       }
       i = data[i + 1];
     }
+  }
+
+  disposeCanvasPattern(id: number): void {
+    delete this.wasm!.patterns[id];
+  }
+
+  disposeImage(id: number): void {
+    delete this.wasm!.images[id];
+  }
+
+  disposeCanvasGradient(id: number): void {
+    delete this.wasm!.gradients[id];
   }
 }
