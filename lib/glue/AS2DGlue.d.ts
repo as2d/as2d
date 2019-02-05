@@ -1,8 +1,8 @@
 import { ASUtil } from "assemblyscript/lib/loader";
 import { ICanvasSYS } from "../util/ICanvasSYS";
 export declare class AS2DGlue<T> {
-    wasm: (ASUtil & T & ICanvasSYS) | null;
     imports: any;
+    wasm: (ASUtil & T & ICanvasSYS) | null;
     private id;
     instantiateBuffer(buffer: any, imports: any): ASUtil & T & ICanvasSYS;
     instantiateStreaming(response: Promise<Response>, imports: any): Promise<ASUtil & T & ICanvasSYS>;
@@ -17,5 +17,8 @@ export declare class AS2DGlue<T> {
     private createPattern;
     measureText(cvsobjid: number, text: number): number;
     private render;
+    disposeCanvasPattern(id: number): void;
+    disposeImage(id: number): void;
+    disposeCanvasGradient(id: number): void;
 }
 //# sourceMappingURL=AS2DGlue.d.ts.map
