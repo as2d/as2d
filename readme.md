@@ -7,47 +7,10 @@ THIS IS A WORK IN PROGRESS.
 
 # Description
 
-This project attempts to bring in the `CanvasRenderingContext2D` prototype into `AssemblyScript` in
+This project brings the utility of the `CanvasRenderingContext2D` prototype into `AssemblyScript` in
 a very optimized way.
 
-# Testing
-
-To run the tests, use `npm test`. This will compile the `./assembly/` folder, and run `jest`.
-
-If you want to watch your builds use `npm start`.
-
-# TODO:
-
-- Implement CanvasGradient
-  - dispose() function
-- Implement Image(s)
-  - loaded event
-  - dispose() function
-- Implement CanvasPattern(s)
-  - dispose() function
-- Implement the following prototype functions
-  - getImageData()
-  - putImageData()
-  - isPointInPath()
-  - isPointInStroke()
-- 100% glue code coverage
-- Save/Restore testing
-  - globalCompositeOperation
-  - imageSmoothingEnabled
-  - imageSmoothingQuality
-  - lineCap
-  - lineDash
-  - lineDashOffset
-  - lineJoin
-  - lineWidth
-  - miterLimit
-  - shadowBlur
-  - shadowColor
-  - shadowOffsetX
-  - shadowOffsetY
-  - strokeStyle
-  - textAlign
-  - textBaseline
+Please see the wiki for instructions on how to get started!
 
 # LICENSE
 
