@@ -2,8 +2,11 @@
 
 [![Build Status](https://travis-ci.org/as2d/as2d.svg?branch=master)](https://travis-ci.org/as2d/as2d)
 [![Coverage Status](https://coveralls.io/repos/github/as2d/as2d/badge.svg?branch=master)](https://coveralls.io/github/as2d/as2d?branch=master)
-
-THIS IS A WORK IN PROGRESS.
+[![Discord Chat](https://img.shields.io/discord/542768132658429962.svg?style=flat)](https://discord.gg/j4UQCKT)
+![Dependencies](https://img.shields.io/librariesio/github/as2d/as2d.svg?style=flat)
+![Issues](https://img.shields.io/github/issues/as2d/as2d.svg?style=flat)
+![Pull Requests](https://img.shields.io/github/issues-pr/as2d/as2d.svg?style=flat)
+![License](https://img.shields.io/github/license/as2d/as2d.svg?style=flat)
 
 # Description
 
