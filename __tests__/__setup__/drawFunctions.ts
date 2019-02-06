@@ -57,7 +57,7 @@ export function run(config: IDrawFunctionConfig): void {
       await config.drawFunc(ctx2, wasm2, shared);
       wasm2.commit();
       if (config.fillStyle) {
-        expect(ctx2.fillStyle).toBe("#0000ff");
+        expect(ctx2.fillStyle).toBe("#00f");
       } else {
         expect(ctx2.fillStyle).toBe("#000");
       }
@@ -335,7 +335,7 @@ export function run(config: IDrawFunctionConfig): void {
     await config.drawFunc(ctx2, wasm2, shared);
     wasm2.commit();
     if (config.shadowColor) {
-      expect(ctx2.shadowColor).toBe("#0000ff");
+      expect(ctx2.shadowColor).toBe("#00f");
     } else {
       expect(ctx2.shadowColor).toBe("rgba(0, 0, 0, 0)");
     }
@@ -383,7 +383,7 @@ export function run(config: IDrawFunctionConfig): void {
     await config.drawFunc(ctx2, wasm2, shared);
     wasm2.commit();
     if (config.strokeStyle) {
-      expect(ctx2.strokeStyle).toBe("#0000ff");
+      expect(ctx2.strokeStyle).toBe("#00f");
     } else {
       expect(ctx2.strokeStyle).toBe("#000");
     }

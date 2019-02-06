@@ -81,7 +81,6 @@ describe("glue code", () => {
     wasm.useContext("main", ctx);
     wasm.init();
     var id: number = wasm.addLinearGradient();
-    wasm.gradients[id].addColorStop = jest.fn(wasm.gradients[id].addColorStop);
     wasm.addColorStop();
     expect(wasm.gradients[id].addColorStop).toBeCalledWith(1.0, "blue");
   });
