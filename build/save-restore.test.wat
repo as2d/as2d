@@ -203,6 +203,20 @@
  (export "setLineWidth" (func $assembly/save-restore.test/setLineWidth))
  (export "getMiterLimit" (func $assembly/save-restore.test/getMiterLimit))
  (export "setMiterLimit" (func $assembly/save-restore.test/setMiterLimit))
+ (export "getShadowBlur" (func $assembly/save-restore.test/getShadowBlur))
+ (export "setShadowBlur" (func $assembly/save-restore.test/setShadowBlur))
+ (export "getShadowColor" (func $assembly/save-restore.test/getShadowColor))
+ (export "setShadowColor" (func $assembly/save-restore.test/setShadowColor))
+ (export "getShadowOffsetX" (func $assembly/save-restore.test/getShadowOffsetX))
+ (export "setShadowOffsetX" (func $assembly/save-restore.test/setShadowOffsetX))
+ (export "getShadowOffsetY" (func $assembly/save-restore.test/getShadowOffsetY))
+ (export "setShadowOffsetY" (func $assembly/save-restore.test/setShadowOffsetY))
+ (export "getStrokeStyle" (func $assembly/save-restore.test/getStrokeStyle))
+ (export "setStrokeStyle" (func $assembly/save-restore.test/setStrokeStyle))
+ (export "getTextAlign" (func $assembly/save-restore.test/getTextAlign))
+ (export "setTextAlign" (func $assembly/save-restore.test/setTextAlign))
+ (export "getTextBaseline" (func $assembly/save-restore.test/getTextBaseline))
+ (export "setTextBaseline" (func $assembly/save-restore.test/setTextBaseline))
  (export "__use_context" (func $assembly/internal/getContext/__use_context))
  (export "__image_loaded" (func $assembly/renderer/Image/__image_loaded))
  (export "memory.fill" (func $~lib/memory/memory.fill))
@@ -6859,7 +6873,582 @@
   get_local $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:miterLimit
  )
- (func $start (; 112 ;) (type $v)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:shadowBlur (; 112 ;) (type $iF) (param $0 i32) (result f64)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  get_local $0
+  i32.load offset=168
+  set_local $1
+  get_local $0
+  i32.load8_u offset=12
+  set_local $2
+  i32.const 0
+  set_local $3
+  get_local $1
+  get_local $2
+  i32.const 3
+  i32.shl
+  i32.add
+  get_local $3
+  i32.add
+  f64.load offset=8
+ )
+ (func $assembly/save-restore.test/getShadowBlur (; 113 ;) (type $F) (result f64)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 194
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:shadowBlur
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowBlur (; 114 ;) (type $iFv) (param $0 i32) (param $1 f64)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  get_local $0
+  i32.load offset=168
+  set_local $2
+  get_local $0
+  i32.load8_u offset=12
+  set_local $3
+  i32.const 0
+  set_local $4
+  get_local $2
+  get_local $3
+  i32.const 3
+  i32.shl
+  i32.add
+  get_local $4
+  i32.add
+  get_local $1
+  f64.store offset=8
+ )
+ (func $assembly/save-restore.test/setShadowBlur (; 115 ;) (type $Fv) (param $0 f64)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 199
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  get_local $0
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowBlur
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:shadowColor (; 116 ;) (type $ii) (param $0 i32) (result i32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  get_local $0
+  i32.load offset=184
+  set_local $1
+  get_local $0
+  i32.load8_u offset=12
+  set_local $2
+  i32.const 0
+  set_local $3
+  get_local $1
+  get_local $2
+  i32.const 2
+  i32.shl
+  i32.add
+  get_local $3
+  i32.add
+  i32.load offset=8
+ )
+ (func $assembly/save-restore.test/getShadowColor (; 117 ;) (type $i) (result i32)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 204
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:shadowColor
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowColor (; 118 ;) (type $iiv) (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  get_local $1
+  i32.const 0
+  call $~lib/string/String.__eq
+  if
+   get_global $assembly/renderer/CanvasRenderingContext2D/defaultShadowColor
+   set_local $1
+  end
+  get_local $0
+  i32.load offset=184
+  set_local $2
+  get_local $0
+  i32.load8_u offset=12
+  set_local $3
+  i32.const 0
+  set_local $4
+  get_local $2
+  get_local $3
+  i32.const 2
+  i32.shl
+  i32.add
+  get_local $4
+  i32.add
+  get_local $1
+  i32.store offset=8
+ )
+ (func $assembly/save-restore.test/setShadowColor (; 119 ;) (type $iv) (param $0 i32)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 209
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  get_local $0
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowColor
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:shadowOffsetX (; 120 ;) (type $iF) (param $0 i32) (result f64)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  get_local $0
+  i32.load offset=192
+  set_local $1
+  get_local $0
+  i32.load8_u offset=12
+  set_local $2
+  i32.const 0
+  set_local $3
+  get_local $1
+  get_local $2
+  i32.const 3
+  i32.shl
+  i32.add
+  get_local $3
+  i32.add
+  f64.load offset=8
+ )
+ (func $assembly/save-restore.test/getShadowOffsetX (; 121 ;) (type $F) (result f64)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 214
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:shadowOffsetX
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowOffsetX (; 122 ;) (type $iFv) (param $0 i32) (param $1 f64)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  get_local $0
+  i32.load offset=192
+  set_local $2
+  get_local $0
+  i32.load8_u offset=12
+  set_local $3
+  i32.const 0
+  set_local $4
+  get_local $2
+  get_local $3
+  i32.const 3
+  i32.shl
+  i32.add
+  get_local $4
+  i32.add
+  get_local $1
+  f64.store offset=8
+ )
+ (func $assembly/save-restore.test/setShadowOffsetX (; 123 ;) (type $Fv) (param $0 f64)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 219
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  get_local $0
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowOffsetX
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:shadowOffsetY (; 124 ;) (type $iF) (param $0 i32) (result f64)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  get_local $0
+  i32.load offset=208
+  set_local $1
+  get_local $0
+  i32.load8_u offset=12
+  set_local $2
+  i32.const 0
+  set_local $3
+  get_local $1
+  get_local $2
+  i32.const 3
+  i32.shl
+  i32.add
+  get_local $3
+  i32.add
+  f64.load offset=8
+ )
+ (func $assembly/save-restore.test/getShadowOffsetY (; 125 ;) (type $F) (result f64)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 224
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:shadowOffsetY
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowOffsetY (; 126 ;) (type $iFv) (param $0 i32) (param $1 f64)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  get_local $0
+  i32.load offset=208
+  set_local $2
+  get_local $0
+  i32.load8_u offset=12
+  set_local $3
+  i32.const 0
+  set_local $4
+  get_local $2
+  get_local $3
+  i32.const 3
+  i32.shl
+  i32.add
+  get_local $4
+  i32.add
+  get_local $1
+  f64.store offset=8
+ )
+ (func $assembly/save-restore.test/setShadowOffsetY (; 127 ;) (type $Fv) (param $0 f64)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 229
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  get_local $0
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowOffsetY
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:strokeStyle (; 128 ;) (type $ii) (param $0 i32) (result i32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  (local $5 i32)
+  get_local $0
+  i32.load8_u offset=12
+  i32.const 2
+  i32.mul
+  i32.const 255
+  i32.and
+  set_local $1
+  block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.21 (result i32)
+   get_local $0
+   i32.load offset=224
+   set_local $2
+   i32.const 0
+   set_local $3
+   get_local $2
+   get_local $1
+   i32.const 2
+   i32.shl
+   i32.add
+   get_local $3
+   i32.add
+   i32.load offset=8
+  end
+  set_local $4
+  get_local $4
+  get_global $assembly/renderer/CanvasRenderingContext2D/FillStrokeStyleType.String
+  i32.eq
+  if
+   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.22 (result i32)
+    get_local $0
+    i32.load offset=224
+    set_local $3
+    get_local $1
+    i32.const 1
+    i32.add
+    set_local $2
+    i32.const 0
+    set_local $5
+    get_local $3
+    get_local $2
+    i32.const 2
+    i32.shl
+    i32.add
+    get_local $5
+    i32.add
+    i32.load offset=8
+   end
+   return
+  end
+  i32.const 0
+ )
+ (func $assembly/save-restore.test/getStrokeStyle (; 129 ;) (type $i) (result i32)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 234
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:strokeStyle
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokeStyle (; 130 ;) (type $iiv) (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  (local $5 i32)
+  get_local $1
+  i32.const 0
+  call $~lib/string/String.__eq
+  if
+   get_global $assembly/renderer/CanvasRenderingContext2D/defaultBlack
+   set_local $1
+  end
+  get_local $0
+  i32.load8_u offset=12
+  i32.const 2
+  i32.mul
+  i32.const 255
+  i32.and
+  set_local $2
+  get_local $0
+  i32.load offset=224
+  set_local $3
+  get_global $assembly/renderer/CanvasRenderingContext2D/FillStrokeStyleType.String
+  set_local $4
+  i32.const 0
+  set_local $5
+  get_local $3
+  get_local $2
+  i32.const 2
+  i32.shl
+  i32.add
+  get_local $5
+  i32.add
+  get_local $4
+  i32.store offset=8
+  get_local $2
+  i32.const 1
+  i32.add
+  set_local $5
+  i32.const 0
+  set_local $4
+  get_local $3
+  get_local $5
+  i32.const 2
+  i32.shl
+  i32.add
+  get_local $4
+  i32.add
+  get_local $1
+  i32.store offset=8
+ )
+ (func $assembly/save-restore.test/setStrokeStyle (; 131 ;) (type $iv) (param $0 i32)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 239
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  get_local $0
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokeStyle
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:textAlign (; 132 ;) (type $ii) (param $0 i32) (result i32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  get_local $0
+  i32.load offset=236
+  set_local $1
+  get_local $0
+  i32.load8_u offset=12
+  set_local $2
+  i32.const 0
+  set_local $3
+  get_local $1
+  get_local $2
+  i32.const 2
+  i32.shl
+  i32.add
+  get_local $3
+  i32.add
+  i32.load offset=8
+ )
+ (func $assembly/save-restore.test/getTextAlign (; 133 ;) (type $i) (result i32)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 244
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:textAlign
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:textAlign (; 134 ;) (type $iiv) (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  get_local $0
+  i32.load offset=236
+  set_local $2
+  get_local $0
+  i32.load8_u offset=12
+  set_local $3
+  i32.const 0
+  set_local $4
+  get_local $2
+  get_local $3
+  i32.const 2
+  i32.shl
+  i32.add
+  get_local $4
+  i32.add
+  get_local $1
+  i32.store offset=8
+ )
+ (func $assembly/save-restore.test/setTextAlign (; 135 ;) (type $iv) (param $0 i32)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 249
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  get_local $0
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:textAlign
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:textBaseline (; 136 ;) (type $ii) (param $0 i32) (result i32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  get_local $0
+  i32.load offset=244
+  set_local $1
+  get_local $0
+  i32.load8_u offset=12
+  set_local $2
+  i32.const 0
+  set_local $3
+  get_local $1
+  get_local $2
+  i32.const 2
+  i32.shl
+  i32.add
+  get_local $3
+  i32.add
+  i32.load offset=8
+ )
+ (func $assembly/save-restore.test/getTextBaseline (; 137 ;) (type $i) (result i32)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 254
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:textBaseline
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:textBaseline (; 138 ;) (type $iiv) (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  get_local $0
+  i32.load offset=244
+  set_local $2
+  get_local $0
+  i32.load8_u offset=12
+  set_local $3
+  i32.const 0
+  set_local $4
+  get_local $2
+  get_local $3
+  i32.const 2
+  i32.shl
+  i32.add
+  get_local $4
+  i32.add
+  get_local $1
+  i32.store offset=8
+ )
+ (func $assembly/save-restore.test/setTextBaseline (; 139 ;) (type $iv) (param $0 i32)
+  get_global $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 416
+   i32.const 259
+   i32.const 2
+   call $~lib/env/abort
+   unreachable
+  end
+  get_global $assembly/save-restore.test/ctx
+  get_local $0
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:textBaseline
+ )
+ (func $start (; 140 ;) (type $v)
   get_global $HEAP_BASE
   get_global $~lib/internal/allocator/AL_MASK
   i32.add
@@ -6878,6 +7467,6 @@
   call $~lib/map/Map<String,CanvasRenderingContext2D>#constructor
   set_global $assembly/internal/getContext/map
  )
- (func $null (; 113 ;) (type $v)
+ (func $null (; 141 ;) (type $v)
  )
 )

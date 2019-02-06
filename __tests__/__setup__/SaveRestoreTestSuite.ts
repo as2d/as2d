@@ -1,4 +1,4 @@
-import { CanvasDirection, GlobalCompositeOperation, ImageSmoothingQuality, LineCap, LineJoin } from "../../src";
+import { CanvasDirection, GlobalCompositeOperation, ImageSmoothingQuality, LineCap, LineJoin, TextAlign, TextBaseline } from "../../src";
 
 export interface ISaveRestoreTestSuite {
   getDirection(): CanvasDirection;
@@ -13,6 +13,11 @@ export interface ISaveRestoreTestSuite {
   getLineDashOffset(): number;
   getLineJoin(): LineJoin;
   getLineWidth(): number;
+  getMiterLimit(): number;
+  getShadowBlur(): number;
+  getShadowColor(): number;
+  getShadowOffsetX(): number;
+  getShadowOffsetY(): number;
   getTransform(): number;
   hardSave(): void;
   init(): void;
@@ -30,7 +35,16 @@ export interface ISaveRestoreTestSuite {
   setLineDashOffset(value: number): void;
   setLineJoin(value: LineJoin): void;
   setLineWidth(value: number): void;
-  setTransform(a: number, b: number, c: number, d: number, e: number, f: number): void;
   setMiterLimit(value: number): void;
-  getMiterLimit(): number;
+  setShadowBlur(value: number): void;
+  setShadowColor(value: number): void;
+  setShadowOffsetX(value: number): void;
+  setShadowOffsetY(value: number): void;
+  setTransform(a: number, b: number, c: number, d: number, e: number, f: number): void;
+  getStrokeStyle(): number;
+  setStrokeStyle(value: number): void;
+  getTextAlign(): TextAlign;
+  setTextAlign(value: TextAlign): void;
+  getTextBaseline(): TextBaseline;
+  setTextBaseline(value: TextBaseline): void;
 }

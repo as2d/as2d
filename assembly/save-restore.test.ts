@@ -189,3 +189,73 @@ export function setMiterLimit(value: f64): void {
   assert(ctx);
   ctx.miterLimit = value;
 }
+
+export function getShadowBlur(): f64 {
+  assert(ctx);
+  return ctx.shadowBlur;
+}
+
+export function setShadowBlur(value: f64): void {
+  assert(ctx);
+  ctx.shadowBlur = value;
+}
+
+export function getShadowColor(): string {
+  assert(ctx);
+  return ctx.shadowColor;
+}
+
+export function setShadowColor(value: string): void {
+  assert(ctx);
+  ctx.shadowColor = value;
+}
+
+export function getShadowOffsetX(): f64 {
+  assert(ctx);
+  return ctx.shadowOffsetX;
+}
+
+export function setShadowOffsetX(value: f64): void {
+  assert(ctx);
+  ctx.shadowOffsetX = value;
+}
+
+export function getShadowOffsetY(): f64 {
+  assert(ctx);
+  return ctx.shadowOffsetY;
+}
+
+export function setShadowOffsetY(value: f64): void {
+  assert(ctx);
+  ctx.shadowOffsetY = value;
+}
+
+export function getStrokeStyle(): string | null {
+  assert(ctx);
+  return ctx.strokeStyle;
+}
+
+export function setStrokeStyle(value: string): void {
+  assert(ctx);
+  ctx.strokeStyle = value;
+}
+
+export function getTextAlign(): TextAlign {
+  assert(ctx);
+  return ctx.textAlign;
+}
+
+export function setTextAlign(value: TextAlign): void {
+  assert(ctx);
+  ctx.textAlign = value;
+}
+
+export function getTextBaseline(): TextBaseline {
+  assert(ctx);
+  return ctx.textBaseline;
+}
+
+export function setTextBaseline(value: TextBaseline): void {
+  assert(ctx);
+  ctx.textBaseline = value;
+}

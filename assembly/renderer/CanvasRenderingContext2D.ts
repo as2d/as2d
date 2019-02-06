@@ -1080,11 +1080,11 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * The CanvasRenderingContext2D.shadowColor property of the Canvas 2D API specifies the current text
    * representing a CSS Color
    */
-  public get shadowColor(): string | null {
+  public get shadowColor(): string {
     return changetype<string>(LOAD<usize>(this._shadowColorStack, this._stackOffset));
   }
 
-  public set shadowColor(value: string | null) {
+  public set shadowColor(value: string) {
     if (value == null) value = defaultShadowColor;
     STORE<usize>(this._shadowColorStack, this._stackOffset, changetype<usize>(value));
   }
