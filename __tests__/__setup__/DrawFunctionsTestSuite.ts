@@ -68,4 +68,6 @@ export interface IDrawFunctionsTestSuite {
   strokeTextWidth(text: number, x: number, y: number, maxWidth: number): void;
   textAlign(value: TextAlign): void;
   textBaseline(value: TextBaseline): void;
+
+  lineWidthInfinity(): void;
 }

@@ -17,7 +17,6 @@ import { arraysEqual } from "../internal/util";
 import { Path2DElement } from "../internal/Path2DElement";
 import { FillRule } from "../../src/shared/FillRule";
 
-
 //#region EXTERNALS
 
 // @ts-ignore: linked functions can have decorators
@@ -578,8 +577,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   public set globalAlpha(value: f64) {
-    if (value != value) return;
-    STORE<f64>(this._globalAlphaStack, <i32>this._stackOffset, min<f64>(1.0, max<f64>(value, 0.0)));
+    if (!isFinite(value) || value < 0.0 || value > 1.0) return;
+    STORE<f64>(this._globalAlphaStack, <i32>this._stackOffset, value);
   }
 
   /**
@@ -868,7 +867,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   public set lineDashOffset(value: f64) {
-    if (value != value) return;
+    if (!isFinite(value)) return;
     STORE<f64>(this._lineDashOffsetStack, <i32>this._stackOffset, value);
   }
 
@@ -958,6 +957,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   public set lineWidth(value: f64) {
+    if (!isFinite(value) || value < 0) return;
     STORE<f64>(this._lineWidthStack, <i32>this._stackOffset, value);
   }
 
@@ -1000,6 +1000,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   public set miterLimit(value: f64) {
+    if (!isFinite(value) || value < 0) return;
     STORE<f64>(this._miterLimitStack, <i32>this._stackOffset, value);
   }
 
@@ -1043,6 +1044,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   public set shadowBlur(value: f64) {
+    if (!isFinite(value) || value < 0) return;
     STORE<f64>(this._shadowBlurStack, <i32>this._stackOffset, value);
   }
 
@@ -1128,6 +1130,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   public set shadowOffsetX(value: f64) {
+    if (!isFinite(value)) return;
     STORE<f64>(this._shadowOffsetXStack, <i32>this._stackOffset, value);
   }
 
@@ -1170,6 +1173,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   public set shadowOffsetY(value: f64) {
+    if (!isFinite(value)) return;
     STORE<f64>(this._shadowOffsetYStack, <i32>this._stackOffset, value);
   }
 
@@ -1834,6 +1838,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * counter-clockwise between the start and end angles. The default value is false (clockwise).
    */
   public arc(x: f64, y: f64, radius: f64, startAngle: f64, endAngle: f64 , anticlockwise: bool = false): void {
+    if (!isFinite(x + y + radius + startAngle + endAngle) || radius < 0) return;
     this._writePath(CanvasInstruction.Arc, true, 6, x, y, radius, startAngle, endAngle, anticlockwise ? 1.0 : 0.0);
   }
   //#endregion ARC
@@ -1852,6 +1857,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param {f64} radius - The arc's radius. Must be non-negative.
    */
   public arcTo(x1: f64, y1: f64, x2: f64, y2: f64, radius: f64): void {
+    if (!isFinite(x1 + y1 + x2 + y2 + radius) || radius < 0) return;
     this._writePath(CanvasInstruction.ArcTo, true, 5, x1, y1, x2, y2, radius);
   }
   //#endregion ARCTO
@@ -1882,6 +1888,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param {f64} y - The y-axis coordinate of the end point.
    */
   public bezierCurveTo(cp1x: f64, cp1y: f64, cp2x: f64, cp2y: f64, x: f64, y: f64): void {
+    if (!isFinite(cp1x + cp1y + cp2x + cp2y + x + y)) return;
     this._writePath(CanvasInstruction.BezierCurveTo, true, 6, cp1x, cp1y, cp2x, cp2y, x, y);
   }
   //#endregion BEZIERCURVETO
