@@ -2167,7 +2167,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param y - The y-axis coordinate of the point at which to begin drawing the text, in pixels.
    */
   public fillText(text: string, x: f64, y: f64): void {
-    if (text.length == 0) return;
+    if (!isFinite(x + y) || text == null || text.length == 0) return;
     this._updateDirection();
     this._updateFillStyle();
     this._updateFilter();
