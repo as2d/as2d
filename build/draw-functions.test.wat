@@ -261,6 +261,7 @@
  (export "strokeTextWidth" (func $assembly/draw-functions.test/strokeTextWidth))
  (export "save" (func $assembly/draw-functions.test/save))
  (export "restore" (func $assembly/draw-functions.test/restore))
+ (export "imageNull" (func $assembly/draw-functions.test/imageNull))
  (export "__use_context" (func $assembly/internal/getContext/__use_context))
  (export "__image_loaded" (func $assembly/renderer/Image/__image_loaded))
  (export "memory.fill" (func $~lib/memory/memory.fill))
@@ -16254,13 +16255,31 @@
   (local $16 f64)
   (local $17 f64)
   (local $18 f64)
-  block $assembly/renderer/Image/Image#get:loaded|inlined.3 (result i32)
-   local.get $1
-   i32.load8_u offset=12
-  end
+  local.get $1
   i32.const 0
-  i32.ne
-  i32.eqz
+  i32.eq
+  local.tee $4
+  if (result i32)
+   local.get $4
+  else   
+   local.get $2
+   local.get $3
+   f64.add
+   call $~lib/builtins/isFinite<f64>
+   i32.eqz
+  end
+  local.tee $4
+  if (result i32)
+   local.get $4
+  else   
+   block $assembly/renderer/Image/Image#get:loaded|inlined.2 (result i32)
+    local.get $1
+    i32.load8_u offset=12
+   end
+   i32.const 0
+   i32.ne
+   i32.eqz
+  end
   if
    return
   end
@@ -17421,32 +17440,12 @@
   i32.store offset=4
  )
  (func $assembly/draw-functions.test/drawImage (; 129 ;) (type $FFv) (param $0 f64) (param $1 f64)
-  (local $2 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
    i32.const 328
    i32.const 211
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  block $assembly/renderer/Image/Image#get:loaded|inlined.1 (result i32)
-   global.get $assembly/draw-functions.test/img
-   local.set $2
-   local.get $2
-   i32.load8_u offset=12
-   i32.const 0
-   i32.ne
-  end
-  i32.const 0
-  i32.ne
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 328
-   i32.const 212
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -17471,7 +17470,7 @@
   (local $16 f64)
   (local $17 f64)
   (local $18 f64)
-  block $assembly/renderer/Image/Image#get:loaded|inlined.6 (result i32)
+  block $assembly/renderer/Image/Image#get:loaded|inlined.4 (result i32)
    local.get $1
    i32.load8_u offset=12
   end
@@ -18626,32 +18625,12 @@
   i32.store offset=4
  )
  (func $assembly/draw-functions.test/drawImageSize (; 131 ;) (type $FFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
-  (local $4 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
    i32.const 328
-   i32.const 217
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  block $assembly/renderer/Image/Image#get:loaded|inlined.4 (result i32)
-   global.get $assembly/draw-functions.test/img
-   local.set $4
-   local.get $4
-   i32.load8_u offset=12
-   i32.const 0
-   i32.ne
-  end
-  i32.const 0
-  i32.ne
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 328
-   i32.const 218
+   i32.const 216
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -18674,7 +18653,7 @@
   (local $16 f64)
   (local $17 i32)
   (local $18 i32)
-  block $assembly/renderer/Image/Image#get:loaded|inlined.9 (result i32)
+  block $assembly/renderer/Image/Image#get:loaded|inlined.6 (result i32)
    local.get $1
    i32.load8_u offset=12
   end
@@ -19813,32 +19792,12 @@
   i32.store offset=4
  )
  (func $assembly/draw-functions.test/drawImageSource (; 133 ;) (type $FFFFFFFFv) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (param $7 f64)
-  (local $8 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
    i32.const 0
    i32.const 328
-   i32.const 223
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  block $assembly/renderer/Image/Image#get:loaded|inlined.7 (result i32)
-   global.get $assembly/draw-functions.test/img
-   local.set $8
-   local.get $8
-   i32.load8_u offset=12
-   i32.const 0
-   i32.ne
-  end
-  i32.const 0
-  i32.ne
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 328
-   i32.const 224
+   i32.const 221
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -21438,7 +21397,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 229
+   i32.const 226
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -23055,7 +23014,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 234
+   i32.const 231
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -23095,7 +23054,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 239
+   i32.const 236
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -23132,7 +23091,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 244
+   i32.const 241
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -23169,7 +23128,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 249
+   i32.const 246
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -23206,7 +23165,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 254
+   i32.const 251
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -23337,7 +23296,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 259
+   i32.const 256
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -23374,7 +23333,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 264
+   i32.const 261
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -23445,7 +23404,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 269
+   i32.const 266
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -23504,7 +23463,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 278
+   i32.const 275
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -23541,7 +23500,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 283
+   i32.const 280
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -23592,7 +23551,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 288
+   i32.const 285
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -23643,7 +23602,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 293
+   i32.const 290
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -25547,7 +25506,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 298
+   i32.const 295
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -27813,7 +27772,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 303
+   i32.const 300
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -30095,7 +30054,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 308
+   i32.const 305
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -31083,7 +31042,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 313
+   i32.const 310
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -31785,7 +31744,7 @@
   if
    i32.const 0
    i32.const 328
-   i32.const 318
+   i32.const 315
    i32.const 2
    call $~lib/env/abort
    unreachable
@@ -31793,7 +31752,11 @@
   global.get $assembly/draw-functions.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#restore
  )
- (func $start (; 171 ;) (type $v)
+ (func $assembly/draw-functions.test/imageNull (; 171 ;) (type $v)
+  i32.const 0
+  global.set $assembly/draw-functions.test/img
+ )
+ (func $start (; 172 ;) (type $v)
   global.get $HEAP_BASE
   global.get $~lib/internal/allocator/AL_MASK
   i32.add
@@ -31812,9 +31775,9 @@
   call $~lib/map/Map<String,CanvasRenderingContext2D>#constructor
   global.set $assembly/internal/getContext/map
  )
- (func $null (; 172 ;) (type $v)
+ (func $null (; 173 ;) (type $v)
  )
- (func $assembly/draw-functions.test/fill|trampoline (; 173 ;) (type $iv) (param $0 i32)
+ (func $assembly/draw-functions.test/fill|trampoline (; 174 ;) (type $iv) (param $0 i32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -31829,7 +31792,7 @@
   local.get $0
   call $assembly/draw-functions.test/fill
  )
- (func $~setargc (; 174 ;) (type $iv) (param $0 i32)
+ (func $~setargc (; 175 ;) (type $iv) (param $0 i32)
   local.get $0
   global.set $~argc
  )

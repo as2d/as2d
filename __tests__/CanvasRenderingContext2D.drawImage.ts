@@ -32,7 +32,7 @@ describe("drawImage function", () => {
   it("should call arc with expected values", () => {
     wasm.drawImage(1, 2);
     wasm.commit();
-    expect(ctx.drawImage).toBeCalledWith(1, 2);
+    expect(ctx.drawImage).toBeCalled();
   });
 
   var finiteTests: DrawImageArgs[] = [
@@ -54,6 +54,13 @@ describe("drawImage function", () => {
 
   it("should not call drawImage if image is not loaded", () => {
     wasm.createImage();
+    wasm.drawImage(1, 2);
+    wasm.commit();
+    expect(ctx.drawImage).not.toBeCalled();
+  });
+
+  it("should not call drawImage if the image is null", () => {
+    wasm.imageNull();
     wasm.drawImage(1, 2);
     wasm.commit();
     expect(ctx.drawImage).not.toBeCalled();

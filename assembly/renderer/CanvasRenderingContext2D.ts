@@ -1951,7 +1951,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * corner of the source image.
    */
   public drawImage(image: Image, dx: f64, dy: f64): void {
-    if (!image.loaded) return;
+    if (image == null || !isFinite(dx + dy) || !image.loaded) return;
     this._updateFilter();
     this._updateGlobalAlpha();
     this._updateGlobalCompositeOperation();

@@ -69,5 +69,5 @@ export interface IDrawFunctionsTestSuite {
   textAlign(value: TextAlign): void;
   textBaseline(value: TextBaseline): void;
 
-  lineWidthInfinity(): void;
+  imageNull(): void;
 }
