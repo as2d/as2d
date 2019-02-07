@@ -1986,7 +1986,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * of the drawn image. If not specified, the image is not scaled in height when drawn.
    */
   public drawImageSize(image: Image, dx: f64, dy: f64, dWidth: f64, dHeight: f64): void {
-    if (!image.loaded) return;
+    if (image == null || !isFinite(dx + dy + dWidth + dHeight) || !image.loaded) return;
     this._updateFilter();
     this._updateGlobalAlpha();
     this._updateGlobalCompositeOperation();

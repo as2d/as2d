@@ -17470,13 +17470,35 @@
   (local $16 f64)
   (local $17 f64)
   (local $18 f64)
-  block $assembly/renderer/Image/Image#get:loaded|inlined.4 (result i32)
-   local.get $1
-   i32.load8_u offset=12
-  end
+  local.get $1
   i32.const 0
-  i32.ne
-  i32.eqz
+  i32.eq
+  local.tee $6
+  if (result i32)
+   local.get $6
+  else   
+   local.get $2
+   local.get $3
+   f64.add
+   local.get $4
+   f64.add
+   local.get $5
+   f64.add
+   call $~lib/builtins/isFinite<f64>
+   i32.eqz
+  end
+  local.tee $6
+  if (result i32)
+   local.get $6
+  else   
+   block $assembly/renderer/Image/Image#get:loaded|inlined.4 (result i32)
+    local.get $1
+    i32.load8_u offset=12
+   end
+   i32.const 0
+   i32.ne
+   i32.eqz
+  end
   if
    return
   end
