@@ -2132,8 +2132,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param height - The rectangle's height. Positive values are down, and negative are up.
    */
   public fillRect(x: f64, y: f64, width: f64, height: f64): void {
-    if (width == 0.0) return;
-    if (height == 0.0) return;
+    if (!isFinite(x + y + width + height)) return;
     this._updateFillStyle();
     this._updateFilter();
     this._updateGlobalAlpha();
