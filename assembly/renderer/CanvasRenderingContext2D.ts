@@ -2207,8 +2207,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * user agent will adjust the kerning, select a more horizontally condensed font (if one is available or can be generated without loss of quality), or scale down to a smaller font size in order to fit the text in the specified width.
    */
   public fillTextWidth(text: string, x: f64, y: f64, maxWidth: f64): void {
-    if (text.length == 0) return;
-    if (maxWidth <= 0.0) return;
+    if (!isFinite(x + y) || text == null || text.length == 0 || maxWidth < 0) return;
     this._updateDirection();
     this._updateFillStyle();
     this._updateFilter();

@@ -22971,10 +22971,28 @@
   (local $19 i32)
   (local $20 f64)
   (local $21 f64)
-  local.get $1
-  i32.load
-  i32.const 0
-  i32.eq
+  local.get $2
+  local.get $3
+  f64.add
+  call $~lib/builtins/isFinite<f64>
+  i32.eqz
+  local.tee $4
+  if (result i32)
+   local.get $4
+  else   
+   local.get $1
+   i32.const 0
+   call $~lib/string/String.__eq
+  end
+  local.tee $4
+  if (result i32)
+   local.get $4
+  else   
+   local.get $1
+   i32.load
+   i32.const 0
+   i32.eq
+  end
   if
    return
   end
