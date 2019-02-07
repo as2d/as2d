@@ -24,7 +24,7 @@
   "author": "Joshua <tenner.joshua@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "assemblyscript": "github:assemblyscript/assemblyscript#01cade13f93cdf56bae92fa7d165f57a55cbdd69"
+    "assemblyscript": "github:assemblyscript/assemblyscript"
   },
   "devDependencies": {
     "@types/jest": "^24.0.0",

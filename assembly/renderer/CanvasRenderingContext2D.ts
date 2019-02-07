@@ -2030,7 +2030,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * of the drawn image. If not specified, the image is not scaled in height when drawn.
    */
   public drawImageSource(image: Image, sx: f64, sy: f64, sWidth: f64, sHeight: f64, dx: f64, dy: f64, dWidth: f64, dHeight: f64): void {
-    if (!image.loaded) return;
+    if (image == null || !isFinite(sx + sy + sWidth + sHeight + dx + dy + dWidth + dHeight) || !image.loaded) return;
     this._updateFilter();
     this._updateGlobalAlpha();
     this._updateGlobalCompositeOperation();
@@ -2067,6 +2067,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * (counter-clockwise). The default value is false (clockwise).
    */
   public ellipse(x: f64, y: f64, radiusX: f64, radiusY: f64, rotation: f64, startAngle: f64, endAngle: f64, anticlockwise: bool = false): void {
+    if (!isFinite(x + y + radiusX + radiusY + rotation + startAngle + endAngle) || radiusX < 0 || radiusY < 0) return;
     this._writePath(
       CanvasInstruction.Ellipse,
       true, 8,

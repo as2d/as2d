@@ -1,15 +1,15 @@
 (module
  (type $iii (func (param i32 i32) (result i32)))
- (type $iiiiv (func (param i32 i32 i32 i32)))
+ (type $iiii_ (func (param i32 i32 i32 i32)))
  (type $ii (func (param i32) (result i32)))
- (type $iiiv (func (param i32 i32 i32)))
- (type $iv (func (param i32)))
+ (type $iii_ (func (param i32 i32 i32)))
+ (type $i_ (func (param i32)))
  (type $iiii (func (param i32 i32 i32) (result i32)))
- (type $iiv (func (param i32 i32)))
+ (type $ii_ (func (param i32 i32)))
  (type $iFi (func (param i32 f64) (result i32)))
  (type $i (func (result i32)))
  (type $iiiiii (func (param i32 i32 i32 i32 i32) (result i32)))
- (type $v (func))
+ (type $_ (func))
  (import "env" "abort" (func $~lib/env/abort (param i32 i32 i32 i32)))
  (memory $0 1)
  (data (i32.const 8) "\04\00\00\00#\000\000\000\00")
@@ -163,8 +163,6 @@
  (export "writeThreeTimes" (func $assembly/Buffer.test/writeThreeTimes))
  (export "__use_context" (func $assembly/internal/getContext/__use_context))
  (export "__image_loaded" (func $assembly/renderer/Image/__image_loaded))
- (export "memory.fill" (func $~lib/memory/memory.fill))
- (export "memory.copy" (func $~lib/memory/memory.copy))
  (export "memory.compare" (func $~lib/memory/memory.compare))
  (export "memory.allocate" (func $~lib/memory/memory.allocate))
  (export "memory.free" (func $~lib/memory/memory.free))
@@ -290,7 +288,7 @@
   i32.store
   local.get $1
  )
- (func $~lib/internal/memory/memset (; 4 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/internal/memory/memset (; 4 ;) (type $iii_) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i64)
@@ -554,6 +552,7 @@
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
+  (local $6 i32)
   local.get $1
   i32.const 134217727
   i32.gt_u
@@ -572,16 +571,20 @@
   local.get $2
   call $~lib/internal/arraybuffer/allocateUnsafe
   local.set $3
-  local.get $3
-  global.get $~lib/internal/arraybuffer/HEADER_SIZE
-  i32.add
-  local.set $4
-  i32.const 0
-  local.set $5
-  local.get $4
-  local.get $5
-  local.get $2
-  call $~lib/internal/memory/memset
+  block $memory.fill|inlined.0
+   local.get $3
+   global.get $~lib/internal/arraybuffer/HEADER_SIZE
+   i32.add
+   local.set $4
+   i32.const 0
+   local.set $5
+   local.get $2
+   local.set $6
+   local.get $4
+   local.get $5
+   local.get $6
+   call $~lib/internal/memory/memset
+  end
   block (result i32)
    local.get $0
    i32.eqz
@@ -629,6 +632,7 @@
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
+  (local $6 i32)
   local.get $1
   global.get $~lib/internal/arraybuffer/MAX_BLENGTH
   i32.gt_u
@@ -654,14 +658,16 @@
    local.set $4
    i32.const 0
    local.set $5
+   local.get $1
+   local.set $6
    local.get $4
    local.get $5
-   local.get $1
+   local.get $6
    call $~lib/internal/memory/memset
   end
   local.get $3
  )
- (func $~lib/map/Map<String,CanvasRenderingContext2D>#clear (; 9 ;) (type $iv) (param $0 i32)
+ (func $~lib/map/Map<String,CanvasRenderingContext2D>#clear (; 9 ;) (type $i_) (param $0 i32)
   local.get $0
   i32.const 0
   i32.const 16
@@ -744,201 +750,272 @@
  )
  (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferIdentity (; 12 ;) (type $ii) (param $0 i32) (result i32)
   (local $1 i32)
-  (local $2 f64)
-  (local $3 i32)
-  i32.const 0
-  local.set $1
-  f64.const 1
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $0
-  local.get $1
-  i32.const 3
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  local.get $2
-  f64.store offset=8
-  i32.const 1
-  local.set $3
-  f64.const 0
-  local.set $2
-  i32.const 0
-  local.set $1
-  local.get $0
-  local.get $3
-  i32.const 3
-  i32.shl
-  i32.add
-  local.get $1
-  i32.add
-  local.get $2
-  f64.store offset=8
-  i32.const 2
-  local.set $1
-  f64.const 0
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $0
-  local.get $1
-  i32.const 3
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  local.get $2
-  f64.store offset=8
-  i32.const 3
-  local.set $3
-  f64.const 1
-  local.set $2
-  i32.const 0
-  local.set $1
-  local.get $0
-  local.get $3
-  i32.const 3
-  i32.shl
-  i32.add
-  local.get $1
-  i32.add
-  local.get $2
-  f64.store offset=8
-  i32.const 4
-  local.set $1
-  f64.const 0
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $0
-  local.get $1
-  i32.const 3
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  local.get $2
-  f64.store offset=8
-  i32.const 5
-  local.set $3
-  f64.const 0
-  local.set $2
-  i32.const 0
-  local.set $1
-  local.get $0
-  local.get $3
-  i32.const 3
-  i32.shl
-  i32.add
-  local.get $1
-  i32.add
-  local.get $2
-  f64.store offset=8
+  (local $2 i32)
+  (local $3 f64)
+  (local $4 i32)
+  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.0
+   local.get $0
+   local.set $1
+   i32.const 0
+   local.set $2
+   f64.const 1
+   local.set $3
+   i32.const 0
+   local.set $4
+   local.get $1
+   local.get $2
+   i32.const 3
+   i32.shl
+   i32.add
+   local.get $4
+   i32.add
+   local.get $3
+   f64.store offset=8
+  end
+  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.1
+   local.get $0
+   local.set $4
+   i32.const 1
+   local.set $2
+   f64.const 0
+   local.set $3
+   i32.const 0
+   local.set $1
+   local.get $4
+   local.get $2
+   i32.const 3
+   i32.shl
+   i32.add
+   local.get $1
+   i32.add
+   local.get $3
+   f64.store offset=8
+  end
+  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.2
+   local.get $0
+   local.set $1
+   i32.const 2
+   local.set $2
+   f64.const 0
+   local.set $3
+   i32.const 0
+   local.set $4
+   local.get $1
+   local.get $2
+   i32.const 3
+   i32.shl
+   i32.add
+   local.get $4
+   i32.add
+   local.get $3
+   f64.store offset=8
+  end
+  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.3
+   local.get $0
+   local.set $4
+   i32.const 3
+   local.set $2
+   f64.const 1
+   local.set $3
+   i32.const 0
+   local.set $1
+   local.get $4
+   local.get $2
+   i32.const 3
+   i32.shl
+   i32.add
+   local.get $1
+   i32.add
+   local.get $3
+   f64.store offset=8
+  end
+  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.4
+   local.get $0
+   local.set $1
+   i32.const 4
+   local.set $2
+   f64.const 0
+   local.set $3
+   i32.const 0
+   local.set $4
+   local.get $1
+   local.get $2
+   i32.const 3
+   i32.shl
+   i32.add
+   local.get $4
+   i32.add
+   local.get $3
+   f64.store offset=8
+  end
+  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.5
+   local.get $0
+   local.set $4
+   i32.const 5
+   local.set $2
+   f64.const 0
+   local.set $3
+   i32.const 0
+   local.set $1
+   local.get $4
+   local.get $2
+   i32.const 3
+   i32.shl
+   i32.add
+   local.get $1
+   i32.add
+   local.get $3
+   f64.store offset=8
+  end
   local.get $0
  )
  (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<i32> (; 13 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
-  i32.const 0
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $0
-  local.get $2
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  local.get $1
-  i32.store offset=8
+  (local $4 i32)
+  (local $5 i32)
+  block $~lib/internal/arraybuffer/STORE<i32,i32>|inlined.0
+   local.get $0
+   local.set $2
+   i32.const 0
+   local.set $3
+   local.get $1
+   local.set $4
+   i32.const 0
+   local.set $5
+   local.get $2
+   local.get $3
+   i32.const 2
+   i32.shl
+   i32.add
+   local.get $5
+   i32.add
+   local.get $4
+   i32.store offset=8
+  end
   local.get $0
  )
  (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue2<usize> (; 14 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
-  i32.const 0
-  local.set $3
-  i32.const 0
-  local.set $4
-  local.get $0
-  local.get $3
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $4
-  i32.add
-  local.get $1
-  i32.store offset=8
-  i32.const 1
-  local.set $4
-  i32.const 0
-  local.set $3
-  local.get $0
-  local.get $4
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  local.get $2
-  i32.store offset=8
+  (local $5 i32)
+  (local $6 i32)
+  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.0
+   local.get $0
+   local.set $3
+   i32.const 0
+   local.set $4
+   local.get $1
+   local.set $5
+   i32.const 0
+   local.set $6
+   local.get $3
+   local.get $4
+   i32.const 2
+   i32.shl
+   i32.add
+   local.get $6
+   i32.add
+   local.get $5
+   i32.store offset=8
+  end
+  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.1
+   local.get $0
+   local.set $6
+   i32.const 1
+   local.set $5
+   local.get $2
+   local.set $4
+   i32.const 0
+   local.set $3
+   local.get $6
+   local.get $5
+   i32.const 2
+   i32.shl
+   i32.add
+   local.get $3
+   i32.add
+   local.get $4
+   i32.store offset=8
+  end
   local.get $0
  )
  (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<usize> (; 15 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
-  i32.const 0
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $0
-  local.get $2
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  local.get $1
-  i32.store offset=8
+  (local $4 i32)
+  (local $5 i32)
+  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.2
+   local.get $0
+   local.set $2
+   i32.const 0
+   local.set $3
+   local.get $1
+   local.set $4
+   i32.const 0
+   local.set $5
+   local.get $2
+   local.get $3
+   i32.const 2
+   i32.shl
+   i32.add
+   local.get $5
+   i32.add
+   local.get $4
+   i32.store offset=8
+  end
   local.get $0
  )
  (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<f64> (; 16 ;) (type $iFi) (param $0 i32) (param $1 f64) (result i32)
   (local $2 i32)
   (local $3 i32)
-  i32.const 0
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $0
-  local.get $2
-  i32.const 3
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  local.get $1
-  f64.store offset=8
+  (local $4 f64)
+  (local $5 i32)
+  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.6
+   local.get $0
+   local.set $2
+   i32.const 0
+   local.set $3
+   local.get $1
+   local.set $4
+   i32.const 0
+   local.set $5
+   local.get $2
+   local.get $3
+   i32.const 3
+   i32.shl
+   i32.add
+   local.get $5
+   i32.add
+   local.get $4
+   f64.store offset=8
+  end
   local.get $0
  )
  (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<bool> (; 17 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
-  i32.const 0
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $0
-  local.get $2
-  i32.const 0
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  local.get $1
-  i32.store8 offset=8
+  (local $4 i32)
+  (local $5 i32)
+  block $~lib/internal/arraybuffer/STORE<bool,bool>|inlined.0
+   local.get $0
+   local.set $2
+   i32.const 0
+   local.set $3
+   local.get $1
+   local.set $4
+   i32.const 0
+   local.set $5
+   local.get $2
+   local.get $3
+   i32.const 0
+   i32.shl
+   i32.add
+   local.get $5
+   i32.add
+   local.get $4
+   i32.store8 offset=8
+  end
   local.get $0
  )
  (func $~lib/array/Array<Path2DElement>#constructor (; 18 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
@@ -946,6 +1023,7 @@
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
+  (local $6 i32)
   local.get $1
   i32.const 268435454
   i32.gt_u
@@ -985,16 +1063,20 @@
   local.get $0
   local.get $1
   i32.store offset=4
-  local.get $3
-  global.get $~lib/internal/arraybuffer/HEADER_SIZE
-  i32.add
-  local.set $4
-  i32.const 0
-  local.set $5
-  local.get $4
-  local.get $5
-  local.get $2
-  call $~lib/internal/memory/memset
+  block $memory.fill|inlined.2
+   local.get $3
+   global.get $~lib/internal/arraybuffer/HEADER_SIZE
+   i32.add
+   local.set $4
+   i32.const 0
+   local.set $5
+   local.get $2
+   local.set $6
+   local.get $4
+   local.get $5
+   local.get $6
+   call $~lib/internal/memory/memset
+  end
   local.get $0
  )
  (func $assembly/internal/Path2DElement/Path2DElement#constructor (; 19 ;) (type $ii) (param $0 i32) (result i32)
@@ -1058,7 +1140,7 @@
   f64.store offset=120
   local.get $0
  )
- (func $~lib/internal/memory/memcpy (; 20 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/internal/memory/memcpy (; 20 ;) (type $iii_) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -2259,7 +2341,7 @@
    i32.store8
   end
  )
- (func $~lib/internal/memory/memmove (; 21 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/internal/memory/memmove (; 21 ;) (type $iii_) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   local.get $0
   local.get $1
@@ -2486,7 +2568,7 @@
    end
   end
  )
- (func $~lib/allocator/arena/__memory_free (; 22 ;) (type $iv) (param $0 i32)
+ (func $~lib/allocator/arena/__memory_free (; 22 ;) (type $i_) (param $0 i32)
   nop
  )
  (func $~lib/internal/arraybuffer/reallocateUnsafe (; 23 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
@@ -2494,6 +2576,7 @@
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
+  (local $6 i32)
   local.get $0
   i32.load
   local.set $2
@@ -2527,46 +2610,50 @@
     local.get $1
     call $~lib/internal/arraybuffer/allocateUnsafe
     local.set $3
-    local.get $3
-    global.get $~lib/internal/arraybuffer/HEADER_SIZE
-    i32.add
-    local.set $4
-    local.get $0
-    global.get $~lib/internal/arraybuffer/HEADER_SIZE
-    i32.add
-    local.set $5
-    local.get $4
-    local.get $5
-    local.get $2
-    call $~lib/internal/memory/memmove
+    block $memory.copy|inlined.0
+     local.get $3
+     global.get $~lib/internal/arraybuffer/HEADER_SIZE
+     i32.add
+     local.set $4
+     local.get $0
+     global.get $~lib/internal/arraybuffer/HEADER_SIZE
+     i32.add
+     local.set $5
+     local.get $2
+     local.set $6
+     local.get $4
+     local.get $5
+     local.get $6
+     call $~lib/internal/memory/memmove
+    end
     block $~lib/memory/memory.free|inlined.0
-     block
-      local.get $0
-      call $~lib/allocator/arena/__memory_free
-      br $~lib/memory/memory.free|inlined.0
-      unreachable
-     end
-     unreachable
+     local.get $0
+     local.set $6
+     local.get $6
+     call $~lib/allocator/arena/__memory_free
+     br $~lib/memory/memory.free|inlined.0
     end
     local.get $3
     local.set $0
    end
-   local.get $0
-   global.get $~lib/internal/arraybuffer/HEADER_SIZE
-   i32.add
-   local.get $2
-   i32.add
-   local.set $3
-   i32.const 0
-   local.set $5
-   local.get $1
-   local.get $2
-   i32.sub
-   local.set $4
-   local.get $3
-   local.get $5
-   local.get $4
-   call $~lib/internal/memory/memset
+   block $memory.fill|inlined.3
+    local.get $0
+    global.get $~lib/internal/arraybuffer/HEADER_SIZE
+    i32.add
+    local.get $2
+    i32.add
+    local.set $3
+    i32.const 0
+    local.set $6
+    local.get $1
+    local.get $2
+    i32.sub
+    local.set $5
+    local.get $3
+    local.get $6
+    local.get $5
+    call $~lib/internal/memory/memset
+   end
   else   
    local.get $1
    local.get $2
@@ -2591,10 +2678,13 @@
   end
   local.get $0
  )
- (func $~lib/array/Array<Path2DElement>#__set (; 24 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/array/Array<Path2DElement>#__set (; 24 ;) (type $iii_) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
+  (local $6 i32)
+  (local $7 i32)
+  (local $8 i32)
   local.get $0
   i32.load
   local.set $3
@@ -2635,32 +2725,43 @@
    i32.add
    i32.store offset=4
   end
-  i32.const 0
-  local.set $5
-  local.get $3
-  local.get $1
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $5
-  i32.add
-  local.get $2
-  i32.store offset=8
+  block $~lib/internal/arraybuffer/STORE<Path2DElement,Path2DElement>|inlined.0
+   local.get $3
+   local.set $5
+   local.get $1
+   local.set $6
+   local.get $2
+   local.set $7
+   i32.const 0
+   local.set $8
+   local.get $5
+   local.get $6
+   i32.const 2
+   i32.shl
+   i32.add
+   local.get $8
+   i32.add
+   local.get $7
+   i32.store offset=8
+  end
  )
  (func $~lib/array/Array<Path2DElement>#__unchecked_get (; 25 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
+  (local $4 i32)
   local.get $0
   i32.load
   local.set $2
-  i32.const 0
-  local.set $3
-  local.get $2
   local.get $1
+  local.set $3
+  i32.const 0
+  local.set $4
+  local.get $2
+  local.get $3
   i32.const 2
   i32.shl
   i32.add
-  local.get $3
+  local.get $4
   i32.add
   i32.load offset=8
  )
@@ -3235,7 +3336,7 @@
   end
   i32.const 0
  )
- (func $~lib/map/Map<String,CanvasRenderingContext2D>#rehash (; 32 ;) (type $iiv) (param $0 i32) (param $1 i32)
+ (func $~lib/map/Map<String,CanvasRenderingContext2D>#rehash (; 32 ;) (type $ii_) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -3375,25 +3476,27 @@
   i32.load offset=20
   i32.store offset=16
  )
- (func $~lib/map/Map<String,CanvasRenderingContext2D>#set (; 33 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/map/Map<String,CanvasRenderingContext2D>#set (; 33 ;) (type $iii_) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
   (local $6 i32)
   block $~lib/internal/hash/HASH<String>|inlined.0 (result i32)
    local.get $1
+   local.set $3
+   local.get $3
    call $~lib/internal/hash/hashStr
    br $~lib/internal/hash/HASH<String>|inlined.0
   end
-  local.set $3
+  local.set $4
   local.get $0
   local.get $1
-  local.get $3
-  call $~lib/map/Map<String,CanvasRenderingContext2D>#find
-  local.set $4
   local.get $4
+  call $~lib/map/Map<String,CanvasRenderingContext2D>#find
+  local.set $5
+  local.get $5
   if
-   local.get $4
+   local.get $5
    local.get $2
    i32.store offset=4
   else   
@@ -3428,8 +3531,8 @@
    end
    local.get $0
    i32.load offset=8
-   local.set $5
-   local.get $5
+   local.set $3
+   local.get $3
    global.get $~lib/internal/arraybuffer/HEADER_SIZE
    i32.add
    block (result i32)
@@ -3447,11 +3550,11 @@
    end
    i32.mul
    i32.add
-   local.set $4
-   local.get $4
+   local.set $5
+   local.get $5
    local.get $1
    i32.store
-   local.get $4
+   local.get $5
    local.get $2
    i32.store offset=4
    local.get $0
@@ -3462,7 +3565,7 @@
    i32.store offset=20
    local.get $0
    i32.load
-   local.get $3
+   local.get $4
    local.get $0
    i32.load offset=4
    i32.and
@@ -3470,16 +3573,16 @@
    i32.mul
    i32.add
    local.set $6
-   local.get $4
+   local.get $5
    local.get $6
    i32.load offset=8
    i32.store offset=8
    local.get $6
-   local.get $4
+   local.get $5
    i32.store offset=8
   end
  )
- (func $assembly/internal/getContext/__use_context (; 34 ;) (type $iiv) (param $0 i32) (param $1 i32)
+ (func $assembly/internal/getContext/__use_context (; 34 ;) (type $ii_) (param $0 i32) (param $1 i32)
   (local $2 i32)
   i32.const 0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#constructor
@@ -3494,7 +3597,7 @@
   local.get $2
   call $~lib/map/Map<String,CanvasRenderingContext2D>#set
  )
- (func $assembly/renderer/Image/__image_loaded (; 35 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $assembly/renderer/Image/__image_loaded (; 35 ;) (type $iii_) (param $0 i32) (param $1 i32) (param $2 i32)
   local.get $0
   i32.const 4
   i32.add
@@ -3511,19 +3614,7 @@
   i32.const 1
   i32.store8
  )
- (func $~lib/memory/memory.fill (; 36 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
-  local.get $0
-  local.get $1
-  local.get $2
-  call $~lib/internal/memory/memset
- )
- (func $~lib/memory/memory.copy (; 37 ;) (type $iiiv) (param $0 i32) (param $1 i32) (param $2 i32)
-  local.get $0
-  local.get $1
-  local.get $2
-  call $~lib/internal/memory/memmove
- )
- (func $~lib/internal/memory/memcmp (; 38 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/internal/memory/memcmp (; 36 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   local.get $0
   local.get $1
@@ -3577,26 +3668,26 @@
    i32.const 0
   end
  )
- (func $~lib/memory/memory.compare (; 39 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/memory/memory.compare (; 37 ;) (type $iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   local.get $0
   local.get $1
   local.get $2
   call $~lib/internal/memory/memcmp
  )
- (func $~lib/memory/memory.free (; 40 ;) (type $iv) (param $0 i32)
+ (func $~lib/memory/memory.free (; 38 ;) (type $i_) (param $0 i32)
   local.get $0
   call $~lib/allocator/arena/__memory_free
   return
  )
- (func $~lib/allocator/arena/__memory_reset (; 41 ;) (type $v)
+ (func $~lib/allocator/arena/__memory_reset (; 39 ;) (type $_)
   global.get $~lib/allocator/arena/startOffset
   global.set $~lib/allocator/arena/offset
  )
- (func $~lib/memory/memory.reset (; 42 ;) (type $v)
+ (func $~lib/memory/memory.reset (; 40 ;) (type $_)
   call $~lib/allocator/arena/__memory_reset
   return
  )
- (func $assembly/internal/Buffer/Buffer<f64>#constructor (; 43 ;) (type $ii) (param $0 i32) (result i32)
+ (func $assembly/internal/Buffer/Buffer<f64>#constructor (; 41 ;) (type $ii) (param $0 i32) (result i32)
   local.get $0
   i32.eqz
   if
@@ -3617,7 +3708,7 @@
   i32.store offset=4
   local.get $0
  )
- (func $assembly/Buffer.test/Writer#constructor (; 44 ;) (type $ii) (param $0 i32) (result i32)
+ (func $assembly/Buffer.test/Writer#constructor (; 42 ;) (type $ii) (param $0 i32) (result i32)
   local.get $0
   i32.eqz
   if
@@ -3630,11 +3721,14 @@
   local.set $0
   local.get $0
  )
- (func $~lib/map/Map<String,CanvasRenderingContext2D>#has (; 45 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/map/Map<String,CanvasRenderingContext2D>#has (; 43 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
+  (local $2 i32)
   local.get $0
   local.get $1
   block $~lib/internal/hash/HASH<String>|inlined.2 (result i32)
    local.get $1
+   local.set $2
+   local.get $2
    call $~lib/internal/hash/hashStr
    br $~lib/internal/hash/HASH<String>|inlined.2
   end
@@ -3642,26 +3736,29 @@
   i32.const 0
   i32.ne
  )
- (func $~lib/map/Map<String,CanvasRenderingContext2D>#get (; 46 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/map/Map<String,CanvasRenderingContext2D>#get (; 44 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
+  (local $3 i32)
   local.get $0
   local.get $1
   block $~lib/internal/hash/HASH<String>|inlined.3 (result i32)
    local.get $1
+   local.set $2
+   local.get $2
    call $~lib/internal/hash/hashStr
    br $~lib/internal/hash/HASH<String>|inlined.3
   end
   call $~lib/map/Map<String,CanvasRenderingContext2D>#find
-  local.set $2
-  local.get $2
+  local.set $3
+  local.get $3
   if (result i32)
-   local.get $2
+   local.get $3
    i32.load offset=4
   else   
    unreachable
   end
  )
- (func $assembly/internal/getContext/getContextById (; 47 ;) (type $ii) (param $0 i32) (result i32)
+ (func $assembly/internal/getContext/getContextById (; 45 ;) (type $ii) (param $0 i32) (result i32)
   global.get $assembly/internal/getContext/map
   local.get $0
   call $~lib/map/Map<String,CanvasRenderingContext2D>#has
@@ -3678,116 +3775,136 @@
   local.get $0
   call $~lib/map/Map<String,CanvasRenderingContext2D>#get
  )
- (func $assembly/Buffer.test/init (; 48 ;) (type $v)
+ (func $assembly/Buffer.test/init (; 46 ;) (type $_)
   i32.const 328
   call $assembly/internal/getContext/getContextById
   global.set $assembly/Buffer.test/ctx
  )
- (func $assembly/Buffer.test/Writer#writeTest (; 49 ;) (type $iv) (param $0 i32)
-  (local $1 f64)
+ (func $assembly/Buffer.test/Writer#writeTest (; 47 ;) (type $i_) (param $0 i32)
+  (local $1 i32)
   (local $2 f64)
   (local $3 f64)
-  (local $4 i32)
+  (local $4 f64)
   (local $5 i32)
   (local $6 i32)
   (local $7 i32)
-  (local $8 f64)
+  (local $8 i32)
   (local $9 i32)
-  f64.const 0
+  (local $10 f64)
+  (local $11 i32)
+  local.get $0
   local.set $1
-  f64.const 1
+  f64.const 0
   local.set $2
-  f64.const 2
+  f64.const 1
   local.set $3
-  local.get $0
-  i32.load
+  f64.const 2
   local.set $4
-  local.get $0
-  i32.load offset=4
+  local.get $1
+  i32.load
   local.set $5
-  local.get $5
+  local.get $1
+  i32.load offset=4
+  local.set $6
+  local.get $6
   i32.const 4
   i32.add
-  local.set $6
-  block
-   i32.const 0
-   local.set $7
-   local.get $4
+  local.set $7
+  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.7
    local.get $5
+   local.set $8
+   local.get $6
+   local.set $9
+   local.get $2
+   local.set $10
+   i32.const 0
+   local.set $11
+   local.get $8
+   local.get $9
    i32.const 3
    i32.shl
    i32.add
-   local.get $7
+   local.get $11
    i32.add
-   local.get $1
+   local.get $10
    f64.store offset=8
   end
-  block
+  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.8
    local.get $5
+   local.set $11
+   local.get $6
    i32.const 1
    i32.add
-   local.set $7
-   local.get $6
-   f64.convert_i32_s
-   local.set $8
-   i32.const 0
    local.set $9
-   local.get $4
    local.get $7
+   f64.convert_i32_s
+   local.set $10
+   i32.const 0
+   local.set $8
+   local.get $11
+   local.get $9
    i32.const 3
    i32.shl
    i32.add
-   local.get $9
-   i32.add
    local.get $8
+   i32.add
+   local.get $10
    f64.store offset=8
   end
-  block
+  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.9
    local.get $5
+   local.set $8
+   local.get $6
    i32.const 2
    i32.add
    local.set $9
+   local.get $3
+   local.set $10
    i32.const 0
-   local.set $7
-   local.get $4
+   local.set $11
+   local.get $8
    local.get $9
    i32.const 3
    i32.shl
    i32.add
-   local.get $7
+   local.get $11
    i32.add
-   local.get $2
+   local.get $10
    f64.store offset=8
   end
-  block
+  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.10
    local.get $5
+   local.set $11
+   local.get $6
    i32.const 3
    i32.add
-   local.set $7
-   i32.const 0
    local.set $9
    local.get $4
-   local.get $7
+   local.set $10
+   i32.const 0
+   local.set $8
+   local.get $11
+   local.get $9
    i32.const 3
    i32.shl
    i32.add
-   local.get $9
+   local.get $8
    i32.add
-   local.get $3
+   local.get $10
    f64.store offset=8
   end
-  local.get $0
-  local.get $6
+  local.get $1
+  local.get $7
   i32.store offset=4
  )
- (func $assembly/Buffer.test/writeThreeTimes (; 50 ;) (type $i) (result i32)
+ (func $assembly/Buffer.test/writeThreeTimes (; 48 ;) (type $i) (result i32)
   global.get $assembly/Buffer.test/buff
   call $assembly/Buffer.test/Writer#writeTest
   global.get $assembly/Buffer.test/buff
   i32.const 0
   i32.add
  )
- (func $start (; 51 ;) (type $v)
+ (func $start (; 49 ;) (type $_)
   global.get $HEAP_BASE
   global.get $~lib/internal/allocator/AL_MASK
   i32.add
@@ -3809,6 +3926,6 @@
   call $assembly/Buffer.test/Writer#constructor
   global.set $assembly/Buffer.test/buff
  )
- (func $null (; 52 ;) (type $v)
+ (func $null (; 50 ;) (type $_)
  )
 )
