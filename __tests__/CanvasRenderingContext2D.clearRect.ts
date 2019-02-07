@@ -25,7 +25,7 @@ beforeEach(() => {
 type ClearRectArgs = [number, number, number, number];
 
 describe("clearRect function", () => {
-  it("should call arc with expected values", () => {
+  it("should call clearRect with expected values", () => {
     wasm.clearRect(1, 2, 3, 4);
     wasm.commit();
     expect(ctx.clearRect).toBeCalledWith(1, 2, 3, 4);
@@ -47,7 +47,7 @@ describe("clearRect function", () => {
   ];
 
   finiteTests.forEach((args: ClearRectArgs, index: number) => {
-    it("should not call arc if argument " + index + " is " + args[index % 4], () => {
+    it("should not call clearRect if argument " + index + " is " + args[index % 4], () => {
       wasm.clearRect(...args);
       wasm.commit();
       expect(ctx.clearRect).not.toBeCalled();
