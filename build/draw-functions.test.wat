@@ -24884,16 +24884,38 @@
   (local $21 f64)
   (local $22 f64)
   (local $23 f64)
-  local.get $1
-  i32.load
-  i32.const 0
-  i32.eq
-  if
-   return
-  end
+  local.get $2
+  local.get $3
+  f64.add
   local.get $4
-  f64.const 0
-  f64.le
+  f64.add
+  call $~lib/builtins/isFinite<f64>
+  i32.eqz
+  local.tee $5
+  if (result i32)
+   local.get $5
+  else   
+   local.get $1
+   i32.const 0
+   call $~lib/string/String.__eq
+  end
+  local.tee $5
+  if (result i32)
+   local.get $5
+  else   
+   local.get $1
+   i32.load
+   i32.const 0
+   i32.eq
+  end
+  local.tee $5
+  if (result i32)
+   local.get $5
+  else   
+   local.get $4
+   f64.const 0
+   f64.lt
+  end
   if
    return
   end
