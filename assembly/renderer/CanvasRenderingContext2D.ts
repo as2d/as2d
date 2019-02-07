@@ -1905,6 +1905,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param {f64} height - The rectangle's height. Positive values are down, and negative are up.
    */
   public clearRect(x: f64, y: f64, width: f64, height: f64): void {
+    if (!isFinite(x + y + width + height)) return;
     this._updateTransform();
     super._writeFour(CanvasInstruction.ClearRect, x, y, width, height);
   }

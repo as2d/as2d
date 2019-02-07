@@ -11562,6 +11562,18 @@
   (local $9 f64)
   (local $10 i32)
   (local $11 i32)
+  local.get $1
+  local.get $2
+  f64.add
+  local.get $3
+  f64.add
+  local.get $4
+  f64.add
+  call $~lib/builtins/isFinite<f64>
+  i32.eqz
+  if
+   return
+  end
   local.get $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#_updateTransform
   global.get $src/shared/CanvasInstruction/CanvasInstruction.ClearRect
