@@ -330,3 +330,8 @@ export function scale(x: f64, y: f64): void {
   assert(ctx);
   ctx.scale(x, y);
 }
+
+export function transform(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64): void {
+  assert(ctx);
+  ctx.transform(a, b, c, d, e, f);
+}

@@ -2624,6 +2624,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param {f64} f - Vertical translation (moving).
    */
   public transform(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64): void {
+    if (!isFinite(a + b + c + d + e + f)) return;
     var current: ArrayBuffer = this._transformStack;
     var index: i32 = this._stackOffset * 6;
     var sa: f64 = LOAD<f64>(current, index);
