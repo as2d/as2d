@@ -70,4 +70,6 @@ export interface IDrawFunctionsTestSuite {
   textBaseline(value: TextBaseline): void;
 
   imageNull(): void;
+  rotate(angle: number): void;
+  scale(x: number, y: number): void;
 }

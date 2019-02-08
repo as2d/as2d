@@ -2377,6 +2377,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * `degree * Math.PI / 180` if you want to calculate from a degree value.
    */
   public rotate(angle: f64): void {
+    if (!isFinite(angle)) return;
     var index: i32 = this._stackOffset * 6;
     var current: ArrayBuffer = this._transformStack;
     var a: f64 = LOAD<f64>(current, index);
@@ -2407,6 +2408,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * the horizontal axis. A value of 1 results in no vertical scaling.
    */
   public scale(x: f64, y: f64): void {
+    if (!isFinite(x + y)) return;
     var index: i32 = this._stackOffset * 6;
     var current: ArrayBuffer = this._transformStack;
     STORE<f64>(current, index, LOAD<f64>(current, index) * x);

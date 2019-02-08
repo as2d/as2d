@@ -10,6 +10,7 @@ const buff = readFileSync("./build/draw-functions.test.wasm");
 // @ts-ignore
 WebAssembly.instantiateStreaming = jest.fn(() => ({
   instance: new WebAssembly.Instance(new WebAssembly.Module(buff), {
+    Math,
     env: { abort() {} },
     __canvas_sys: {
       render() {},

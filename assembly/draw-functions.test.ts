@@ -320,3 +320,13 @@ export function imageNull(): void {
   // @ts-ignore
   img = null;
 }
+
+export function rotate(angle: f64): void {
+  assert(ctx);
+  ctx.rotate(angle);
+}
+
+export function scale(x: f64, y: f64): void {
+  assert(ctx);
+  ctx.scale(x, y);
+}
