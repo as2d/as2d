@@ -4673,40 +4673,7 @@
   local.get $5
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#arc
  )
- (func $~lib/array/Array<Path2DElement>#__get (; 86 ;) (type $iii) (param $0 i32) (param $1 i32) (result i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  local.get $0
-  i32.load
-  local.set $2
-  local.get $1
-  local.get $2
-  i32.load
-  i32.const 2
-  i32.shr_u
-  i32.lt_u
-  if (result i32)
-   local.get $2
-   local.set $3
-   local.get $1
-   local.set $4
-   i32.const 0
-   local.set $5
-   local.get $3
-   local.get $4
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $5
-   i32.add
-   i32.load offset=8
-  else   
-   unreachable
-  end
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#closePath (; 87 ;) (type $i_) (param $0 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#closePath (; 86 ;) (type $i_) (param $0 i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -4729,19 +4696,25 @@
   i32.load offset=260
   i32.const 1
   i32.eq
-  if
-   return
+  local.tee $1
+  if (result i32)
+   local.get $1
+  else   
+   block $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:_lastPathItem|inlined.1 (result i32)
+    local.get $0
+    local.set $1
+    local.get $1
+    i32.load offset=256
+    local.get $1
+    i32.load offset=260
+    i32.const 1
+    i32.sub
+    call $~lib/array/Array<Path2DElement>#__unchecked_get
+   end
+   i32.load
+   global.get $src/shared/CanvasInstruction/CanvasInstruction.ClosePath
+   i32.eq
   end
-  local.get $0
-  i32.load offset=256
-  local.get $0
-  i32.load offset=260
-  i32.const 1
-  i32.sub
-  call $~lib/array/Array<Path2DElement>#__get
-  i32.load
-  global.get $src/shared/CanvasInstruction/CanvasInstruction.ClosePath
-  i32.eq
   if
    return
   end
@@ -4950,7 +4923,7 @@
    i32.store offset=260
   end
  )
- (func $assembly/glue.test/closePath (; 88 ;) (type $_)
+ (func $assembly/glue.test/closePath (; 87 ;) (type $_)
   global.get $assembly/glue.test/ctx
   i32.eqz
   if
@@ -4964,7 +4937,7 @@
   global.get $assembly/glue.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#closePath
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#isPointInPath (; 89 ;) (type $iFFii) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 i32) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#isPointInPath (; 88 ;) (type $iFFii) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 i32) (result i32)
   (local $4 i32)
   (local $5 i32)
   (local $6 i32)
@@ -6665,7 +6638,7 @@
   local.get $3
   call $assembly/renderer/CanvasRenderingContext2D/isPointInPath
  )
- (func $assembly/glue.test/isPointInPath (; 90 ;) (type $FFii) (param $0 f64) (param $1 f64) (param $2 i32) (result i32)
+ (func $assembly/glue.test/isPointInPath (; 89 ;) (type $FFii) (param $0 f64) (param $1 f64) (param $2 i32) (result i32)
   global.get $assembly/glue.test/ctx
   i32.eqz
   if
@@ -6684,7 +6657,7 @@
   i32.const 0
   i32.ne
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#isPointInStroke (; 91 ;) (type $iFFi) (param $0 i32) (param $1 f64) (param $2 f64) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#isPointInStroke (; 90 ;) (type $iFFi) (param $0 i32) (param $1 f64) (param $2 f64) (result i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -8384,7 +8357,7 @@
   local.get $2
   call $assembly/renderer/CanvasRenderingContext2D/isPointInStroke
  )
- (func $assembly/glue.test/isPointInStroke (; 92 ;) (type $FFi) (param $0 f64) (param $1 f64) (result i32)
+ (func $assembly/glue.test/isPointInStroke (; 91 ;) (type $FFi) (param $0 f64) (param $1 f64) (result i32)
   global.get $assembly/glue.test/ctx
   i32.eqz
   if
@@ -8402,7 +8375,7 @@
   i32.const 0
   i32.ne
  )
- (func $start (; 93 ;) (type $_)
+ (func $start (; 92 ;) (type $_)
   global.get $HEAP_BASE
   global.get $~lib/internal/allocator/AL_MASK
   i32.add
@@ -8421,6 +8394,6 @@
   call $~lib/map/Map<String,CanvasRenderingContext2D>#constructor
   global.set $assembly/internal/getContext/map
  )
- (func $null (; 94 ;) (type $_)
+ (func $null (; 93 ;) (type $_)
  )
 )

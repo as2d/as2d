@@ -1940,9 +1940,13 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * the canvas directly. You can render the path using the stroke() or fill() methods.
    */
   public closePath(): void {
-    if (this._pathOffset == 1) return;
-    if (this._path[this._pathOffset - 1].instruction == CanvasInstruction.ClosePath) return;
+    if (this._pathOffset == 1 || this._lastPathItem.instruction === CanvasInstruction.ClosePath) return;
     this._writePath(CanvasInstruction.ClosePath, true, 0);
+  }
+
+  @inline
+  private get _lastPathItem(): Path2DElement {
+    return unchecked(this._path[this._pathOffset - 1]);
   }
   //#endregion CLOSEPATH
 
