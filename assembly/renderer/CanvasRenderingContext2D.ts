@@ -38,6 +38,14 @@ declare function createPattern(ctxid: i32, imageid: i32, repetition: CanvasPatte
 // @ts-ignore: linked functions can have decorators
 @external("__canvas_sys", "measureText")
 declare function measureText(id: i32, text: string): f64;
+
+// @ts-ignore: linked functions can have decorators
+@external("__canvas_sys", "isPointInPath")
+declare function isPointInPath(id: i32, x: f64, y: f64, fillRule: FillRule): bool;
+
+// @ts-ignore: linked functions can have decorators
+@external("__canvas_sys", "isPointInStroke")
+declare function isPointInStroke(id: i32, x: f64, y: f64): bool;
 //#endregion EXTERNALS
 
 
@@ -2230,7 +2238,9 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   //#region ISPOINTINPATH
   /**
    * The CanvasRenderingContext2D.isPointInPath() method of the Canvas 2D API reports whether or not
-   * the specified point is contained in the current path.
+   * the specified point is contained in the current path. It forces a commit to flush all the
+   * current instructions to the buffer, updates the path, and then performs a pointInPath function
+   * call on the canvas.
    *
    * @param {f64} x - The x-axis coordinate of the point to check.
    * @param {f64} y - The y-axis coordinate of the point to check.
@@ -2242,9 +2252,30 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * - `FillRule.evenodd`: The even-odd winding rule.
    */
   public isPointInPath(x: f64, y: f64, fillRule: FillRule = FillRule.nonzero): bool {
-    throw new Error("Function isPointInPath is not implemented.");
+    if (!isFinite(x + y)) return false;
+    this._updatePath();
+    this.commit();
+    return isPointInPath(this.id, x, y, fillRule);
   }
   //#endregion ISPOINTINPATH
+
+  //#region ISPOINTINSTROKE
+  /**
+   * The CanvasRenderingContext2D.isPointInStroke() method of the Canvas 2D API reports whether or
+   * not the specified point is inside the area contained by the stroking of a path. It forces a
+   * commit to flush all the current instructions to the buffer, updates the path, and then performs
+   * a pointInPath function call on the canvas.
+   *
+   * @param {f64} x - The x-axis coordinate of the point to check.
+   * @param {f64} y - The y-axis coordinate of the point to check.
+   */
+  public isPointInStroke(x: f64, y: f64): bool {
+    if (!isFinite(x + y)) return false;
+    this._updatePath();
+    this.commit();
+    return isPointInStroke(this.id, x, y);
+  }
+  //#endregion ISPOINTINSTROKE
 
   //#region LINETO
   /**
@@ -2257,6 +2288,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param {f64} y - The y-axis coordinate of the line's end point.
    */
   public lineTo(x: f64, y: f64): void {
+    if (!isFinite(x + y)) return;
     this._writePath(CanvasInstruction.LineTo, true, 2, x, y);
   }
   //#endregion LINETO
@@ -2285,6 +2317,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param {f64} y - The y-axis (vertical) coordinate of the point.
    */
   public moveTo(x: f64, y: f64): void {
+    if (!isFinite(x + y)) return;
     this._writePath(CanvasInstruction.MoveTo, true, 2, x, y);
   }
   //#endregion MOVETO

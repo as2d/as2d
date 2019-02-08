@@ -11,6 +11,11 @@ import { TextBaseline } from "../shared/TextBaseline";
 import { LineCap } from "../shared/LineCap";
 import { LineJoin } from "../shared/LineJoin";
 
+const bool = {
+  "true": 1,
+  "false": 0,
+};
+
 export class AS2DGlue<T> {
   public imports: any = null;
   public wasm: (ASUtil & T & ICanvasSYS) | null = null;
@@ -49,6 +54,8 @@ export class AS2DGlue<T> {
       disposeCanvasGradient: this.disposeCanvasGradient.bind(this),
       disposeCanvasPattern: this.disposeCanvasPattern.bind(this),
       disposeImage: this.disposeImage.bind(this),
+      isPointInPath: this.isPointInPath.bind(this),
+      isPointInStroke: this.isPointInStroke.bind(this),
       loadImage: this.loadImage.bind(this),
       measureText: this.measureText.bind(this),
       render: this.render.bind(this),
@@ -362,5 +369,13 @@ export class AS2DGlue<T> {
 
   disposeCanvasGradient(id: number): void {
     delete this.wasm!.gradients[id];
+  }
+
+  isPointInPath(id: number, x: number, y: number, fillRule: FillRule): number {
+    return bool[(<any>this.wasm!.contexts[id]).isPointInPath(x, y, FillRule[fillRule]).toString() as "true" | "false"];
+  }
+
+  isPointInStroke(id: number, x: number, y: number): number {
+    return bool[(<any>this.wasm!.contexts[id]).isPointInStroke(x, y).toString() as "true" | "false"];
   }
 }

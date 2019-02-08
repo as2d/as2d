@@ -7,6 +7,7 @@ import {
   Image,
   getContextById,
 } from "./index";
+import { FillRule } from "../src/shared/FillRule";
 
 var ctx: CanvasRenderingContext2D;
 var grd: CanvasGradient;
@@ -78,4 +79,24 @@ export function disposeImage(): void {
 export function disposeGradient(): void {
   assert(grd);
   grd.dispose();
+}
+
+export function arc(x: f64, y: f64, r: f64, startAngle: f64, endAngle: f64, anticlockwise: bool): void {
+  assert(ctx);
+  ctx.arc(x, y, r, startAngle, endAngle, anticlockwise);
+}
+
+export function closePath(): void {
+  assert(ctx);
+  ctx.closePath();
+}
+
+export function isPointInPath(x: f64, y: f64, fillRule: FillRule): bool {
+  assert(ctx);
+  return ctx.isPointInPath(x, y, fillRule);
+}
+
+export function isPointInStroke(x: f64, y: f64): bool {
+  assert(ctx);
+  return ctx.isPointInStroke(x, y);
 }

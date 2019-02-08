@@ -1,4 +1,4 @@
-import { instantiateBuffer } from "../src";
+import { instantiateBuffer, FillRule } from "../src";
 import { readFileSync } from "fs";
 import { ASUtil } from "assemblyscript/lib/loader";
 import { ICanvasSYS } from "../src/util/ICanvasSYS";
@@ -17,6 +17,10 @@ interface IGlueTestSuite {
   measureText(): void;
   setBadID(): void;
   disposeGradient(): void;
+  arc(x: number, y: number, r: number, startAngle: number, endAngle: number, anticlockwise: number): void;
+  closePath(): void;
+  isPointInPath(x: number, y: number, fillRule: FillRule): number;
+  isPointInStroke(x: number, y: number): number;
 }
 
 var buff = readFileSync("./build/glue.test.wasm");
@@ -205,5 +209,23 @@ describe("glue code", () => {
     wasm.init();
     wasm.setBadID();
     expect(() => wasm.addLinearGradient()).toThrow();
+  });
+
+  it("should call isPointInPath", () => {
+    wasm.useContext("main", ctx);
+    wasm.init();
+    wasm.arc(1, 2, 3, 4, 5, 0);
+    wasm.closePath();
+    wasm.isPointInPath(1, 2, FillRule.nonzero);
+    expect(ctx.isPointInPath).toBeCalledWith(1, 2, "nonzero");
+  });
+
+  it("should call isPointInStroke", () => {
+    wasm.useContext("main", ctx);
+    wasm.init();
+    wasm.arc(1, 2, 3, 4, 5, 0);
+    wasm.closePath();
+    wasm.isPointInStroke(1, 2);
+    expect(ctx.isPointInStroke).toBeCalledWith(1, 2);
   });
 });
