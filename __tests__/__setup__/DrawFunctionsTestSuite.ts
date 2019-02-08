@@ -10,8 +10,10 @@ import {
  } from "../../src";
 
 export interface IDrawFunctionsTestSuite {
-  arc(x: number, y: number, r: number, startAngle: number, endAngle: number, anticlockwise: 1 | 0): void;
+
+
   arc(x: number, y: number, r: number, startAngle: number, endAngle: number): void;
+  arc(x: number, y: number, r: number, startAngle: number, endAngle: number, anticlockwise: 1 | 0): void;
   arcTo(a: number, b: number, c: number, d: number, e: number): void;
   bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number): void;
   clearRect(x: number, y: number, width: number, height: number): void;
@@ -26,7 +28,6 @@ export interface IDrawFunctionsTestSuite {
   drawImageSize(x: number, y: number, width: number, height: number): void;
   drawImageSource(sx: number, sy: number, sWidth: number, sHeight: number, x: number, y: number, width: number, height: number): void;
   ellipse(x: number, y: number, radiusX: number, radiusY: number, rotation: number, startAngle: number, endAngle: number, anticlockwise: number): void;
-
   fill(fillRule?: FillRule): void;
   fillGradient(): void;
   fillPattern(): void;
@@ -38,6 +39,7 @@ export interface IDrawFunctionsTestSuite {
   font(value: number): void;
   globalAlpha(value: number): void;
   globalCompositeOperation(value: GlobalCompositeOperation): void;
+  imageNull(): void;
   imageSmoothingEnabled(value: 0 | 1): void;
   imageSmoothingQuality(value: ImageSmoothingQuality): void;
   init(): void;
@@ -52,7 +54,9 @@ export interface IDrawFunctionsTestSuite {
   quadraticCurveTo(cpx: number, cpy: number, x: number, y: number): void;
   rect(x: number, y: number, width: number, height: number): void;
   restore(): void;
+  rotate(angle: number): void;
   save(hard: number): void;
+  scale(x: number, y: number): void;
   setLineDash(a: number, b: number, c: number): void;
   setTransform(a: number, b: number, c: number, d: number, e: number, f: number): void;
   shadowBlur(value: number): void;
@@ -68,9 +72,6 @@ export interface IDrawFunctionsTestSuite {
   strokeTextWidth(text: number, x: number, y: number, maxWidth: number): void;
   textAlign(value: TextAlign): void;
   textBaseline(value: TextBaseline): void;
-
-  imageNull(): void;
-  rotate(angle: number): void;
-  scale(x: number, y: number): void;
   transform(a: number, b: number, c: number, d: number, e: number, f: number): void;
+  translate(x: number, y: number): void;
 }

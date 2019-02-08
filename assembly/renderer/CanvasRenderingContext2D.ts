@@ -2653,21 +2653,23 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * negative are up.
    */
   public translate(x: f64, y: f64): void {
+    if (!isFinite(x + y)) return;
+
     var current: ArrayBuffer = this._transformStack;
     var index: i32 = this._stackOffset * 6;
 
     // e = e + a * x + c * y;
     STORE<f64>(
       current,
-      index + 5,
-      LOAD<f64>(current, index + 5) + LOAD<f64>(current, index) * x + LOAD<f64>(current, index + 2) * y,
+      index + 4,
+      LOAD<f64>(current, index + 4) + LOAD<f64>(current, index) * x + LOAD<f64>(current, index + 2) * y,
     );
 
     // f = f + b * x + d * y;
     STORE<f64>(
       current,
-      index + 6,
-      LOAD<f64>(current, index + 6) + LOAD<f64>(current, index + 1) * x + LOAD<f64>(current, index + 3) * y,
+      index + 5,
+      LOAD<f64>(current, index + 5) + LOAD<f64>(current, index + 1) * x + LOAD<f64>(current, index + 3) * y,
     );
   }
   //#endregion TRANSLATE
