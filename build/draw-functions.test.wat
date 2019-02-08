@@ -12927,6 +12927,22 @@
   (local $10 i32)
   (local $11 f64)
   (local $12 i32)
+  local.get $1
+  local.get $2
+  f64.add
+  local.get $3
+  f64.add
+  local.get $4
+  f64.add
+  local.get $5
+  f64.add
+  local.get $6
+  f64.add
+  call $~lib/builtins/isFinite<f64>
+  i32.eqz
+  if
+   return
+  end
   local.get $0
   i32.load8_u offset=12
   i32.const 6

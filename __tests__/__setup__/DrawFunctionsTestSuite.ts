@@ -72,4 +72,5 @@ export interface IDrawFunctionsTestSuite {
   imageNull(): void;
   rotate(angle: number): void;
   scale(x: number, y: number): void;
+  setTransform(a: number, b: number, c: number, d: number, e: number, f: number): void;
 }

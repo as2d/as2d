@@ -15,10 +15,10 @@
  (type $iiF (func (param i32 i32) (result f64)))
  (type $FFFFFF_ (func (param f64 f64 f64 f64 f64 f64)))
  (type $iFFFFFF_ (func (param i32 f64 f64 f64 f64 f64 f64)))
+ (type $Fi (func (param f64) (result i32)))
  (type $F (func (result f64)))
  (type $F_ (func (param f64)))
  (type $iF_ (func (param i32 f64)))
- (type $Fi (func (param f64) (result i32)))
  (import "env" "abort" (func $~lib/env/abort (param i32 i32 i32 i32)))
  (memory $0 1)
  (data (i32.const 8) "\04\00\00\00#\000\000\000\00")
@@ -6333,13 +6333,36 @@
   drop
   local.get $1
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#setTransform (; 65 ;) (type $iFFFFFF_) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64)
+ (func $~lib/builtins/isFinite<f64> (; 65 ;) (type $Fi) (param $0 f64) (result i32)
+  local.get $0
+  local.get $0
+  f64.sub
+  f64.const 0
+  f64.eq
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#setTransform (; 66 ;) (type $iFFFFFF_) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64)
   (local $7 i32)
   (local $8 i32)
   (local $9 i32)
   (local $10 i32)
   (local $11 f64)
   (local $12 i32)
+  local.get $1
+  local.get $2
+  f64.add
+  local.get $3
+  f64.add
+  local.get $4
+  f64.add
+  local.get $5
+  f64.add
+  local.get $6
+  f64.add
+  call $~lib/builtins/isFinite<f64>
+  i32.eqz
+  if
+   return
+  end
   local.get $0
   i32.load8_u offset=12
   i32.const 6
@@ -6475,7 +6498,7 @@
    f64.store offset=8
   end
  )
- (func $assembly/save-restore.test/setTransform (; 66 ;) (type $FFFFFF_) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
+ (func $assembly/save-restore.test/setTransform (; 67 ;) (type $FFFFFF_) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
@@ -6495,7 +6518,7 @@
   local.get $5
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#setTransform
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:fillStyle (; 67 ;) (type $ii) (param $0 i32) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:fillStyle (; 68 ;) (type $ii) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -6553,7 +6576,7 @@
   end
   i32.const 0
  )
- (func $assembly/save-restore.test/getFillStyle (; 68 ;) (type $i) (result i32)
+ (func $assembly/save-restore.test/getFillStyle (; 69 ;) (type $i) (result i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
@@ -6567,7 +6590,7 @@
   global.get $assembly/save-restore.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:fillStyle
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillStyle (; 69 ;) (type $ii_) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillStyle (; 70 ;) (type $ii_) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -6632,7 +6655,7 @@
    i32.store offset=8
   end
  )
- (func $assembly/save-restore.test/setFillStyle (; 70 ;) (type $i_) (param $0 i32)
+ (func $assembly/save-restore.test/setFillStyle (; 71 ;) (type $i_) (param $0 i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
@@ -6647,7 +6670,7 @@
   local.get $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillStyle
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:filter (; 71 ;) (type $ii) (param $0 i32) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:filter (; 72 ;) (type $ii) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -6668,7 +6691,7 @@
   i32.add
   i32.load offset=8
  )
- (func $assembly/save-restore.test/getFilter (; 72 ;) (type $i) (result i32)
+ (func $assembly/save-restore.test/getFilter (; 73 ;) (type $i) (result i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
@@ -6682,7 +6705,7 @@
   global.get $assembly/save-restore.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:filter
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:filter (; 73 ;) (type $ii_) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:filter (; 74 ;) (type $ii_) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -6707,7 +6730,7 @@
   local.get $4
   i32.store offset=8
  )
- (func $assembly/save-restore.test/setFilter (; 74 ;) (type $i_) (param $0 i32)
+ (func $assembly/save-restore.test/setFilter (; 75 ;) (type $i_) (param $0 i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
@@ -6722,7 +6745,7 @@
   local.get $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:filter
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:font (; 75 ;) (type $ii) (param $0 i32) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:font (; 76 ;) (type $ii) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -6743,7 +6766,7 @@
   i32.add
   i32.load offset=8
  )
- (func $assembly/save-restore.test/getFont (; 76 ;) (type $i) (result i32)
+ (func $assembly/save-restore.test/getFont (; 77 ;) (type $i) (result i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
@@ -6757,7 +6780,7 @@
   global.get $assembly/save-restore.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:font
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:font (; 77 ;) (type $ii_) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:font (; 78 ;) (type $ii_) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -6782,7 +6805,7 @@
   local.get $4
   i32.store offset=8
  )
- (func $assembly/save-restore.test/setFont (; 78 ;) (type $i_) (param $0 i32)
+ (func $assembly/save-restore.test/setFont (; 79 ;) (type $i_) (param $0 i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
@@ -6797,7 +6820,7 @@
   local.get $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:font
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:globalAlpha (; 79 ;) (type $iF) (param $0 i32) (result f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:globalAlpha (; 80 ;) (type $iF) (param $0 i32) (result f64)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -6818,7 +6841,7 @@
   i32.add
   f64.load offset=8
  )
- (func $assembly/save-restore.test/getGlobalAlpha (; 80 ;) (type $F) (result f64)
+ (func $assembly/save-restore.test/getGlobalAlpha (; 81 ;) (type $F) (result f64)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
@@ -6831,13 +6854,6 @@
   end
   global.get $assembly/save-restore.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:globalAlpha
- )
- (func $~lib/builtins/isFinite<f64> (; 81 ;) (type $Fi) (param $0 f64) (result i32)
-  local.get $0
-  local.get $0
-  f64.sub
-  f64.const 0
-  f64.eq
  )
  (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:globalAlpha (; 82 ;) (type $iF_) (param $0 i32) (param $1 f64)
   (local $2 i32)
