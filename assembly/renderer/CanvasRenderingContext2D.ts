@@ -2335,6 +2335,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param y - The y-axis coordinate of the end point.
    */
   public quadraticCurveTo(cpx: f64, cpy: f64, x: f64, y: f64): void {
+    if (!isFinite(cpx + cpy + x + y)) return;
     this._writePath(CanvasInstruction.QuadraticCurveTo, true, 4, cpx, cpy, x, y);
   }
   //#endregion QUADRATICCURVETO

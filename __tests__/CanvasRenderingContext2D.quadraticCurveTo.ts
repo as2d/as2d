@@ -50,6 +50,7 @@ describe("quadraticCurveTo function", () => {
   finiteTests.forEach((args: QuadraticCurveToArgs, index: number) => {
     it("should not call quadraticCurveTo if argument " + index + " is " + args[index % 4], () => {
       wasm.quadraticCurveTo(...args);
+      wasm.fill();
       wasm.commit();
       expect(ctx.quadraticCurveTo).not.toBeCalled();
     });

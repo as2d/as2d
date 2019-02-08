@@ -16654,208 +16654,222 @@
   (local $20 i32)
   (local $21 i32)
   (local $22 i32)
-  local.get $0
-  local.set $5
-  global.get $src/shared/CanvasInstruction/CanvasInstruction.QuadraticCurveTo
-  local.set $6
-  i32.const 1
-  local.set $7
-  i32.const 4
-  local.set $8
   local.get $1
-  local.set $9
   local.get $2
-  local.set $10
+  f64.add
   local.get $3
-  local.set $11
+  f64.add
   local.get $4
-  local.set $12
-  f64.const 0
-  local.set $13
-  f64.const 0
-  local.set $14
-  f64.const 0
-  local.set $15
-  f64.const 0
-  local.set $16
-  local.get $5
-  i32.load offset=256
-  local.get $5
-  i32.load offset=260
-  call $~lib/array/Array<Path2DElement>#__unchecked_get
-  local.set $17
-  local.get $17
-  local.get $6
-  i32.store
-  local.get $17
-  local.get $7
-  i32.store8 offset=60
-  local.get $7
+  f64.add
+  call $~lib/builtins/isFinite<f64>
+  i32.eqz
   if
-   local.get $5
-   i32.load8_u offset=12
-   i32.const 6
-   i32.mul
-   i32.const 255
-   i32.and
-   local.set $18
-   local.get $5
-   i32.load offset=16
-   local.set $19
-   local.get $17
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.117 (result f64)
-    local.get $19
-    local.set $20
-    local.get $18
-    i32.const 0
-    i32.add
-    local.set $21
-    i32.const 0
-    local.set $22
-    local.get $20
-    local.get $21
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $22
-    i32.add
-    f64.load offset=8
-   end
-   f64.store offset=8
-   local.get $17
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.118 (result f64)
-    local.get $19
-    local.set $22
-    local.get $18
-    i32.const 1
-    i32.add
-    local.set $21
-    i32.const 0
-    local.set $20
-    local.get $22
-    local.get $21
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $20
-    i32.add
-    f64.load offset=8
-   end
-   f64.store offset=16
-   local.get $17
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.119 (result f64)
-    local.get $19
-    local.set $20
-    local.get $18
-    i32.const 2
-    i32.add
-    local.set $21
-    i32.const 0
-    local.set $22
-    local.get $20
-    local.get $21
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $22
-    i32.add
-    f64.load offset=8
-   end
-   f64.store offset=24
-   local.get $17
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.120 (result f64)
-    local.get $19
-    local.set $22
-    local.get $18
-    i32.const 3
-    i32.add
-    local.set $21
-    i32.const 0
-    local.set $20
-    local.get $22
-    local.get $21
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $20
-    i32.add
-    f64.load offset=8
-   end
-   f64.store offset=32
-   local.get $17
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.121 (result f64)
-    local.get $19
-    local.set $20
-    local.get $18
-    i32.const 4
-    i32.add
-    local.set $21
-    i32.const 0
-    local.set $22
-    local.get $20
-    local.get $21
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $22
-    i32.add
-    f64.load offset=8
-   end
-   f64.store offset=40
-   local.get $17
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.122 (result f64)
-    local.get $19
-    local.set $22
-    local.get $18
-    i32.const 5
-    i32.add
-    local.set $21
-    i32.const 0
-    local.set $20
-    local.get $22
-    local.get $21
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $20
-    i32.add
-    f64.load offset=8
-   end
-   f64.store offset=48
+   return
   end
-  local.get $17
-  local.get $8
-  i32.store offset=56
-  local.get $17
-  local.get $9
-  f64.store offset=64
-  local.get $17
-  local.get $10
-  f64.store offset=72
-  local.get $17
-  local.get $11
-  f64.store offset=80
-  local.get $17
-  local.get $12
-  f64.store offset=88
-  local.get $17
-  local.get $13
-  f64.store offset=96
-  local.get $17
-  local.get $14
-  f64.store offset=104
-  local.get $17
-  local.get $15
-  f64.store offset=112
-  local.get $17
-  local.get $16
-  f64.store offset=120
-  local.get $5
-  local.get $5
-  i32.load offset=260
-  i32.const 1
-  i32.add
-  i32.store offset=260
+  block $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#_writePath|inlined.7
+   local.get $0
+   local.set $5
+   global.get $src/shared/CanvasInstruction/CanvasInstruction.QuadraticCurveTo
+   local.set $6
+   i32.const 1
+   local.set $7
+   i32.const 4
+   local.set $8
+   local.get $1
+   local.set $9
+   local.get $2
+   local.set $10
+   local.get $3
+   local.set $11
+   local.get $4
+   local.set $12
+   f64.const 0
+   local.set $13
+   f64.const 0
+   local.set $14
+   f64.const 0
+   local.set $15
+   f64.const 0
+   local.set $16
+   local.get $5
+   i32.load offset=256
+   local.get $5
+   i32.load offset=260
+   call $~lib/array/Array<Path2DElement>#__unchecked_get
+   local.set $17
+   local.get $17
+   local.get $6
+   i32.store
+   local.get $17
+   local.get $7
+   i32.store8 offset=60
+   local.get $7
+   if
+    local.get $5
+    i32.load8_u offset=12
+    i32.const 6
+    i32.mul
+    i32.const 255
+    i32.and
+    local.set $18
+    local.get $5
+    i32.load offset=16
+    local.set $19
+    local.get $17
+    block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.117 (result f64)
+     local.get $19
+     local.set $20
+     local.get $18
+     i32.const 0
+     i32.add
+     local.set $21
+     i32.const 0
+     local.set $22
+     local.get $20
+     local.get $21
+     i32.const 3
+     i32.shl
+     i32.add
+     local.get $22
+     i32.add
+     f64.load offset=8
+    end
+    f64.store offset=8
+    local.get $17
+    block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.118 (result f64)
+     local.get $19
+     local.set $22
+     local.get $18
+     i32.const 1
+     i32.add
+     local.set $21
+     i32.const 0
+     local.set $20
+     local.get $22
+     local.get $21
+     i32.const 3
+     i32.shl
+     i32.add
+     local.get $20
+     i32.add
+     f64.load offset=8
+    end
+    f64.store offset=16
+    local.get $17
+    block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.119 (result f64)
+     local.get $19
+     local.set $20
+     local.get $18
+     i32.const 2
+     i32.add
+     local.set $21
+     i32.const 0
+     local.set $22
+     local.get $20
+     local.get $21
+     i32.const 3
+     i32.shl
+     i32.add
+     local.get $22
+     i32.add
+     f64.load offset=8
+    end
+    f64.store offset=24
+    local.get $17
+    block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.120 (result f64)
+     local.get $19
+     local.set $22
+     local.get $18
+     i32.const 3
+     i32.add
+     local.set $21
+     i32.const 0
+     local.set $20
+     local.get $22
+     local.get $21
+     i32.const 3
+     i32.shl
+     i32.add
+     local.get $20
+     i32.add
+     f64.load offset=8
+    end
+    f64.store offset=32
+    local.get $17
+    block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.121 (result f64)
+     local.get $19
+     local.set $20
+     local.get $18
+     i32.const 4
+     i32.add
+     local.set $21
+     i32.const 0
+     local.set $22
+     local.get $20
+     local.get $21
+     i32.const 3
+     i32.shl
+     i32.add
+     local.get $22
+     i32.add
+     f64.load offset=8
+    end
+    f64.store offset=40
+    local.get $17
+    block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.122 (result f64)
+     local.get $19
+     local.set $22
+     local.get $18
+     i32.const 5
+     i32.add
+     local.set $21
+     i32.const 0
+     local.set $20
+     local.get $22
+     local.get $21
+     i32.const 3
+     i32.shl
+     i32.add
+     local.get $20
+     i32.add
+     f64.load offset=8
+    end
+    f64.store offset=48
+   end
+   local.get $17
+   local.get $8
+   i32.store offset=56
+   local.get $17
+   local.get $9
+   f64.store offset=64
+   local.get $17
+   local.get $10
+   f64.store offset=72
+   local.get $17
+   local.get $11
+   f64.store offset=80
+   local.get $17
+   local.get $12
+   f64.store offset=88
+   local.get $17
+   local.get $13
+   f64.store offset=96
+   local.get $17
+   local.get $14
+   f64.store offset=104
+   local.get $17
+   local.get $15
+   f64.store offset=112
+   local.get $17
+   local.get $16
+   f64.store offset=120
+   local.get $5
+   local.get $5
+   i32.load offset=260
+   i32.const 1
+   i32.add
+   i32.store offset=260
+  end
  )
  (func $assembly/draw-functions.test/quadraticCurveTo (; 118 ;) (type $FFFF_) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
   global.get $assembly/draw-functions.test/ctx
