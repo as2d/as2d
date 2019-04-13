@@ -50,9 +50,9 @@ declare function isPointInStroke(id: i32, x: f64, y: f64): bool;
 
 
 const enum FillStrokeStyleType {
-  String,
-  CanvasPattern,
-  CanvasGradient,
+  String = 0,
+  CanvasPattern = 1,
+  CanvasGradient = 2,
 }
 
 var defaultBlack: string = "#000";

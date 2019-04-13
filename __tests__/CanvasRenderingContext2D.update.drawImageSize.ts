@@ -22,7 +22,14 @@ run({
     const lastCall = shared.drawImage.mock.calls[0];
     expect(lastCall[0]).toBeInstanceOf(ImageBitmap);
     const image = lastCall[0];
-    expect(lastCall.slice(1)).toStrictEqual([0, 0, image.width, image.height, 1, 2, 3, 4]);
+    expect(lastCall[1]).toBe(0);
+    expect(lastCall[2]).toBe(0);
+    expect(lastCall[3]).toBe(image.width);
+    expect(lastCall[4]).toBe(image.height);
+    expect(lastCall[5]).toBe(1);
+    expect(lastCall[6]).toBe(2);
+    expect(lastCall[7]).toBe(3);
+    expect(lastCall[8]).toBe(4);
   },
   direction: false,
   fillStyle: false,

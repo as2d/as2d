@@ -21,7 +21,9 @@ run({
   expectFunc(_ctx: CanvasRenderingContext2D, _wasm: WASMModule, shared: any): any {
     const lastCall = shared.drawImage.mock.calls[0];
     expect(lastCall[0]).toBeInstanceOf(ImageBitmap);
-    expect(lastCall.slice(1)).toStrictEqual([1, 2, 3, 4, 5, 6, 7, 8]);
+    for (let i = 1; i < 9; i++) {
+      expect(lastCall[i]).toBe(i);
+    }
   },
   direction: false,
   fillStyle: false,
