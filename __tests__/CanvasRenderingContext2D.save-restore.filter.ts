@@ -4,9 +4,9 @@ run<string>({
   name: "filter",
   values: ["one", "two", "three", "four", "five"],
   getValue(wasm): string {
-    return wasm.getString(wasm.getFilter());
+    return wasm.__getString(wasm.getFilter());
   },
   setValue(wasm, value): void {
-    wasm.setFilter(wasm.newString(value));
+    wasm.setFilter(wasm.__allocString(value));
   },
 });

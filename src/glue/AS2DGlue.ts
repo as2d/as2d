@@ -1,4 +1,4 @@
-import { ASUtil, instantiateBuffer, instantiate, instantiateStreaming } from "assemblyscript/lib/loader";
+import { ASUtil, instantiateSync as instantiateBuffer, instantiate, instantiateStreaming } from "assemblyscript/lib/loader";
 import { ICanvasSYS } from "../util/ICanvasSYS";
 import { CanvasPatternRepetition } from "../shared/CanvasPatternRepetition";
 import { CanvasInstruction } from "../shared/CanvasInstruction";
@@ -74,7 +74,7 @@ export class AS2DGlue<T> {
   private useContext(name: string, ctx: CanvasRenderingContext2D): number {
     this.id += 1;
     this.wasm!.contexts[this.id] = ctx;
-    this.wasm!.__use_context(this.wasm!.newString(name), this.id);
+    this.wasm!.__use_context(this.wasm!.__allocString(name), this.id);
     return this.id;
   }
 
@@ -94,11 +94,11 @@ export class AS2DGlue<T> {
 
   private addColorStop(objid: number, offset: number, color: number): void {
     if (!this.wasm!.gradients[objid]) throw new Error("Cannot find gradient: " + objid);
-    this.wasm!.gradients[objid].addColorStop(offset, this.wasm!.getString(color));
+    this.wasm!.gradients[objid].addColorStop(offset, this.wasm!.__getString(color));
   }
 
   private loadImage(imgPointer: number, srcPointer: number): number {
-    var src: string = this.wasm!.getString(srcPointer);
+    var src: string = this.wasm!.__getString(srcPointer);
     this.id += 1;
     var result: number = this.id;
     this.wasm!.loading[result] = fetch(src)
@@ -127,7 +127,7 @@ export class AS2DGlue<T> {
     // The canvas exists, because render was already called
     // if (!this.wasm!.contexts[cvsobjid]) throw new Error("Cannot find canvas: " + cvsobjid);
     var ctx: CanvasRenderingContext2D = this.wasm!.contexts[cvsobjid];
-    return ctx.measureText(this.wasm!.getString(text)).width;
+    return ctx.measureText(this.wasm!.__getString(text)).width;
   }
 
   private render(cvsobjid: number, pointer: number): void {
@@ -196,12 +196,12 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.FillStyle: {
-          ctx.fillStyle = strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2]));
+          ctx.fillStyle = strings[data[i + 2]] || (strings[data[i + 2]] = wasm.__getString(data[i + 2]));
           break;
         }
         case CanvasInstruction.FillText: {
           ctx.fillText(
-            strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2])),
+            strings[data[i + 2]] || (strings[data[i + 2]] = wasm.__getString(data[i + 2])),
             data[i + 3],
             data[i + 4],
           );
@@ -209,7 +209,7 @@ export class AS2DGlue<T> {
         }
         case CanvasInstruction.FillTextWidth: {
           ctx.fillText(
-            strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2])),
+            strings[data[i + 2]] || (strings[data[i + 2]] = wasm.__getString(data[i + 2])),
             data[i + 3],
             data[i + 4],
             data[i + 5],
@@ -217,11 +217,11 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.Filter: {
-          ctx.filter = strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2]));
+          ctx.filter = strings[data[i + 2]] || (strings[data[i + 2]] = wasm.__getString(data[i + 2]));
           break;
         }
         case CanvasInstruction.Font: {
-          ctx.font = strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2]));
+          ctx.font = strings[data[i + 2]] || (strings[data[i + 2]] = wasm.__getString(data[i + 2]));
           break;
         }
         case CanvasInstruction.GlobalAlpha: {
@@ -246,7 +246,7 @@ export class AS2DGlue<T> {
         }
         case CanvasInstruction.LineDash: {
           // @ts-ignore: Float64Array is not a valid TypedArrayConstructor, and setLineDash accepts Float64Array
-          ctx.setLineDash(wasm.getArray(Float64Array, data[i + 2]));
+          ctx.setLineDash(wasm.__getArrayView(data[i + 2]));
           break;
         }
         case CanvasInstruction.LineDashOffset: {
@@ -298,7 +298,7 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.ShadowColor: {
-          ctx.shadowColor = strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2]));
+          ctx.shadowColor = strings[data[i + 2]] || (strings[data[i + 2]] = wasm.__getString(data[i + 2]));
           break;
         }
         case CanvasInstruction.ShadowOffsetX: {
@@ -326,12 +326,12 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.StrokeStyle: {
-          ctx.strokeStyle = strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2]));
+          ctx.strokeStyle = strings[data[i + 2]] || (strings[data[i + 2]] = wasm.__getString(data[i + 2]));
           break;
         }
         case CanvasInstruction.StrokeText: {
           ctx.strokeText(
-            strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2])),
+            strings[data[i + 2]] || (strings[data[i + 2]] = wasm.__getString(data[i + 2])),
             data[i + 3],
             data[i + 4],
           );
@@ -339,7 +339,7 @@ export class AS2DGlue<T> {
         }
         case CanvasInstruction.StrokeTextWidth: {
           ctx.strokeText(
-            strings[data[i + 2]] || (strings[data[i + 2]] = wasm.getString(data[i + 2])),
+            strings[data[i + 2]] || (strings[data[i + 2]] = wasm.__getString(data[i + 2])),
             data[i + 3],
             data[i + 4],
             data[i + 5],

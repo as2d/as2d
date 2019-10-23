@@ -1,3 +1,4 @@
+/// <reference path="../node_modules/assemblyscript/std/assembly/rt/index.d.ts" />
 export { Buffer } from "./internal/Buffer";
 export { CanvasDirection } from "../src/shared/CanvasDirection";
 export { CanvasGradient } from "./renderer/CanvasGradient";

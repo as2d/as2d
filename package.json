@@ -21,23 +21,22 @@
     "asbuild:optimized": "asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --sourceMap --validate --optimize",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
-  "author": "Joshua <tenner.joshua@gmail.com>",
+  "author": "Joshua Tenner <tenner.joshua@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "assemblyscript": "github:assemblyscript/assemblyscript"
   },
   "devDependencies": {
-    "@types/jest": "latest",
-    "@types/node": "latest",
-    "@types/webassembly-js-api": "0.0.3",
-    "coveralls": "latest",
-    "cross-env": "latest",
-    "jest": "latest",
-    "jest-canvas-mock": "latest",
-    "jest-fetch-mock": "latest",
-    "npm-run-all": "latest",
-    "onchange": "latest",
-    "ts-jest": "latest",
-    "typescript": "latest"
+    "@types/jest": "24.0.19",
+    "@types/node": "12.11.5",
+    "coveralls": "3.0.7",
+    "cross-env": "6.0.3",
+    "jest": "24.9.0",
+    "jest-canvas-mock": "2.1.2",
+    "jest-fetch-mock": "2.1.2",
+    "npm-run-all": "4.1.5",
+    "onchange": "6.1.0",
+    "ts-jest": "24.1.0",
+    "typescript": "3.6.4"
   }
 }

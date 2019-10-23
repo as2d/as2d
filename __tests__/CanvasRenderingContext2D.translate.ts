@@ -14,7 +14,7 @@ beforeEach(() => {
     test: {
       log: console.log.bind(console),
       logStr(ptr: number) {
-        console.log(wasm.getString(ptr));
+        console.log(wasm.__getString(ptr));
       },
     }
   });

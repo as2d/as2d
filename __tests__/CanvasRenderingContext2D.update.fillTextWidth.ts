@@ -7,7 +7,7 @@ run({
 
   },
   drawFunc(_ctx: CanvasRenderingContext2D, wasm: WASMModule, _shared: any): any {
-    wasm.fillTextWidth(wasm.newString("test!"), 100, 200, 300);
+    wasm.fillTextWidth(wasm.__allocString("test!"), 100, 200, 300);
   },
   expectFunc(ctx: CanvasRenderingContext2D, _wasm: WASMModule, _shared: any): any {
     expect(ctx.fillText).toBeCalledWith("test!", 100, 200, 300);

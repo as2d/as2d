@@ -5,9 +5,9 @@ run<string>({
   name: "strokeStyle",
   values: ["one", "two", "three", "four", "five"],
   getValue(wasm): string {
-    return wasm.getString(wasm.getStrokeStyle());
+    return wasm.__getString(wasm.getStrokeStyle());
   },
   setValue(wasm, value): void {
-    wasm.setStrokeStyle(wasm.newString(value));
+    wasm.setStrokeStyle(wasm.__allocString(value));
   },
 });

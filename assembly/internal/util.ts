@@ -33,3 +33,15 @@ export function checkDoubleArray(value: Float64Array): Float64Array {
   }
   return result;
 }
+
+// @ts-ignore: decorators *are* valid here
+@inline
+export function STORE<T>(pointer: usize, index: i32, value: T): void {
+  store<T>(pointer + (index << alignof<T>()), value);
+}
+
+// @ts-ignore: decorators *are* valid here
+@inline
+export function LOAD<T>(pointer: usize, index: i32): T {
+  return load<T>(pointer + (index << alignof<T>()));
+}
