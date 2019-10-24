@@ -7,6 +7,7 @@ import { ImageSmoothingQuality } from "../../src/shared/ImageSmoothingQuality";
 import { LineCap } from "../../src/shared/LineCap";
 import { LineJoin } from "../../src/shared/LineJoin";
 import { TextAlign } from "../../src/shared/TextAlign";
+import { TextBaseline } from "../../src/shared/TextBaseline";
 
 @unmanaged
 export class CanvasStack {
@@ -21,6 +22,7 @@ export class CanvasStack {
   fillStyleString: string | null;
   fillStyleGradient: CanvasGradient | null;
   fillStylePattern: CanvasPattern | null;
+  fillStyleValue: number;
   filter: string;
   font: string;
   globalAlpha: f64;
@@ -41,5 +43,8 @@ export class CanvasStack {
   strokeStyleString: string | null;
   strokeStyleGradient: CanvasGradient | null;
   strokeStylePattern: CanvasPattern | null;
+  strokeStyleValue: number;
   textAlign: TextAlign;
+  textBaseline: TextBaseline;
+  save: bool;
 }

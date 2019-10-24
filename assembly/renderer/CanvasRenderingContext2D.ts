@@ -341,6 +341,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
       __release(changetype<usize>(stack.fillStyleString));
     }
     stack.fillStyleString = value!;
+    stack.fillStyleValue = changetype<usize>(value);
   }
 
   /**
@@ -398,6 +399,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     __release(changetype<usize>(stack.fillStylePattern));
     stack.fillStyleType = FillStrokeStyleType.CanvasPattern;
     stack.fillStylePattern = value;
+    stack.fillStyleValue = <usize>load<i32>(changetype<usize>(value), offsetof<CanvasPattern>("id"));
   }
   //#endregion FILLPATTERN
 
@@ -423,6 +425,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     stack.fillStyleType = FillStrokeStyleType.CanvasGradient;
     __release(changetype<usize>(stack.fillStyleGradient));
     stack.fillStyleGradient = value;
+    stack.fillStyleValue = <usize>load<i32>(changetype<usize>(value), offsetof<CanvasGradient>("id"));
   }
   //#endregion FILLGRADIENT
 
@@ -849,7 +852,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateLineWidth(): void {
-    var value: f64 = LOAD<f64>(changetype<usize>(this._lineWidthStack), <i32>this._stackOffset);
+    var value: f64 = this._stack.reference().lineWidth;
     if (value != this._currentLineWidth) {
       this._currentLineWidth = value;
       super._writeOne(CanvasInstruction.LineWidth, value);
@@ -943,7 +946,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * representing a CSS Color
    */
   public get shadowColor(): string {
-    return changetype<string>(LOAD<usize>(changetype<usize>(this._shadowColorStack), this._stackOffset));
+    return this._stack.reference().shadowColor;
   }
 
   public set shadowColor(value: string) {
@@ -1059,7 +1062,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   private _currentStrokeStyleValue: usize = changetype<usize>(defaultBlack);
 
   /**
-   * The CanvasRenderingContext2D.fillStyle property of the Canvas 2D API specifies the current text
+   * The CanvasRenderingContext2D.strokeStyle property of the Canvas 2D API specifies the current text
    * representing a CSS Color
    */
   public get strokeStyle(): string | null {
@@ -1085,6 +1088,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     }
     __retain(changetype<usize>(value));
     stack.strokeStyleString = value!;
+    stack.strokeStyleValue = changetype<usize>(value);
   }
 
   /**
@@ -1122,8 +1126,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
   //#region STROKEPATTERN
   /**
-   * The CanvasRenderingContext2D.fillPattern property of the Canvas 2D API specifies the current
-   * fillStyle pattern
+   * The CanvasRenderingContext2D.strokePattern property of the Canvas 2D API specifies the current
+   * strokeStyle pattern
    */
   public get strokePattern(): CanvasPattern | null {
     var stack = this._stack.reference();
@@ -1142,13 +1146,14 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     __release(changetype<usize>(stack.strokeStylePattern));
     stack.strokeStyleType = FillStrokeStyleType.CanvasPattern;
     stack.strokeStylePattern = value;
+    stack.strokeStyleValue = <usize>load<i32>(changetype<usize>(value), offsetof<CanvasPattern>("id"));
   }
   //#endregion STROKEPATTERN
 
   //#region STROKEGRADIENT
   /**
    * The CanvasRenderingContext2D.strokeGradient property of the Canvas 2D API specifies the current
-   * strokeStyle gradient
+   * strokeStyle gradient.
    */
   public get strokeGradient(): CanvasGradient | null {
     var stack = this._stack.reference();
@@ -1167,6 +1172,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     stack.strokeStyleType = FillStrokeStyleType.CanvasGradient;
     __release(changetype<usize>(stack.strokeStyleGradient));
     stack.strokeStyleGradient = value;
+    stack.strokeStyleValue = <usize>load<i32>(changetype<usize>(value), offsetof<CanvasGradient>("id"));
   }
   //#endregion STROKEGRADIENT
 
@@ -1208,8 +1214,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
   //#region TEXTBASELINE
   /**
-   * A private member that contains a single LineCap value that represents the last
-   * lineCap value written by a drawing operation.
+   * A private member that contains a single TextBaseline value that represents the last
+   * TextBaseline value written by a drawing operation.
    */
   private _currentTextBaseline: TextBaseline = TextBaseline.alphabetic;
 
@@ -1218,11 +1224,11 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * text baseline used when drawing text.
    */
   public get textBaseline(): TextBaseline {
-    return LOAD<TextBaseline>(changetype<usize>(this._textBaselineStack), <i32>this._stackOffset);
+    return this._stack.reference().textBaseline;
   }
 
   public set textBaseline(value: TextBaseline) {
-    STORE<TextBaseline>(changetype<usize>(this._textBaselineStack), <i32>this._stackOffset, value);
+    this._stack.reference().textBaseline = value;
   }
 
   /**
@@ -1231,10 +1237,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateTextBaseline(): void {
-    var value: TextBaseline = LOAD<TextBaseline>(
-      changetype<usize>(this._textBaselineStack),
-      <i32>this._stackOffset,
-    );
+    var value: TextBaseline = this._stack.reference().textBaseline;
     if (value != this._currentTextBaseline) {
       this._currentTextBaseline = value;
       super._writeOne(CanvasInstruction.TextBaseline, <f64>value);
@@ -1265,118 +1268,32 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var offset: i32 = <i32>this._stackOffset;
     var nextOffset: i32 = offset + 1;
     if (nextOffset >= <i32>u8.MAX_VALUE) unreachable();
-    var transformIndex: i32 = offset * 6;
-    var nextTransformIndex: i32 = transformIndex + 6;
-    var styleIndex: i32 = offset << 1;
-    var nextStyleIndex = styleIndex + 2;
-
-    // currentTransform
-    var target = changetype<usize>(this._transformStack);
-    STORE<f64>(target, nextTransformIndex, LOAD<f64>(target, transformIndex));
-    STORE<f64>(target, nextTransformIndex + 1, LOAD<f64>(target, transformIndex + 1));
-    STORE<f64>(target, nextTransformIndex + 2, LOAD<f64>(target, transformIndex + 2));
-    STORE<f64>(target, nextTransformIndex + 3, LOAD<f64>(target, transformIndex + 3));
-    STORE<f64>(target, nextTransformIndex + 4, LOAD<f64>(target, transformIndex + 4));
-    STORE<f64>(target, nextTransformIndex + 5, LOAD<f64>(target, transformIndex + 5));
-
-    // direction
-    target = changetype<usize>(this._directionStack);
-    STORE<CanvasDirection>(target, nextOffset, LOAD<CanvasDirection>(target, offset));
+    let stack = this._stack.push();
+    this._stack = stack;
+    let stackReference = stack.reference();
+    // hard saves
+    stackReference.save = hard;
 
     // fillStyle
-    target = changetype<usize>(this._fillStyleStack);
-    STORE<usize>(target, nextStyleIndex, LOAD<usize>(target, styleIndex));
-    STORE<usize>(target, nextStyleIndex + 1, LOAD<usize>(target, styleIndex + 1));
+    __retain(changetype<usize>(stackReference.fillStyleGradient));
+    __retain(changetype<usize>(stackReference.fillStylePattern));
+    __retain(changetype<usize>(stackReference.fillStyleString));
 
     // filter
-    target = changetype<usize>(this._filterStack);
-    STORE<usize>(target, nextOffset, LOAD<usize>(target, offset));
+    __retain(changetype<usize>(stackReference.filter));
 
     // font
-    target = changetype<usize>(this._fontStack);
-    STORE<usize>(target, nextOffset, LOAD<usize>(target, offset));
-
-    // globalAlpha
-    target = changetype<usize>(this._globalAlphaStack);
-    STORE<f64>(target, nextOffset, LOAD<f64>(target, offset));
-
-    // globalCompositeOperation
-    target = changetype<usize>(this._globalCompositeOperationStack);
-    STORE<GlobalCompositeOperation>(target, nextOffset, LOAD<GlobalCompositeOperation>(target, offset));
-
-    // imageSmoothingEnabled
-    target = changetype<usize>(this._imageSmoothingEnabledStack);
-    STORE<bool>(target, nextOffset, LOAD<bool>(target, offset));
-
-    // imageSmoothingQuality
-    target = changetype<usize>(this._imageSmoothingQualityStack);
-    STORE<ImageSmoothingQuality>(target, nextOffset, LOAD<ImageSmoothingQuality>(target, offset));
-
-    // lineCap
-    target = changetype<usize>(this._lineCapStack);
-    STORE<LineCap>(target, nextOffset, LOAD<LineCap>(target, offset));
+    __retain(changetype<usize>(stackReference.font));
 
     // lineDash
-
-    /**
-     * Whenever a save occurs, if it would overwrite a reference that already exists, we must free
-     * it manually.
-     */
-    target = changetype<usize>(this._lineDashStack);
-    var nextLineDash: usize = LOAD<usize>(target, nextOffset);
-    if (nextLineDash != null) __release(nextLineDash);
-
-    STORE<usize>(target, nextOffset, changetype<usize>(null));
-
-    // lineDashOffset
-    target = changetype<usize>(this._lineDashOffsetStack);
-    STORE<f64>(target, nextOffset, LOAD<f64>(target, offset));
-
-    // lineJoin
-    target = changetype<usize>(this._lineJoinStack);
-    STORE<LineJoin>(target, nextOffset, LOAD<LineJoin>(target, offset));
-
-    // lineWidth
-    target = changetype<usize>(this._lineWidthStack);
-    STORE<f64>(target, nextOffset, LOAD<f64>(target, offset));
-
-    // miterLimit
-    target = changetype<usize>(this._miterLimitStack);
-    STORE<f64>(target, nextOffset, LOAD<f64>(target, offset));
-
-    // shadowBlur
-    target = changetype<usize>(this._shadowBlurStack);
-    STORE<f64>(target, nextOffset, LOAD<f64>(target, offset));
-
-    // shadowColor
-    target = changetype<usize>(this._shadowColorStack);
-    STORE<usize>(target, nextOffset, LOAD<usize>(target, offset));
-
-    // shadowOffsetX
-    target = changetype<usize>(this._shadowOffsetXStack);
-    STORE<f64>(target, nextOffset, LOAD<f64>(target, offset));
-
-    // shadowOffsetY
-    target = changetype<usize>(this._shadowOffsetYStack);
-    STORE<f64>(target, nextOffset, LOAD<f64>(target, offset));
+    __retain(changetype<usize>(stackReference.lineDash));
 
     // strokeStyle
-    target = changetype<usize>(this._strokeStyleStack);
-    STORE<usize>(target, nextStyleIndex, LOAD<usize>(target, styleIndex));
-    STORE<usize>(target, nextStyleIndex + 1, LOAD<usize>(target, styleIndex + 1));
+    __retain(changetype<usize>(stackReference.strokeStyleGradient));
+    __retain(changetype<usize>(stackReference.strokeStylePattern));
+    __retain(changetype<usize>(stackReference.strokeStyleString));
 
-    // textBaseline
-    target = changetype<usize>(this._textBaselineStack);
-    STORE<TextBaseline>(target, nextOffset, LOAD<TextBaseline>(target, offset));
-
-    // textAlign
-    target = changetype<usize>(this._textAlignStack);
-    STORE<TextAlign>(target, nextOffset, LOAD<TextAlign>(target, offset));
-
-    if (hard) {
-      STORE<bool>(changetype<usize>(this._saveStack), nextOffset, true);
-      super._writeZero(CanvasInstruction.Save);
-    }
+    if (hard) super._writeZero(CanvasInstruction.Save);
 
     this._stackOffset = <u8>nextOffset;
   }
@@ -1394,95 +1311,74 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   public restore(): void {
     if (this._stackOffset == <u8>0) return;
-    var currentOffset: i32 = <i32>this._stackOffset;
-    var nextOffset: i32 = currentOffset - 1;
-    var styleOffset: i32 = nextOffset * 2;
-    var target: usize;
-    var source: usize;
-    var transformOffset: i32 = nextOffset * 6;
+    let currentStack = this._stack;
+    let nextStack = currentStack.pop();
+    this._stack = nextStack;
+    let currentStackReference = currentStack.reference();
+    let nextStackReference = nextStack.reference();
+    // fillStyle
+    __release(changetype<usize>(currentStackReference.fillStyleGradient));
+    __release(changetype<usize>(currentStackReference.fillStylePattern));
+    __release(changetype<usize>(currentStackReference.fillStyleString));
 
-    if (LOAD<bool>(changetype<usize>(this._saveStack), currentOffset)) {
-      target = changetype<usize>(this._currentTransform);
-      source = changetype<usize>(this._transformStack);
+    // filter
+    __release(changetype<usize>(currentStackReference.filter));
 
-      // transformCurrent
-      STORE<f64>(target, 0, LOAD<f64>(source, transformOffset));
-      STORE<f64>(target, 1, LOAD<f64>(source, transformOffset + 1));
-      STORE<f64>(target, 2, LOAD<f64>(source, transformOffset + 2));
-      STORE<f64>(target, 3, LOAD<f64>(source, transformOffset + 3));
-      STORE<f64>(target, 4, LOAD<f64>(source, transformOffset + 4));
-      STORE<f64>(target, 5, LOAD<f64>(source, transformOffset + 5));
+    // font
+    __release(changetype<usize>(currentStackReference.font));
 
-      // direction
-      this._currentDirection = LOAD<CanvasDirection>(changetype<usize>(this._directionStack), nextOffset);
+    // lineDash
+    __release(changetype<usize>(currentStackReference.lineDash));
 
-      // fillStyle
-      source = changetype<usize>(this._fillStyleStack);
-      this._currentFillStyleType = <FillStrokeStyleType>LOAD<usize>(source, styleOffset);
-      this._currentFillStyleValue = LOAD<usize>(source, styleOffset + 1);
+    // strokeStyle
+    __retain(changetype<usize>(currentStackReference.strokeStyleGradient));
+    __retain(changetype<usize>(currentStackReference.strokeStylePattern));
+    __retain(changetype<usize>(currentStackReference.strokeStyleString));
 
-      // filter
-      this._currentFilter = changetype<string>(LOAD<usize>(changetype<usize>(this._filterStack), nextOffset));
-
-      // font
-      this._currentFont = changetype<string>(LOAD<usize>(changetype<usize>(this._fontStack), nextOffset));
-
-      // globalAlpha
-      this._currentGlobalAlpha = LOAD<f64>(changetype<usize>(this._globalAlphaStack), nextOffset);
-
-      // globalCompositeOperation
-      this._currentGlobalCompositeOperation = LOAD<GlobalCompositeOperation>(changetype<usize>(this._globalCompositeOperationStack), nextOffset);
-
-      // imageSmoothingEnabled
-      this._currentImageSmoothingEnabled = LOAD<bool>(changetype<usize>(this._imageSmoothingEnabledStack), nextOffset);
-
-      // imageSmoothingQuality
-      this._currentImageSmoothingQuality = LOAD<ImageSmoothingQuality>(changetype<usize>(this._imageSmoothingQualityStack), nextOffset);
-
-      // lineCap
-      this._currentLineCap = LOAD<LineCap>(changetype<usize>(this._lineCapStack), nextOffset);
-
-      // lineDash
-      this._currentLineDash = changetype<Float64Array>(LOAD<usize>(changetype<usize>(this._lineDashStack), nextOffset));
-
-      // lineDashOffset
-      this._currentLineDashOffset = LOAD<f64>(changetype<usize>(this._lineDashOffsetStack), nextOffset);
-
-      // lineJoin
-      this._currentLineJoin = LOAD<LineJoin>(changetype<usize>(this._lineJoinStack), nextOffset);
-
-      // lineWidth
-      this._currentLineWidth = LOAD<f64>(changetype<usize>(this._lineWidthStack), nextOffset);
-
-      // miterLimit
-      this._currentMiterLimit = LOAD<f64>(changetype<usize>(this._miterLimitStack), nextOffset);
-
-      // shadowBlur
-      this._currentShadowBlur = LOAD<f64>(changetype<usize>(this._shadowBlurStack), nextOffset);
-
-      // shadowColor
-      this._currentShadowColor = changetype<string>(LOAD<usize>(changetype<usize>(this._shadowColorStack), nextOffset));
-
-      // shadowOffsetX
-      this._currentShadowOffsetX = LOAD<f64>(changetype<usize>(this._shadowOffsetXStack), nextOffset);
-
-      // shadowOffsetY
-      this._currentShadowOffsetY = LOAD<f64>(changetype<usize>(this._shadowOffsetYStack), nextOffset);
-
-      // strokeStyle
-      source = changetype<usize>(this._strokeStyleStack);
-      this._currentStrokeStyleType = <FillStrokeStyleType>LOAD<usize>(source, styleOffset);
-      this._currentStrokeStyleValue = LOAD<usize>(source, styleOffset + 1);
-
-      // textAlign
-      this._currentTextAlign = LOAD<TextAlign>(changetype<usize>(this._textAlignStack), nextOffset);
-
-      // textBaseline
-      this._currentTextBaseline = LOAD<TextBaseline>(changetype<usize>(this._textBaselineStack), nextOffset);
+    if (currentStackReference.save) {
       super._writeZero(CanvasInstruction.Restore);
+
+      // currentTransform
+      memory.copy(
+        changetype<usize>(this._currentTransform),
+        changetype<usize>(nextStackReference) + offsetof<CanvasStack>("a"),
+        48,
+      );
+
+      this._currentDirection = nextStackReference.direction;
+
+      this._currentFillStyleType = nextStackReference.fillStyleType;
+      this._currentFillStyleValue = nextStackReference.fillStyleValue;
+
+      this._currentFilter = nextStackReference.filter;
+
+      this._currentFont = nextStackReference.font;
+
+      this._currentGlobalAlpha = nextStackReference.globalAlpha;
+      this._currentGlobalCompositeOperation = nextStackReference.globalCompositeOperation;
+
+      this._currentImageSmoothingEnabled = nextStackReference.imageSmoothingEnabled;
+      this._currentImageSmoothingQuality = nextStackReference.imageSmoothingQuality;
+
+      this._currentLineCap = nextStackReference.lineCap;
+      this._currentLineDash = nextStackReference.lineDash;
+      this._currentLineJoin = nextStackReference.lineJoin;
+      this._currentLineWidth = nextStackReference.lineWidth;
+      this._currentMiterLimit = nextStackReference.miterLimit;
+
+      this._currentShadowBlur = nextStackReference.shadowBlur;
+      this._currentShadowColor = nextStackReference.shadowColor;
+      this._currentShadowOffsetX = nextStackReference.shadowOffsetX;
+      this._currentShadowOffsetY = nextStackReference.shadowOffsetY;
+
+      this._currentStrokeStyleType = nextStackReference.strokeStyleType;
+      this._currentStrokeStyleValue = nextStackReference.strokeStyleValue;
+
+      this._currentTextAlign = nextStackReference.textAlign;
+      this._currentTextBaseline = nextStackReference.textBaseline;
     }
 
-    this._stackOffset = <u8>nextOffset;
+    this._stackOffset -= <u8>1;
   }
   //#endregion RESTORE
 
