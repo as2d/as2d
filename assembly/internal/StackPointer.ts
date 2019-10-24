@@ -24,7 +24,7 @@ export class StackPointer<T> {
     return changetype<StackPointer<T>>(changetype<usize>(this) - offsetof<T>());
   }
 
-  deref(): T {
+  reference(): T {
     return changetype<T>(this);
   }
 }

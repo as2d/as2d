@@ -18,6 +18,16 @@ export class Buffer<T extends i32> {
   protected _buffer: ArrayBuffer = new ArrayBuffer(0x10000 * sizeof<f64>());
 
   /**
+   * The set of retained pointers that need to be cleaned up after a commit().
+   */
+  protected _retained: ArrayBuffer = new ArrayBuffer(0x10000 << alignof<usize>());
+
+  /**
+   * The offset into the _retained pointer list.
+   */
+  protected _retainedOffset: i32 = 0;
+
+  /**
    * The offset property is a pointer to the next index that will receive a written value.
    */
   private _offset: i32 = 0;
@@ -248,5 +258,23 @@ export class Buffer<T extends i32> {
   @inline
   protected _resetBuffer(): void {
     this._offset = 0;
+    let length = this._retainedOffset;
+    let pointer = changetype<usize>(this._retained);
+    for (let i = 0; i < length; i++) {
+      __release(load<usize>(pointer + (<usize>i << alignof<usize>())));
+    }
+  }
+
+  /**
+   * Retain a pointer in the buffer for later use.
+   *
+   * @param {usize} pointer - The pointer to be retained and released after the buffer is reset.
+   */
+  protected _retain(pointer: usize): void {
+    __retain(pointer);
+    var retained = changetype<usize>(this._retained);
+    var index = this._retainedOffset;
+    store<usize>(retained + (index << alignof<usize>()), pointer);
+    this._retainedOffset = index + 1;
   }
 }
