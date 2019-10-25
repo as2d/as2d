@@ -6099,9 +6099,6 @@
     call $~lib/rt/pure/__release
    end
   end
-  local.get $1
-  call $~lib/rt/pure/__retain
-  drop
   local.get $2
   local.get $1
   local.tee $4
@@ -11658,7 +11655,7 @@
     i32.eq
     if
      local.get $10
-     i32.load offset=192
+     i32.load offset=196
      local.set $1
      local.get $1
      i32.load
@@ -24792,7 +24789,7 @@
     i32.eq
     if
      local.get $8
-     i32.load offset=192
+     i32.load offset=196
      local.set $5
      local.get $5
      i32.load
@@ -26623,7 +26620,7 @@
     i32.eq
     if
      local.get $8
-     i32.load offset=192
+     i32.load offset=196
      local.set $9
      local.get $9
      i32.load
@@ -28610,7 +28607,7 @@
     i32.eq
     if
      local.get $9
-     i32.load offset=192
+     i32.load offset=196
      local.set $10
      local.get $10
      i32.load

@@ -7552,9 +7552,6 @@
     call $~lib/rt/pure/__release
    end
   end
-  local.get $1
-  call $~lib/rt/pure/__retain
-  drop
   local.get $2
   local.get $1
   local.tee $4

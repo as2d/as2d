@@ -1088,7 +1088,6 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     } else {
       __release(changetype<usize>(stack.strokeStyleString));
     }
-    __retain(changetype<usize>(value));
     stack.strokeStyleString = value!;
     stack.strokeStyleValue = changetype<usize>(value);
   }
