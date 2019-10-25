@@ -207,20 +207,17 @@ export function fillRect(x: f64, y: f64, width: f64, height: f64): void {
 
 export function drawImage(dx: f64, dy: f64): void {
   assert(ctx);
-  assert(img);
-  ctx.drawImage(img!, dx, dy);
+  ctx.drawImage(img, dx, dy);
 }
 
 export function drawImageSize(dx: f64, dy: f64, dWidth: f64, dHeight: f64): void {
   assert(ctx);
-  assert(img);
-  ctx.drawImageSize(img!, dx, dy, dWidth, dHeight);
+  ctx.drawImageSize(img, dx, dy, dWidth, dHeight);
 }
 
 export function drawImageSource(sx: f64, sy: f64, sWidth: f64, sHeight: f64, dx: f64, dy: f64, dWidth: f64, dHeight: f64): void {
   assert(ctx);
-  assert(img);
-  ctx.drawImageSource(img!, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+  ctx.drawImageSource(img, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 }
 
 export function fillText(text: string, x: f64, y: f64): void {

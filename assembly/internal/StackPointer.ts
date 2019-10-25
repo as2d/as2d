@@ -6,7 +6,7 @@ export class StackPointer<T> {
     assert(isReference<T>());
     assert(count > 0);
     let length = offsetof<T>() * count;
-    let ptr = __alloc(length, idof<StackPointer<T>>());
+    let ptr = __alloc(length, idof<ArrayBuffer>());
     memory.fill(ptr, 0, length);
     return changetype<StackPointer<T>>(ptr);
   }
@@ -26,5 +26,9 @@ export class StackPointer<T> {
 
   reference(): T {
     return changetype<T>(this);
+  }
+
+  dereference(): usize {
+    return changetype<usize>(this);
   }
 }

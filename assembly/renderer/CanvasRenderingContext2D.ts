@@ -169,7 +169,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
   //#endregion CREATERADIALGRADIENT
 
-  private _stack = initializeStackPointer(StackPointer.create<CanvasStack>(0xFF));
+  private _stack: StackPointer<CanvasStack> = initializeStackPointer(StackPointer.create<CanvasStack>(0xFF));
 
   //#region TRANSFORM
 
@@ -331,6 +331,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     let stack = this._stack.reference();
     let currentType = stack.fillStyleType;
     stack.fillStyleType = FillStrokeStyleType.String;
+    __retain(changetype<usize>(value));
     if (currentType == FillStrokeStyleType.CanvasGradient) {
       __release(changetype<usize>(stack.fillStyleGradient));
       stack.fillStyleGradient = null;
@@ -362,7 +363,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
       pointer = changetype<usize>(stack.fillStyleGradient);
       value = <f64>load<i32>(pointer, offsetof<CanvasGradient>("id"));
     } else if (styleType === FillStrokeStyleType.CanvasPattern) {
-      pointer = changetype<usize>(stack.fillStyleGradient);
+      pointer = changetype<usize>(stack.fillStylePattern);
       value = <f64>load<i32>(pointer, offsetof<CanvasPattern>("id"));
     }
     super._retain(pointer);
@@ -570,7 +571,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   public set globalCompositeOperation(value: GlobalCompositeOperation) {
-    this._stack.reference().globalCompositeOperation = this.globalCompositeOperation;
+    this._stack.reference().globalCompositeOperation = value;
   }
 
   /**
@@ -1077,6 +1078,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     let stack = this._stack.reference();
     let currentType = stack.strokeStyleType;
     stack.strokeStyleType = FillStrokeStyleType.String;
+    __retain(changetype<usize>(value));
     if (currentType == FillStrokeStyleType.CanvasGradient) {
       __release(changetype<usize>(stack.strokeStyleGradient));
       stack.strokeStyleGradient = null;
@@ -1109,7 +1111,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
       pointer = changetype<usize>(stack.strokeStyleGradient);
       value = <f64>load<i32>(pointer, offsetof<CanvasGradient>("id"));
     } else if (styleType === FillStrokeStyleType.CanvasPattern) {
-      pointer = changetype<usize>(stack.strokeStyleGradient);
+      pointer = changetype<usize>(stack.strokeStylePattern);
       value = <f64>load<i32>(pointer, offsetof<CanvasPattern>("id"));
     }
     super._retain(pointer);
@@ -1348,7 +1350,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
       this._currentDirection = nextStackReference.direction;
 
       this._currentFillStyleType = nextStackReference.fillStyleType;
-      this._currentFillStyleValue = nextStackReference.fillStyleValue;
+      this._currentFillStyleValue = <usize>nextStackReference.fillStyleValue;
 
       this._currentFilter = nextStackReference.filter;
 
@@ -1372,7 +1374,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
       this._currentShadowOffsetY = nextStackReference.shadowOffsetY;
 
       this._currentStrokeStyleType = nextStackReference.strokeStyleType;
-      this._currentStrokeStyleValue = nextStackReference.strokeStyleValue;
+      this._currentStrokeStyleValue = <usize>nextStackReference.strokeStyleValue;
 
       this._currentTextAlign = nextStackReference.textAlign;
       this._currentTextBaseline = nextStackReference.textBaseline;
@@ -1432,18 +1434,16 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     h: f64 = 0.0,
   ): void {
     var el: Path2DElement = unchecked(this._path[this._pathOffset]);
-    var index: i32;
     el.instruction = inst;
     el.updateTransform = updateTransform;
     if (updateTransform) {
-      index = this._stackOffset * 6;
-      let current = changetype<usize>(this._transformStack);
-      el.transformA = LOAD<f64>(current, index + 0);
-      el.transformB = LOAD<f64>(current, index + 1);
-      el.transformC = LOAD<f64>(current, index + 2);
-      el.transformD = LOAD<f64>(current, index + 3);
-      el.transformE = LOAD<f64>(current, index + 4);
-      el.transformF = LOAD<f64>(current, index + 5);
+      let current = this._stack.reference();
+      el.transformA = current.a;
+      el.transformB = current.b;
+      el.transformC = current.c;
+      el.transformD = current.d;
+      el.transformE = current.e;
+      el.transformF = current.f;
     }
     el.count = count;
     el.a = a;
@@ -1471,7 +1471,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var d: f64;
     var e: f64;
     var f: f64;
-    var current: usize = changetype<usize>(this._currentTransform);
+    var currentTransform: usize = changetype<usize>(this._currentTransform);
     for (var i: i32 = this._pathBufferOffset; i <= end; i++) {
       el = unchecked(this._path[i]);
       if (el.updateTransform) {
@@ -1482,21 +1482,19 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
         e = el.transformE;
         f = el.transformF;
 
-        if (
-          a != LOAD<f64>(current, 0) ||
-          b != LOAD<f64>(current, 1) ||
-          c != LOAD<f64>(current, 2) ||
-          d != LOAD<f64>(current, 3) ||
-          e != LOAD<f64>(current, 4) ||
-          f != LOAD<f64>(current, 5)
-        ) {
+        let diff = memory.compare(
+          currentTransform,
+          changetype<usize>(el) + offsetof<Path2DElement>("transformA"),
+          48,
+        );
+        if (diff != 0) {
           super._writeSix(CanvasInstruction.SetTransform, a, b, c, d, e, f);
-          STORE<f64>(current, 0, a);
-          STORE<f64>(current, 1, b);
-          STORE<f64>(current, 2, c);
-          STORE<f64>(current, 3, d);
-          STORE<f64>(current, 4, e);
-          STORE<f64>(current, 5, f);
+          STORE<f64>(currentTransform, 0, a);
+          STORE<f64>(currentTransform, 1, b);
+          STORE<f64>(currentTransform, 2, c);
+          STORE<f64>(currentTransform, 3, d);
+          STORE<f64>(currentTransform, 4, e);
+          STORE<f64>(currentTransform, 5, f);
         }
         switch (el.count) {
           case 0: {
@@ -1664,7 +1662,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param {f64} dy - The y-axis coordinate in the destination canvas at which to place the top-left
    * corner of the source image.
    */
-  public drawImage(image: Image, dx: f64, dy: f64): void {
+  public drawImage(image: Image | null, dx: f64, dy: f64): void {
     if (image == null || !isFinite(dx + dy) || !image.loaded) return;
     this._updateFilter();
     this._updateGlobalAlpha();
@@ -1699,7 +1697,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param {f64} dHeight - The height to draw the image in the destination canvas. This allows scaling
    * of the drawn image. If not specified, the image is not scaled in height when drawn.
    */
-  public drawImageSize(image: Image, dx: f64, dy: f64, dWidth: f64, dHeight: f64): void {
+  public drawImageSize(image: Image | null, dx: f64, dy: f64, dWidth: f64, dHeight: f64): void {
     if (image == null || !isFinite(dx + dy + dWidth + dHeight) || !image.loaded) return;
     this._updateFilter();
     this._updateGlobalAlpha();
@@ -1743,7 +1741,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param {f64} dHeight - The height to draw the image in the destination canvas. This allows scaling
    * of the drawn image. If not specified, the image is not scaled in height when drawn.
    */
-  public drawImageSource(image: Image, sx: f64, sy: f64, sWidth: f64, sHeight: f64, dx: f64, dy: f64, dWidth: f64, dHeight: f64): void {
+  public drawImageSource(image: Image | null, sx: f64, sy: f64, sWidth: f64, sHeight: f64, dx: f64, dy: f64, dWidth: f64, dHeight: f64): void {
     if (image == null || !isFinite(sx + sy + sWidth + sHeight + dx + dy + dWidth + dHeight) || !image.loaded) return;
     this._updateFilter();
     this._updateGlobalAlpha();
@@ -1897,6 +1895,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     this._updateTextAlign();
     this._updateTextBaseline();
     this._updateTransform();
+    super._retain(changetype<usize>(text));
     super._writeThree(CanvasInstruction.FillText, <f64>changetype<usize>(text), x, y);
   }
 
@@ -1937,6 +1936,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     this._updateTextAlign();
     this._updateTextBaseline();
     this._updateTransform();
+    super._retain(changetype<usize>(text));
     super._writeFour(CanvasInstruction.FillTextWidth, <f64>changetype<usize>(text), x, y, maxWidth);
   }
   //#endregion FILLTEXT
@@ -2084,18 +2084,42 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   public rotate(angle: f64): void {
     if (!isFinite(angle)) return;
-    var index: i32 = this._stackOffset * 6;
-    var current = changetype<usize>(this._transformStack);
-    var a: f64 = LOAD<f64>(current, index);
-    var b: f64 = LOAD<f64>(current, index + 1);
-    var c: f64 = LOAD<f64>(current, index + 2);
-    var d: f64 = LOAD<f64>(current, index + 3);
-    var cos: f64 = Math.cos(angle);
-    var sin: f64 = Math.sin(angle);
-    STORE<f64>(current, index, a * cos + c * sin);
-    STORE<f64>(current, index + 1, b * cos + d * sin);
-    STORE<f64>(current, index + 2, c * cos - a * sin);
-    STORE<f64>(current, index + 3, d * cos - b * sin);
+
+    var stack = this._stack.reference();
+
+    NativeMath.sincos(angle);
+    var cos: f64 = NativeMath.sincos_cos;
+    var sin: f64 = NativeMath.sincos_sin;
+
+    if (ASC_FEATURE_SIMD) {
+      let cossplat = v128.splat<f64>(cos);
+      let sinsplat = v128.splat<f64>(sin);
+      let aptr = changetype<usize>(stack) + offsetof<CanvasStack>("a");
+      let cptr = changetype<usize>(stack) + offsetof<CanvasStack>("c");
+      let ab = v128.load(aptr);
+      let cb = v128.load(cptr);
+      v128.store(aptr,
+        v128.add<f64>(
+          v128.mul<f64>(ab, cossplat),
+          v128.mul<f64>(cb, sinsplat),
+        ),
+      );
+      v128.store(cptr,
+        v128.sub<f64>(
+          v128.mul<f64>(cb, cossplat),
+          v128.mul<f64>(ab, sinsplat),
+        ),
+      );
+    } else {
+      var a = stack.a;
+      var b = stack.b;
+      var c = stack.c;
+      var d = stack.d;
+      stack.a = a * cos + c * sin;
+      stack.b = b * cos + d * sin;
+      stack.c = c * cos - a * sin;
+      stack.d = d * cos - b * sin;
+    }
   }
   //#endregion ROTATE
 
@@ -2115,12 +2139,28 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   public scale(x: f64, y: f64): void {
     if (!isFinite(x + y)) return;
-    var index: i32 = this._stackOffset * 6;
-    var current = changetype<usize>(this._transformStack);
-    STORE<f64>(current, index, LOAD<f64>(current, index) * x);
-    STORE<f64>(current, index + 1, LOAD<f64>(current, index + 1) * x);
-    STORE<f64>(current, index + 2, LOAD<f64>(current, index + 2) * y);
-    STORE<f64>(current, index + 3, LOAD<f64>(current, index + 3) * y);
+    let stack = this._stack.reference();
+    if (ASC_FEATURE_SIMD) {
+      let abptr = changetype<usize>(this) + offsetof<CanvasStack>("a");
+      let cdptr = changetype<usize>(this) + offsetof<CanvasStack>("c");
+      v128.store(abptr,
+        v128.mul<f64>(
+          v128.load(abptr),
+          v128.splat<f64>(x),
+        ),
+      );
+      v128.store(cdptr,
+        v128.mul<f64>(
+          v128.load(cdptr),
+          v128.splat<f64>(y),
+        ),
+      );
+    } else {
+      stack.a *= x;
+      stack.b *= x;
+      stack.c *= y;
+      stack.d *= y;
+    }
   }
   //#endregion SCALE
 
@@ -2140,14 +2180,13 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   public setTransform(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64): void {
     if (!isFinite(a + b + c + d + e + f)) return ;
-    var index: i32 = this._stackOffset * 6;
-    var current = changetype<usize>(this._transformStack);
-    STORE<f64>(current, index, a);
-    STORE<f64>(current, index + 1, b);
-    STORE<f64>(current, index + 2, c);
-    STORE<f64>(current, index + 3, d);
-    STORE<f64>(current, index + 4, e);
-    STORE<f64>(current, index + 5, f);
+    let stack = this._stack.reference();
+    stack.a = a;
+    stack.b = b;
+    stack.c = c;
+    stack.d = d;
+    stack.e = e;
+    stack.f = f;
   }
   //#endregion SETTRANSFORM
 
@@ -2166,10 +2205,11 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
      * this point.
      */
     if (this._pathOffset == 1) return;
+
     /**
      * If the lineWidth is zero, there is no line and it does not matter if ctx.stroke() is called.
      */
-    if (LOAD<f64>(changetype<usize>(this._lineWidthStack), this._stackOffset) <= 0.0) return;
+    if (this._stack.reference().lineWidth <= 0.0) return;
     this._updateFilter();
     this._updateGlobalAlpha();
     this._updateGlobalCompositeOperation();
@@ -2209,7 +2249,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     /**
      * If the lineWidth is zero, there is no line and it does not matter if ctx.stroke() is called.
      */
-    if (LOAD<f64>(changetype<usize>(this._lineWidthStack), this._stackOffset) <= 0.0) return;
+    if (this._stack.reference().lineWidth <= 0.0) return;
     this._updateFilter();
     this._updateGlobalAlpha();
     this._updateGlobalCompositeOperation();
@@ -2268,6 +2308,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     this._updateTextAlign();
     this._updateTextBaseline();
     this._updateTransform();
+    super._retain(changetype<usize>(text));
     super._writeThree(CanvasInstruction.StrokeText, <f64>changetype<usize>(text), x, y)
   }
 
@@ -2312,6 +2353,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     this._updateTextAlign();
     this._updateTextBaseline();
     this._updateTransform();
+    super._retain(changetype<usize>(text));
     super._writeFour(CanvasInstruction.StrokeTextWidth, <f64>changetype<usize>(text), x, y, maxWidth);
   }
   //#endregion STROKETEXT
@@ -2331,21 +2373,53 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   public transform(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64): void {
     if (!isFinite(a + b + c + d + e + f)) return;
-    var current = changetype<usize>(this._transformStack);
-    var index: i32 = this._stackOffset * 6;
-    var sa: f64 = LOAD<f64>(current, index);
-    var sb: f64 = LOAD<f64>(current, index + 1);
-    var sc: f64 = LOAD<f64>(current, index + 2);
-    var sd: f64 = LOAD<f64>(current, index + 3);
-    var se: f64 = LOAD<f64>(current, index + 4);
-    var sf: f64 = LOAD<f64>(current, index + 5);
-
-    STORE<f64>(current, index, sa * a + sc * b);
-    STORE<f64>(current, index + 1, sb * a + sd * b);
-    STORE<f64>(current, index + 2, sa * c + sc * d);
-    STORE<f64>(current, index + 3, sb * c + sd * d);
-    STORE<f64>(current, index + 4, sa * e + sc * f + se);
-    STORE<f64>(current, index + 5, sb * e + sd * f + sf);
+    if (ASC_FEATURE_SIMD) {
+      let stack = this._stack.dereference();
+      let abptr = stack + offsetof<CanvasStack>("a");
+      let cdptr = stack + offsetof<CanvasStack>("c");
+      let efptr = stack + offsetof<CanvasStack>("e");
+      let ab = v128.load(abptr);
+      let cd = v128.load(cdptr);
+      let ef = v128.load(efptr);
+      v128.store(
+        abptr,
+        v128.add<f64>(
+          v128.mul(ab, v128.splat<f64>(a)),
+          v128.mul(cd, v128.splat<f64>(b)),
+        ),
+      );
+      v128.store(
+        cdptr,
+        v128.add<f64>(
+          v128.mul(ab, v128.splat<f64>(c)),
+          v128.mul(cd, v128.splat<f64>(d)),
+        ),
+      );
+      v128.store(
+        efptr,
+        v128.add<f64>(
+          v128.add<f64>(
+            v128.mul(ab, v128.splat<f64>(e)),
+            v128.mul(cd, v128.splat<f64>(f)),
+          ),
+          ef,
+        ),
+      );
+    } else {
+      let stack = this._stack.reference();
+      var sa = stack.a;
+      var sb = stack.b;
+      var sc = stack.c;
+      var sd = stack.d;
+      var se = stack.e;
+      var sf = stack.f;
+      stack.a = sa * a + sc * b;
+      stack.b = sb * a + sd * b;
+      stack.c = sa * c + sc * d;
+      stack.d = sb * c + sd * d;
+      stack.e = sa * e + sc * f + se;
+      stack.f = sb * e + sd * f + sf;
+    }
   }
   //#endregion TRANSFORM
 
@@ -2361,22 +2435,27 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   public translate(x: f64, y: f64): void {
     if (!isFinite(x + y)) return;
 
-    var current = changetype<usize>(this._transformStack);
-    var index: i32 = this._stackOffset * 6;
-
-    // e = e + a * x + c * y;
-    STORE<f64>(
-      current,
-      index + 4,
-      LOAD<f64>(current, index + 4) + LOAD<f64>(current, index) * x + LOAD<f64>(current, index + 2) * y,
-    );
-
-    // f = f + b * x + d * y;
-    STORE<f64>(
-      current,
-      index + 5,
-      LOAD<f64>(current, index + 5) + LOAD<f64>(current, index + 1) * x + LOAD<f64>(current, index + 3) * y,
-    );
+    if (ASC_FEATURE_SIMD) {
+      let stack = this._stack.dereference();
+      let efptr = stack + offsetof<CanvasStack>("e");
+      v128.store(
+        efptr,
+        v128.add<f64>(
+          v128.mul<f64>(
+            v128.load(stack + offsetof<CanvasStack>("a")),
+            v128.splat<f64>(x),
+          ),
+          v128.mul<f64>(
+            v128.load(stack + offsetof<CanvasStack>("c")),
+            v128.splat<f64>(y),
+          ),
+        ),
+      );
+    } else {
+      let stack = this._stack.reference();
+      stack.e += stack.a * x + stack.c * y;
+      stack.f += stack.b * x + stack.d * y;
+    }
   }
   //#endregion TRANSLATE
 

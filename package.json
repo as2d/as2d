@@ -13,7 +13,7 @@
     "jest": "jest",
     "build:all": "run-p asbuild:test build:src",
     "build:src": "tsc",
-    "asbuild:test": "run-p asbuild:glue asbuild:Buffer asbuild:CanvasRenderingContext2D asbuild:save-restore",
+    "asbuild:test": "run-s asbuild:glue asbuild:Buffer asbuild:CanvasRenderingContext2D asbuild:save-restore",
     "asbuild:save-restore": "asc assembly/glue.ts assembly/save-restore.test.ts -b build/save-restore.test.wasm -t build/save-restore.test.wat --sourceMap --validate --debug --use Math=JSMath",
     "asbuild:glue": "asc assembly/glue.ts assembly/glue.test.ts -b build/glue.test.wasm -t build/glue.test.wat --sourceMap --validate --debug --use Math=JSMath",
     "asbuild:Buffer": "asc assembly/glue.ts assembly/Buffer.test.ts -b build/Buffer.test.wasm -t build/Buffer.test.wat --sourceMap --validate --debug --use Math=JSMath",

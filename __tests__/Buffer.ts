@@ -19,7 +19,7 @@ describe("Buffers", () => {
     var bufferPointer: number = wasm.writeThreeTimes();
 
     // @ts-ignore
-    var data = new Float64Array(wasm.memory.buffer, bufferPointer + 16, 0x10000);
+    var data = new Float64Array(wasm.memory.buffer, bufferPointer, 0x10000);
 
     expect(data[0]).toBe(0);
     expect(data[1]).toBe(4);
