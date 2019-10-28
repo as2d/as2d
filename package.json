@@ -27,8 +27,8 @@
     "assemblyscript": "github:assemblyscript/assemblyscript"
   },
   "devDependencies": {
-    "@types/jest": "24.0.19",
-    "@types/node": "12.11.5",
+    "@types/jest": "24.0.20",
+    "@types/node": "12.11.7",
     "coveralls": "3.0.7",
     "cross-env": "6.0.3",
     "jest": "24.9.0",

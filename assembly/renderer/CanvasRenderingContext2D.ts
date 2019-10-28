@@ -89,9 +89,12 @@ function initializeStackPointer(pointer: StackPointer<CanvasStack>): StackPointe
   stack.lineCap = LineCap.butt;
   stack.lineDash = defaultLineDash;
   stack.lineJoin = LineJoin.miter;
+  stack.lineWidth = 1.0;
   stack.miterLimit = 10.0;
   stack.shadowBlur = 0.0;
   stack.shadowColor = defaultShadowColor;
+  stack.strokeStyleString = defaultBlack;
+  __retain(changetype<usize>(defaultBlack));
   __retain(changetype<usize>(defaultShadowColor));
   return pointer;
 }
@@ -967,6 +970,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: string = this._stack.reference().shadowColor;
     if (value != this._currentShadowColor) {
       this._currentFilter = value;
+      super._retain(changetype<usize>(value));
       super._writeOne(CanvasInstruction.ShadowColor, changetype<usize>(value));
     }
   }
@@ -1117,9 +1121,9 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
     if (styleType != this._currentStrokeStyleType || value != this._currentStrokeStyleValue) {
       var inst: CanvasInstruction;
-      if (styleType == FillStrokeStyleType.String) inst = CanvasInstruction.FillStyle;
-      else if (styleType == FillStrokeStyleType.CanvasGradient) inst = CanvasInstruction.FillGradient;
-      else inst = CanvasInstruction.FillPattern;
+      if (styleType == FillStrokeStyleType.String) inst = CanvasInstruction.StrokeStyle;
+      else if (styleType == FillStrokeStyleType.CanvasGradient) inst = CanvasInstruction.StrokeGradient;
+      else inst = CanvasInstruction.StrokePattern;
       super._writeOne(inst, <f64>value);
     }
   }
@@ -1289,6 +1293,9 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     // lineDash
     __retain(changetype<usize>(stackReference.lineDash));
 
+    // shadowColor
+    __retain(changetype<usize>(stackReference.shadowColor));
+
     // strokeStyle
     __retain(changetype<usize>(stackReference.strokeStyleGradient));
     __retain(changetype<usize>(stackReference.strokeStylePattern));
@@ -1331,10 +1338,14 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     // lineDash
     __release(changetype<usize>(currentStackReference.lineDash));
 
+    // shadowColor
+    __release(changetype<usize>(currentStackReference.shadowColor));
+
     // strokeStyle
-    __retain(changetype<usize>(currentStackReference.strokeStyleGradient));
-    __retain(changetype<usize>(currentStackReference.strokeStylePattern));
-    __retain(changetype<usize>(currentStackReference.strokeStyleString));
+    __release(changetype<usize>(currentStackReference.strokeStyleGradient));
+    __release(changetype<usize>(currentStackReference.strokeStylePattern));
+    __release(changetype<usize>(currentStackReference.strokeStyleString));
+
 
     if (currentStackReference.save) {
       super._writeZero(CanvasInstruction.Restore);
@@ -2286,6 +2297,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param {f64} y - The y-axis coordinate of the point at which to begin drawing the text.
    */
   public strokeText(text: string, x: f64, y: f64): void {
+    if (!isFinite(x + y) || text == null || text.length == 0) return;
     this._updateDirection();
     this._updateFilter();
     this._updateFont();
@@ -2331,6 +2343,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * text in the specified width.
    */
   public strokeTextWidth(text: string, x: f64, y: f64, maxWidth: f64): void {
+    if (!isFinite(x + y + maxWidth) || text == null || text.length == 0 || maxWidth < 0) return;
     this._updateDirection();
     this._updateFilter();
     this._updateFont();

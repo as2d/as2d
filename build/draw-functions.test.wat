@@ -4032,6 +4032,9 @@
   global.get $src/shared/LineJoin/LineJoin.miter
   i32.store offset=128
   local.get $1
+  f64.const 1
+  f64.store offset=136
+  local.get $1
   f64.const 10
   f64.store offset=144
   local.get $1
@@ -4040,6 +4043,12 @@
   local.get $1
   global.get $assembly/renderer/CanvasRenderingContext2D/defaultShadowColor
   i32.store offset=160
+  local.get $1
+  global.get $assembly/renderer/CanvasRenderingContext2D/defaultBlack
+  i32.store offset=188
+  global.get $assembly/renderer/CanvasRenderingContext2D/defaultBlack
+  call $~lib/rt/pure/__retain
+  drop
   global.get $assembly/renderer/CanvasRenderingContext2D/defaultShadowColor
   call $~lib/rt/pure/__retain
   drop
@@ -8592,6 +8601,9 @@
    local.get $3
    i32.store offset=44
    local.get $13
+   local.get $5
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
+   local.get $13
    local.set $11
    i32.const 42
    local.set $7
@@ -11387,6 +11399,9 @@
    local.get $10
    i32.store offset=44
    local.get $4
+   local.get $2
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
+   local.get $4
    local.set $7
    i32.const 42
    local.set $18
@@ -11685,17 +11700,17 @@
    i32.const 0
    i32.eq
    if
-    i32.const 16
+    i32.const 49
     local.set $11
    else
     local.get $4
     i32.const 2
     i32.eq
     if
-     i32.const 13
+     i32.const 46
      local.set $11
     else
-     i32.const 14
+     i32.const 47
      local.set $11
     end
    end
@@ -16392,6 +16407,9 @@
    local.get $12
    i32.store offset=44
    local.get $14
+   local.get $6
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
+   local.get $14
    local.set $5
    i32.const 42
    local.set $8
@@ -17355,6 +17373,9 @@
    end
    local.get $7
    i32.store offset=44
+   local.get $5
+   local.get $16
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $5
    local.set $4
    i32.const 42
@@ -18436,6 +18457,9 @@
    end
    local.get $9
    i32.store offset=44
+   local.get $7
+   local.get $18
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $7
    local.set $6
    i32.const 42
@@ -19519,6 +19543,9 @@
    end
    local.get $13
    i32.store offset=44
+   local.get $11
+   local.get $22
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $11
    local.set $10
    i32.const 42
@@ -20910,6 +20937,9 @@
    end
    local.get $10
    i32.store offset=44
+   local.get $9
+   local.get $5
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $9
    local.set $4
    i32.const 42
@@ -22363,6 +22393,9 @@
    end
    local.get $11
    i32.store offset=44
+   local.get $10
+   local.get $6
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $10
    local.set $5
    i32.const 42
@@ -24521,6 +24554,9 @@
    local.get $6
    i32.store offset=44
    local.get $10
+   local.get $14
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
+   local.get $10
    local.set $7
    i32.const 42
    local.set $8
@@ -24819,17 +24855,17 @@
    i32.const 0
    i32.eq
    if
-    i32.const 16
+    i32.const 49
     local.set $18
    else
     local.get $10
     i32.const 2
     i32.eq
     if
-     i32.const 13
+     i32.const 46
      local.set $18
     else
-     i32.const 14
+     i32.const 47
      local.set $18
     end
    end
@@ -25054,6 +25090,31 @@
   local.get $1
   call $~lib/rt/pure/__retain
   drop
+  local.get $2
+  local.get $3
+  f64.add
+  call $~lib/number/isFinite<f64>
+  i32.eqz
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   i32.const 0
+   call $~lib/string/String.__eq
+  end
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   call $~lib/string/String#get:length
+   i32.const 0
+   i32.eq
+  end
+  if
+   local.get $1
+   call $~lib/rt/pure/__release
+   return
+  end
   local.get $0
   local.set $4
   local.get $4
@@ -26352,6 +26413,9 @@
    local.get $5
    i32.store offset=44
    local.get $10
+   local.get $14
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
+   local.get $10
    local.set $7
    i32.const 42
    local.set $8
@@ -26650,17 +26714,17 @@
    i32.const 0
    i32.eq
    if
-    i32.const 16
+    i32.const 49
     local.set $17
    else
     local.get $10
     i32.const 2
     i32.eq
     if
-     i32.const 13
+     i32.const 46
      local.set $17
     else
-     i32.const 14
+     i32.const 47
      local.set $17
     end
    end
@@ -27041,6 +27105,40 @@
   local.get $1
   call $~lib/rt/pure/__retain
   drop
+  local.get $2
+  local.get $3
+  f64.add
+  local.get $4
+  f64.add
+  call $~lib/number/isFinite<f64>
+  i32.eqz
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   i32.const 0
+   call $~lib/string/String.__eq
+  end
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   call $~lib/string/String#get:length
+   i32.const 0
+   i32.eq
+  end
+  if (result i32)
+   i32.const 1
+  else
+   local.get $4
+   f64.const 0
+   f64.lt
+  end
+  if
+   local.get $1
+   call $~lib/rt/pure/__release
+   return
+  end
   local.get $0
   local.set $5
   local.get $5
@@ -28339,6 +28437,9 @@
    local.get $6
    i32.store offset=44
    local.get $11
+   local.get $15
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
+   local.get $11
    local.set $8
    i32.const 42
    local.set $9
@@ -28637,17 +28738,17 @@
    i32.const 0
    i32.eq
    if
-    i32.const 16
+    i32.const 49
     local.set $18
    else
     local.get $11
     i32.const 2
     i32.eq
     if
-     i32.const 13
+     i32.const 46
      local.set $18
     else
-     i32.const 14
+     i32.const 47
      local.set $18
     end
    end
@@ -29100,6 +29201,10 @@
   call $~lib/rt/pure/__retain
   drop
   local.get $5
+  i32.load offset=160
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $5
   i32.load offset=192
   call $~lib/rt/pure/__retain
   drop
@@ -29237,17 +29342,17 @@
   i32.load offset=112
   call $~lib/rt/pure/__release
   local.get $3
+  i32.load offset=160
+  call $~lib/rt/pure/__release
+  local.get $3
   i32.load offset=192
-  call $~lib/rt/pure/__retain
-  drop
+  call $~lib/rt/pure/__release
   local.get $3
   i32.load offset=196
-  call $~lib/rt/pure/__retain
-  drop
+  call $~lib/rt/pure/__release
   local.get $3
   i32.load offset=188
-  call $~lib/rt/pure/__retain
-  drop
+  call $~lib/rt/pure/__release
   local.get $3
   i32.load8_u offset=216
   if

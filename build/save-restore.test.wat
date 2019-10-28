@@ -3979,6 +3979,9 @@
   global.get $src/shared/LineJoin/LineJoin.miter
   i32.store offset=128
   local.get $1
+  f64.const 1
+  f64.store offset=136
+  local.get $1
   f64.const 10
   f64.store offset=144
   local.get $1
@@ -3987,6 +3990,12 @@
   local.get $1
   global.get $assembly/renderer/CanvasRenderingContext2D/defaultShadowColor
   i32.store offset=160
+  local.get $1
+  global.get $assembly/renderer/CanvasRenderingContext2D/defaultBlack
+  i32.store offset=188
+  global.get $assembly/renderer/CanvasRenderingContext2D/defaultBlack
+  call $~lib/rt/pure/__retain
+  drop
   global.get $assembly/renderer/CanvasRenderingContext2D/defaultShadowColor
   call $~lib/rt/pure/__retain
   drop
@@ -5787,6 +5796,10 @@
   call $~lib/rt/pure/__retain
   drop
   local.get $5
+  i32.load offset=160
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $5
   i32.load offset=192
   call $~lib/rt/pure/__retain
   drop
@@ -5939,17 +5952,17 @@
   i32.load offset=112
   call $~lib/rt/pure/__release
   local.get $3
+  i32.load offset=160
+  call $~lib/rt/pure/__release
+  local.get $3
   i32.load offset=192
-  call $~lib/rt/pure/__retain
-  drop
+  call $~lib/rt/pure/__release
   local.get $3
   i32.load offset=196
-  call $~lib/rt/pure/__retain
-  drop
+  call $~lib/rt/pure/__release
   local.get $3
   i32.load offset=188
-  call $~lib/rt/pure/__retain
-  drop
+  call $~lib/rt/pure/__release
   local.get $3
   i32.load8_u offset=216
   if
