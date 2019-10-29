@@ -19,6 +19,16 @@ export class StackPointer<T> {
     return changetype<StackPointer<T>>(next);
   }
 
+  @inline @operator.prefix("++")
+  increment(): StackPointer<T> {
+    return changetype<StackPointer<T>>(changetype<usize>(this) + offsetof<T>());
+  }
+
+  @inline @operator.prefix("--")
+  decrement(): StackPointer<T> {
+    return changetype<StackPointer<T>>(changetype<usize>(this) - offsetof<T>());
+  }
+
   @inline
   pop(): StackPointer<T> {
     return changetype<StackPointer<T>>(changetype<usize>(this) - offsetof<T>());

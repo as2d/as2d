@@ -101,16 +101,15 @@ function initializeStackPointer(pointer: StackPointer<CanvasStack>): StackPointe
 
 
 /** The path element initializer. */
-function createPathElements(): Path2DElement[] {
-  var path: Path2DElement[] = new Array<Path2DElement>(0xFF);
-  for (var i = 0; i < 0x1000; i++) {
-    path[i] = new Path2DElement();
-  }
-  var el = unchecked(path[0]);
-  el.instruction = CanvasInstruction.BeginPath;
-  el.count = 0;
-  el.updateTransform = true;
-  return path;
+function createPathElements(): StackPointer<Path2DElement> {
+  let pointer = StackPointer.create<Path2DElement>(0x1000);
+  let reference = pointer.reference();
+  reference.instruction = CanvasInstruction.BeginPath;
+  reference.count = 0;
+  reference.updateTransform = true;
+  reference.transformA = 1.0;
+  reference.transformD = 1.0;
+  return pointer;
 }
 
 /**
@@ -147,7 +146,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   public createLinearGradient(x0: f64, y0: f64, x1: f64, y1: f64): CanvasGradient {
     var id: i32 = createLinearGradient(this.id, x0, y0, x1, y1);
     var result: CanvasGradient = new CanvasGradient();
-    store<i32>(changetype<usize>(result) + offsetof<CanvasGradient>("id"), id);
+    store<i32>(changetype<usize>(result), id, offsetof<CanvasGradient>("id"));
     return result;
   }
   //#endregion CREATELINEARGRADIENT
@@ -167,7 +166,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   public createRadialGradient(x0: f64, y0: f64, r0: f64, x1: f64, y1: f64, r1: f64): CanvasGradient {
     var id: i32 = createRadialGradient(this.id, x0, y0, r0, x1, y1, r1);
     var result: CanvasGradient = new CanvasGradient();
-    store<i32>(changetype<usize>(result) + offsetof<CanvasGradient>("id"), id);
+    store<i32>(changetype<usize>(result), id, offsetof<CanvasGradient>("id"));
     return result;
   }
   //#endregion CREATERADIALGRADIENT
@@ -443,8 +442,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   public createPattern(img: Image, repetition: CanvasPatternRepetition): CanvasPattern {
     var result = new CanvasPattern();
-    var id: i32 = load<i32>(changetype<usize>(img) + offsetof<Image>("_id"));
-    store<i32>(changetype<usize>(result) + offsetof<CanvasPattern>("id"), createPattern(this.id, id, repetition));
+    var id: i32 = load<i32>(changetype<usize>(img), offsetof<Image>("_id"));
+    store<i32>(changetype<usize>(result), createPattern(this.id, id, repetition), offsetof<CanvasPattern>("id"));
     return result;
   }
   //#endregion CREATEPATTERN
@@ -1252,11 +1251,6 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
   //#region SAVE
   /**
-   * An ArrayBuffer that contains 256 sets of bool values.
-   */
-  private _saveStack: ArrayBuffer = new ArrayBuffer(0xFF * sizeof<bool>());
-
-  /**
    * The CanvasRenderingContext2D.save() method of the Canvas 2D API saves the entire state of the
    * canvas by pushing the current state onto a stack.
    *
@@ -1396,21 +1390,25 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
   //#region PATH
   /**
-   * An internal array of path items.
+   * A c like pointer that always points to the next path element to write to.
    */
-  private _path: Path2DElement[] = createPathElements();
+  private _path: StackPointer<Path2DElement> = createPathElements().increment();
 
   /**
-   * The path offset is an index that always points to the next path index to be written to.
-   * Every time beginPath is called, this value should be set to 1.
+   * A reference to the path start for quick path resetting.
    */
-  private _pathOffset: i32 = 1;
+  private _pathStart: StackPointer<Path2DElement> = this._path.decrement();
 
   /**
-   * The path buffer offset is an index that always points to the next path item to be written to
-   * the buffer. Every time beginPath is called, this value should be set to 0.
+   * A pointer that points to the end of the path.
    */
-  private _pathBufferOffset: i32 = 0;
+  private _pathEnd: StackPointer<Path2DElement> =
+    changetype<StackPointer<Path2DElement>>(changetype<usize>(this._pathStart) + offsetof<Path2DElement>() * 0x1000);
+
+  /**
+   * A reference to the next path item that should be written to the buffer.
+   */
+  private _pathCurrent: StackPointer<Path2DElement> = this._pathStart;
 
   /**
    * An internal function that writes a single path item to the _path.
@@ -1443,28 +1441,30 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     g: f64 = 0.0,
     h: f64 = 0.0,
   ): void {
-    var el: Path2DElement = unchecked(this._path[this._pathOffset]);
-    el.instruction = inst;
-    el.updateTransform = updateTransform;
+    let _path = this._path;
+    let element = _path.reference();
+    assert(changetype<usize>(_path) < changetype<usize>(this._pathEnd));
+    element.instruction = inst;
+    element.updateTransform = updateTransform;
     if (updateTransform) {
       let current = this._stack.reference();
-      el.transformA = current.a;
-      el.transformB = current.b;
-      el.transformC = current.c;
-      el.transformD = current.d;
-      el.transformE = current.e;
-      el.transformF = current.f;
+      element.transformA = current.a;
+      element.transformB = current.b;
+      element.transformC = current.c;
+      element.transformD = current.d;
+      element.transformE = current.e;
+      element.transformF = current.f;
     }
-    el.count = count;
-    el.a = a;
-    el.b = b;
-    el.c = c;
-    el.d = d;
-    el.e = e;
-    el.f = f;
-    el.g = g;
-    el.h = h;
-    ++this._pathOffset;
+    element.count = count;
+    element.a = a;
+    element.b = b;
+    element.c = c;
+    element.d = d;
+    element.e = e;
+    element.f = f;
+    element.g = g;
+    element.h = h;
+    this._path = _path.increment();
   }
 
   /**
@@ -1473,7 +1473,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updatePath(): void {
-    var end: i32 = this._pathOffset;
+    var nextPath = this._path;
     var el: Path2DElement;
     var a: f64;
     var b: f64;
@@ -1482,8 +1482,9 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var e: f64;
     var f: f64;
     var currentTransform: usize = changetype<usize>(this._currentTransform);
-    for (var i: i32 = this._pathBufferOffset; i <= end; i++) {
-      el = unchecked(this._path[i]);
+    var currentPath = this._pathCurrent;
+    while (currentPath.dereference() < nextPath.dereference()) {
+      el = currentPath.reference();
       if (el.updateTransform) {
         a = el.transformA;
         b = el.transformB;
@@ -1506,37 +1507,39 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
           STORE<f64>(currentTransform, 4, e);
           STORE<f64>(currentTransform, 5, f);
         }
-        switch (el.count) {
-          case 0: {
-            super._writeZero(el.instruction);
-            break;
-          }
-          case 1: {
-            super._writeOne(el.instruction, el.a);
-            break;
-          }
-          case 2: {
-            super._writeTwo(el.instruction, el.a, el.b);
-            break;
-          }
-          case 4: {
-            super._writeFour(el.instruction, el.a, el.b, el.c, el.d);
-            break;
-          }
-          case 5: {
-            super._writeFive(el.instruction, el.a, el.b, el.c, el.d, el.e);
-            break;
-          }
-          case 6: {
-            super._writeSix(el.instruction, el.a, el.b, el.c, el.d, el.e, el.f);
-            break;
-          }
-          case 8: {
-            super._writeEight(el.instruction, el.a, el.b, el.c, el.d, el.e, el.f, el.g, el.h);
-          }
+      }
+      switch (el.count) {
+        case 0: {
+          super._writeZero(el.instruction);
+          break;
+        }
+        case 1: {
+          super._writeOne(el.instruction, el.a);
+          break;
+        }
+        case 2: {
+          super._writeTwo(el.instruction, el.a, el.b);
+          break;
+        }
+        case 4: {
+          super._writeFour(el.instruction, el.a, el.b, el.c, el.d);
+          break;
+        }
+        case 5: {
+          super._writeFive(el.instruction, el.a, el.b, el.c, el.d, el.e);
+          break;
+        }
+        case 6: {
+          super._writeSix(el.instruction, el.a, el.b, el.c, el.d, el.e, el.f);
+          break;
+        }
+        case 8: {
+          super._writeEight(el.instruction, el.a, el.b, el.c, el.d, el.e, el.f, el.g, el.h);
         }
       }
+      currentPath = currentPath.increment();
     }
+    this._pathCurrent = currentPath;
   }
   //#endregion PATH
 
@@ -1586,8 +1589,9 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * emptying the list of sub-paths. Call this method when you want to create a new path.
    */
   public beginPath(): void {
-    this._pathOffset = 1;
-    this._pathBufferOffset = 0;
+    let start = this._pathStart;
+    this._path = start.increment();
+    this._pathCurrent = start;
   }
   //#endregion BEGINPATH
 
@@ -1650,14 +1654,11 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * the canvas directly. You can render the path using the stroke() or fill() methods.
    */
   public closePath(): void {
-    if (this._pathOffset == 1 || this._lastPathItem.instruction === CanvasInstruction.ClosePath) return;
+    let previous = this._path.decrement().reference();
+    if (i32(previous.instruction == CanvasInstruction.BeginPath) | i32(previous.instruction == CanvasInstruction.ClosePath)) return;
     this._writePath(CanvasInstruction.ClosePath, true, 0);
   }
 
-  @inline
-  private get _lastPathItem(): Path2DElement {
-    return unchecked(this._path[this._pathOffset - 1]);
-  }
   //#endregion CLOSEPATH
 
   //#region DRAWIMAGE
@@ -1817,7 +1818,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
      * is pointing to a single `beginPath()` operation and it does not matter if fill is called at
      * this point.
      */
-    if (this._pathOffset == 1) return;
+    if (this._path == this._pathStart.increment()) return;
     this._updateFillStyle();
     this._updateFilter();
     this._updateGlobalAlpha();
@@ -2214,7 +2215,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
      * is pointing to a single `beginPath()` operation and it does not matter if fill is called at
      * this point.
      */
-    if (this._pathOffset == 1) return;
+    if (this._path == this._pathStart.increment()) return;
 
     /**
      * If the lineWidth is zero, there is no line and it does not matter if ctx.stroke() is called.

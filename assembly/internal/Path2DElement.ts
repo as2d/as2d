@@ -1,5 +1,6 @@
 import { CanvasInstruction } from "../../src/shared/CanvasInstruction";
 
+@unmanaged
 export class Path2DElement {
   instruction: CanvasInstruction = CanvasInstruction.Commit;
   transformA: f64 = 1.0;
