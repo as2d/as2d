@@ -1,7 +1,13 @@
-language: node_js
-node_js:
-  - "10"
-  - "11"
+install: npm ci --no-audit
+jobs:
+  include:
+  - node_js: lts/*
+    script:
+    - npm test
+    env: Runs the tests on node.js LTS.
+  - node_js: node
+    script:
+    - npm test
+    env: Runs the tests on node.js Stable.
 after_success:
   - npm run coveralls
-  
