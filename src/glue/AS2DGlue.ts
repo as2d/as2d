@@ -1,15 +1,43 @@
 import { ASUtil, instantiateSync as instantiateBuffer, instantiate, instantiateStreaming } from "assemblyscript/lib/loader";
 import { ICanvasSYS } from "../util/ICanvasSYS";
-import { CanvasPatternRepetition } from "../shared/CanvasPatternRepetition";
 import { CanvasInstruction } from "../shared/CanvasInstruction";
-import { FillRule } from "../shared/FillRule";
-import { ImageSmoothingQuality } from "../shared/ImageSmoothingQuality";
-import { GlobalCompositeOperationValue } from "../shared/GlobalCompositeOperationValue";
-import { CanvasDirection } from "../shared/CanvasDirection";
-import { TextAlign } from "../shared/TextAlign";
-import { TextBaseline } from "../shared/TextBaseline";
-import { LineCap } from "../shared/LineCap";
-import { LineJoin } from "../shared/LineJoin";
+
+const CanvasPatternRepetitionValues = ["repeat", "repeat_x", "repeat_y", "no_repeat"];
+const FillRuleValues = ["nonzero", "evenodd"];
+const LineCapValues = ["butt", "round", "square"];
+const LineJoinValues = ["bevel", "round", "miter"];
+const TextBaselineValues = ["top", "hanging", "middle", "alphabetic", "ideographic", "bottom"];
+const TextAlignValues = ["left", "right", "center", "start", "end"];
+const CanvasDirectionValues = ["ltr", "rtl", "inherit"];
+const ImageSmoothingQualityValues = ["low", "medium", "high"];
+const GlobalCompositeOperationValues = [
+  "source-over",
+  "source-in",
+  "source-out",
+  "source-atop",
+  "destination-over",
+  "destination-in",
+  "destination-out",
+  "destination-atop",
+  "lighter",
+  "copy",
+  "xor",
+  "multiply",
+  "screen",
+  "overlay",
+  "darken",
+  "lighten",
+  "color-dodge",
+  "color-burn",
+  "hard-light",
+  "soft-light",
+  "difference",
+  "exclusion",
+  "hue",
+  "saturation",
+  "color",
+  "luminosity",
+];
 
 const bool = {
   "true": 1,
@@ -112,13 +140,13 @@ export class AS2DGlue<T> {
     return this.id;
   }
 
-  private createPattern(cvsobjid: number, objid: number, repetition: CanvasPatternRepetition): number {
+  private createPattern(cvsobjid: number, objid: number, repetition: number): number {
     this.id += 1;
     if (!this.wasm!.contexts[cvsobjid]) throw new Error("Cannot find canvas: " + cvsobjid);
     if (!this.wasm!.images[objid]) throw new Error("Cannot find image: " + objid);
     this.wasm!.patterns[this.id] = this.wasm!.contexts[cvsobjid].createPattern(
       this.wasm!.images[objid],
-      CanvasPatternRepetition[repetition].replace("_", "-"),
+      CanvasPatternRepetitionValues[repetition].replace("_", "-"),
     )!;
     return this.id;
   }
@@ -168,7 +196,7 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.Direction: {
-          ctx.direction = CanvasDirection[data[i + 2]] as "rtl" | "ltr" | "inherit";
+          ctx.direction = CanvasDirectionValues[data[i + 2]] as CanvasDirection;
           break;
         }
         case CanvasInstruction.DrawImage: {
@@ -180,7 +208,7 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.Fill: {
-          ctx.fill(FillRule[data[i + 2]] as CanvasFillRule);
+          ctx.fill(FillRuleValues[data[i + 2]] as CanvasFillRule);
           break;
         }
         case CanvasInstruction.FillGradient: {
@@ -229,7 +257,7 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.GlobalCompositeOperation: {
-          ctx.globalCompositeOperation = GlobalCompositeOperationValue[data[i + 2]];
+          ctx.globalCompositeOperation = GlobalCompositeOperationValues[data[i + 2]];
           break;
         }
         case CanvasInstruction.ImageSmoothingEnabled: {
@@ -237,16 +265,16 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.ImageSmoothingQuality: {
-          ctx.imageSmoothingQuality = ImageSmoothingQuality[data[i + 2]] as "low" | "medium" | "high";
+          ctx.imageSmoothingQuality = ImageSmoothingQualityValues[data[i + 2]] as "low" | "medium" | "high";
           break;
         }
         case CanvasInstruction.LineCap: {
-          ctx.lineCap = LineCap[data[i + 2]] as CanvasLineCap;
+          ctx.lineCap = LineCapValues[data[i + 2]] as CanvasLineCap;
           break;
         }
         case CanvasInstruction.LineDash: {
-          // @ts-ignore: Float64Array is not a valid TypedArrayConstructor, and setLineDash accepts Float64Array
-          ctx.setLineDash(wasm.__getArrayView(data[i + 2]));
+          // @ts-ignore setLineDash accepts a Float64Array as a parameter
+          ctx.setLineDash(wasm.__getFloat64Array(data[i + 2]));
           break;
         }
         case CanvasInstruction.LineDashOffset: {
@@ -254,7 +282,7 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.LineJoin: {
-          ctx.lineJoin = LineJoin[data[i + 2]] as CanvasLineJoin;
+          ctx.lineJoin = LineJoinValues[data[i + 2]] as CanvasLineJoin;
           break;
         }
         case CanvasInstruction.LineTo: {
@@ -347,11 +375,11 @@ export class AS2DGlue<T> {
           break;
         }
         case CanvasInstruction.TextAlign: {
-          ctx.textAlign = TextAlign[data[i + 2]] as CanvasTextAlign;
+          ctx.textAlign = TextAlignValues[data[i + 2]] as CanvasTextAlign;
           break;
         }
         case CanvasInstruction.TextBaseline: {
-          ctx.textBaseline = TextBaseline[data[i + 2]] as CanvasTextBaseline;
+          ctx.textBaseline = TextBaselineValues[data[i + 2]] as CanvasTextBaseline;
           break;
         }
       }
@@ -371,8 +399,8 @@ export class AS2DGlue<T> {
     delete this.wasm!.gradients[id];
   }
 
-  isPointInPath(id: number, x: number, y: number, fillRule: FillRule): number {
-    return bool[(<any>this.wasm!.contexts[id]).isPointInPath(x, y, FillRule[fillRule]).toString() as "true" | "false"];
+  isPointInPath(id: number, x: number, y: number, fillRule: number): number {
+    return bool[(<any>this.wasm!.contexts[id]).isPointInPath(x, y, FillRuleValues[fillRule]).toString() as "true" | "false"];
   }
 
   isPointInStroke(id: number, x: number, y: number): number {
