@@ -368,13 +368,13 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
       pointer = changetype<usize>(stack.fillStylePattern);
       value = <f64>load<i32>(pointer, offsetof<CanvasPattern>("id"));
     }
-    super._retain(pointer);
 
     if (styleType != this._currentFillStyleType || value != this._currentFillStyleValue) {
       var inst: CanvasInstruction;
       if (styleType == FillStrokeStyleType.String) inst = CanvasInstruction.FillStyle;
       else if (styleType == FillStrokeStyleType.CanvasGradient) inst = CanvasInstruction.FillGradient;
       else inst = CanvasInstruction.FillPattern;
+      super._retain(pointer);
       super._writeOne(inst, <f64>value);
     }
   }
@@ -480,6 +480,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var value: string = this._stack.reference().filter;
     if (value != this._currentFilter) {
       this._currentFilter = value;
+      super._retain(changetype<usize>(value));
       super._writeOne(CanvasInstruction.Filter, changetype<usize>(value));
     }
   }
@@ -1116,13 +1117,13 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
       pointer = changetype<usize>(stack.strokeStylePattern);
       value = <f64>load<i32>(pointer, offsetof<CanvasPattern>("id"));
     }
-    super._retain(pointer);
 
     if (styleType != this._currentStrokeStyleType || value != this._currentStrokeStyleValue) {
       var inst: CanvasInstruction;
       if (styleType == FillStrokeStyleType.String) inst = CanvasInstruction.StrokeStyle;
       else if (styleType == FillStrokeStyleType.CanvasGradient) inst = CanvasInstruction.StrokeGradient;
       else inst = CanvasInstruction.StrokePattern;
+      super._retain(pointer);
       super._writeOne(inst, <f64>value);
     }
   }

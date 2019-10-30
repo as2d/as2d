@@ -263,6 +263,8 @@ export class Buffer<T extends i32> {
     for (let i = 0; i < length; i++) {
       __release(load<usize>(pointer + (<usize>i << alignof<usize>())));
     }
+    // all the pointers are released
+    this._retainedOffset = 0;
   }
 
   /**

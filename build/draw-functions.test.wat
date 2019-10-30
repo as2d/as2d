@@ -5388,7 +5388,7 @@
   if
    i32.const 0
    i32.const 784
-   i32.const 1446
+   i32.const 1447
    i32.const 4
    call $~lib/builtins/abort
    unreachable
@@ -6409,9 +6409,6 @@
     end
    end
   end
-  local.get $2
-  local.get $5
-  call $assembly/internal/Buffer/Buffer<i32>#_retain
   local.get $4
   local.get $2
   i32.load offset=36
@@ -6444,6 +6441,9 @@
      local.set $7
     end
    end
+   local.get $2
+   local.get $5
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $2
    local.set $10
    local.get $7
@@ -6539,6 +6539,9 @@
    end
    local.get $16
    i32.store offset=44
+   local.get $15
+   local.get $5
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $15
    local.set $10
    i32.const 19
@@ -8759,6 +8762,9 @@
    end
    local.get $4
    i32.store offset=44
+   local.get $1
+   local.get $2
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $1
    local.set $4
    i32.const 19
@@ -11419,9 +11425,6 @@
     end
    end
   end
-  local.get $19
-  local.get $11
-  call $assembly/internal/Buffer/Buffer<i32>#_retain
   local.get $13
   local.get $19
   i32.load offset=152
@@ -11454,6 +11457,9 @@
      local.set $18
     end
    end
+   local.get $19
+   local.get $11
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $19
    local.set $7
    local.get $18
@@ -11679,6 +11685,9 @@
    end
    unreachable
   end
+  local.get $7
+  i32.const 0
+  i32.store offset=8
  )
  (func $assembly/draw-functions.test/commit (; 87 ;) (type $FUNCSIG$v)
   global.get $assembly/draw-functions.test/ctx
@@ -12791,7 +12800,7 @@
   if
    i32.const 0
    i32.const 784
-   i32.const 1446
+   i32.const 1447
    i32.const 4
    call $~lib/builtins/abort
    unreachable
@@ -12957,7 +12966,7 @@
   if
    i32.const 0
    i32.const 784
-   i32.const 1446
+   i32.const 1447
    i32.const 4
    call $~lib/builtins/abort
    unreachable
@@ -14514,7 +14523,7 @@
   if
    i32.const 0
    i32.const 784
-   i32.const 1446
+   i32.const 1447
    i32.const 4
    call $~lib/builtins/abort
    unreachable
@@ -14696,7 +14705,7 @@
   if
    i32.const 0
    i32.const 784
-   i32.const 1446
+   i32.const 1447
    i32.const 4
    call $~lib/builtins/abort
    unreachable
@@ -14857,7 +14866,7 @@
   if
    i32.const 0
    i32.const 784
-   i32.const 1446
+   i32.const 1447
    i32.const 4
    call $~lib/builtins/abort
    unreachable
@@ -15012,7 +15021,7 @@
   if
    i32.const 0
    i32.const 784
-   i32.const 1446
+   i32.const 1447
    i32.const 4
    call $~lib/builtins/abort
    unreachable
@@ -15171,7 +15180,7 @@
   if
    i32.const 0
    i32.const 784
-   i32.const 1446
+   i32.const 1447
    i32.const 4
    call $~lib/builtins/abort
    unreachable
@@ -15332,7 +15341,7 @@
   if
    i32.const 0
    i32.const 784
-   i32.const 1446
+   i32.const 1447
    i32.const 4
    call $~lib/builtins/abort
    unreachable
@@ -15529,9 +15538,6 @@
     end
    end
   end
-  local.get $5
-  local.get $8
-  call $assembly/internal/Buffer/Buffer<i32>#_retain
   local.get $7
   local.get $5
   i32.load offset=36
@@ -15564,6 +15570,9 @@
      local.set $10
     end
    end
+   local.get $5
+   local.get $8
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $5
    local.set $13
    local.get $10
@@ -15659,6 +15668,9 @@
    end
    local.get $19
    i32.store offset=44
+   local.get $18
+   local.get $8
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $18
    local.set $13
    i32.const 19
@@ -16626,6 +16638,9 @@
    end
    local.get $7
    i32.store offset=44
+   local.get $4
+   local.get $5
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $4
    local.set $7
    i32.const 19
@@ -17710,6 +17725,9 @@
    end
    local.get $9
    i32.store offset=44
+   local.get $6
+   local.get $7
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $6
    local.set $9
    i32.const 19
@@ -18796,6 +18814,9 @@
    end
    local.get $13
    i32.store offset=44
+   local.get $10
+   local.get $11
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $10
    local.set $13
    i32.const 19
@@ -19959,9 +19980,6 @@
     end
    end
   end
-  local.get $13
-  local.get $11
-  call $assembly/internal/Buffer/Buffer<i32>#_retain
   local.get $4
   local.get $13
   i32.load offset=36
@@ -19994,6 +20012,9 @@
      local.set $10
     end
    end
+   local.get $13
+   local.get $11
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $13
    local.set $7
    local.get $10
@@ -20089,6 +20110,9 @@
    end
    local.get $18
    i32.store offset=44
+   local.get $17
+   local.get $11
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $17
    local.set $7
    i32.const 19
@@ -21415,9 +21439,6 @@
     end
    end
   end
-  local.get $14
-  local.get $12
-  call $assembly/internal/Buffer/Buffer<i32>#_retain
   local.get $5
   local.get $14
   i32.load offset=36
@@ -21450,6 +21471,9 @@
      local.set $11
     end
    end
+   local.get $14
+   local.get $12
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $14
    local.set $8
    local.get $11
@@ -21545,6 +21569,9 @@
    end
    local.get $19
    i32.store offset=44
+   local.get $18
+   local.get $12
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $18
    local.set $8
    i32.const 19
@@ -23239,6 +23266,9 @@
    local.get $8
    i32.store offset=44
    local.get $5
+   local.get $6
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
+   local.get $5
    local.set $8
    i32.const 19
    local.set $7
@@ -24604,9 +24634,6 @@
     end
    end
   end
-  local.get $12
-  local.get $5
-  call $assembly/internal/Buffer/Buffer<i32>#_retain
   local.get $10
   local.get $12
   i32.load offset=152
@@ -24639,6 +24666,9 @@
      local.set $18
     end
    end
+   local.get $12
+   local.get $5
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $12
    local.set $11
    local.get $18
@@ -24996,6 +25026,9 @@
    end
    local.get $14
    i32.store offset=44
+   local.get $13
+   local.get $5
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $13
    local.set $8
    i32.const 19
@@ -26463,9 +26496,6 @@
     end
    end
   end
-  local.get $11
-  local.get $9
-  call $assembly/internal/Buffer/Buffer<i32>#_retain
   local.get $10
   local.get $11
   i32.load offset=152
@@ -26498,6 +26528,9 @@
      local.set $17
     end
    end
+   local.get $11
+   local.get $9
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $11
    local.set $13
    local.get $17
@@ -27020,6 +27053,9 @@
    end
    local.get $15
    i32.store offset=44
+   local.get $14
+   local.get $6
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $14
    local.set $9
    i32.const 19
@@ -28487,9 +28523,6 @@
     end
    end
   end
-  local.get $12
-  local.get $10
-  call $assembly/internal/Buffer/Buffer<i32>#_retain
   local.get $11
   local.get $12
   i32.load offset=152
@@ -28522,6 +28555,9 @@
      local.set $18
     end
    end
+   local.get $12
+   local.get $10
+   call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $12
    local.set $14
    local.get $18

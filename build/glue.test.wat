@@ -5872,6 +5872,9 @@
    end
    unreachable
   end
+  local.get $7
+  i32.const 0
+  i32.store offset=8
  )
  (func $assembly/glue.test/commit (; 92 ;) (type $FUNCSIG$v)
   global.get $assembly/glue.test/ctx
@@ -6218,7 +6221,7 @@
   if
    i32.const 0
    i32.const 1224
-   i32.const 1446
+   i32.const 1447
    i32.const 4
    call $~lib/builtins/abort
    unreachable
@@ -6390,7 +6393,7 @@
   if
    i32.const 0
    i32.const 1224
-   i32.const 1446
+   i32.const 1447
    i32.const 4
    call $~lib/builtins/abort
    unreachable
