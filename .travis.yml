@@ -15,6 +15,7 @@ jobs:
     - npm run coveralls
   - node_js: node
     script:
+      - nvm install 13
       - nvm use 13
       - npm run test:simd
     env: Runs simd tests on node.js Stable.
