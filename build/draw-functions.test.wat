@@ -30424,9 +30424,9 @@
   global.set $~lib/math/NativeMath.sincos_cos
  )
  (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#rotate (; 193 ;) (type $FUNCSIG$vid) (param $0 i32) (param $1 f64)
-  (local $2 i32)
+  (local $2 f64)
   (local $3 f64)
-  (local $4 f64)
+  (local $4 i32)
   (local $5 f64)
   (local $6 f64)
   (local $7 f64)
@@ -30437,61 +30437,61 @@
   if
    return
   end
-  local.get $0
-  i32.load offset=24
-  call $assembly/internal/StackPointer/StackPointer<assembly/renderer/CanvasStack/CanvasStack>#reference
-  local.set $2
   local.get $1
   call $~lib/math/NativeMath.sincos
   global.get $~lib/math/NativeMath.sincos_cos
-  local.set $3
+  local.set $2
   global.get $~lib/math/NativeMath.sincos_sin
+  local.set $3
+  local.get $0
+  i32.load offset=24
+  call $assembly/internal/StackPointer/StackPointer<assembly/renderer/CanvasStack/CanvasStack>#reference
   local.set $4
-  local.get $2
+  local.get $4
   f64.load
   local.set $5
-  local.get $2
+  local.get $4
   f64.load offset=8
   local.set $6
-  local.get $2
+  local.get $4
   f64.load offset=16
   local.set $7
-  local.get $2
+  local.get $4
   f64.load offset=24
   local.set $8
-  local.get $2
+  local.get $4
   local.get $5
-  local.get $3
+  local.get $2
   f64.mul
   local.get $7
-  local.get $4
+  local.get $3
   f64.mul
   f64.add
   f64.store
-  local.get $2
+  local.get $4
   local.get $6
-  local.get $3
+  local.get $2
   f64.mul
   local.get $8
-  local.get $4
+  local.get $3
   f64.mul
   f64.add
   f64.store offset=8
-  local.get $2
+  local.get $4
   local.get $7
-  local.get $3
+  local.get $2
   f64.mul
   local.get $5
-  local.get $4
+  local.get $3
   f64.mul
   f64.sub
   f64.store offset=16
-  local.get $2
+  local.get $4
   local.get $8
-  local.get $3
+  local.get $2
   f64.mul
   local.get $6
-  local.get $4
+  local.get $3
   f64.mul
   f64.sub
   f64.store offset=24

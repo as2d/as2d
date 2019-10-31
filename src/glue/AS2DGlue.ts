@@ -52,7 +52,7 @@ export class AS2DGlue<T> {
   public instantiateBuffer(buffer: any, imports: any): ASUtil & T & ICanvasSYS {
     this.imports = imports;
     this.hookImports();
-    this.wasm = instantiateBuffer(buffer, this.imports) as any;
+    this.wasm = instantiateBuffer<T & ICanvasSYS>(buffer, this.imports);
     this.hookWasmApi();
     return this.wasm!;
   }
@@ -60,7 +60,7 @@ export class AS2DGlue<T> {
   public async instantiateStreaming(response: Promise<Response>, imports: any): Promise<ASUtil & T & ICanvasSYS> {
     this.imports = imports;
     this.hookImports();
-    this.wasm = await instantiateStreaming(response, this.imports) as any;
+    this.wasm = await instantiateStreaming<T & ICanvasSYS>(response, this.imports);
     this.hookWasmApi();
     return this.wasm!;
   }

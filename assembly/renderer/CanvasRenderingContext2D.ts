@@ -2097,32 +2097,32 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   public rotate(angle: f64): void {
     if (!isFinite(angle)) return;
 
-    var stack = this._stack.reference();
-
     NativeMath.sincos(angle);
     var cos: f64 = NativeMath.sincos_cos;
     var sin: f64 = NativeMath.sincos_sin;
 
     if (ASC_FEATURE_SIMD) {
+      let stack = this._stack.dereference();
       let cossplat = v128.splat<f64>(cos);
       let sinsplat = v128.splat<f64>(sin);
-      let aptr = changetype<usize>(stack) + offsetof<CanvasStack>("a");
-      let cptr = changetype<usize>(stack) + offsetof<CanvasStack>("c");
-      let ab = v128.load(aptr);
-      let cb = v128.load(cptr);
-      v128.store(aptr,
+      let ab = v128.load(stack, offsetof<CanvasStack>("a"));
+      let cb = v128.load(stack, offsetof<CanvasStack>("c"));
+      v128.store(stack,
         v128.add<f64>(
           v128.mul<f64>(ab, cossplat),
           v128.mul<f64>(cb, sinsplat),
         ),
+        offsetof<CanvasStack>("a"),
       );
-      v128.store(cptr,
+      v128.store(stack,
         v128.sub<f64>(
           v128.mul<f64>(cb, cossplat),
           v128.mul<f64>(ab, sinsplat),
         ),
+        offsetof<CanvasStack>("c"),
       );
     } else {
+      var stack = this._stack.reference();
       var a = stack.a;
       var b = stack.b;
       var c = stack.c;
@@ -2151,23 +2151,24 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   public scale(x: f64, y: f64): void {
     if (!isFinite(x + y)) return;
-    let stack = this._stack.reference();
     if (ASC_FEATURE_SIMD) {
-      let abptr = changetype<usize>(this) + offsetof<CanvasStack>("a");
-      let cdptr = changetype<usize>(this) + offsetof<CanvasStack>("c");
-      v128.store(abptr,
+      let stack = this._stack.dereference();
+      v128.store(stack,
         v128.mul<f64>(
-          v128.load(abptr),
+          v128.load(stack, offsetof<CanvasStack>("a")),
           v128.splat<f64>(x),
         ),
+        offsetof<CanvasStack>("a"),
       );
-      v128.store(cdptr,
+      v128.store(stack,
         v128.mul<f64>(
-          v128.load(cdptr),
+          v128.load(stack, offsetof<CanvasStack>("c")),
           v128.splat<f64>(y),
         ),
+        offsetof<CanvasStack>("c"),
       );
     } else {
+      let stack = this._stack.reference();
       stack.a *= x;
       stack.b *= x;
       stack.c *= y;
@@ -2389,35 +2390,35 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     if (!isFinite(a + b + c + d + e + f)) return;
     if (ASC_FEATURE_SIMD) {
       let stack = this._stack.dereference();
-      let abptr = stack + offsetof<CanvasStack>("a");
-      let cdptr = stack + offsetof<CanvasStack>("c");
-      let efptr = stack + offsetof<CanvasStack>("e");
-      let ab = v128.load(abptr);
-      let cd = v128.load(cdptr);
-      let ef = v128.load(efptr);
+      let ab = v128.load(stack, offsetof<CanvasStack>("a"));
+      let cd = v128.load(stack, offsetof<CanvasStack>("c"));
+      let ef = v128.load(stack, offsetof<CanvasStack>("e"));
       v128.store(
-        abptr,
+        stack,
         v128.add<f64>(
-          v128.mul(ab, v128.splat<f64>(a)),
-          v128.mul(cd, v128.splat<f64>(b)),
+          v128.mul<f64>(ab, v128.splat<f64>(a)),
+          v128.mul<f64>(cd, v128.splat<f64>(b)),
         ),
+        offsetof<CanvasStack>("a"),
       );
       v128.store(
-        cdptr,
+        stack,
         v128.add<f64>(
-          v128.mul(ab, v128.splat<f64>(c)),
-          v128.mul(cd, v128.splat<f64>(d)),
+          v128.mul<f64>(ab, v128.splat<f64>(c)),
+          v128.mul<f64>(cd, v128.splat<f64>(d)),
         ),
+        offsetof<CanvasStack>("c"),
       );
       v128.store(
-        efptr,
+        stack,
         v128.add<f64>(
           v128.add<f64>(
-            v128.mul(ab, v128.splat<f64>(e)),
-            v128.mul(cd, v128.splat<f64>(f)),
+            v128.mul<f64>(ab, v128.splat<f64>(e)),
+            v128.mul<f64>(cd, v128.splat<f64>(f)),
           ),
           ef,
         ),
+        offsetof<CanvasStack>("e"),
       );
     } else {
       let stack = this._stack.reference();
@@ -2451,19 +2452,19 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
 
     if (ASC_FEATURE_SIMD) {
       let stack = this._stack.dereference();
-      let efptr = stack + offsetof<CanvasStack>("e");
       v128.store(
-        efptr,
+        stack,
         v128.add<f64>(
           v128.mul<f64>(
-            v128.load(stack + offsetof<CanvasStack>("a")),
+            v128.load(stack, offsetof<CanvasStack>("a")),
             v128.splat<f64>(x),
           ),
           v128.mul<f64>(
-            v128.load(stack + offsetof<CanvasStack>("c")),
+            v128.load(stack, offsetof<CanvasStack>("c")),
             v128.splat<f64>(y),
           ),
         ),
+        offsetof<CanvasStack>("e"),
       );
     } else {
       let stack = this._stack.reference();
