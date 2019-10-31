@@ -13,9 +13,9 @@ jobs:
     env: Runs the tests on node.js Stable.
     after_success:
     - npm run coveralls
-  - node_js:
-      - 13
+  - node_js: node
     script:
+      - nvm use 13
       - npm run test:simd
     env: Runs simd tests on node.js Stable.
 
