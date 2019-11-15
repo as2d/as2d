@@ -5282,15 +5282,15 @@
   local.get $1
   f64.const 1
   f64.gt
+  i32.const 1
   local.get $1
   f64.const 0
   f64.lt
-  i32.const 1
   local.get $1
   local.get $1
   f64.sub
   f64.const 0
-  f64.eq
+  f64.ne
   select
   select
   if
@@ -5543,15 +5543,15 @@
   end
   global.get $assembly/save-restore.test/ctx
   local.set $1
+  i32.const 1
   local.get $0
   f64.const 0
   f64.lt
-  i32.const 1
   local.get $0
   local.get $0
   f64.sub
   f64.const 0
-  f64.eq
+  f64.ne
   select
   i32.eqz
   if
@@ -5590,15 +5590,15 @@
   end
   global.get $assembly/save-restore.test/ctx
   local.set $1
+  i32.const 1
   local.get $0
   f64.const 0
   f64.lt
-  i32.const 1
   local.get $0
   local.get $0
   f64.sub
   f64.const 0
-  f64.eq
+  f64.ne
   select
   i32.eqz
   if
@@ -5637,15 +5637,15 @@
   end
   global.get $assembly/save-restore.test/ctx
   local.set $1
+  i32.const 1
   local.get $0
   f64.const 0
   f64.lt
-  i32.const 1
   local.get $0
   local.get $0
   f64.sub
   f64.const 0
-  f64.eq
+  f64.ne
   select
   i32.eqz
   if

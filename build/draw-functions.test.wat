@@ -4300,13 +4300,13 @@
   local.get $8
   f64.sub
   f64.const 0
-  f64.eq
+  f64.ne
   if (result i32)
+   i32.const 1
+  else
    local.get $3
    f64.const 0
    f64.lt
-  else
-   i32.const 1
   end
   if
    return
@@ -8481,15 +8481,15 @@
   local.get $1
   f64.const 1
   f64.gt
+  i32.const 1
   local.get $1
   f64.const 0
   f64.lt
-  i32.const 1
   local.get $1
   local.get $1
   f64.sub
   f64.const 0
-  f64.eq
+  f64.ne
   select
   select
   if
@@ -8561,15 +8561,15 @@
   end
   global.get $assembly/draw-functions.test/ctx
   local.set $1
+  i32.const 1
   local.get $0
   f64.const 0
   f64.lt
-  i32.const 1
   local.get $0
   local.get $0
   f64.sub
   f64.const 0
-  f64.eq
+  f64.ne
   select
   i32.eqz
   if
@@ -9323,13 +9323,13 @@
   local.get $8
   f64.sub
   f64.const 0
-  f64.eq
+  f64.ne
   if (result i32)
+   i32.const 1
+  else
    local.get $5
    f64.const 0
    f64.lt
-  else
-   i32.const 1
   end
   if
    return
@@ -10579,13 +10579,13 @@
   local.get $10
   f64.sub
   f64.const 0
-  f64.eq
+  f64.ne
   if (result i32)
+   i32.const 1
+  else
    local.get $3
    f64.const 0
    f64.lt
-  else
-   i32.const 1
   end
   if (result i32)
    i32.const 1
@@ -13916,13 +13916,13 @@
   local.get $8
   f64.sub
   f64.const 0
-  f64.eq
+  f64.ne
   if (result i32)
+   i32.const 1
+  else
    local.get $1
    i32.const 0
    call $~lib/string/String.__eq
-  else
-   i32.const 1
   end
   if (result i32)
    i32.const 1
@@ -14848,13 +14848,13 @@
   local.get $9
   f64.sub
   f64.const 0
-  f64.eq
+  f64.ne
   if (result i32)
+   i32.const 1
+  else
    local.get $1
    i32.const 0
    call $~lib/string/String.__eq
-  else
-   i32.const 1
   end
   if (result i32)
    i32.const 1
@@ -16118,15 +16118,15 @@
   end
   global.get $assembly/draw-functions.test/ctx
   local.set $1
+  i32.const 1
   local.get $0
   f64.const 0
   f64.lt
-  i32.const 1
   local.get $0
   local.get $0
   f64.sub
   f64.const 0
-  f64.eq
+  f64.ne
   select
   i32.eqz
   if
@@ -16150,15 +16150,15 @@
   end
   global.get $assembly/draw-functions.test/ctx
   local.set $1
+  i32.const 1
   local.get $0
   f64.const 0
   f64.lt
-  i32.const 1
   local.get $0
   local.get $0
   f64.sub
   f64.const 0
-  f64.eq
+  f64.ne
   select
   i32.eqz
   if
@@ -17255,13 +17255,13 @@
   local.get $8
   f64.sub
   f64.const 0
-  f64.eq
+  f64.ne
   if (result i32)
+   i32.const 1
+  else
    local.get $1
    i32.const 0
    call $~lib/string/String.__eq
-  else
-   i32.const 1
   end
   if (result i32)
    i32.const 1
@@ -18566,13 +18566,13 @@
   local.get $9
   f64.sub
   f64.const 0
-  f64.eq
+  f64.ne
   if (result i32)
+   i32.const 1
+  else
    local.get $1
    i32.const 0
    call $~lib/string/String.__eq
-  else
-   i32.const 1
   end
   if (result i32)
    i32.const 1

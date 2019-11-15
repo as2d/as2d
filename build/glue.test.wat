@@ -4881,13 +4881,13 @@
   local.get $8
   f64.sub
   f64.const 0
-  f64.eq
+  f64.ne
   if (result i32)
+   i32.const 1
+  else
    local.get $3
    f64.const 0
    f64.lt
-  else
-   i32.const 1
   end
   if
    return
