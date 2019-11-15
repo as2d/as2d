@@ -10,7 +10,7 @@ run<Matrix>({
     [4, 3, 2, 1, 0, -1],
   ],
   getValue(wasm): Matrix {
-    return Array.from(wasm.getArray(Float64Array as any, wasm.getTransform())) as Matrix;
+    return wasm.__getArray(wasm.getTransform()) as Matrix;
   },
   setValue(wasm, value): void {
     wasm.setTransform(value[0], value[1], value[2], value[3], value[4], value[5]);

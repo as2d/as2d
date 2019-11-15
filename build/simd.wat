@@ -10,6 +10,7 @@
  (type $FUNCSIG$i (func (result i32)))
  (type $FUNCSIG$vdddddi (func (param f64 f64 f64 f64 f64 i32)))
  (type $FUNCSIG$vidddddi (func (param i32 f64 f64 f64 f64 f64 i32)))
+ (type $FUNCSIG$id (func (param f64) (result i32)))
  (type $FUNCSIG$dii (func (param i32 i32) (result f64)))
  (type $FUNCSIG$vd (func (param f64)))
  (type $FUNCSIG$vid (func (param i32 f64)))
@@ -1224,23 +1225,6 @@
   (local $2 i32)
   memory.size
   local.tee $2
-  local.get $1
-  i32.const 536870904
-  i32.lt_u
-  if (result i32)
-   i32.const 1
-   i32.const 27
-   local.get $1
-   i32.clz
-   i32.sub
-   i32.shl
-   i32.const 1
-   i32.sub
-   local.get $1
-   i32.add
-  else
-   local.get $1
-  end
   i32.const 16
   local.get $0
   i32.load offset=1568
@@ -1251,6 +1235,21 @@
   i32.sub
   i32.ne
   i32.shl
+  i32.const 1
+  i32.const 27
+  local.get $1
+  i32.clz
+  i32.sub
+  i32.shl
+  i32.const 1
+  i32.sub
+  local.get $1
+  i32.add
+  local.get $1
+  local.get $1
+  i32.const 536870904
+  i32.lt_u
+  select
   i32.add
   i32.const 65535
   i32.add
@@ -1528,858 +1527,7 @@
   i32.add
   i32.load
  )
- (func $~lib/util/memory/memcpy (; 25 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  loop $continue|0
-   local.get $1
-   i32.const 3
-   i32.and
-   i32.const 0
-   local.get $2
-   select
-   if
-    local.get $0
-    local.tee $3
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $1
-    local.tee $4
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $3
-    local.get $4
-    i32.load8_u
-    i32.store8
-    local.get $2
-    i32.const 1
-    i32.sub
-    local.set $2
-    br $continue|0
-   end
-  end
-  local.get $0
-  i32.const 3
-  i32.and
-  i32.eqz
-  if
-   loop $continue|1
-    local.get $2
-    i32.const 16
-    i32.lt_u
-    i32.eqz
-    if
-     local.get $0
-     local.get $1
-     i32.load
-     i32.store
-     local.get $0
-     i32.const 4
-     i32.add
-     local.get $1
-     i32.const 4
-     i32.add
-     i32.load
-     i32.store
-     local.get $0
-     i32.const 8
-     i32.add
-     local.get $1
-     i32.const 8
-     i32.add
-     i32.load
-     i32.store
-     local.get $0
-     i32.const 12
-     i32.add
-     local.get $1
-     i32.const 12
-     i32.add
-     i32.load
-     i32.store
-     local.get $1
-     i32.const 16
-     i32.add
-     local.set $1
-     local.get $0
-     i32.const 16
-     i32.add
-     local.set $0
-     local.get $2
-     i32.const 16
-     i32.sub
-     local.set $2
-     br $continue|1
-    end
-   end
-   local.get $2
-   i32.const 8
-   i32.and
-   if
-    local.get $0
-    local.get $1
-    i32.load
-    i32.store
-    local.get $0
-    i32.const 4
-    i32.add
-    local.get $1
-    i32.const 4
-    i32.add
-    i32.load
-    i32.store
-    local.get $1
-    i32.const 8
-    i32.add
-    local.set $1
-    local.get $0
-    i32.const 8
-    i32.add
-    local.set $0
-   end
-   local.get $2
-   i32.const 4
-   i32.and
-   if
-    local.get $0
-    local.get $1
-    i32.load
-    i32.store
-    local.get $1
-    i32.const 4
-    i32.add
-    local.set $1
-    local.get $0
-    i32.const 4
-    i32.add
-    local.set $0
-   end
-   local.get $2
-   i32.const 2
-   i32.and
-   if
-    local.get $0
-    local.get $1
-    i32.load16_u
-    i32.store16
-    local.get $1
-    i32.const 2
-    i32.add
-    local.set $1
-    local.get $0
-    i32.const 2
-    i32.add
-    local.set $0
-   end
-   local.get $2
-   i32.const 1
-   i32.and
-   if
-    local.get $0
-    local.get $1
-    i32.load8_u
-    i32.store8
-   end
-   return
-  end
-  local.get $2
-  i32.const 32
-  i32.ge_u
-  if
-   block $break|2
-    block $case2|2
-     block $case1|2
-      local.get $0
-      i32.const 3
-      i32.and
-      local.tee $3
-      i32.const 1
-      i32.ne
-      if
-       local.get $3
-       i32.const 2
-       i32.eq
-       br_if $case1|2
-       local.get $3
-       i32.const 3
-       i32.eq
-       br_if $case2|2
-       br $break|2
-      end
-      local.get $1
-      i32.load
-      local.set $5
-      local.get $0
-      local.get $1
-      i32.load8_u
-      i32.store8
-      local.get $0
-      i32.const 1
-      i32.add
-      local.tee $0
-      local.get $1
-      i32.const 1
-      i32.add
-      local.tee $1
-      i32.load8_u
-      i32.store8
-      local.get $0
-      i32.const 1
-      i32.add
-      local.tee $3
-      i32.const 1
-      i32.add
-      local.set $0
-      local.get $1
-      i32.const 1
-      i32.add
-      local.tee $4
-      i32.const 1
-      i32.add
-      local.set $1
-      local.get $3
-      local.get $4
-      i32.load8_u
-      i32.store8
-      local.get $2
-      i32.const 3
-      i32.sub
-      local.set $2
-      loop $continue|3
-       local.get $2
-       i32.const 17
-       i32.lt_u
-       i32.eqz
-       if
-        local.get $0
-        local.get $1
-        i32.const 1
-        i32.add
-        i32.load
-        local.tee $3
-        i32.const 8
-        i32.shl
-        local.get $5
-        i32.const 24
-        i32.shr_u
-        i32.or
-        i32.store
-        local.get $0
-        i32.const 4
-        i32.add
-        local.get $3
-        i32.const 24
-        i32.shr_u
-        local.get $1
-        i32.const 5
-        i32.add
-        i32.load
-        local.tee $3
-        i32.const 8
-        i32.shl
-        i32.or
-        i32.store
-        local.get $0
-        i32.const 8
-        i32.add
-        local.get $3
-        i32.const 24
-        i32.shr_u
-        local.get $1
-        i32.const 9
-        i32.add
-        i32.load
-        local.tee $3
-        i32.const 8
-        i32.shl
-        i32.or
-        i32.store
-        local.get $0
-        i32.const 12
-        i32.add
-        local.get $1
-        i32.const 13
-        i32.add
-        i32.load
-        local.tee $5
-        i32.const 8
-        i32.shl
-        local.get $3
-        i32.const 24
-        i32.shr_u
-        i32.or
-        i32.store
-        local.get $1
-        i32.const 16
-        i32.add
-        local.set $1
-        local.get $0
-        i32.const 16
-        i32.add
-        local.set $0
-        local.get $2
-        i32.const 16
-        i32.sub
-        local.set $2
-        br $continue|3
-       end
-      end
-      br $break|2
-     end
-     local.get $1
-     i32.load
-     local.set $5
-     local.get $0
-     local.get $1
-     i32.load8_u
-     i32.store8
-     local.get $0
-     i32.const 1
-     i32.add
-     local.tee $3
-     i32.const 1
-     i32.add
-     local.set $0
-     local.get $1
-     i32.const 1
-     i32.add
-     local.tee $4
-     i32.const 1
-     i32.add
-     local.set $1
-     local.get $3
-     local.get $4
-     i32.load8_u
-     i32.store8
-     local.get $2
-     i32.const 2
-     i32.sub
-     local.set $2
-     loop $continue|4
-      local.get $2
-      i32.const 18
-      i32.lt_u
-      i32.eqz
-      if
-       local.get $0
-       local.get $1
-       i32.const 2
-       i32.add
-       i32.load
-       local.tee $3
-       i32.const 16
-       i32.shl
-       local.get $5
-       i32.const 16
-       i32.shr_u
-       i32.or
-       i32.store
-       local.get $0
-       i32.const 4
-       i32.add
-       local.get $3
-       i32.const 16
-       i32.shr_u
-       local.get $1
-       i32.const 6
-       i32.add
-       i32.load
-       local.tee $3
-       i32.const 16
-       i32.shl
-       i32.or
-       i32.store
-       local.get $0
-       i32.const 8
-       i32.add
-       local.get $3
-       i32.const 16
-       i32.shr_u
-       local.get $1
-       i32.const 10
-       i32.add
-       i32.load
-       local.tee $3
-       i32.const 16
-       i32.shl
-       i32.or
-       i32.store
-       local.get $0
-       i32.const 12
-       i32.add
-       local.get $1
-       i32.const 14
-       i32.add
-       i32.load
-       local.tee $5
-       i32.const 16
-       i32.shl
-       local.get $3
-       i32.const 16
-       i32.shr_u
-       i32.or
-       i32.store
-       local.get $1
-       i32.const 16
-       i32.add
-       local.set $1
-       local.get $0
-       i32.const 16
-       i32.add
-       local.set $0
-       local.get $2
-       i32.const 16
-       i32.sub
-       local.set $2
-       br $continue|4
-      end
-     end
-     br $break|2
-    end
-    local.get $1
-    i32.load
-    local.set $5
-    local.get $0
-    local.tee $3
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $1
-    local.tee $4
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $3
-    local.get $4
-    i32.load8_u
-    i32.store8
-    local.get $2
-    i32.const 1
-    i32.sub
-    local.set $2
-    loop $continue|5
-     local.get $2
-     i32.const 19
-     i32.lt_u
-     i32.eqz
-     if
-      local.get $0
-      local.get $1
-      i32.const 3
-      i32.add
-      i32.load
-      local.tee $3
-      i32.const 24
-      i32.shl
-      local.get $5
-      i32.const 8
-      i32.shr_u
-      i32.or
-      i32.store
-      local.get $0
-      i32.const 4
-      i32.add
-      local.get $3
-      i32.const 8
-      i32.shr_u
-      local.get $1
-      i32.const 7
-      i32.add
-      i32.load
-      local.tee $3
-      i32.const 24
-      i32.shl
-      i32.or
-      i32.store
-      local.get $0
-      i32.const 8
-      i32.add
-      local.get $3
-      i32.const 8
-      i32.shr_u
-      local.get $1
-      i32.const 11
-      i32.add
-      i32.load
-      local.tee $3
-      i32.const 24
-      i32.shl
-      i32.or
-      i32.store
-      local.get $0
-      i32.const 12
-      i32.add
-      local.get $1
-      i32.const 15
-      i32.add
-      i32.load
-      local.tee $5
-      i32.const 24
-      i32.shl
-      local.get $3
-      i32.const 8
-      i32.shr_u
-      i32.or
-      i32.store
-      local.get $1
-      i32.const 16
-      i32.add
-      local.set $1
-      local.get $0
-      i32.const 16
-      i32.add
-      local.set $0
-      local.get $2
-      i32.const 16
-      i32.sub
-      local.set $2
-      br $continue|5
-     end
-    end
-   end
-  end
-  local.get $2
-  i32.const 16
-  i32.and
-  if
-   local.get $0
-   local.get $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $3
-   i32.const 1
-   i32.add
-   local.set $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $4
-   i32.const 1
-   i32.add
-   local.set $1
-   local.get $3
-   local.get $4
-   i32.load8_u
-   i32.store8
-  end
-  local.get $2
-  i32.const 8
-  i32.and
-  if
-   local.get $0
-   local.get $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $3
-   i32.const 1
-   i32.add
-   local.set $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $4
-   i32.const 1
-   i32.add
-   local.set $1
-   local.get $3
-   local.get $4
-   i32.load8_u
-   i32.store8
-  end
-  local.get $2
-  i32.const 4
-  i32.and
-  if
-   local.get $0
-   local.get $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $3
-   i32.const 1
-   i32.add
-   local.set $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $4
-   i32.const 1
-   i32.add
-   local.set $1
-   local.get $3
-   local.get $4
-   i32.load8_u
-   i32.store8
-  end
-  local.get $2
-  i32.const 2
-  i32.and
-  if
-   local.get $0
-   local.get $1
-   i32.load8_u
-   i32.store8
-   local.get $0
-   i32.const 1
-   i32.add
-   local.tee $3
-   i32.const 1
-   i32.add
-   local.set $0
-   local.get $1
-   i32.const 1
-   i32.add
-   local.tee $4
-   i32.const 1
-   i32.add
-   local.set $1
-   local.get $3
-   local.get $4
-   i32.load8_u
-   i32.store8
-  end
-  local.get $2
-  i32.const 1
-  i32.and
-  if
-   local.get $0
-   local.get $1
-   i32.load8_u
-   i32.store8
-  end
- )
- (func $~lib/memory/memory.copy (; 26 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/memory/memory.copy (; 25 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   block $~lib/util/memory/memmove|inlined.0
@@ -2389,25 +1537,6 @@
    local.get $1
    i32.eq
    br_if $~lib/util/memory/memmove|inlined.0
-   i32.const 1
-   local.get $0
-   local.get $3
-   i32.add
-   local.get $1
-   i32.le_u
-   local.get $1
-   local.get $3
-   i32.add
-   local.get $0
-   i32.le_u
-   select
-   if
-    local.get $0
-    local.get $1
-    local.get $3
-    call $~lib/util/memory/memcpy
-    br $~lib/util/memory/memmove|inlined.0
-   end
    local.get $0
    local.get $1
    i32.lt_u
@@ -2573,7 +1702,7 @@
    end
   end
  )
- (func $~lib/rt/tlsf/__free (; 27 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $~lib/rt/tlsf/__free (; 26 ;) (type $FUNCSIG$vi) (param $0 i32)
   global.get $~lib/rt/tlsf/ROOT
   i32.eqz
   if
@@ -2606,7 +1735,7 @@
   i32.sub
   call $~lib/rt/tlsf/freeBlock
  )
- (func $~lib/rt/pure/growRoots (; 28 ;) (type $FUNCSIG$v)
+ (func $~lib/rt/pure/growRoots (; 27 ;) (type $FUNCSIG$v)
   (local $0 i32)
   (local $1 i32)
   (local $2 i32)
@@ -2647,7 +1776,7 @@
   i32.add
   global.set $~lib/rt/pure/END
  )
- (func $~lib/rt/pure/appendRoot (; 29 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $~lib/rt/pure/appendRoot (; 28 ;) (type $FUNCSIG$vi) (param $0 i32)
   (local $1 i32)
   global.get $~lib/rt/pure/CUR
   local.tee $1
@@ -2666,7 +1795,7 @@
   i32.add
   global.set $~lib/rt/pure/CUR
  )
- (func $~lib/rt/pure/decrement (; 30 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $~lib/rt/pure/decrement (; 29 ;) (type $FUNCSIG$vi) (param $0 i32)
   (local $1 i32)
   (local $2 i32)
   local.get $0
@@ -2754,7 +1883,7 @@
    end
   end
  )
- (func $~lib/rt/pure/__release (; 31 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $~lib/rt/pure/__release (; 30 ;) (type $FUNCSIG$vi) (param $0 i32)
   local.get $0
   i32.const 1676
   i32.gt_u
@@ -2765,7 +1894,7 @@
    call $~lib/rt/pure/decrement
   end
  )
- (func $~lib/memory/memory.fill (; 32 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/memory/memory.fill (; 31 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i64)
   block $~lib/util/memory/memset|inlined.0
@@ -2946,8 +2075,8 @@
    local.set $2
    local.get $0
    i64.extend_i32_u
-   local.tee $4
-   local.get $4
+   local.get $0
+   i64.extend_i32_u
    i64.const 32
    i64.shl
    i64.or
@@ -2989,7 +2118,7 @@
    end
   end
  )
- (func $~lib/arraybuffer/ArrayBufferView#constructor (; 33 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/arraybuffer/ArrayBufferView#constructor (; 32 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $1
@@ -3054,7 +2183,7 @@
   i32.store offset=8
   local.get $0
  )
- (func $~lib/typedarray/Float64Array#constructor (; 34 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $~lib/typedarray/Float64Array#constructor (; 33 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
   i32.const 12
   i32.const 3
   call $~lib/rt/tlsf/__alloc
@@ -3062,7 +2191,7 @@
   local.get $0
   call $~lib/arraybuffer/ArrayBufferView#constructor
  )
- (func $~lib/arraybuffer/ArrayBuffer#constructor (; 35 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $~lib/arraybuffer/ArrayBuffer#constructor (; 34 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   i32.const 1073741808
@@ -3085,7 +2214,7 @@
   local.get $1
   call $~lib/rt/pure/__retain
  )
- (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#clear (; 36 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#clear (; 35 ;) (type $FUNCSIG$vi) (param $0 i32)
   (local $1 i32)
   i32.const 16
   call $~lib/arraybuffer/ArrayBuffer#constructor
@@ -3118,7 +2247,7 @@
   i32.const 0
   i32.store offset=20
  )
- (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#constructor (; 37 ;) (type $FUNCSIG$i) (result i32)
+ (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#constructor (; 36 ;) (type $FUNCSIG$i) (result i32)
   (local $0 i32)
   i32.const 24
   i32.const 9
@@ -3146,7 +2275,7 @@
   call $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#clear
   local.get $0
  )
- (func $assembly/internal/Buffer/Buffer<i32>#constructor (; 38 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $assembly/internal/Buffer/Buffer<i32>#constructor (; 37 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
   local.get $0
   i32.eqz
   if
@@ -3172,7 +2301,7 @@
   i32.store offset=12
   local.get $0
  )
- (func $assembly/internal/StackPointer/StackPointer.create<assembly/renderer/CanvasStack/CanvasStack> (; 39 ;) (type $FUNCSIG$i) (result i32)
+ (func $assembly/internal/StackPointer/StackPointer.create<assembly/renderer/CanvasStack/CanvasStack> (; 38 ;) (type $FUNCSIG$i) (result i32)
   (local $0 i32)
   i32.const 55335
   i32.const 0
@@ -3183,8 +2312,7 @@
   call $~lib/memory/memory.fill
   local.get $0
  )
- (func $assembly/renderer/CanvasRenderingContext2D/initializeStackPointer (; 40 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  (local $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/initializeStackPointer (; 39 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
   local.get $0
   f64.const 1
   f64.store
@@ -3199,23 +2327,20 @@
   i32.store offset=52
   local.get $0
   i32.const 272
-  local.tee $1
   i32.store offset=56
-  local.get $1
+  i32.const 272
   call $~lib/rt/pure/__retain
   drop
   local.get $0
   i32.const 296
-  local.tee $1
   i32.store offset=80
-  local.get $1
+  i32.const 296
   call $~lib/rt/pure/__retain
   drop
   local.get $0
   i32.const 320
-  local.tee $1
   i32.store offset=84
-  local.get $1
+  i32.const 320
   call $~lib/rt/pure/__retain
   drop
   local.get $0
@@ -3253,9 +2378,8 @@
   i32.store offset=160
   local.get $0
   i32.const 272
-  local.tee $1
   i32.store offset=188
-  local.get $1
+  i32.const 272
   call $~lib/rt/pure/__retain
   drop
   i32.const 368
@@ -3263,7 +2387,7 @@
   drop
   local.get $0
  )
- (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferIdentity (; 41 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferIdentity (; 40 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
   local.get $0
   f64.const 1
   f64.store
@@ -3294,7 +2418,7 @@
   f64.store
   local.get $0
  )
- (func $assembly/renderer/CanvasRenderingContext2D/createPathElements (; 42 ;) (type $FUNCSIG$i) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/createPathElements (; 41 ;) (type $FUNCSIG$i) (result i32)
   (local $0 i32)
   i32.const 524288
   i32.const 0
@@ -3320,7 +2444,7 @@
   f64.store offset=32
   local.get $0
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#constructor (; 43 ;) (type $FUNCSIG$i) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#constructor (; 42 ;) (type $FUNCSIG$i) (result i32)
   (local $0 i32)
   (local $1 i32)
   i32.const 184
@@ -3561,6 +2685,14 @@
   i32.store offset=180
   local.get $0
  )
+ (func $~lib/string/String#get:length (; 43 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+  local.get $0
+  i32.const 16
+  i32.sub
+  i32.load offset=12
+  i32.const 1
+  i32.shr_u
+ )
  (func $~lib/util/hash/hashStr (; 44 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
@@ -3569,37 +2701,33 @@
   call $~lib/rt/pure/__retain
   drop
   i32.const -2128831035
-  local.set $1
+  local.set $2
   local.get $0
   if
    block $break|0
     local.get $0
-    i32.const 16
-    i32.sub
-    i32.load offset=12
-    i32.const 1
-    i32.shr_u
+    call $~lib/string/String#get:length
     i32.const 1
     i32.shl
     local.set $3
     loop $loop|0
-     local.get $2
+     local.get $1
      local.get $3
      i32.ge_u
      br_if $break|0
      local.get $0
-     local.get $2
+     local.get $1
      i32.add
      i32.load8_u
-     local.get $1
+     local.get $2
      i32.xor
      i32.const 16777619
      i32.mul
-     local.set $1
-     local.get $2
+     local.set $2
+     local.get $1
      i32.const 1
      i32.add
-     local.set $2
+     local.set $1
      br $loop|0
     end
     unreachable
@@ -3607,7 +2735,7 @@
   end
   local.get $0
   call $~lib/rt/pure/__release
-  local.get $1
+  local.get $2
  )
  (func $~lib/util/string/compareImpl (; 45 ;) (type $FUNCSIG$iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
@@ -3621,24 +2749,20 @@
   call $~lib/rt/pure/__retain
   drop
   local.get $0
-  local.set $3
+  local.tee $3
+  i32.const 7
+  i32.and
   local.get $1
-  local.set $4
+  local.tee $4
+  i32.const 7
+  i32.and
+  i32.or
+  i32.eqz
+  i32.const 0
   local.get $2
   i32.const 4
   i32.ge_u
-  if (result i32)
-   local.get $3
-   i32.const 7
-   i32.and
-   local.get $4
-   i32.const 7
-   i32.and
-   i32.or
-   i32.eqz
-  else
-   i32.const 0
-  end
+  select
   if
    loop $continue|0
     local.get $3
@@ -3683,13 +2807,13 @@
     local.tee $6
     i32.ne
     if
-     local.get $6
-     local.get $5
-     i32.sub
      local.get $0
      call $~lib/rt/pure/__release
      local.get $1
      call $~lib/rt/pure/__release
+     local.get $6
+     local.get $5
+     i32.sub
      return
     else
      local.get $3
@@ -3736,22 +2860,18 @@
    i32.const 1
    local.get $0
    select
-   br_if $folding-inner0
+   if
+    br $folding-inner0
+   end
    local.get $0
-   i32.const 16
-   i32.sub
-   i32.load offset=12
-   i32.const 1
-   i32.shr_u
+   call $~lib/string/String#get:length
    local.tee $2
    local.get $1
-   i32.const 16
-   i32.sub
-   i32.load offset=12
-   i32.const 1
-   i32.shr_u
+   call $~lib/string/String#get:length
    i32.ne
-   br_if $folding-inner0
+   if
+    br $folding-inner0
+   end
    local.get $0
    local.get $1
    local.get $2
@@ -3860,7 +2980,8 @@
   loop $continue|0
    local.get $4
    local.get $8
-   i32.ne
+   i32.eq
+   i32.eqz
    if
     local.get $4
     i32.load offset=8
@@ -4142,7 +3263,8 @@
   loop $continue|0
    local.get $4
    local.get $3
-   i32.lt_u
+   i32.ge_u
+   i32.eqz
    if
     local.get $0
     local.get $4
@@ -4283,7 +3405,14 @@
    i32.const 0
   end
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#arc (; 56 ;) (type $FUNCSIG$vidddddi) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 i32)
+ (func $~lib/number/isFinite<f64> (; 56 ;) (type $FUNCSIG$id) (param $0 f64) (result i32)
+  local.get $0
+  local.get $0
+  f64.sub
+  f64.const 0
+  f64.eq
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#arc (; 57 ;) (type $FUNCSIG$vidddddi) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 i32)
   (local $7 i32)
   (local $8 f64)
   (local $9 i32)
@@ -4296,17 +3425,13 @@
   f64.add
   local.get $5
   f64.add
-  local.tee $8
-  local.get $8
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
   if (result i32)
-   i32.const 1
-  else
    local.get $3
    f64.const 0
    f64.lt
+  else
+   i32.const 1
   end
   if
    return
@@ -4396,7 +3521,7 @@
   i32.add
   i32.store offset=168
  )
- (func $assembly/draw-functions.test/arc (; 57 ;) (type $FUNCSIG$vdddddi) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 i32)
+ (func $assembly/draw-functions.test/arc (; 58 ;) (type $FUNCSIG$vdddddi) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -4416,7 +3541,7 @@
   local.get $5
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#arc
  )
- (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#has (; 58 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#has (; 59 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   i32.const 896
@@ -4438,27 +3563,24 @@
   i32.const 896
   call $~lib/rt/pure/__release
  )
- (func $~lib/string/String#concat (; 59 ;) (type $FUNCSIG$i) (result i32)
+ (func $~lib/string/String#concat (; 60 ;) (type $FUNCSIG$i) (result i32)
   (local $0 i32)
   (local $1 i32)
   (local $2 i32)
   i32.const 896
   call $~lib/rt/pure/__retain
   drop
-  i32.const 892
-  i32.load
+  i32.const 920
+  call $~lib/string/String#get:length
   i32.const 1
-  i32.shr_u
+  i32.shl
+  local.set $0
+  local.get $0
+  i32.const 896
+  call $~lib/string/String#get:length
   i32.const 1
   i32.shl
   local.tee $2
-  i32.const 916
-  i32.load
-  i32.const 1
-  i32.shr_u
-  i32.const 1
-  i32.shl
-  local.tee $0
   i32.add
   local.tee $1
   i32.eqz
@@ -4487,7 +3609,7 @@
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#get (; 60 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#get (; 61 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   i32.const 896
@@ -4522,7 +3644,7 @@
   i32.const 896
   call $~lib/rt/pure/__release
  )
- (func $assembly/internal/getContext/getContextById (; 61 ;) (type $FUNCSIG$i) (result i32)
+ (func $assembly/internal/getContext/getContextById (; 62 ;) (type $FUNCSIG$i) (result i32)
   (local $0 i32)
   i32.const 896
   call $~lib/rt/pure/__retain
@@ -4559,14 +3681,14 @@
   call $~lib/rt/pure/__release
   local.get $0
  )
- (func $assembly/draw-functions.test/init (; 62 ;) (type $FUNCSIG$v)
+ (func $assembly/draw-functions.test/init (; 63 ;) (type $FUNCSIG$v)
   (local $0 i32)
   call $assembly/internal/getContext/getContextById
   global.get $assembly/draw-functions.test/ctx
   call $~lib/rt/pure/__release
   global.set $assembly/draw-functions.test/ctx
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillStyle (; 63 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillStyle (; 64 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   local.get $1
   call $~lib/rt/pure/__retain
@@ -4642,7 +3764,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/fillStyle (; 64 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/draw-functions.test/fillStyle (; 65 ;) (type $FUNCSIG$vi) (param $0 i32)
   local.get $0
   call $~lib/rt/pure/__retain
   drop
@@ -4662,7 +3784,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokeStyle (; 65 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokeStyle (; 66 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   local.get $1
   call $~lib/rt/pure/__retain
@@ -4738,7 +3860,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/strokeStyle (; 66 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/draw-functions.test/strokeStyle (; 67 ;) (type $FUNCSIG$vi) (param $0 i32)
   local.get $0
   call $~lib/rt/pure/__retain
   drop
@@ -4758,7 +3880,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $assembly/internal/Buffer/Buffer<i32>#_retain (; 67 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/internal/Buffer/Buffer<i32>#_retain (; 68 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   local.get $1
   call $~lib/rt/pure/__retain
@@ -4779,7 +3901,7 @@
   i32.add
   i32.store offset=8
  )
- (func $~lib/string/String.__ne (; 68 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/string/String.__ne (; 69 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -4796,7 +3918,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#_updateTransform (; 69 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#_updateTransform (; 70 ;) (type $FUNCSIG$vi) (param $0 i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -4994,7 +4116,7 @@
    f64.store
   end
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#fill (; 70 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#fill (; 71 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -5071,18 +4193,6 @@
    f64.ne
   end
   if
-   local.get $3
-   if (result i32)
-    i32.const 13
-    i32.const 14
-    local.get $3
-    i32.const 2
-    i32.eq
-    select
-   else
-    i32.const 16
-   end
-   local.set $2
    local.get $0
    local.get $8
    call $assembly/internal/Buffer/Buffer<i32>#_retain
@@ -5091,27 +4201,35 @@
    local.tee $4
    local.get $0
    i32.load offset=12
-   local.tee $3
+   local.tee $2
    i32.const 3
    i32.shl
    i32.add
-   local.get $2
+   i32.const 13
+   i32.const 14
+   local.get $3
+   i32.const 2
+   i32.eq
+   select
+   i32.const 16
+   local.get $3
+   select
    f64.convert_i32_s
    f64.store
-   local.get $3
+   local.get $2
    i32.const 1
    i32.add
    i32.const 3
    i32.shl
    local.get $4
    i32.add
-   local.get $3
+   local.get $2
    i32.const 3
    i32.add
-   local.tee $2
+   local.tee $3
    f64.convert_i32_s
    f64.store
-   local.get $3
+   local.get $2
    i32.const 2
    i32.add
    i32.const 3
@@ -5121,7 +4239,7 @@
    local.get $5
    f64.store
    local.get $0
-   local.get $2
+   local.get $3
    i32.store offset=12
   end
   local.get $0
@@ -6478,7 +5596,22 @@
   local.get $4
   i32.store offset=12
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#stroke (; 71 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $~lib/typedarray/Float64Array#get:length (; 72 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+  local.get $0
+  i32.load offset=8
+  i32.const 3
+  i32.shr_u
+ )
+ (func $~lib/typedarray/Float64Array#__uget (; 73 ;) (type $FUNCSIG$dii) (param $0 i32) (param $1 i32) (result f64)
+  local.get $0
+  i32.load offset=4
+  local.get $1
+  i32.const 3
+  i32.shl
+  i32.add
+  f64.load
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#stroke (; 74 ;) (type $FUNCSIG$vi) (param $0 i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -6847,53 +5980,39 @@
   call $~lib/rt/pure/__retain
   local.tee $7
   call $~lib/rt/pure/__retain
-  local.set $3
+  local.set $1
   local.get $2
   call $~lib/rt/pure/__retain
   local.set $5
   i32.const 1
   local.set $6
-  local.get $3
-  i32.load offset=8
-  i32.const 3
-  i32.shr_u
-  local.tee $1
-  local.set $13
-  local.get $5
-  i32.load offset=8
-  i32.const 3
-  i32.shr_u
   local.get $1
+  call $~lib/typedarray/Float64Array#get:length
+  local.tee $13
+  local.get $5
+  call $~lib/typedarray/Float64Array#get:length
   i32.eq
   if
    block $break|0
     i32.const 0
-    local.set $1
+    local.set $3
     loop $loop|0
-     local.get $1
+     local.get $3
      local.get $13
      i32.ge_s
      br_if $break|0
+     local.get $1
      local.get $3
-     i32.load offset=4
-     local.get $1
-     i32.const 3
-     i32.shl
-     i32.add
-     f64.load
+     call $~lib/typedarray/Float64Array#__uget
      local.get $5
-     i32.load offset=4
-     local.get $1
-     i32.const 3
-     i32.shl
-     i32.add
-     f64.load
+     local.get $3
+     call $~lib/typedarray/Float64Array#__uget
      f64.eq
      if
-      local.get $1
+      local.get $3
       i32.const 1
       i32.add
-      local.set $1
+      local.set $3
       br $loop|0
      end
     end
@@ -6906,7 +6025,7 @@
   end
   local.get $5
   call $~lib/rt/pure/__release
-  local.get $3
+  local.get $1
   call $~lib/rt/pure/__release
   local.get $6
   i32.eqz
@@ -7201,10 +6320,10 @@
      local.set $12
      block $~lib/util/memory/memcmp|inlined.2 (result i32)
       i32.const 48
-      local.set $1
+      local.set $3
       i32.const 0
       local.get $5
-      local.tee $3
+      local.tee $1
       local.get $2
       i32.const 8
       i32.add
@@ -7212,7 +6331,7 @@
       i32.eq
       br_if $~lib/util/memory/memcmp|inlined.2
       drop
-      local.get $3
+      local.get $1
       i32.const 7
       i32.and
       local.get $7
@@ -7221,16 +6340,16 @@
       i32.eq
       if
        loop $continue|2
-        local.get $3
+        local.get $1
         i32.const 7
         i32.and
         if
          i32.const 0
-         local.get $1
+         local.get $3
          i32.eqz
          br_if $~lib/util/memory/memcmp|inlined.2
          drop
-         local.get $3
+         local.get $1
          i32.load8_u
          local.tee $6
          local.get $7
@@ -7243,14 +6362,14 @@
           i32.sub
           br $~lib/util/memory/memcmp|inlined.2
          else
-          local.get $1
-          i32.const 1
-          i32.sub
-          local.set $1
           local.get $3
           i32.const 1
-          i32.add
+          i32.sub
           local.set $3
+          local.get $1
+          i32.const 1
+          i32.add
+          local.set $1
           local.get $7
           i32.const 1
           i32.add
@@ -7262,43 +6381,43 @@
        end
        loop $continue|3
         block $break|3
-         local.get $1
+         local.get $3
          i32.const 8
          i32.lt_u
          br_if $break|3
-         local.get $3
+         local.get $1
          i64.load
          local.get $7
          i64.load
          i64.ne
          br_if $break|3
-         local.get $3
+         local.get $1
          i32.const 8
          i32.add
-         local.set $3
+         local.set $1
          local.get $7
          i32.const 8
          i32.add
          local.set $7
-         local.get $1
+         local.get $3
          i32.const 8
          i32.sub
-         local.set $1
+         local.set $3
          br $continue|3
         end
        end
       end
       loop $continue|4
        block $break|4
-        local.get $1
+        local.get $3
         local.tee $6
         i32.const 1
         i32.sub
-        local.set $1
+        local.set $3
         local.get $6
         i32.eqz
         br_if $break|4
-        local.get $3
+        local.get $1
         i32.load8_u
         local.tee $6
         local.get $7
@@ -7311,10 +6430,10 @@
          i32.sub
          br $~lib/util/memory/memcmp|inlined.2
         else
-         local.get $3
+         local.get $1
          i32.const 1
          i32.add
-         local.set $3
+         local.set $1
          local.get $7
          i32.const 1
          i32.add
@@ -8255,57 +7374,53 @@
    f64.ne
   end
   if
-   local.get $2
-   if (result i32)
-    i32.const 46
-    i32.const 47
-    local.get $2
-    i32.const 2
-    i32.eq
-    select
-   else
-    i32.const 49
-   end
-   local.set $3
    local.get $0
    local.get $1
    call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $0
    i32.load
-   local.tee $1
+   local.tee $3
    local.get $0
    i32.load offset=12
-   local.tee $2
+   local.tee $1
    i32.const 3
    i32.shl
    i32.add
-   local.get $3
+   i32.const 46
+   i32.const 47
+   local.get $2
+   i32.const 2
+   i32.eq
+   select
+   i32.const 49
+   local.get $2
+   select
    f64.convert_i32_s
    f64.store
-   local.get $2
+   local.get $1
    i32.const 1
    i32.add
    i32.const 3
    i32.shl
-   local.get $1
+   local.get $3
    i32.add
-   local.get $2
+   local.get $1
    i32.const 3
    i32.add
-   local.tee $3
+   local.tee $2
    f64.convert_i32_s
    f64.store
-   local.get $2
+   local.get $1
    i32.const 2
    i32.add
    i32.const 3
    i32.shl
-   local.get $1
+   local.get $3
    i32.add
    local.get $4
    f64.store
    local.get $0
-   local.get $3
+   local.get $2
    i32.store offset=12
   end
   local.get $0
@@ -8338,7 +7453,7 @@
   local.get $2
   i32.store offset=12
  )
- (func $assembly/draw-functions.test/stroke (; 72 ;) (type $FUNCSIG$v)
+ (func $assembly/draw-functions.test/stroke (; 75 ;) (type $FUNCSIG$v)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -8352,7 +7467,7 @@
   global.get $assembly/draw-functions.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#stroke
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#commit (; 73 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#commit (; 76 ;) (type $FUNCSIG$vi) (param $0 i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -8423,7 +7538,7 @@
   i32.const 0
   i32.store offset=8
  )
- (func $assembly/draw-functions.test/commit (; 74 ;) (type $FUNCSIG$v)
+ (func $assembly/draw-functions.test/commit (; 77 ;) (type $FUNCSIG$v)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -8437,7 +7552,7 @@
   global.get $assembly/draw-functions.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#commit
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:filter (; 75 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:filter (; 78 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   local.get $1
   call $~lib/rt/pure/__retain
   drop
@@ -8456,7 +7571,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/filter (; 76 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/draw-functions.test/filter (; 79 ;) (type $FUNCSIG$vi) (param $0 i32)
   local.get $0
   call $~lib/rt/pure/__retain
   drop
@@ -8476,22 +7591,23 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:globalAlpha (; 77 ;) (type $FUNCSIG$vid) (param $0 i32) (param $1 f64)
-  i32.const 1
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:globalAlpha (; 80 ;) (type $FUNCSIG$vid) (param $0 i32) (param $1 f64)
   local.get $1
-  f64.const 1
-  f64.gt
-  i32.const 1
-  local.get $1
-  f64.const 0
-  f64.lt
-  local.get $1
-  local.get $1
-  f64.sub
-  f64.const 0
-  f64.ne
-  select
-  select
+  call $~lib/number/isFinite<f64>
+  if (result i32)
+   local.get $1
+   f64.const 0
+   f64.lt
+  else
+   i32.const 1
+  end
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   f64.const 1
+   f64.gt
+  end
   if
    return
   end
@@ -8500,7 +7616,7 @@
   local.get $1
   f64.store offset=88
  )
- (func $assembly/draw-functions.test/globalAlpha (; 78 ;) (type $FUNCSIG$vd) (param $0 f64)
+ (func $assembly/draw-functions.test/globalAlpha (; 81 ;) (type $FUNCSIG$vd) (param $0 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -8515,7 +7631,7 @@
   local.get $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:globalAlpha
  )
- (func $assembly/draw-functions.test/imageSmoothingEnabled (; 79 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/draw-functions.test/imageSmoothingEnabled (; 82 ;) (type $FUNCSIG$vi) (param $0 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -8531,7 +7647,7 @@
   local.get $0
   i32.store8 offset=100
  )
- (func $assembly/draw-functions.test/imageSmoothingQuality (; 80 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/draw-functions.test/imageSmoothingQuality (; 83 ;) (type $FUNCSIG$vi) (param $0 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -8547,7 +7663,7 @@
   local.get $0
   i32.store offset=104
  )
- (func $assembly/draw-functions.test/shadowBlur (; 81 ;) (type $FUNCSIG$vd) (param $0 f64)
+ (func $assembly/draw-functions.test/shadowBlur (; 84 ;) (type $FUNCSIG$vd) (param $0 f64)
   (local $1 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
@@ -8561,16 +7677,15 @@
   end
   global.get $assembly/draw-functions.test/ctx
   local.set $1
-  i32.const 1
   local.get $0
-  f64.const 0
-  f64.lt
-  local.get $0
-  local.get $0
-  f64.sub
-  f64.const 0
-  f64.ne
-  select
+  call $~lib/number/isFinite<f64>
+  if (result i32)
+   local.get $0
+   f64.const 0
+   f64.lt
+  else
+   i32.const 1
+  end
   i32.eqz
   if
    local.get $1
@@ -8579,7 +7694,7 @@
    f64.store offset=152
   end
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowColor (; 82 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowColor (; 85 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   local.get $1
   call $~lib/rt/pure/__retain
@@ -8617,7 +7732,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/shadowColor (; 83 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/draw-functions.test/shadowColor (; 86 ;) (type $FUNCSIG$vi) (param $0 i32)
   local.get $0
   call $~lib/rt/pure/__retain
   drop
@@ -8637,7 +7752,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/shadowOffsetY (; 84 ;) (type $FUNCSIG$vd) (param $0 f64)
+ (func $assembly/draw-functions.test/shadowOffsetY (; 87 ;) (type $FUNCSIG$vd) (param $0 f64)
   (local $1 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
@@ -8652,10 +7767,7 @@
   global.get $assembly/draw-functions.test/ctx
   local.set $1
   local.get $0
-  local.get $0
-  f64.sub
-  f64.const 0
-  f64.eq
+  call $~lib/number/isFinite<f64>
   if
    local.get $1
    i32.load offset=24
@@ -8663,7 +7775,7 @@
    f64.store offset=176
   end
  )
- (func $assembly/draw-functions.test/shadowOffsetX (; 85 ;) (type $FUNCSIG$vd) (param $0 f64)
+ (func $assembly/draw-functions.test/shadowOffsetX (; 88 ;) (type $FUNCSIG$vd) (param $0 f64)
   (local $1 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
@@ -8678,10 +7790,7 @@
   global.get $assembly/draw-functions.test/ctx
   local.set $1
   local.get $0
-  local.get $0
-  f64.sub
-  f64.const 0
-  f64.eq
+  call $~lib/number/isFinite<f64>
   if
    local.get $1
    i32.load offset=24
@@ -8689,7 +7798,7 @@
    f64.store offset=168
   end
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#createRadialGradient (; 86 ;) (type $FUNCSIG$iidddddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#createRadialGradient (; 89 ;) (type $FUNCSIG$iidddddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (result i32)
   (local $7 i32)
   local.get $0
   i32.load offset=16
@@ -8713,7 +7822,7 @@
   i32.store
   local.get $0
  )
- (func $assembly/draw-functions.test/createRadialGradient (; 87 ;) (type $FUNCSIG$idddddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (result i32)
+ (func $assembly/draw-functions.test/createRadialGradient (; 90 ;) (type $FUNCSIG$idddddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (result i32)
   (local $6 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
@@ -8749,7 +7858,7 @@
   global.get $assembly/draw-functions.test/grd
   i32.load
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillGradient (; 88 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillGradient (; 91 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   local.get $1
   call $~lib/rt/pure/__retain
   drop
@@ -8785,7 +7894,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/fillGradient (; 89 ;) (type $FUNCSIG$v)
+ (func $assembly/draw-functions.test/fillGradient (; 92 ;) (type $FUNCSIG$v)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -8810,7 +7919,7 @@
   global.get $assembly/draw-functions.test/grd
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillGradient
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokeGradient (; 90 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokeGradient (; 93 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   local.get $1
   call $~lib/rt/pure/__retain
   drop
@@ -8846,7 +7955,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/strokeGradient (; 91 ;) (type $FUNCSIG$v)
+ (func $assembly/draw-functions.test/strokeGradient (; 94 ;) (type $FUNCSIG$v)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -8871,7 +7980,7 @@
   global.get $assembly/draw-functions.test/grd
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokeGradient
  )
- (func $assembly/renderer/Image/Image#constructor (; 92 ;) (type $FUNCSIG$i) (result i32)
+ (func $assembly/renderer/Image/Image#constructor (; 95 ;) (type $FUNCSIG$i) (result i32)
   (local $0 i32)
   i32.const 20
   i32.const 10
@@ -8895,7 +8004,7 @@
   i32.store offset=16
   local.get $0
  )
- (func $assembly/renderer/Image/Image#set:src (; 93 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/renderer/Image/Image#set:src (; 96 ;) (type $FUNCSIG$vi) (param $0 i32)
   (local $1 i32)
   i32.const 1216
   call $~lib/rt/pure/__retain
@@ -8923,7 +8032,7 @@
   i32.const 1216
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/createImage (; 94 ;) (type $FUNCSIG$i) (result i32)
+ (func $assembly/draw-functions.test/createImage (; 97 ;) (type $FUNCSIG$i) (result i32)
   (local $0 i32)
   call $assembly/renderer/Image/Image#constructor
   global.get $assembly/draw-functions.test/img
@@ -8944,7 +8053,7 @@
   global.get $assembly/draw-functions.test/img
   i32.load
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#createPattern (; 95 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#createPattern (; 98 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $1
   call $~lib/rt/pure/__retain
@@ -8968,7 +8077,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $assembly/draw-functions.test/createPattern (; 96 ;) (type $FUNCSIG$i) (result i32)
+ (func $assembly/draw-functions.test/createPattern (; 99 ;) (type $FUNCSIG$i) (result i32)
   (local $0 i32)
   (local $1 i32)
   global.get $assembly/draw-functions.test/ctx
@@ -9017,7 +8126,7 @@
   global.get $assembly/draw-functions.test/ptrn
   i32.load
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillPattern (; 97 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillPattern (; 100 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   local.get $1
   call $~lib/rt/pure/__retain
   drop
@@ -9053,7 +8162,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/fillPattern (; 98 ;) (type $FUNCSIG$v)
+ (func $assembly/draw-functions.test/fillPattern (; 101 ;) (type $FUNCSIG$v)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -9078,7 +8187,7 @@
   global.get $assembly/draw-functions.test/ptrn
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillPattern
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokePattern (; 99 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokePattern (; 102 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   local.get $1
   call $~lib/rt/pure/__retain
   drop
@@ -9114,7 +8223,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/strokePattern (; 100 ;) (type $FUNCSIG$v)
+ (func $assembly/draw-functions.test/strokePattern (; 103 ;) (type $FUNCSIG$v)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -9139,8 +8248,7 @@
   global.get $assembly/draw-functions.test/ptrn
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokePattern
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#setTransform (; 101 ;) (type $FUNCSIG$vidddddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64)
-  (local $7 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#setTransform (; 104 ;) (type $FUNCSIG$vidddddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64)
   local.get $1
   local.get $2
   f64.add
@@ -9152,11 +8260,8 @@
   f64.add
   local.get $6
   f64.add
-  local.tee $7
-  local.get $7
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
+  i32.eqz
   if
    return
   end
@@ -9181,7 +8286,7 @@
   local.get $6
   f64.store offset=40
  )
- (func $assembly/draw-functions.test/setTransform (; 102 ;) (type $FUNCSIG$vdddddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
+ (func $assembly/draw-functions.test/setTransform (; 105 ;) (type $FUNCSIG$vdddddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -9201,11 +8306,10 @@
   local.get $5
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#setTransform
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#clearRect (; 103 ;) (type $FUNCSIG$vidddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#clearRect (; 106 ;) (type $FUNCSIG$vidddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64)
   (local $5 i32)
   (local $6 i32)
-  (local $7 f64)
-  (local $8 i32)
+  (local $7 i32)
   local.get $1
   local.get $2
   f64.add
@@ -9213,11 +8317,8 @@
   f64.add
   local.get $4
   f64.add
-  local.tee $7
-  local.get $7
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
+  i32.eqz
   if
    return
   end
@@ -9244,7 +8345,7 @@
   local.get $5
   i32.const 6
   i32.add
-  local.tee $8
+  local.tee $7
   f64.convert_i32_s
   f64.store
   local.get $5
@@ -9284,10 +8385,10 @@
   local.get $4
   f64.store
   local.get $0
-  local.get $8
+  local.get $7
   i32.store offset=12
  )
- (func $assembly/draw-functions.test/clearRect (; 104 ;) (type $FUNCSIG$vdddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
+ (func $assembly/draw-functions.test/clearRect (; 107 ;) (type $FUNCSIG$vdddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -9305,11 +8406,10 @@
   local.get $3
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#clearRect
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#arcTo (; 105 ;) (type $FUNCSIG$viddddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#arcTo (; 108 ;) (type $FUNCSIG$viddddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
   (local $6 i32)
   (local $7 i32)
-  (local $8 f64)
-  (local $9 i32)
+  (local $8 i32)
   local.get $1
   local.get $2
   f64.add
@@ -9319,24 +8419,20 @@
   f64.add
   local.get $5
   f64.add
-  local.tee $8
-  local.get $8
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
   if (result i32)
-   i32.const 1
-  else
    local.get $5
    f64.const 0
    f64.lt
+  else
+   i32.const 1
   end
   if
    return
   end
   local.get $0
   i32.load offset=168
-  local.tee $9
+  local.tee $8
   local.tee $6
   local.get $0
   i32.load offset=176
@@ -9409,12 +8505,12 @@
   f64.const 0
   f64.store offset=120
   local.get $0
-  local.get $9
+  local.get $8
   i32.const 128
   i32.add
   i32.store offset=168
  )
- (func $assembly/draw-functions.test/arcTo (; 106 ;) (type $FUNCSIG$vddddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64)
+ (func $assembly/draw-functions.test/arcTo (; 109 ;) (type $FUNCSIG$vddddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -9433,11 +8529,10 @@
   local.get $4
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#arcTo
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#bezierCurveTo (; 107 ;) (type $FUNCSIG$vidddddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#bezierCurveTo (; 110 ;) (type $FUNCSIG$vidddddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64)
   (local $7 i32)
   (local $8 i32)
-  (local $9 f64)
-  (local $10 i32)
+  (local $9 i32)
   local.get $1
   local.get $2
   f64.add
@@ -9449,17 +8544,14 @@
   f64.add
   local.get $6
   f64.add
-  local.tee $9
-  local.get $9
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
+  i32.eqz
   if
    return
   end
   local.get $0
   i32.load offset=168
-  local.tee $10
+  local.tee $9
   local.tee $7
   local.get $0
   i32.load offset=176
@@ -9532,12 +8624,12 @@
   f64.const 0
   f64.store offset=120
   local.get $0
-  local.get $10
+  local.get $9
   i32.const 128
   i32.add
   i32.store offset=168
  )
- (func $assembly/draw-functions.test/bezierCurveTo (; 108 ;) (type $FUNCSIG$vdddddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
+ (func $assembly/draw-functions.test/bezierCurveTo (; 111 ;) (type $FUNCSIG$vdddddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -9557,7 +8649,7 @@
   local.get $5
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#bezierCurveTo
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#clip (; 109 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#clip (; 112 ;) (type $FUNCSIG$vi) (param $0 i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -10430,7 +9522,7 @@
   local.get $3
   i32.store offset=12
  )
- (func $assembly/draw-functions.test/clip (; 110 ;) (type $FUNCSIG$v)
+ (func $assembly/draw-functions.test/clip (; 113 ;) (type $FUNCSIG$v)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -10444,7 +9536,7 @@
   global.get $assembly/draw-functions.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#clip
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#closePath (; 111 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#closePath (; 114 ;) (type $FUNCSIG$vi) (param $0 i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -10544,7 +9636,7 @@
   i32.add
   i32.store offset=168
  )
- (func $assembly/draw-functions.test/closePath (; 112 ;) (type $FUNCSIG$v)
+ (func $assembly/draw-functions.test/closePath (; 115 ;) (type $FUNCSIG$v)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -10558,7 +9650,7 @@
   global.get $assembly/draw-functions.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#closePath
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#ellipse (; 113 ;) (type $FUNCSIG$vidddddddi) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (param $7 f64) (param $8 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#ellipse (; 116 ;) (type $FUNCSIG$vidddddddi) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (param $7 f64) (param $8 i32)
   (local $9 i32)
   (local $10 f64)
   (local $11 i32)
@@ -10575,17 +9667,13 @@
   f64.add
   local.get $7
   f64.add
-  local.tee $10
-  local.get $10
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
   if (result i32)
-   i32.const 1
-  else
    local.get $3
    f64.const 0
    f64.lt
+  else
+   i32.const 1
   end
   if (result i32)
    i32.const 1
@@ -10682,7 +9770,7 @@
   i32.add
   i32.store offset=168
  )
- (func $assembly/draw-functions.test/ellipse (; 114 ;) (type $FUNCSIG$vdddddddi) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (param $7 i32)
+ (func $assembly/draw-functions.test/ellipse (; 117 ;) (type $FUNCSIG$vdddddddi) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (param $7 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -10704,25 +9792,21 @@
   local.get $7
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#ellipse
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#lineTo (; 115 ;) (type $FUNCSIG$vidd) (param $0 i32) (param $1 f64) (param $2 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#lineTo (; 118 ;) (type $FUNCSIG$vidd) (param $0 i32) (param $1 f64) (param $2 f64)
   (local $3 i32)
   (local $4 i32)
-  (local $5 f64)
-  (local $6 i32)
+  (local $5 i32)
   local.get $1
   local.get $2
   f64.add
-  local.tee $5
-  local.get $5
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
+  i32.eqz
   if
    return
   end
   local.get $0
   i32.load offset=168
-  local.tee $6
+  local.tee $5
   local.tee $3
   local.get $0
   i32.load offset=176
@@ -10795,12 +9879,12 @@
   f64.const 0
   f64.store offset=120
   local.get $0
-  local.get $6
+  local.get $5
   i32.const 128
   i32.add
   i32.store offset=168
  )
- (func $assembly/draw-functions.test/lineTo (; 116 ;) (type $FUNCSIG$vdd) (param $0 f64) (param $1 f64)
+ (func $assembly/draw-functions.test/lineTo (; 119 ;) (type $FUNCSIG$vdd) (param $0 f64) (param $1 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -10816,25 +9900,21 @@
   local.get $1
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#lineTo
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#moveTo (; 117 ;) (type $FUNCSIG$vidd) (param $0 i32) (param $1 f64) (param $2 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#moveTo (; 120 ;) (type $FUNCSIG$vidd) (param $0 i32) (param $1 f64) (param $2 f64)
   (local $3 i32)
   (local $4 i32)
-  (local $5 f64)
-  (local $6 i32)
+  (local $5 i32)
   local.get $1
   local.get $2
   f64.add
-  local.tee $5
-  local.get $5
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
+  i32.eqz
   if
    return
   end
   local.get $0
   i32.load offset=168
-  local.tee $6
+  local.tee $5
   local.tee $3
   local.get $0
   i32.load offset=176
@@ -10907,12 +9987,12 @@
   f64.const 0
   f64.store offset=120
   local.get $0
-  local.get $6
+  local.get $5
   i32.const 128
   i32.add
   i32.store offset=168
  )
- (func $assembly/draw-functions.test/moveTo (; 118 ;) (type $FUNCSIG$vdd) (param $0 f64) (param $1 f64)
+ (func $assembly/draw-functions.test/moveTo (; 121 ;) (type $FUNCSIG$vdd) (param $0 f64) (param $1 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -10928,11 +10008,10 @@
   local.get $1
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#moveTo
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#quadraticCurveTo (; 119 ;) (type $FUNCSIG$vidddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#quadraticCurveTo (; 122 ;) (type $FUNCSIG$vidddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64)
   (local $5 i32)
   (local $6 i32)
-  (local $7 f64)
-  (local $8 i32)
+  (local $7 i32)
   local.get $1
   local.get $2
   f64.add
@@ -10940,17 +10019,14 @@
   f64.add
   local.get $4
   f64.add
-  local.tee $7
-  local.get $7
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
+  i32.eqz
   if
    return
   end
   local.get $0
   i32.load offset=168
-  local.tee $8
+  local.tee $7
   local.tee $5
   local.get $0
   i32.load offset=176
@@ -11023,12 +10099,12 @@
   f64.const 0
   f64.store offset=120
   local.get $0
-  local.get $8
+  local.get $7
   i32.const 128
   i32.add
   i32.store offset=168
  )
- (func $assembly/draw-functions.test/quadraticCurveTo (; 120 ;) (type $FUNCSIG$vdddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
+ (func $assembly/draw-functions.test/quadraticCurveTo (; 123 ;) (type $FUNCSIG$vdddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -11046,11 +10122,10 @@
   local.get $3
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#quadraticCurveTo
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#rect (; 121 ;) (type $FUNCSIG$vidddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#rect (; 124 ;) (type $FUNCSIG$vidddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64)
   (local $5 i32)
   (local $6 i32)
-  (local $7 f64)
-  (local $8 i32)
+  (local $7 i32)
   local.get $1
   local.get $2
   f64.add
@@ -11058,17 +10133,14 @@
   f64.add
   local.get $4
   f64.add
-  local.tee $7
-  local.get $7
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
+  i32.eqz
   if
    return
   end
   local.get $0
   i32.load offset=168
-  local.tee $8
+  local.tee $7
   local.tee $5
   local.get $0
   i32.load offset=176
@@ -11141,12 +10213,12 @@
   f64.const 0
   f64.store offset=120
   local.get $0
-  local.get $8
+  local.get $7
   i32.const 128
   i32.add
   i32.store offset=168
  )
- (func $assembly/draw-functions.test/rect (; 122 ;) (type $FUNCSIG$vdddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
+ (func $assembly/draw-functions.test/rect (; 125 ;) (type $FUNCSIG$vdddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -11164,7 +10236,7 @@
   local.get $3
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#rect
  )
- (func $assembly/draw-functions.test/globalCompositeOperation (; 123 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/draw-functions.test/globalCompositeOperation (; 126 ;) (type $FUNCSIG$vi) (param $0 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -11180,7 +10252,7 @@
   local.get $0
   i32.store offset=96
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#fillRect (; 124 ;) (type $FUNCSIG$vidddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#fillRect (; 127 ;) (type $FUNCSIG$vidddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64)
   (local $5 i32)
   (local $6 i32)
   (local $7 i32)
@@ -11193,11 +10265,8 @@
   f64.add
   local.get $4
   f64.add
-  local.tee $8
-  local.get $8
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
+  i32.eqz
   if
    return
   end
@@ -11251,18 +10320,6 @@
    f64.ne
   end
   if
-   local.get $5
-   if (result i32)
-    i32.const 13
-    i32.const 14
-    local.get $5
-    i32.const 2
-    i32.eq
-    select
-   else
-    i32.const 16
-   end
-   local.set $6
    local.get $0
    local.get $7
    call $assembly/internal/Buffer/Buffer<i32>#_retain
@@ -11271,27 +10328,35 @@
    local.tee $7
    local.get $0
    i32.load offset=12
-   local.tee $5
+   local.tee $6
    i32.const 3
    i32.shl
    i32.add
-   local.get $6
+   i32.const 13
+   i32.const 14
+   local.get $5
+   i32.const 2
+   i32.eq
+   select
+   i32.const 16
+   local.get $5
+   select
    f64.convert_i32_s
    f64.store
-   local.get $5
+   local.get $6
    i32.const 1
    i32.add
    i32.const 3
    i32.shl
    local.get $7
    i32.add
-   local.get $5
+   local.get $6
    i32.const 3
    i32.add
-   local.tee $6
+   local.tee $5
    f64.convert_i32_s
    f64.store
-   local.get $5
+   local.get $6
    i32.const 2
    i32.add
    i32.const 3
@@ -11301,7 +10366,7 @@
    local.get $8
    f64.store
    local.get $0
-   local.get $6
+   local.get $5
    i32.store offset=12
   end
   local.get $0
@@ -11856,7 +10921,7 @@
   local.get $7
   i32.store offset=12
  )
- (func $assembly/draw-functions.test/fillRect (; 125 ;) (type $FUNCSIG$vdddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
+ (func $assembly/draw-functions.test/fillRect (; 128 ;) (type $FUNCSIG$vdddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -11874,7 +10939,7 @@
   local.get $3
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#fillRect
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#drawImage (; 126 ;) (type $FUNCSIG$viidd) (param $0 i32) (param $1 i32) (param $2 f64) (param $3 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#drawImage (; 129 ;) (type $FUNCSIG$viidd) (param $0 i32) (param $1 i32) (param $2 f64) (param $3 f64)
   (local $4 i32)
   (local $5 i32)
   (local $6 i32)
@@ -11891,11 +10956,8 @@
    local.get $2
    local.get $3
    f64.add
-   local.tee $7
-   local.get $7
-   f64.sub
-   f64.const 0
-   f64.ne
+   call $~lib/number/isFinite<f64>
+   i32.eqz
   else
    i32.const 1
   end
@@ -12534,7 +11596,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/drawImage (; 127 ;) (type $FUNCSIG$vdd) (param $0 f64) (param $1 f64)
+ (func $assembly/draw-functions.test/drawImage (; 130 ;) (type $FUNCSIG$vdd) (param $0 f64) (param $1 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -12551,7 +11613,7 @@
   local.get $1
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#drawImage
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#drawImageSize (; 128 ;) (type $FUNCSIG$viidddd) (param $0 i32) (param $1 i32) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#drawImageSize (; 131 ;) (type $FUNCSIG$viidddd) (param $0 i32) (param $1 i32) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
   (local $6 i32)
   (local $7 i32)
   (local $8 i32)
@@ -12570,11 +11632,8 @@
    f64.add
    local.get $5
    f64.add
-   local.tee $9
-   local.get $9
-   f64.sub
-   f64.const 0
-   f64.ne
+   call $~lib/number/isFinite<f64>
+   i32.eqz
   else
    i32.const 1
   end
@@ -13205,7 +12264,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/drawImageSize (; 129 ;) (type $FUNCSIG$vdddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
+ (func $assembly/draw-functions.test/drawImageSize (; 132 ;) (type $FUNCSIG$vdddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -13224,12 +12283,12 @@
   local.get $3
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#drawImageSize
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#drawImageSource (; 130 ;) (type $FUNCSIG$viidddddddd) (param $0 i32) (param $1 i32) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (param $7 f64) (param $8 f64) (param $9 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#drawImageSource (; 133 ;) (type $FUNCSIG$viidddddddd) (param $0 i32) (param $1 i32) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (param $7 f64) (param $8 f64) (param $9 f64)
   (local $10 i32)
   (local $11 i32)
   (local $12 i32)
-  (local $13 f64)
-  (local $14 i32)
+  (local $13 i32)
+  (local $14 f64)
   local.get $1
   call $~lib/rt/pure/__retain
   drop
@@ -13250,11 +12309,8 @@
    f64.add
    local.get $9
    f64.add
-   local.tee $13
-   local.get $13
-   f64.sub
-   f64.const 0
-   f64.ne
+   call $~lib/number/isFinite<f64>
+   i32.eqz
   else
    i32.const 1
   end
@@ -13318,7 +12374,7 @@
    local.get $11
    i32.const 3
    i32.add
-   local.tee $14
+   local.tee $13
    f64.convert_i32_s
    f64.store
    local.get $11
@@ -13332,7 +12388,7 @@
    f64.convert_i32_u
    f64.store
    local.get $0
-   local.get $14
+   local.get $13
    i32.store offset=12
   end
   local.get $10
@@ -13340,13 +12396,13 @@
   local.get $0
   i32.load offset=24
   f64.load offset=88
-  local.tee $13
+  local.tee $14
   local.get $0
   f64.load offset=56
   f64.ne
   if
    local.get $0
-   local.get $13
+   local.get $14
    f64.store offset=56
    local.get $0
    i32.load
@@ -13379,7 +12435,7 @@
    i32.shl
    local.get $11
    i32.add
-   local.get $13
+   local.get $14
    f64.store
    local.get $0
    local.get $12
@@ -13417,7 +12473,7 @@
    local.get $10
    i32.const 3
    i32.add
-   local.tee $14
+   local.tee $13
    f64.convert_i32_s
    f64.store
    local.get $10
@@ -13431,7 +12487,7 @@
    f64.convert_i32_s
    f64.store
    local.get $0
-   local.get $14
+   local.get $13
    i32.store offset=12
   end
   local.get $0
@@ -13470,7 +12526,7 @@
    local.get $10
    i32.const 3
    i32.add
-   local.tee $14
+   local.tee $13
    f64.convert_i32_s
    f64.store
    local.get $10
@@ -13486,7 +12542,7 @@
    select
    f64.store
    local.get $0
-   local.get $14
+   local.get $13
    i32.store offset=12
   end
   local.get $0
@@ -13527,7 +12583,7 @@
     local.get $10
     i32.const 3
     i32.add
-    local.tee $14
+    local.tee $13
     f64.convert_i32_s
     f64.store
     local.get $10
@@ -13541,20 +12597,20 @@
     f64.convert_i32_s
     f64.store
     local.get $0
-    local.get $14
+    local.get $13
     i32.store offset=12
    end
   end
   local.get $0
   i32.load offset=24
   f64.load offset=152
-  local.tee $13
+  local.tee $14
   local.get $0
   f64.load offset=120
   f64.ne
   if
    local.get $0
-   local.get $13
+   local.get $14
    f64.store offset=120
    local.get $0
    i32.load
@@ -13587,7 +12643,7 @@
    i32.shl
    local.get $11
    i32.add
-   local.get $13
+   local.get $14
    f64.store
    local.get $0
    local.get $12
@@ -13641,7 +12697,7 @@
    local.get $11
    i32.const 3
    i32.add
-   local.tee $14
+   local.tee $13
    f64.convert_i32_s
    f64.store
    local.get $11
@@ -13655,7 +12711,7 @@
    f64.convert_i32_u
    f64.store
    local.get $0
-   local.get $14
+   local.get $13
    i32.store offset=12
   end
   local.get $10
@@ -13663,13 +12719,13 @@
   local.get $0
   i32.load offset=24
   f64.load offset=168
-  local.tee $13
+  local.tee $14
   local.get $0
   f64.load offset=136
   f64.ne
   if
    local.get $0
-   local.get $13
+   local.get $14
    f64.store offset=136
    local.get $0
    i32.load
@@ -13702,7 +12758,7 @@
    i32.shl
    local.get $11
    i32.add
-   local.get $13
+   local.get $14
    f64.store
    local.get $0
    local.get $12
@@ -13711,13 +12767,13 @@
   local.get $0
   i32.load offset=24
   f64.load offset=176
-  local.tee $13
+  local.tee $14
   local.get $0
   f64.load offset=144
   f64.ne
   if
    local.get $0
-   local.get $13
+   local.get $14
    f64.store offset=144
    local.get $0
    i32.load
@@ -13750,7 +12806,7 @@
    i32.shl
    local.get $11
    i32.add
-   local.get $13
+   local.get $14
    f64.store
    local.get $0
    local.get $12
@@ -13786,7 +12842,7 @@
   local.get $10
   i32.const 11
   i32.add
-  local.tee $14
+  local.tee $13
   f64.convert_i32_s
   f64.store
   local.get $10
@@ -13872,12 +12928,12 @@
   local.get $9
   f64.store
   local.get $0
-  local.get $14
+  local.get $13
   i32.store offset=12
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/drawImageSource (; 131 ;) (type $FUNCSIG$vdddddddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (param $7 f64)
+ (func $assembly/draw-functions.test/drawImageSource (; 134 ;) (type $FUNCSIG$vdddddddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (param $7 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -13900,7 +12956,7 @@
   local.get $7
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#drawImageSource
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#fillText (; 132 ;) (type $FUNCSIG$viidd) (param $0 i32) (param $1 i32) (param $2 f64) (param $3 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#fillText (; 135 ;) (type $FUNCSIG$viidd) (param $0 i32) (param $1 i32) (param $2 f64) (param $3 f64)
   (local $4 i32)
   (local $5 i32)
   (local $6 i32)
@@ -13912,27 +12968,19 @@
   local.get $2
   local.get $3
   f64.add
-  local.tee $8
-  local.get $8
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
   if (result i32)
-   i32.const 1
-  else
    local.get $1
    i32.const 0
    call $~lib/string/String.__eq
+  else
+   i32.const 1
   end
   if (result i32)
    i32.const 1
   else
    local.get $1
-   i32.const 16
-   i32.sub
-   i32.load offset=12
-   i32.const 1
-   i32.shr_u
+   call $~lib/string/String#get:length
    i32.eqz
   end
   if
@@ -14041,57 +13089,53 @@
    f64.ne
   end
   if
-   local.get $4
-   if (result i32)
-    i32.const 13
-    i32.const 14
-    local.get $4
-    i32.const 2
-    i32.eq
-    select
-   else
-    i32.const 16
-   end
-   local.set $6
    local.get $0
    local.get $5
    call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $0
    i32.load
-   local.tee $5
+   local.tee $6
    local.get $0
    i32.load offset=12
-   local.tee $4
+   local.tee $5
    i32.const 3
    i32.shl
    i32.add
-   local.get $6
+   i32.const 13
+   i32.const 14
+   local.get $4
+   i32.const 2
+   i32.eq
+   select
+   i32.const 16
+   local.get $4
+   select
    f64.convert_i32_s
    f64.store
-   local.get $4
+   local.get $5
    i32.const 1
    i32.add
    i32.const 3
    i32.shl
-   local.get $5
+   local.get $6
    i32.add
-   local.get $4
+   local.get $5
    i32.const 3
    i32.add
-   local.tee $6
+   local.tee $4
    f64.convert_i32_s
    f64.store
-   local.get $4
+   local.get $5
    i32.const 2
    i32.add
    i32.const 3
    i32.shl
-   local.get $5
+   local.get $6
    i32.add
    local.get $8
    f64.store
    local.get $0
-   local.get $6
+   local.get $4
    i32.store offset=12
   end
   local.get $0
@@ -14808,7 +13852,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/fillText (; 133 ;) (type $FUNCSIG$vidd) (param $0 i32) (param $1 f64) (param $2 f64)
+ (func $assembly/draw-functions.test/fillText (; 136 ;) (type $FUNCSIG$vidd) (param $0 i32) (param $1 f64) (param $2 f64)
   local.get $0
   call $~lib/rt/pure/__retain
   drop
@@ -14830,7 +13874,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#fillTextWidth (; 134 ;) (type $FUNCSIG$viiddd) (param $0 i32) (param $1 i32) (param $2 f64) (param $3 f64) (param $4 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#fillTextWidth (; 137 ;) (type $FUNCSIG$viiddd) (param $0 i32) (param $1 i32) (param $2 f64) (param $3 f64) (param $4 f64)
   (local $5 i32)
   (local $6 i32)
   (local $7 i32)
@@ -14844,27 +13888,19 @@
   f64.add
   local.get $4
   f64.add
-  local.tee $9
-  local.get $9
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
   if (result i32)
-   i32.const 1
-  else
    local.get $1
    i32.const 0
    call $~lib/string/String.__eq
+  else
+   i32.const 1
   end
   if (result i32)
    i32.const 1
   else
    local.get $1
-   i32.const 16
-   i32.sub
-   i32.load offset=12
-   i32.const 1
-   i32.shr_u
+   call $~lib/string/String#get:length
    i32.eqz
   end
   if (result i32)
@@ -14980,57 +14016,53 @@
    f64.ne
   end
   if
-   local.get $5
-   if (result i32)
-    i32.const 13
-    i32.const 14
-    local.get $5
-    i32.const 2
-    i32.eq
-    select
-   else
-    i32.const 16
-   end
-   local.set $7
    local.get $0
    local.get $6
    call $assembly/internal/Buffer/Buffer<i32>#_retain
    local.get $0
    i32.load
-   local.tee $6
+   local.tee $7
    local.get $0
    i32.load offset=12
-   local.tee $5
+   local.tee $6
    i32.const 3
    i32.shl
    i32.add
-   local.get $7
+   i32.const 13
+   i32.const 14
+   local.get $5
+   i32.const 2
+   i32.eq
+   select
+   i32.const 16
+   local.get $5
+   select
    f64.convert_i32_s
    f64.store
-   local.get $5
+   local.get $6
    i32.const 1
    i32.add
    i32.const 3
    i32.shl
-   local.get $6
+   local.get $7
    i32.add
-   local.get $5
+   local.get $6
    i32.const 3
    i32.add
-   local.tee $7
+   local.tee $5
    f64.convert_i32_s
    f64.store
-   local.get $5
+   local.get $6
    i32.const 2
    i32.add
    i32.const 3
    i32.shl
-   local.get $6
+   local.get $7
    i32.add
    local.get $9
    f64.store
    local.get $0
-   local.get $7
+   local.get $5
    i32.store offset=12
   end
   local.get $0
@@ -15756,7 +14788,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/fillTextWidth (; 135 ;) (type $FUNCSIG$viddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64)
+ (func $assembly/draw-functions.test/fillTextWidth (; 138 ;) (type $FUNCSIG$viddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64)
   local.get $0
   call $~lib/rt/pure/__retain
   drop
@@ -15779,7 +14811,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/direction (; 136 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/draw-functions.test/direction (; 139 ;) (type $FUNCSIG$vi) (param $0 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -15795,7 +14827,7 @@
   local.get $0
   i32.store offset=48
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:font (; 137 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:font (; 140 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   local.get $1
   call $~lib/rt/pure/__retain
   drop
@@ -15814,7 +14846,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/font (; 138 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/draw-functions.test/font (; 141 ;) (type $FUNCSIG$vi) (param $0 i32)
   local.get $0
   call $~lib/rt/pure/__retain
   drop
@@ -15834,7 +14866,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/textAlign (; 139 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/draw-functions.test/textAlign (; 142 ;) (type $FUNCSIG$vi) (param $0 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -15850,7 +14882,7 @@
   local.get $0
   i32.store offset=208
  )
- (func $assembly/draw-functions.test/textBaseline (; 140 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/draw-functions.test/textBaseline (; 143 ;) (type $FUNCSIG$vi) (param $0 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -15866,7 +14898,7 @@
   local.get $0
   i32.store offset=212
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#measureText (; 141 ;) (type $FUNCSIG$dii) (param $0 i32) (param $1 i32) (result f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#measureText (; 144 ;) (type $FUNCSIG$dii) (param $0 i32) (param $1 i32) (result f64)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -15951,7 +14983,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/measureText (; 142 ;) (type $FUNCSIG$di) (param $0 i32) (result f64)
+ (func $assembly/draw-functions.test/measureText (; 145 ;) (type $FUNCSIG$di) (param $0 i32) (result f64)
   (local $1 f64)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -15972,7 +15004,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/lineCap (; 143 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/draw-functions.test/lineCap (; 146 ;) (type $FUNCSIG$vi) (param $0 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -15988,7 +15020,7 @@
   local.get $0
   i32.store offset=108
  )
- (func $~lib/typedarray/Float64Array#__set (; 144 ;) (type $FUNCSIG$viid) (param $0 i32) (param $1 i32) (param $2 f64)
+ (func $~lib/typedarray/Float64Array#__set (; 147 ;) (type $FUNCSIG$viid) (param $0 i32) (param $1 i32) (param $2 f64)
   local.get $1
   local.get $0
   i32.load offset=8
@@ -16012,7 +15044,7 @@
   local.get $2
   f64.store
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#setLineDash (; 145 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#setLineDash (; 148 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   local.get $1
   call $~lib/rt/pure/__retain
   drop
@@ -16030,7 +15062,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/setLineDash (; 146 ;) (type $FUNCSIG$vddd) (param $0 f64) (param $1 f64) (param $2 f64)
+ (func $assembly/draw-functions.test/setLineDash (; 149 ;) (type $FUNCSIG$vddd) (param $0 f64) (param $1 f64) (param $2 f64)
   (local $3 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
@@ -16062,7 +15094,7 @@
   local.get $3
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/lineDashOffset (; 147 ;) (type $FUNCSIG$vd) (param $0 f64)
+ (func $assembly/draw-functions.test/lineDashOffset (; 150 ;) (type $FUNCSIG$vd) (param $0 f64)
   (local $1 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
@@ -16077,10 +15109,7 @@
   global.get $assembly/draw-functions.test/ctx
   local.set $1
   local.get $0
-  local.get $0
-  f64.sub
-  f64.const 0
-  f64.eq
+  call $~lib/number/isFinite<f64>
   if
    local.get $1
    i32.load offset=24
@@ -16088,7 +15117,7 @@
    f64.store offset=120
   end
  )
- (func $assembly/draw-functions.test/lineJoin (; 148 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/draw-functions.test/lineJoin (; 151 ;) (type $FUNCSIG$vi) (param $0 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -16104,7 +15133,7 @@
   local.get $0
   i32.store offset=128
  )
- (func $assembly/draw-functions.test/lineWidth (; 149 ;) (type $FUNCSIG$vd) (param $0 f64)
+ (func $assembly/draw-functions.test/lineWidth (; 152 ;) (type $FUNCSIG$vd) (param $0 f64)
   (local $1 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
@@ -16118,16 +15147,15 @@
   end
   global.get $assembly/draw-functions.test/ctx
   local.set $1
-  i32.const 1
   local.get $0
-  f64.const 0
-  f64.lt
-  local.get $0
-  local.get $0
-  f64.sub
-  f64.const 0
-  f64.ne
-  select
+  call $~lib/number/isFinite<f64>
+  if (result i32)
+   local.get $0
+   f64.const 0
+   f64.lt
+  else
+   i32.const 1
+  end
   i32.eqz
   if
    local.get $1
@@ -16136,7 +15164,7 @@
    f64.store offset=136
   end
  )
- (func $assembly/draw-functions.test/miterLimit (; 150 ;) (type $FUNCSIG$vd) (param $0 f64)
+ (func $assembly/draw-functions.test/miterLimit (; 153 ;) (type $FUNCSIG$vd) (param $0 f64)
   (local $1 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
@@ -16150,16 +15178,15 @@
   end
   global.get $assembly/draw-functions.test/ctx
   local.set $1
-  i32.const 1
   local.get $0
-  f64.const 0
-  f64.lt
-  local.get $0
-  local.get $0
-  f64.sub
-  f64.const 0
-  f64.ne
-  select
+  call $~lib/number/isFinite<f64>
+  if (result i32)
+   local.get $0
+   f64.const 0
+   f64.lt
+  else
+   i32.const 1
+  end
   i32.eqz
   if
    local.get $1
@@ -16168,7 +15195,7 @@
    f64.store offset=144
   end
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#strokeRect (; 151 ;) (type $FUNCSIG$vidddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#strokeRect (; 154 ;) (type $FUNCSIG$vidddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64)
   (local $5 i32)
   (local $6 i32)
   (local $7 i32)
@@ -16526,16 +15553,10 @@
   i32.const 1
   local.set $5
   local.get $9
-  i32.load offset=8
-  i32.const 3
-  i32.shr_u
-  local.tee $7
-  local.set $12
+  call $~lib/typedarray/Float64Array#get:length
+  local.tee $12
   local.get $10
-  i32.load offset=8
-  i32.const 3
-  i32.shr_u
-  local.get $7
+  call $~lib/typedarray/Float64Array#get:length
   i32.eq
   if
    block $break|0
@@ -16547,19 +15568,11 @@
      i32.ge_s
      br_if $break|0
      local.get $9
-     i32.load offset=4
      local.get $7
-     i32.const 3
-     i32.shl
-     i32.add
-     f64.load
+     call $~lib/typedarray/Float64Array#__uget
      local.get $10
-     i32.load offset=4
      local.get $7
-     i32.const 3
-     i32.shl
-     i32.add
-     f64.load
+     call $~lib/typedarray/Float64Array#__uget
      f64.eq
      if
       local.get $7
@@ -17099,18 +16112,6 @@
    f64.ne
   end
   if
-   local.get $6
-   if (result i32)
-    i32.const 46
-    i32.const 47
-    local.get $6
-    i32.const 2
-    i32.eq
-    select
-   else
-    i32.const 49
-   end
-   local.set $6
    local.get $0
    local.get $5
    call $assembly/internal/Buffer/Buffer<i32>#_retain
@@ -17123,7 +16124,15 @@
    i32.const 3
    i32.shl
    i32.add
+   i32.const 46
+   i32.const 47
    local.get $6
+   i32.const 2
+   i32.eq
+   select
+   i32.const 49
+   local.get $6
+   select
    f64.convert_i32_s
    f64.store
    local.get $5
@@ -17218,7 +16227,7 @@
   local.get $7
   i32.store offset=12
  )
- (func $assembly/draw-functions.test/strokeRect (; 152 ;) (type $FUNCSIG$vdddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
+ (func $assembly/draw-functions.test/strokeRect (; 155 ;) (type $FUNCSIG$vdddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -17236,7 +16245,7 @@
   local.get $3
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#strokeRect
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#strokeText (; 153 ;) (type $FUNCSIG$viidd) (param $0 i32) (param $1 i32) (param $2 f64) (param $3 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#strokeText (; 156 ;) (type $FUNCSIG$viidd) (param $0 i32) (param $1 i32) (param $2 f64) (param $3 f64)
   (local $4 i32)
   (local $5 i32)
   (local $6 i32)
@@ -17251,27 +16260,19 @@
   local.get $2
   local.get $3
   f64.add
-  local.tee $8
-  local.get $8
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
   if (result i32)
-   i32.const 1
-  else
    local.get $1
    i32.const 0
    call $~lib/string/String.__eq
+  else
+   i32.const 1
   end
   if (result i32)
    i32.const 1
   else
    local.get $1
-   i32.const 16
-   i32.sub
-   i32.load offset=12
-   i32.const 1
-   i32.shr_u
+   call $~lib/string/String#get:length
    i32.eqz
   end
   if
@@ -17736,16 +16737,10 @@
   i32.const 1
   local.set $4
   local.get $7
-  i32.load offset=8
-  i32.const 3
-  i32.shr_u
-  local.tee $6
-  local.set $11
+  call $~lib/typedarray/Float64Array#get:length
+  local.tee $11
   local.get $9
-  i32.load offset=8
-  i32.const 3
-  i32.shr_u
-  local.get $6
+  call $~lib/typedarray/Float64Array#get:length
   i32.eq
   if
    block $break|0
@@ -17757,19 +16752,11 @@
      i32.ge_s
      br_if $break|0
      local.get $7
-     i32.load offset=4
      local.get $6
-     i32.const 3
-     i32.shl
-     i32.add
-     f64.load
+     call $~lib/typedarray/Float64Array#__uget
      local.get $9
-     i32.load offset=4
      local.get $6
-     i32.const 3
-     i32.shl
-     i32.add
-     f64.load
+     call $~lib/typedarray/Float64Array#__uget
      f64.eq
      if
       local.get $6
@@ -18309,18 +17296,6 @@
    f64.ne
   end
   if
-   local.get $5
-   if (result i32)
-    i32.const 46
-    i32.const 47
-    local.get $5
-    i32.const 2
-    i32.eq
-    select
-   else
-    i32.const 49
-   end
-   local.set $5
    local.get $0
    local.get $4
    call $assembly/internal/Buffer/Buffer<i32>#_retain
@@ -18333,7 +17308,15 @@
    i32.const 3
    i32.shl
    i32.add
+   i32.const 46
+   i32.const 47
    local.get $5
+   i32.const 2
+   i32.eq
+   select
+   i32.const 49
+   local.get $5
+   select
    f64.convert_i32_s
    f64.store
    local.get $4
@@ -18523,7 +17506,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/strokeText (; 154 ;) (type $FUNCSIG$vidd) (param $0 i32) (param $1 f64) (param $2 f64)
+ (func $assembly/draw-functions.test/strokeText (; 157 ;) (type $FUNCSIG$vidd) (param $0 i32) (param $1 f64) (param $2 f64)
   local.get $0
   call $~lib/rt/pure/__retain
   drop
@@ -18545,7 +17528,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#strokeTextWidth (; 155 ;) (type $FUNCSIG$viiddd) (param $0 i32) (param $1 i32) (param $2 f64) (param $3 f64) (param $4 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#strokeTextWidth (; 158 ;) (type $FUNCSIG$viiddd) (param $0 i32) (param $1 i32) (param $2 f64) (param $3 f64) (param $4 f64)
   (local $5 i32)
   (local $6 i32)
   (local $7 i32)
@@ -18562,27 +17545,19 @@
   f64.add
   local.get $4
   f64.add
-  local.tee $9
-  local.get $9
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
   if (result i32)
-   i32.const 1
-  else
    local.get $1
    i32.const 0
    call $~lib/string/String.__eq
+  else
+   i32.const 1
   end
   if (result i32)
    i32.const 1
   else
    local.get $1
-   i32.const 16
-   i32.sub
-   i32.load offset=12
-   i32.const 1
-   i32.shr_u
+   call $~lib/string/String#get:length
    i32.eqz
   end
   if (result i32)
@@ -19054,16 +18029,10 @@
   i32.const 1
   local.set $5
   local.get $8
-  i32.load offset=8
-  i32.const 3
-  i32.shr_u
-  local.tee $7
-  local.set $12
+  call $~lib/typedarray/Float64Array#get:length
+  local.tee $12
   local.get $10
-  i32.load offset=8
-  i32.const 3
-  i32.shr_u
-  local.get $7
+  call $~lib/typedarray/Float64Array#get:length
   i32.eq
   if
    block $break|0
@@ -19075,19 +18044,11 @@
      i32.ge_s
      br_if $break|0
      local.get $8
-     i32.load offset=4
      local.get $7
-     i32.const 3
-     i32.shl
-     i32.add
-     f64.load
+     call $~lib/typedarray/Float64Array#__uget
      local.get $10
-     i32.load offset=4
      local.get $7
-     i32.const 3
-     i32.shl
-     i32.add
-     f64.load
+     call $~lib/typedarray/Float64Array#__uget
      f64.eq
      if
       local.get $7
@@ -19627,18 +18588,6 @@
    f64.ne
   end
   if
-   local.get $6
-   if (result i32)
-    i32.const 46
-    i32.const 47
-    local.get $6
-    i32.const 2
-    i32.eq
-    select
-   else
-    i32.const 49
-   end
-   local.set $6
    local.get $0
    local.get $5
    call $assembly/internal/Buffer/Buffer<i32>#_retain
@@ -19651,7 +18600,15 @@
    i32.const 3
    i32.shl
    i32.add
+   i32.const 46
+   i32.const 47
    local.get $6
+   i32.const 2
+   i32.eq
+   select
+   i32.const 49
+   local.get $6
+   select
    f64.convert_i32_s
    f64.store
    local.get $5
@@ -19850,7 +18807,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $assembly/draw-functions.test/strokeTextWidth (; 156 ;) (type $FUNCSIG$viddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64)
+ (func $assembly/draw-functions.test/strokeTextWidth (; 159 ;) (type $FUNCSIG$viddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64)
   local.get $0
   call $~lib/rt/pure/__retain
   drop
@@ -19873,7 +18830,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#save (; 157 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#save (; 160 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -19976,7 +18933,7 @@
   local.get $3
   i32.store8 offset=20
  )
- (func $assembly/draw-functions.test/save (; 158 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/draw-functions.test/save (; 161 ;) (type $FUNCSIG$vi) (param $0 i32)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -19991,7 +18948,7 @@
   local.get $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#save
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#restore (; 159 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#restore (; 162 ;) (type $FUNCSIG$vi) (param $0 i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -20224,7 +19181,7 @@
   i32.sub
   i32.store8 offset=20
  )
- (func $assembly/draw-functions.test/restore (; 160 ;) (type $FUNCSIG$v)
+ (func $assembly/draw-functions.test/restore (; 163 ;) (type $FUNCSIG$v)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -20238,7 +19195,7 @@
   global.get $assembly/draw-functions.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#restore
  )
- (func $assembly/draw-functions.test/imageNull (; 161 ;) (type $FUNCSIG$v)
+ (func $assembly/draw-functions.test/imageNull (; 164 ;) (type $FUNCSIG$v)
   (local $0 i32)
   global.get $assembly/draw-functions.test/img
   local.tee $0
@@ -20252,7 +19209,7 @@
   i32.const 0
   global.set $assembly/draw-functions.test/img
  )
- (func $~lib/math/pio2_large_quot (; 162 ;) (type $FUNCSIG$ij) (param $0 i64) (result i32)
+ (func $~lib/math/pio2_large_quot (; 165 ;) (type $FUNCSIG$ij) (param $0 i64) (result i32)
   (local $1 i64)
   (local $2 i64)
   (local $3 i64)
@@ -20544,35 +19501,35 @@
   i64.sub
   i32.wrap_i64
  )
- (func $~lib/math/NativeMath.sincos (; 163 ;) (type $FUNCSIG$vd) (param $0 f64)
+ (func $~lib/math/NativeMath.sincos (; 166 ;) (type $FUNCSIG$vd) (param $0 f64)
   (local $1 f64)
   (local $2 f64)
   (local $3 f64)
-  (local $4 i32)
+  (local $4 f64)
   (local $5 f64)
-  (local $6 f64)
+  (local $6 i32)
   (local $7 f64)
   (local $8 i32)
   (local $9 f64)
-  (local $10 i32)
-  (local $11 i64)
+  (local $10 i64)
   local.get $0
   i64.reinterpret_f64
-  local.tee $11
+  local.tee $10
   i64.const 32
   i64.shr_u
   i32.wrap_i64
-  local.tee $8
+  local.tee $6
   i32.const 31
   i32.shr_u
-  local.get $8
+  local.set $8
+  local.get $6
   i32.const 2147483647
   i32.and
-  local.tee $8
+  local.tee $6
   i32.const 1072243195
   i32.le_u
   if
-   local.get $8
+   local.get $6
    i32.const 1044816030
    i32.lt_u
    if
@@ -20624,13 +19581,13 @@
    local.get $0
    local.get $0
    f64.mul
-   local.tee $5
-   local.get $5
+   local.tee $4
+   local.get $4
    f64.mul
    local.set $1
    f64.const 1
    f64.const 0.5
-   local.get $5
+   local.get $4
    f64.mul
    local.tee $2
    f64.sub
@@ -20640,12 +19597,12 @@
    f64.sub
    local.get $2
    f64.sub
-   local.get $5
-   local.get $5
+   local.get $4
+   local.get $4
    f64.const 0.0416666666666666
-   local.get $5
+   local.get $4
    f64.const -0.001388888888887411
-   local.get $5
+   local.get $4
    f64.const 2.480158728947673e-05
    f64.mul
    f64.add
@@ -20656,9 +19613,9 @@
    local.get $1
    f64.mul
    f64.const -2.7557314351390663e-07
-   local.get $5
+   local.get $4
    f64.const 2.087572321298175e-09
-   local.get $5
+   local.get $4
    f64.const -1.1359647557788195e-11
    f64.mul
    f64.add
@@ -20676,7 +19633,7 @@
    global.set $~lib/math/NativeMath.sincos_cos
    return
   end
-  local.get $8
+  local.get $6
   i32.const 2139095040
   i32.ge_u
   if
@@ -20689,99 +19646,21 @@
    global.set $~lib/math/NativeMath.sincos_cos
    return
   end
-  local.set $8
-  block $~lib/math/rempio2|inlined.0
-   local.get $11
+  block $~lib/math/rempio2|inlined.0 (result i32)
+   local.get $10
    i64.const 32
    i64.shr_u
    i32.wrap_i64
    i32.const 2147483647
    i32.and
-   local.tee $10
-   i32.const 1073928572
-   i32.lt_u
-   if
-    i32.const 1
-    local.set $4
-    local.get $8
-    if (result f64)
-     local.get $0
-     f64.const 1.5707963267341256
-     f64.add
-     local.set $0
-     i32.const -1
-     local.set $4
-     local.get $10
-     i32.const 1073291771
-     i32.ne
-     if (result f64)
-      local.get $0
-      local.get $0
-      f64.const 6.077100506506192e-11
-      f64.add
-      local.tee $1
-      f64.sub
-      f64.const 6.077100506506192e-11
-      f64.add
-     else
-      local.get $0
-      f64.const 6.077100506303966e-11
-      f64.add
-      local.tee $0
-      f64.const 2.0222662487959506e-21
-      f64.add
-      local.set $1
-      local.get $0
-      local.get $1
-      f64.sub
-      f64.const 2.0222662487959506e-21
-      f64.add
-     end
-    else
-     local.get $0
-     f64.const 1.5707963267341256
-     f64.sub
-     local.set $0
-     local.get $10
-     i32.const 1073291771
-     i32.ne
-     if (result f64)
-      local.get $0
-      local.get $0
-      f64.const 6.077100506506192e-11
-      f64.sub
-      local.tee $1
-      f64.sub
-      f64.const 6.077100506506192e-11
-      f64.sub
-     else
-      local.get $0
-      f64.const 6.077100506303966e-11
-      f64.sub
-      local.tee $0
-      f64.const 2.0222662487959506e-21
-      f64.sub
-      local.set $1
-      local.get $0
-      local.get $1
-      f64.sub
-      f64.const 2.0222662487959506e-21
-      f64.sub
-     end
-    end
-    local.get $1
-    global.set $~lib/math/rempio2_y0
-    global.set $~lib/math/rempio2_y1
-    br $~lib/math/rempio2|inlined.0
-   end
-   local.get $10
+   local.tee $6
    i32.const 1094263291
    i32.lt_u
    if
-    local.get $10
+    local.get $6
     i32.const 20
     i32.shr_u
-    local.tee $4
+    local.tee $8
     local.get $0
     local.get $0
     f64.const 0.6366197723675814
@@ -20826,7 +19705,7 @@
      f64.sub
      f64.sub
      local.set $3
-     local.get $4
+     local.get $8
      local.get $1
      local.get $3
      f64.sub
@@ -20877,52 +19756,51 @@
     global.set $~lib/math/rempio2_y1
     local.get $2
     i32.trunc_f64_s
-    local.set $4
     br $~lib/math/rempio2|inlined.0
    end
    i32.const 0
-   local.get $11
+   local.get $10
    call $~lib/math/pio2_large_quot
-   local.tee $4
+   local.tee $6
    i32.sub
-   local.get $4
+   local.get $6
    local.get $8
    select
-   local.set $4
   end
+  local.set $8
   global.get $~lib/math/rempio2_y0
   local.tee $9
   local.get $9
   local.get $9
   f64.mul
-  local.tee $6
-  local.get $6
+  local.tee $5
+  local.get $5
   f64.mul
   local.set $0
-  local.get $6
+  local.get $5
   f64.const 0.5
   global.get $~lib/math/rempio2_y1
-  local.tee $5
+  local.tee $4
   local.tee $1
   f64.mul
-  local.get $6
+  local.get $5
   local.get $9
   f64.mul
   local.tee $2
   f64.const 0.00833333333332249
-  local.get $6
+  local.get $5
   f64.const -1.984126982985795e-04
-  local.get $6
+  local.get $5
   f64.const 2.7557313707070068e-06
   f64.mul
   f64.add
   f64.mul
   f64.add
-  local.get $6
+  local.get $5
   local.get $0
   f64.mul
   f64.const -2.5050760253406863e-08
-  local.get $6
+  local.get $5
   f64.const 1.58969099521155e-10
   f64.mul
   f64.add
@@ -20945,7 +19823,7 @@
   local.tee $7
   local.get $7
   f64.mul
-  local.set $6
+  local.set $5
   local.get $3
   local.set $2
   f64.const 1
@@ -20972,8 +19850,8 @@
   f64.mul
   f64.add
   f64.mul
-  local.get $6
-  local.get $6
+  local.get $5
+  local.get $5
   f64.mul
   f64.const -2.7557314351390663e-07
   local.get $7
@@ -20988,14 +19866,14 @@
   f64.add
   f64.mul
   local.get $9
-  local.get $5
+  local.get $4
   f64.mul
   f64.sub
   f64.add
   f64.add
   local.tee $0
   local.set $1
-  local.get $4
+  local.get $8
   i32.const 1
   i32.and
   if
@@ -21005,7 +19883,7 @@
    local.get $0
    local.set $2
   end
-  local.get $4
+  local.get $8
   i32.const 2
   i32.and
   if (result f64)
@@ -21021,17 +19899,14 @@
   local.get $1
   global.set $~lib/math/NativeMath.sincos_cos
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#rotate (; 164 ;) (type $FUNCSIG$vid) (param $0 i32) (param $1 f64)
-  (local $2 f64)
-  (local $3 f64)
-  (local $4 f64)
-  (local $5 f64)
-  (local $6 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#rotate (; 167 ;) (type $FUNCSIG$vid) (param $0 i32) (param $1 f64)
+  (local $2 v128)
+  (local $3 v128)
+  (local $4 v128)
+  (local $5 v128)
   local.get $1
-  local.get $1
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
+  i32.eqz
   if
    return
   end
@@ -21040,55 +19915,34 @@
   local.get $0
   i32.load offset=24
   local.tee $0
-  f64.load offset=8
-  local.set $3
+  v128.load
+  local.set $2
   local.get $0
-  f64.load offset=24
-  local.set $4
-  local.get $0
-  local.get $0
-  f64.load
-  local.tee $5
+  local.get $2
   global.get $~lib/math/NativeMath.sincos_cos
-  local.tee $1
-  f64.mul
+  f64x2.splat
+  local.tee $3
+  f64x2.mul
   local.get $0
-  f64.load offset=16
-  local.tee $6
+  v128.load offset=16
+  local.tee $4
   global.get $~lib/math/NativeMath.sincos_sin
-  local.tee $2
-  f64.mul
-  f64.add
-  f64.store
+  f64x2.splat
+  local.tee $5
+  f64x2.mul
+  f64x2.add
+  v128.store
   local.get $0
-  local.get $3
-  local.get $1
-  f64.mul
   local.get $4
+  local.get $3
+  f64x2.mul
   local.get $2
-  f64.mul
-  f64.add
-  f64.store offset=8
-  local.get $0
-  local.get $6
-  local.get $1
-  f64.mul
   local.get $5
-  local.get $2
-  f64.mul
-  f64.sub
-  f64.store offset=16
-  local.get $0
-  local.get $4
-  local.get $1
-  f64.mul
-  local.get $3
-  local.get $2
-  f64.mul
-  f64.sub
-  f64.store offset=24
+  f64x2.mul
+  f64x2.sub
+  v128.store offset=16
  )
- (func $assembly/draw-functions.test/rotate (; 165 ;) (type $FUNCSIG$vd) (param $0 f64)
+ (func $assembly/draw-functions.test/rotate (; 168 ;) (type $FUNCSIG$vd) (param $0 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -21103,16 +19957,12 @@
   local.get $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#rotate
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#scale (; 166 ;) (type $FUNCSIG$vidd) (param $0 i32) (param $1 f64) (param $2 f64)
-  (local $3 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#scale (; 169 ;) (type $FUNCSIG$vidd) (param $0 i32) (param $1 f64) (param $2 f64)
   local.get $1
   local.get $2
   f64.add
-  local.tee $3
-  local.get $3
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
+  i32.eqz
   if
    return
   end
@@ -21120,30 +19970,20 @@
   i32.load offset=24
   local.tee $0
   local.get $0
-  f64.load
+  v128.load
   local.get $1
-  f64.mul
-  f64.store
+  f64x2.splat
+  f64x2.mul
+  v128.store
   local.get $0
   local.get $0
-  f64.load offset=8
-  local.get $1
-  f64.mul
-  f64.store offset=8
-  local.get $0
-  local.get $0
-  f64.load offset=16
+  v128.load offset=16
   local.get $2
-  f64.mul
-  f64.store offset=16
-  local.get $0
-  local.get $0
-  f64.load offset=24
-  local.get $2
-  f64.mul
-  f64.store offset=24
+  f64x2.splat
+  f64x2.mul
+  v128.store offset=16
  )
- (func $assembly/draw-functions.test/scale (; 167 ;) (type $FUNCSIG$vdd) (param $0 f64) (param $1 f64)
+ (func $assembly/draw-functions.test/scale (; 170 ;) (type $FUNCSIG$vdd) (param $0 f64) (param $1 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -21159,13 +19999,10 @@
   local.get $1
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#scale
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#transform (; 168 ;) (type $FUNCSIG$vidddddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64)
-  (local $7 f64)
-  (local $8 f64)
-  (local $9 f64)
-  (local $10 f64)
-  (local $11 f64)
-  (local $12 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#transform (; 171 ;) (type $FUNCSIG$vidddddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64)
+  (local $7 v128)
+  (local $8 v128)
+  (local $9 v128)
   local.get $1
   local.get $2
   f64.add
@@ -21177,92 +20014,57 @@
   f64.add
   local.get $6
   f64.add
-  local.tee $7
-  local.get $7
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
+  i32.eqz
   if
    return
   end
   local.get $0
   i32.load offset=24
   local.tee $0
-  f64.load offset=8
-  local.set $7
-  local.get $0
-  f64.load offset=24
-  local.set $8
-  local.get $0
-  f64.load offset=32
-  local.set $11
-  local.get $0
-  f64.load offset=40
-  local.set $12
+  v128.load offset=32
+  local.set $9
   local.get $0
   local.get $0
-  f64.load
-  local.tee $9
+  v128.load
+  local.tee $7
   local.get $1
-  f64.mul
+  f64x2.splat
+  f64x2.mul
   local.get $0
-  f64.load offset=16
-  local.tee $10
+  v128.load offset=16
+  local.tee $8
   local.get $2
-  f64.mul
-  f64.add
-  f64.store
-  local.get $0
-  local.get $7
-  local.get $1
-  f64.mul
-  local.get $8
-  local.get $2
-  f64.mul
-  f64.add
-  f64.store offset=8
-  local.get $0
-  local.get $9
-  local.get $3
-  f64.mul
-  local.get $10
-  local.get $4
-  f64.mul
-  f64.add
-  f64.store offset=16
+  f64x2.splat
+  f64x2.mul
+  f64x2.add
+  v128.store
   local.get $0
   local.get $7
   local.get $3
-  f64.mul
+  f64x2.splat
+  f64x2.mul
   local.get $8
   local.get $4
-  f64.mul
-  f64.add
-  f64.store offset=24
-  local.get $0
-  local.get $9
-  local.get $5
-  f64.mul
-  local.get $10
-  local.get $6
-  f64.mul
-  f64.add
-  local.get $11
-  f64.add
-  f64.store offset=32
+  f64x2.splat
+  f64x2.mul
+  f64x2.add
+  v128.store offset=16
   local.get $0
   local.get $7
   local.get $5
-  f64.mul
+  f64x2.splat
+  f64x2.mul
   local.get $8
   local.get $6
-  f64.mul
-  f64.add
-  local.get $12
-  f64.add
-  f64.store offset=40
+  f64x2.splat
+  f64x2.mul
+  f64x2.add
+  local.get $9
+  f64x2.add
+  v128.store offset=32
  )
- (func $assembly/draw-functions.test/transform (; 169 ;) (type $FUNCSIG$vdddddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
+ (func $assembly/draw-functions.test/transform (; 172 ;) (type $FUNCSIG$vdddddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -21282,16 +20084,12 @@
   local.get $5
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#transform
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#translate (; 170 ;) (type $FUNCSIG$vidd) (param $0 i32) (param $1 f64) (param $2 f64)
-  (local $3 f64)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#translate (; 173 ;) (type $FUNCSIG$vidd) (param $0 i32) (param $1 f64) (param $2 f64)
   local.get $1
   local.get $2
   f64.add
-  local.tee $3
-  local.get $3
-  f64.sub
-  f64.const 0
-  f64.ne
+  call $~lib/number/isFinite<f64>
+  i32.eqz
   if
    return
   end
@@ -21299,34 +20097,19 @@
   i32.load offset=24
   local.tee $0
   local.get $0
-  f64.load offset=32
-  local.get $0
-  f64.load
+  v128.load
   local.get $1
-  f64.mul
+  f64x2.splat
+  f64x2.mul
   local.get $0
-  f64.load offset=16
+  v128.load offset=16
   local.get $2
-  f64.mul
-  f64.add
-  f64.add
-  f64.store offset=32
-  local.get $0
-  local.get $0
-  f64.load offset=40
-  local.get $0
-  f64.load offset=8
-  local.get $1
-  f64.mul
-  local.get $0
-  f64.load offset=24
-  local.get $2
-  f64.mul
-  f64.add
-  f64.add
-  f64.store offset=40
+  f64x2.splat
+  f64x2.mul
+  f64x2.add
+  v128.store offset=32
  )
- (func $assembly/draw-functions.test/translate (; 171 ;) (type $FUNCSIG$vdd) (param $0 f64) (param $1 f64)
+ (func $assembly/draw-functions.test/translate (; 174 ;) (type $FUNCSIG$vdd) (param $0 f64) (param $1 f64)
   global.get $assembly/draw-functions.test/ctx
   i32.eqz
   if
@@ -21342,14 +20125,14 @@
   local.get $1
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#translate
  )
- (func $start (; 172 ;) (type $FUNCSIG$v)
+ (func $start (; 175 ;) (type $FUNCSIG$v)
   i32.const 0
   call $~lib/typedarray/Float64Array#constructor
   global.set $assembly/renderer/CanvasRenderingContext2D/defaultLineDash
   call $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#constructor
   global.set $assembly/internal/getContext/map
  )
- (func $~lib/rt/pure/__visit (; 173 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $~lib/rt/pure/__visit (; 176 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   local.get $0
   i32.const 1676
   i32.lt_u
@@ -21459,7 +20242,7 @@
    unreachable
   end
  )
- (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#__visit_impl (; 174 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#__visit_impl (; 177 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
@@ -21507,7 +20290,7 @@
   local.get $1
   call $~lib/rt/pure/__visit
  )
- (func $~lib/rt/__visit_members (; 175 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $~lib/rt/__visit_members (; 178 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   block $block$6$break
    block $block$4$break
@@ -21610,10 +20393,10 @@
    call $~lib/rt/pure/__visit
   end
  )
- (func $null (; 176 ;) (type $FUNCSIG$v)
+ (func $null (; 179 ;) (type $FUNCSIG$v)
   nop
  )
- (func $assembly/draw-functions.test/fill|trampoline (; 177 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/draw-functions.test/fill|trampoline (; 180 ;) (type $FUNCSIG$vi) (param $0 i32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -21639,7 +20422,7 @@
   local.get $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#fill
  )
- (func $~lib/setargc (; 178 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $~lib/setargc (; 181 ;) (type $FUNCSIG$vi) (param $0 i32)
   local.get $0
   global.set $~lib/argc
  )

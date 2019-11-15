@@ -18,7 +18,7 @@ beforeEach(() => {
     test: {
       log: console.log.bind(console),
       logStr(ptr: number) {
-        console.log(wasm.getString(ptr));
+        console.log(wasm.__getString(ptr));
       },
     }
   });
@@ -30,15 +30,15 @@ beforeEach(() => {
 
 describe("measureText", () => {
   it("should call measureText text", () => {
-    var i = wasm.measureText(wasm.newString("test"));
+    var i = wasm.measureText(wasm.__allocString("test"));
     expect(ctx.measureText).toBeCalledWith("test");
     expect(i).toBe(4); // in the testing environment measureText returns text length
   });
 
   it("should update the font when measureText is called", () => {
     var font = "12pt Times New Roman";
-    wasm.font(wasm.newString(font));
-    wasm.measureText(wasm.newString("test"));
+    wasm.font(wasm.__allocString(font));
+    wasm.measureText(wasm.__allocString("test"));
     expect(ctx.font).toBe(`16px "Times New Roman"`);
     expect(ctx.measureText).toBeCalledWith("test");
   });

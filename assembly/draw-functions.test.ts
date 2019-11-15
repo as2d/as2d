@@ -1,5 +1,3 @@
-import "allocator/arena";
-
 import {
   CanvasDirection,
   CanvasGradient,
@@ -19,7 +17,7 @@ import {
 
 var ctx: CanvasRenderingContext2D;
 var grd: CanvasGradient;
-var img: Image;
+var img: Image | null = null;
 var ptrn: CanvasPattern;
 
 export function arc(x: number, y: number, r: number, startAngle: number, endAngle: number, anticlockwise: bool): void {
@@ -126,7 +124,7 @@ export function createPattern(): i32 {
   assert(ctx);
   assert(img);
   assert(img.loaded);
-  ptrn = ctx.createPattern(img, CanvasPatternRepetition.repeat);
+  ptrn = ctx.createPattern(img!, CanvasPatternRepetition.repeat);
   return load<i32>(changetype<usize>(ptrn) + offsetof<CanvasPattern>("id"));
 }
 

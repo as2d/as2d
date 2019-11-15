@@ -1,7 +1,21 @@
-language: node_js
-node_js:
-  - "10"
-  - "11"
-after_success:
-  - npm run coveralls
-  
+install: npm ci --no-audit
+jobs:
+  include:
+  - node_js: lts/*
+    script:
+    - npm test
+    env: Runs the tests on node.js LTS.
+    after_success:
+    - npm run coveralls
+  - node_js: node
+    script:
+    - npm test
+    env: Runs the tests on node.js Stable.
+    after_success:
+    - npm run coveralls
+  - node_js: node
+    script:
+      - nvm install 13
+      - npm run test:simd
+    env: Runs simd tests on node.js Stable.
+

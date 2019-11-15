@@ -1,4 +1,3 @@
-import "allocator/arena";
 import {
   CanvasGradient,
   CanvasPattern,

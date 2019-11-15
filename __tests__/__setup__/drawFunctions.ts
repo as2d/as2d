@@ -21,7 +21,7 @@ export function run(config: IDrawFunctionConfig): void {
       test: {
         log: console.log.bind(console),
         logStr(ptr: number) {
-          console.log(wasm.getString(ptr));
+          console.log(wasm.__getString(ptr));
         },
       }
     });
@@ -53,7 +53,7 @@ export function run(config: IDrawFunctionConfig): void {
       const ctx2 = ctx;
       const shared = {};
       await config.beforeEach(ctx2, wasm2, shared);
-      wasm2.fillStyle(wasm2.newString("blue"));
+      wasm2.fillStyle(wasm2.__allocString("blue"));
       await config.drawFunc(ctx2, wasm2, shared);
       wasm2.commit();
       if (config.fillStyle) {
@@ -108,7 +108,7 @@ export function run(config: IDrawFunctionConfig): void {
       const ctx2 = ctx;
       const shared = {};
       await config.beforeEach(ctx2, wasm2, shared);
-      wasm2.filter(wasm2.newString("invert(100%)"));
+      wasm2.filter(wasm2.__allocString("invert(100%)"));
       await config.drawFunc(ctx2, wasm2, shared);
       wasm2.commit();
       if (config.filter) {
@@ -124,7 +124,7 @@ export function run(config: IDrawFunctionConfig): void {
       const ctx2 = ctx;
       const shared = {};
       await config.beforeEach(ctx2, wasm2, shared);
-      wasm2.font(wasm2.newString("12pt Times New Roman"));
+      wasm2.font(wasm2.__allocString("12pt Times New Roman"));
       await config.drawFunc(ctx2, wasm2, shared);
       wasm2.commit();
       if (config.font) {
@@ -331,7 +331,7 @@ export function run(config: IDrawFunctionConfig): void {
     const ctx2 = ctx;
     const shared = {};
     await config.beforeEach(ctx2, wasm2, shared);
-    wasm2.shadowColor(wasm2.newString("blue"));
+    wasm2.shadowColor(wasm2.__allocString("blue"));
     await config.drawFunc(ctx2, wasm2, shared);
     wasm2.commit();
     if (config.shadowColor) {
@@ -379,7 +379,7 @@ export function run(config: IDrawFunctionConfig): void {
     const ctx2 = ctx;
     const shared = {};
     await config.beforeEach(ctx2, wasm2, shared);
-    wasm2.strokeStyle(wasm2.newString("blue"));
+    wasm2.strokeStyle(wasm2.__allocString("blue"));
     await config.drawFunc(ctx2, wasm2, shared);
     wasm2.commit();
     if (config.strokeStyle) {

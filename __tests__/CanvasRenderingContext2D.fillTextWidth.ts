@@ -12,7 +12,7 @@ beforeEach(() => {
     test: {
       log: console.log.bind(console),
       logStr(ptr: number) {
-        console.log(wasm.getString(ptr));
+        console.log(wasm.__getString(ptr));
       },
     }
   });
@@ -30,7 +30,7 @@ type FillTextArgs = [number, number, number];
 
 describe("fillTextWidth function", () => {
   it("should call fillTextWidth with expected values", () => {
-    wasm.fillTextWidth(wasm.newString("test!"), 1, 2, 3);
+    wasm.fillTextWidth(wasm.__allocString("test!"), 1, 2, 3);
     wasm.commit();
     expect(ctx.fillText).toBeCalledWith("test!", 1, 2, 3);
   });
@@ -49,7 +49,7 @@ describe("fillTextWidth function", () => {
 
   finiteTests.forEach((args: FillTextArgs, index: number) => {
     it("should not call fillTextWidth if argument " + index + " is " + args[index % 3], () => {
-      wasm.fillTextWidth(wasm.newString("test!"), ...args);
+      wasm.fillTextWidth(wasm.__allocString("test!"), ...args);
       wasm.commit();
       expect(ctx.fillText).not.toBeCalled();
     });
@@ -57,7 +57,7 @@ describe("fillTextWidth function", () => {
 
   it("should not call fillTextWidth if text length is 0", () => {
     wasm.createImage();
-    wasm.fillTextWidth(wasm.newString(""), 1, 2, 3);
+    wasm.fillTextWidth(wasm.__allocString(""), 1, 2, 3);
     wasm.commit();
     expect(ctx.fillText).not.toBeCalled();
   });

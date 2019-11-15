@@ -1,116 +1,66 @@
 (module
  (type $FUNCSIG$iii (func (param i32 i32) (result i32)))
- (type $FUNCSIG$viiii (func (param i32 i32 i32 i32)))
- (type $FUNCSIG$ii (func (param i32) (result i32)))
  (type $FUNCSIG$v (func))
- (type $FUNCSIG$viii (func (param i32 i32 i32)))
- (type $FUNCSIG$vi (func (param i32)))
  (type $FUNCSIG$iiii (func (param i32 i32 i32) (result i32)))
+ (type $FUNCSIG$viiii (func (param i32 i32 i32 i32)))
  (type $FUNCSIG$vii (func (param i32 i32)))
- (type $FUNCSIG$iid (func (param i32 f64) (result i32)))
+ (type $FUNCSIG$ii (func (param i32) (result i32)))
+ (type $FUNCSIG$vi (func (param i32)))
+ (type $FUNCSIG$viii (func (param i32 i32 i32)))
  (type $FUNCSIG$i (func (result i32)))
- (type $FUNCSIG$iiiiii (func (param i32 i32 i32 i32 i32) (result i32)))
- (type $FUNCSIG$di (func (param i32) (result f64)))
- (type $FUNCSIG$viid (func (param i32 i32 f64)))
- (type $FUNCSIG$dii (func (param i32 i32) (result f64)))
  (type $FUNCSIG$vdddddd (func (param f64 f64 f64 f64 f64 f64)))
  (type $FUNCSIG$vidddddd (func (param i32 f64 f64 f64 f64 f64 f64)))
- (type $FUNCSIG$id (func (param f64) (result i32)))
  (type $FUNCSIG$d (func (result f64)))
  (type $FUNCSIG$vd (func (param f64)))
  (type $FUNCSIG$vid (func (param i32 f64)))
- (import "env" "abort" (func $~lib/env/abort (param i32 i32 i32 i32)))
+ (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
  (memory $0 1)
- (data (i32.const 8) "\04\00\00\00#\000\000\000\00")
- (data (i32.const 24) "\04\00\00\00n\00o\00n\00e\00")
- (data (i32.const 40) "\0f\00\00\001\000\00p\00x\00 \00s\00a\00n\00s\00-\00s\00e\00r\00i\00f\00")
- (data (i32.const 80) "\10\00\00\00r\00g\00b\00a\00(\000\00,\00 \000\00,\00 \000\00,\00 \000\00)\00")
- (data (i32.const 120) "\1b\00\00\00~\00l\00i\00b\00/\00i\00n\00t\00e\00r\00n\00a\00l\00/\00t\00y\00p\00e\00d\00a\00r\00r\00a\00y\00.\00t\00s\00")
- (data (i32.const 184) "\1c\00\00\00~\00l\00i\00b\00/\00i\00n\00t\00e\00r\00n\00a\00l\00/\00a\00r\00r\00a\00y\00b\00u\00f\00f\00e\00r\00.\00t\00s\00")
- (data (i32.const 248) "\13\00\00\00~\00l\00i\00b\00/\00a\00r\00r\00a\00y\00b\00u\00f\00f\00e\00r\00.\00t\00s\00")
- (data (i32.const 296) "\0d\00\00\00~\00l\00i\00b\00/\00a\00r\00r\00a\00y\00.\00t\00s\00")
- (data (i32.const 328) "\04\00\00\00m\00a\00i\00n\00")
- (data (i32.const 344) "\1f\00\00\00a\00s\00s\00e\00m\00b\00l\00y\00/\00i\00n\00t\00e\00r\00n\00a\00l\00/\00g\00e\00t\00C\00o\00n\00t\00e\00x\00t\00.\00t\00s\00")
- (data (i32.const 416) "\1d\00\00\00a\00s\00s\00e\00m\00b\00l\00y\00/\00s\00a\00v\00e\00-\00r\00e\00s\00t\00o\00r\00e\00.\00t\00e\00s\00t\00.\00t\00s\00")
- (table $0 1 funcref)
- (elem (i32.const 0) $null)
- (global $src/shared/CanvasDirection/CanvasDirection.ltr i32 (i32.const 0))
- (global $src/shared/CanvasDirection/CanvasDirection.rtl i32 (i32.const 1))
- (global $src/shared/CanvasDirection/CanvasDirection.inherit i32 (i32.const 2))
- (global $src/shared/CanvasPatternRepetition/CanvasPatternRepetition.repeat i32 (i32.const 0))
- (global $src/shared/CanvasPatternRepetition/CanvasPatternRepetition.repeat_x i32 (i32.const 1))
- (global $src/shared/CanvasPatternRepetition/CanvasPatternRepetition.repeat_y i32 (i32.const 2))
- (global $src/shared/CanvasPatternRepetition/CanvasPatternRepetition.no_repeat i32 (i32.const 3))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.source_over i32 (i32.const 0))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.source_in i32 (i32.const 1))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.source_out i32 (i32.const 2))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.source_atop i32 (i32.const 3))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.destination_over i32 (i32.const 4))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.destination_in i32 (i32.const 5))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.destination_out i32 (i32.const 6))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.destination_atop i32 (i32.const 7))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.lighter i32 (i32.const 8))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.copy i32 (i32.const 9))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.xor i32 (i32.const 10))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.multiply i32 (i32.const 11))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.screen i32 (i32.const 12))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.overlay i32 (i32.const 13))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.darken i32 (i32.const 14))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.lighten i32 (i32.const 15))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.color_dodge i32 (i32.const 16))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.color_burn i32 (i32.const 17))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.hard_light i32 (i32.const 18))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.soft_light i32 (i32.const 19))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.difference i32 (i32.const 20))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.exclusion i32 (i32.const 21))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.hue i32 (i32.const 22))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.saturation i32 (i32.const 23))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.color i32 (i32.const 24))
- (global $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.luminosity i32 (i32.const 25))
- (global $src/shared/ImageSmoothingQuality/ImageSmoothingQuality.low i32 (i32.const 0))
- (global $src/shared/ImageSmoothingQuality/ImageSmoothingQuality.medium i32 (i32.const 1))
- (global $src/shared/ImageSmoothingQuality/ImageSmoothingQuality.high i32 (i32.const 2))
- (global $src/shared/LineCap/LineCap.butt i32 (i32.const 0))
- (global $src/shared/LineCap/LineCap.round i32 (i32.const 1))
- (global $src/shared/LineCap/LineCap.square i32 (i32.const 2))
- (global $src/shared/LineJoin/LineJoin.bevel i32 (i32.const 0))
- (global $src/shared/LineJoin/LineJoin.round i32 (i32.const 1))
- (global $src/shared/LineJoin/LineJoin.miter i32 (i32.const 2))
- (global $src/shared/TextAlign/TextAlign.left i32 (i32.const 0))
- (global $src/shared/TextAlign/TextAlign.right i32 (i32.const 1))
- (global $src/shared/TextAlign/TextAlign.center i32 (i32.const 2))
- (global $src/shared/TextAlign/TextAlign.start i32 (i32.const 3))
- (global $src/shared/TextAlign/TextAlign.end i32 (i32.const 4))
- (global $src/shared/TextBaseline/TextBaseline.top i32 (i32.const 0))
- (global $src/shared/TextBaseline/TextBaseline.hanging i32 (i32.const 1))
- (global $src/shared/TextBaseline/TextBaseline.middle i32 (i32.const 2))
- (global $src/shared/TextBaseline/TextBaseline.alphabetic i32 (i32.const 3))
- (global $src/shared/TextBaseline/TextBaseline.ideographic i32 (i32.const 4))
- (global $src/shared/TextBaseline/TextBaseline.bottom i32 (i32.const 5))
- (global $src/shared/FillRule/FillRule.nonzero i32 (i32.const 0))
- (global $src/shared/FillRule/FillRule.evenodd i32 (i32.const 1))
- (global $assembly/renderer/CanvasRenderingContext2D/defaultBlack (mut i32) (i32.const 8))
- (global $assembly/renderer/CanvasRenderingContext2D/defaultNone (mut i32) (i32.const 24))
- (global $assembly/renderer/CanvasRenderingContext2D/defaultFont (mut i32) (i32.const 40))
- (global $assembly/renderer/CanvasRenderingContext2D/defaultShadowColor (mut i32) (i32.const 80))
- (global $~lib/allocator/arena/startOffset (mut i32) (i32.const 0))
- (global $~lib/allocator/arena/offset (mut i32) (i32.const 0))
+ (data (i32.const 8) "\1e\00\00\00\01\00\00\00\01\00\00\00\1e\00\00\00~\00l\00i\00b\00/\00r\00t\00/\00t\00l\00s\00f\00.\00t\00s")
+ (data (i32.const 56) "(\00\00\00\01\00\00\00\01\00\00\00(\00\00\00a\00l\00l\00o\00c\00a\00t\00i\00o\00n\00 \00t\00o\00o\00 \00l\00a\00r\00g\00e")
+ (data (i32.const 112) "\1e\00\00\00\01\00\00\00\01\00\00\00\1e\00\00\00~\00l\00i\00b\00/\00r\00t\00/\00p\00u\00r\00e\00.\00t\00s")
+ (data (i32.const 160) "$\00\00\00\01\00\00\00\01\00\00\00$\00\00\00I\00n\00d\00e\00x\00 \00o\00u\00t\00 \00o\00f\00 \00r\00a\00n\00g\00e")
+ (data (i32.const 216) "\14\00\00\00\01\00\00\00\01\00\00\00\14\00\00\00~\00l\00i\00b\00/\00r\00t\00.\00t\00s")
+ (data (i32.const 256) "\08\00\00\00\01\00\00\00\01\00\00\00\08\00\00\00#\000\000\000")
+ (data (i32.const 280) "\08\00\00\00\01\00\00\00\01\00\00\00\08\00\00\00n\00o\00n\00e")
+ (data (i32.const 304) "\1e\00\00\00\01\00\00\00\01\00\00\00\1e\00\00\001\000\00p\00x\00 \00s\00a\00n\00s\00-\00s\00e\00r\00i\00f")
+ (data (i32.const 352) " \00\00\00\01\00\00\00\01\00\00\00 \00\00\00r\00g\00b\00a\00(\000\00,\00 \000\00,\00 \000\00,\00 \000\00)")
+ (data (i32.const 400) "\1c\00\00\00\01\00\00\00\01\00\00\00\1c\00\00\00I\00n\00v\00a\00l\00i\00d\00 \00l\00e\00n\00g\00t\00h")
+ (data (i32.const 448) "&\00\00\00\01\00\00\00\01\00\00\00&\00\00\00~\00l\00i\00b\00/\00a\00r\00r\00a\00y\00b\00u\00f\00f\00e\00r\00.\00t\00s")
+ (data (i32.const 504) "B\00\00\00\01\00\00\00\01\00\00\00B\00\00\00a\00s\00s\00e\00m\00b\00l\00y\00/\00i\00n\00t\00e\00r\00n\00a\00l\00/\00S\00t\00a\00c\00k\00P\00o\00i\00n\00t\00e\00r\00.\00t\00s")
+ (data (i32.const 592) "\1e\00\00\00\01\00\00\00\01\00\00\00\1e\00\00\00N\00o\00t\00 \00i\00m\00p\00l\00e\00m\00e\00n\00t\00e\00d")
+ (data (i32.const 640) "\1c\00\00\00\01\00\00\00\01\00\00\00\1c\00\00\00~\00l\00i\00b\00/\00m\00e\00m\00o\00r\00y\00.\00t\00s")
+ (data (i32.const 688) "\08\00\00\00\01\00\00\00\01\00\00\00\08\00\00\00m\00a\00i\00n")
+ (data (i32.const 712) ">\00\00\00\01\00\00\00\01\00\00\00>\00\00\00C\00a\00n\00n\00o\00t\00 \00f\00i\00n\00d\00 \00c\00o\00n\00t\00e\00x\00t\00 \00w\00i\00t\00h\00 \00n\00a\00m\00e\00:\00 ")
+ (data (i32.const 792) "\08\00\00\00\01\00\00\00\01\00\00\00\08\00\00\00n\00u\00l\00l")
+ (data (i32.const 820) "\01\00\00\00\01")
+ (data (i32.const 832) ">\00\00\00\01\00\00\00\01\00\00\00>\00\00\00a\00s\00s\00e\00m\00b\00l\00y\00/\00i\00n\00t\00e\00r\00n\00a\00l\00/\00g\00e\00t\00C\00o\00n\00t\00e\00x\00t\00.\00t\00s")
+ (data (i32.const 912) "$\00\00\00\01\00\00\00\01\00\00\00$\00\00\00K\00e\00y\00 \00d\00o\00e\00s\00 \00n\00o\00t\00 \00e\00x\00i\00s\00t")
+ (data (i32.const 968) "\16\00\00\00\01\00\00\00\01\00\00\00\16\00\00\00~\00l\00i\00b\00/\00m\00a\00p\00.\00t\00s")
+ (data (i32.const 1008) ":\00\00\00\01\00\00\00\01\00\00\00:\00\00\00a\00s\00s\00e\00m\00b\00l\00y\00/\00s\00a\00v\00e\00-\00r\00e\00s\00t\00o\00r\00e\00.\00t\00e\00s\00t\00.\00t\00s")
+ (data (i32.const 1088) "\0b\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\11\0d\00\00\02\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\04\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\98 A\00\00\00\00\00\10")
+ (global $~lib/rt/tlsf/ROOT (mut i32) (i32.const 0))
+ (global $~lib/rt/tlsf/collectLock (mut i32) (i32.const 0))
+ (global $~lib/rt/pure/ROOTS (mut i32) (i32.const 0))
+ (global $~lib/rt/pure/CUR (mut i32) (i32.const 0))
+ (global $~lib/rt/pure/END (mut i32) (i32.const 0))
  (global $assembly/renderer/CanvasRenderingContext2D/defaultLineDash (mut i32) (i32.const 0))
  (global $assembly/internal/getContext/map (mut i32) (i32.const 0))
  (global $assembly/save-restore.test/ctx (mut i32) (i32.const 0))
- (global $assembly/save-restore.test/grd (mut i32) (i32.const 0))
- (global $assembly/save-restore.test/img (mut i32) (i32.const 0))
- (global $assembly/save-restore.test/ptrn (mut i32) (i32.const 0))
- (global $~lib/builtins/u8.MAX_VALUE i32 (i32.const 255))
- (global $~lib/memory/HEAP_BASE i32 (i32.const 480))
+ (global $~lib/rt/__rtti_base i32 (i32.const 1088))
  (export "memory" (memory $0))
- (export "table" (table $0))
+ (export "__alloc" (func $~lib/rt/tlsf/__alloc))
+ (export "__retain" (func $~lib/rt/pure/__retain))
+ (export "__release" (func $~lib/rt/pure/__release))
+ (export "__collect" (func $~lib/rt/pure/__collect))
+ (export "__rtti_base" (global $~lib/rt/__rtti_base))
  (export "__use_context" (func $assembly/internal/getContext/__use_context))
  (export "__image_loaded" (func $assembly/renderer/Image/__image_loaded))
+ (export "memory.fill" (func $~lib/memory/memory.fill))
+ (export "memory.copy" (func $~lib/memory/memory.copy))
+ (export "memory.init" (func $~lib/memory/memory.init))
+ (export "memory.drop" (func $~lib/memory/memory.drop))
+ (export "memory.repeat" (func $~lib/memory/memory.repeat))
  (export "memory.compare" (func $~lib/memory/memory.compare))
- (export "memory.allocate" (func $~lib/memory/memory.allocate))
- (export "memory.free" (func $~lib/memory/memory.free))
- (export "memory.reset" (func $~lib/memory/memory.reset))
  (export "init" (func $assembly/save-restore.test/init))
  (export "save" (func $assembly/save-restore.test/save))
  (export "hardSave" (func $assembly/save-restore.test/hardSave))
@@ -158,1105 +108,1454 @@
  (export "getTextBaseline" (func $assembly/save-restore.test/getTextBaseline))
  (export "setTextBaseline" (func $assembly/save-restore.test/setTextBaseline))
  (start $start)
- (func $~lib/internal/arraybuffer/computeSize (; 1 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $~lib/rt/tlsf/removeBlock (; 1 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  (local $5 i32)
+  local.get $1
+  i32.load
+  local.tee $3
   i32.const 1
-  i32.const 32
-  local.get $0
-  i32.const 8
-  i32.add
-  i32.const 1
-  i32.sub
-  i32.clz
-  i32.sub
-  i32.shl
- )
- (func $start:~lib/allocator/arena (; 2 ;) (type $FUNCSIG$v)
-  global.get $~lib/memory/HEAP_BASE
-  i32.const 7
-  i32.add
-  i32.const 7
-  i32.const -1
-  i32.xor
   i32.and
-  global.set $~lib/allocator/arena/startOffset
-  global.get $~lib/allocator/arena/startOffset
-  global.set $~lib/allocator/arena/offset
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 24
+   i32.const 277
+   i32.const 13
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $3
+  i32.const -4
+  i32.and
+  local.tee $2
+  i32.const 16
+  i32.ge_u
+  if (result i32)
+   local.get $2
+   i32.const 1073741808
+   i32.lt_u
+  else
+   i32.const 0
+  end
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 24
+   i32.const 279
+   i32.const 13
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $2
+  i32.const 256
+  i32.lt_u
+  if (result i32)
+   local.get $2
+   i32.const 4
+   i32.shr_u
+   local.set $2
+   i32.const 0
+  else
+   local.get $2
+   i32.const 31
+   local.get $2
+   i32.clz
+   i32.sub
+   local.tee $3
+   i32.const 4
+   i32.sub
+   i32.shr_u
+   i32.const 16
+   i32.xor
+   local.set $2
+   local.get $3
+   i32.const 7
+   i32.sub
+  end
+  local.tee $3
+  i32.const 23
+  i32.lt_u
+  if (result i32)
+   local.get $2
+   i32.const 16
+   i32.lt_u
+  else
+   i32.const 0
+  end
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 24
+   i32.const 292
+   i32.const 13
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $1
+  i32.load offset=20
+  local.set $4
+  local.get $1
+  i32.load offset=16
+  local.tee $5
+  if
+   local.get $5
+   local.get $4
+   i32.store offset=20
+  end
+  local.get $4
+  if
+   local.get $4
+   local.get $5
+   i32.store offset=16
+  end
+  local.get $3
+  i32.const 4
+  i32.shl
+  local.get $2
+  i32.add
+  i32.const 2
+  i32.shl
+  local.get $0
+  i32.add
+  i32.load offset=96
+  local.get $1
+  i32.eq
+  if
+   local.get $3
+   i32.const 4
+   i32.shl
+   local.get $2
+   i32.add
+   i32.const 2
+   i32.shl
+   local.get $0
+   i32.add
+   local.get $4
+   i32.store offset=96
+   local.get $4
+   i32.eqz
+   if
+    local.get $3
+    i32.const 2
+    i32.shl
+    local.get $0
+    i32.add
+    local.get $3
+    i32.const 2
+    i32.shl
+    local.get $0
+    i32.add
+    i32.load offset=4
+    i32.const 1
+    local.get $2
+    i32.shl
+    i32.const -1
+    i32.xor
+    i32.and
+    local.tee $1
+    i32.store offset=4
+    local.get $1
+    i32.eqz
+    if
+     local.get $0
+     local.get $0
+     i32.load
+     i32.const 1
+     local.get $3
+     i32.shl
+     i32.const -1
+     i32.xor
+     i32.and
+     i32.store
+    end
+   end
+  end
  )
- (func $~lib/allocator/arena/__memory_allocate (; 3 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  (local $1 i32)
+ (func $~lib/rt/tlsf/insertBlock (; 2 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
   (local $6 i32)
+  (local $7 i32)
+  local.get $1
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 24
+   i32.const 205
+   i32.const 13
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $1
+  i32.load
+  local.tee $3
+  i32.const 1
+  i32.and
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 24
+   i32.const 207
+   i32.const 13
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $1
+  i32.const 16
+  i32.add
+  local.get $1
+  i32.load
+  i32.const -4
+  i32.and
+  i32.add
+  local.tee $4
+  i32.load
+  local.tee $5
+  i32.const 1
+  i32.and
+  if
+   local.get $3
+   i32.const -4
+   i32.and
+   i32.const 16
+   i32.add
+   local.get $5
+   i32.const -4
+   i32.and
+   i32.add
+   local.tee $2
+   i32.const 1073741808
+   i32.lt_u
+   if
+    local.get $0
+    local.get $4
+    call $~lib/rt/tlsf/removeBlock
+    local.get $1
+    local.get $3
+    i32.const 3
+    i32.and
+    local.get $2
+    i32.or
+    local.tee $3
+    i32.store
+    local.get $1
+    i32.const 16
+    i32.add
+    local.get $1
+    i32.load
+    i32.const -4
+    i32.and
+    i32.add
+    local.tee $4
+    i32.load
+    local.set $5
+   end
+  end
+  local.get $3
+  i32.const 2
+  i32.and
+  if
+   local.get $1
+   i32.const 4
+   i32.sub
+   i32.load
+   local.tee $2
+   i32.load
+   local.tee $6
+   i32.const 1
+   i32.and
+   i32.eqz
+   if
+    i32.const 0
+    i32.const 24
+    i32.const 228
+    i32.const 15
+    call $~lib/builtins/abort
+    unreachable
+   end
+   local.get $6
+   i32.const -4
+   i32.and
+   i32.const 16
+   i32.add
+   local.get $3
+   i32.const -4
+   i32.and
+   i32.add
+   local.tee $7
+   i32.const 1073741808
+   i32.lt_u
+   if (result i32)
+    local.get $0
+    local.get $2
+    call $~lib/rt/tlsf/removeBlock
+    local.get $2
+    local.get $6
+    i32.const 3
+    i32.and
+    local.get $7
+    i32.or
+    local.tee $3
+    i32.store
+    local.get $2
+   else
+    local.get $1
+   end
+   local.set $1
+  end
+  local.get $4
+  local.get $5
+  i32.const 2
+  i32.or
+  i32.store
+  local.get $3
+  i32.const -4
+  i32.and
+  local.tee $2
+  i32.const 16
+  i32.ge_u
+  if (result i32)
+   local.get $2
+   i32.const 1073741808
+   i32.lt_u
+  else
+   i32.const 0
+  end
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 24
+   i32.const 243
+   i32.const 13
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $4
+  local.get $1
+  i32.const 16
+  i32.add
+  local.get $2
+  i32.add
+  i32.ne
+  if
+   i32.const 0
+   i32.const 24
+   i32.const 244
+   i32.const 13
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $4
+  i32.const 4
+  i32.sub
+  local.get $1
+  i32.store
+  local.get $2
+  i32.const 256
+  i32.lt_u
+  if (result i32)
+   local.get $2
+   i32.const 4
+   i32.shr_u
+   local.set $4
+   i32.const 0
+  else
+   local.get $2
+   i32.const 31
+   local.get $2
+   i32.clz
+   i32.sub
+   local.tee $2
+   i32.const 4
+   i32.sub
+   i32.shr_u
+   i32.const 16
+   i32.xor
+   local.set $4
+   local.get $2
+   i32.const 7
+   i32.sub
+  end
+  local.tee $3
+  i32.const 23
+  i32.lt_u
+  if (result i32)
+   local.get $4
+   i32.const 16
+   i32.lt_u
+  else
+   i32.const 0
+  end
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 24
+   i32.const 260
+   i32.const 13
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $3
+  i32.const 4
+  i32.shl
+  local.get $4
+  i32.add
+  i32.const 2
+  i32.shl
   local.get $0
-  i32.const 1073741824
-  i32.gt_u
+  i32.add
+  i32.load offset=96
+  local.set $2
+  local.get $1
+  i32.const 0
+  i32.store offset=16
+  local.get $1
+  local.get $2
+  i32.store offset=20
+  local.get $2
+  if
+   local.get $2
+   local.get $1
+   i32.store offset=16
+  end
+  local.get $3
+  i32.const 4
+  i32.shl
+  local.get $4
+  i32.add
+  i32.const 2
+  i32.shl
+  local.get $0
+  i32.add
+  local.get $1
+  i32.store offset=96
+  local.get $0
+  local.get $0
+  i32.load
+  i32.const 1
+  local.get $3
+  i32.shl
+  i32.or
+  i32.store
+  local.get $3
+  i32.const 2
+  i32.shl
+  local.get $0
+  i32.add
+  local.get $3
+  i32.const 2
+  i32.shl
+  local.get $0
+  i32.add
+  i32.load offset=4
+  i32.const 1
+  local.get $4
+  i32.shl
+  i32.or
+  i32.store offset=4
+ )
+ (func $~lib/rt/tlsf/addMemory (; 3 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  local.get $2
+  i32.const 15
+  i32.and
+  i32.eqz
+  i32.const 0
+  local.get $1
+  i32.const 15
+  i32.and
+  i32.eqz
+  i32.const 0
+  local.get $1
+  local.get $2
+  i32.le_u
+  select
+  select
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 24
+   i32.const 386
+   i32.const 4
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $0
+  i32.load offset=1568
+  local.tee $3
+  if
+   local.get $1
+   local.get $3
+   i32.const 16
+   i32.add
+   i32.lt_u
+   if
+    i32.const 0
+    i32.const 24
+    i32.const 396
+    i32.const 15
+    call $~lib/builtins/abort
+    unreachable
+   end
+   local.get $1
+   i32.const 16
+   i32.sub
+   local.get $3
+   i32.eq
+   if
+    local.get $3
+    i32.load
+    local.set $4
+    local.get $1
+    i32.const 16
+    i32.sub
+    local.set $1
+   end
+  else
+   local.get $1
+   local.get $0
+   i32.const 1572
+   i32.add
+   i32.lt_u
+   if
+    i32.const 0
+    i32.const 24
+    i32.const 408
+    i32.const 4
+    call $~lib/builtins/abort
+    unreachable
+   end
+  end
+  local.get $2
+  local.get $1
+  i32.sub
+  local.tee $2
+  i32.const 48
+  i32.lt_u
+  if
+   return
+  end
+  local.get $1
+  local.get $4
+  i32.const 2
+  i32.and
+  local.get $2
+  i32.const 32
+  i32.sub
+  i32.const 1
+  i32.or
+  i32.or
+  i32.store
+  local.get $1
+  i32.const 0
+  i32.store offset=16
+  local.get $1
+  i32.const 0
+  i32.store offset=20
+  local.get $1
+  local.get $2
+  i32.add
+  i32.const 16
+  i32.sub
+  local.tee $2
+  i32.const 2
+  i32.store
+  local.get $0
+  local.get $2
+  i32.store offset=1568
+  local.get $0
+  local.get $1
+  call $~lib/rt/tlsf/insertBlock
+ )
+ (func $~lib/rt/tlsf/initializeRoot (; 4 ;) (type $FUNCSIG$v)
+  (local $0 i32)
+  (local $1 i32)
+  i32.const 1
+  memory.size
+  local.tee $0
+  i32.gt_s
+  if (result i32)
+   i32.const 1
+   local.get $0
+   i32.sub
+   memory.grow
+   i32.const 0
+   i32.lt_s
+  else
+   i32.const 0
+  end
   if
    unreachable
   end
-  global.get $~lib/allocator/arena/offset
-  local.set $1
-  local.get $1
-  local.get $0
-  local.tee $2
-  i32.const 1
-  local.tee $3
-  local.get $2
-  local.get $3
-  i32.gt_u
-  select
-  i32.add
-  i32.const 7
-  i32.add
-  i32.const 7
-  i32.const -1
-  i32.xor
-  i32.and
-  local.set $4
-  current_memory
-  local.set $5
-  local.get $4
-  local.get $5
+  i32.const 1184
+  i32.const 0
+  i32.store
+  i32.const 2752
+  i32.const 0
+  i32.store
+  i32.const 0
+  local.set $0
+  loop $loop|0
+   block $break|0
+    local.get $0
+    i32.const 23
+    i32.ge_u
+    br_if $break|0
+    local.get $0
+    i32.const 2
+    i32.shl
+    i32.const 1184
+    i32.add
+    i32.const 0
+    i32.store offset=4
+    i32.const 0
+    local.set $1
+    loop $loop|1
+     block $break|1
+      local.get $1
+      i32.const 16
+      i32.ge_u
+      br_if $break|1
+      local.get $0
+      i32.const 4
+      i32.shl
+      local.get $1
+      i32.add
+      i32.const 2
+      i32.shl
+      i32.const 1184
+      i32.add
+      i32.const 0
+      i32.store offset=96
+      local.get $1
+      i32.const 1
+      i32.add
+      local.set $1
+      br $loop|1
+     end
+    end
+    local.get $0
+    i32.const 1
+    i32.add
+    local.set $0
+    br $loop|0
+   end
+  end
+  i32.const 1184
+  i32.const 2768
+  memory.size
   i32.const 16
   i32.shl
-  i32.gt_u
+  call $~lib/rt/tlsf/addMemory
+  i32.const 1184
+  global.set $~lib/rt/tlsf/ROOT
+ )
+ (func $~lib/rt/tlsf/prepareSize (; 5 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+  local.get $0
+  i32.const 1073741808
+  i32.ge_u
   if
-   local.get $4
+   i32.const 72
+   i32.const 24
+   i32.const 457
+   i32.const 29
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $0
+  i32.const 15
+  i32.add
+  i32.const -16
+  i32.and
+  local.tee $0
+  i32.const 16
+  local.get $0
+  i32.const 16
+  i32.gt_u
+  select
+ )
+ (func $~lib/rt/tlsf/searchBlock (; 6 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+  (local $2 i32)
+  local.get $1
+  i32.const 256
+  i32.lt_u
+  if (result i32)
    local.get $1
-   i32.sub
-   i32.const 65535
-   i32.add
-   i32.const 65535
-   i32.const -1
-   i32.xor
-   i32.and
-   i32.const 16
+   i32.const 4
    i32.shr_u
-   local.set $2
-   local.get $5
-   local.tee $3
+   local.set $1
+   i32.const 0
+  else
+   local.get $1
+   i32.const 536870904
+   i32.lt_u
+   if
+    i32.const 1
+    i32.const 27
+    local.get $1
+    i32.clz
+    i32.sub
+    i32.shl
+    local.get $1
+    i32.add
+    i32.const 1
+    i32.sub
+    local.set $1
+   end
+   local.get $1
+   i32.const 31
+   local.get $1
+   i32.clz
+   i32.sub
+   local.tee $2
+   i32.const 4
+   i32.sub
+   i32.shr_u
+   i32.const 16
+   i32.xor
+   local.set $1
    local.get $2
-   local.tee $6
-   local.get $3
-   local.get $6
-   i32.gt_s
-   select
-   local.set $3
-   local.get $3
-   grow_memory
+   i32.const 7
+   i32.sub
+  end
+  local.tee $2
+  i32.const 23
+  i32.lt_u
+  if (result i32)
+   local.get $1
+   i32.const 16
+   i32.lt_u
+  else
+   i32.const 0
+  end
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 24
+   i32.const 338
+   i32.const 13
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $2
+  i32.const 2
+  i32.shl
+  local.get $0
+  i32.add
+  i32.load offset=4
+  i32.const -1
+  local.get $1
+  i32.shl
+  i32.and
+  local.tee $1
+  if (result i32)
+   local.get $1
+   i32.ctz
+   local.get $2
+   i32.const 4
+   i32.shl
+   i32.add
+   i32.const 2
+   i32.shl
+   local.get $0
+   i32.add
+   i32.load offset=96
+  else
+   local.get $0
+   i32.load
+   i32.const -1
+   local.get $2
+   i32.const 1
+   i32.add
+   i32.shl
+   i32.and
+   local.tee $1
+   if (result i32)
+    local.get $1
+    i32.ctz
+    local.tee $1
+    i32.const 2
+    i32.shl
+    local.get $0
+    i32.add
+    i32.load offset=4
+    local.tee $2
+    i32.eqz
+    if
+     i32.const 0
+     i32.const 24
+     i32.const 351
+     i32.const 17
+     call $~lib/builtins/abort
+     unreachable
+    end
+    local.get $2
+    i32.ctz
+    local.get $1
+    i32.const 4
+    i32.shl
+    i32.add
+    i32.const 2
+    i32.shl
+    local.get $0
+    i32.add
+    i32.load offset=96
+   else
+    i32.const 0
+   end
+  end
+ )
+ (func $~lib/rt/pure/markGray (; 7 ;) (type $FUNCSIG$vi) (param $0 i32)
+  (local $1 i32)
+  local.get $0
+  i32.load offset=4
+  local.tee $1
+  i32.const 1879048192
+  i32.and
+  i32.const 268435456
+  i32.ne
+  if
+   local.get $0
+   local.get $1
+   i32.const -1879048193
+   i32.and
+   i32.const 268435456
+   i32.or
+   i32.store offset=4
+   local.get $0
+   i32.const 16
+   i32.add
+   i32.const 2
+   call $~lib/rt/__visit_members
+  end
+ )
+ (func $~lib/rt/tlsf/freeBlock (; 8 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  local.get $1
+  i32.load
+  local.tee $2
+  i32.const 1
+  i32.and
+  if
+   i32.const 0
+   i32.const 24
+   i32.const 563
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $1
+  local.get $2
+  i32.const 1
+  i32.or
+  i32.store
+  local.get $0
+  local.get $1
+  call $~lib/rt/tlsf/insertBlock
+ )
+ (func $~lib/rt/pure/scanBlack (; 9 ;) (type $FUNCSIG$vi) (param $0 i32)
+  local.get $0
+  local.get $0
+  i32.load offset=4
+  i32.const -1879048193
+  i32.and
+  i32.store offset=4
+  local.get $0
+  i32.const 16
+  i32.add
+  i32.const 4
+  call $~lib/rt/__visit_members
+ )
+ (func $~lib/rt/pure/scan (; 10 ;) (type $FUNCSIG$vi) (param $0 i32)
+  (local $1 i32)
+  local.get $0
+  i32.load offset=4
+  local.tee $1
+  i32.const 1879048192
+  i32.and
+  i32.const 268435456
+  i32.eq
+  if
+   local.get $1
+   i32.const 268435455
+   i32.and
+   i32.const 0
+   i32.gt_u
+   if
+    local.get $0
+    call $~lib/rt/pure/scanBlack
+   else
+    local.get $0
+    local.get $1
+    i32.const -1879048193
+    i32.and
+    i32.const 536870912
+    i32.or
+    i32.store offset=4
+    local.get $0
+    i32.const 16
+    i32.add
+    i32.const 3
+    call $~lib/rt/__visit_members
+   end
+  end
+ )
+ (func $~lib/rt/pure/collectWhite (; 11 ;) (type $FUNCSIG$vi) (param $0 i32)
+  (local $1 i32)
+  local.get $0
+  i32.load offset=4
+  local.tee $1
+  i32.const 1879048192
+  i32.and
+  i32.const 536870912
+  i32.eq
+  if (result i32)
+   local.get $1
+   i32.const -2147483648
+   i32.and
+   i32.eqz
+  else
+   i32.const 0
+  end
+  if
+   local.get $0
+   local.get $1
+   i32.const -1879048193
+   i32.and
+   i32.store offset=4
+   local.get $0
+   i32.const 16
+   i32.add
+   i32.const 5
+   call $~lib/rt/__visit_members
+   global.get $~lib/rt/tlsf/ROOT
+   local.get $0
+   call $~lib/rt/tlsf/freeBlock
+  end
+ )
+ (func $~lib/rt/pure/__collect (; 12 ;) (type $FUNCSIG$v)
+  (local $0 i32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  (local $5 i32)
+  global.get $~lib/rt/pure/ROOTS
+  local.tee $5
+  local.tee $2
+  local.set $3
+  global.get $~lib/rt/pure/CUR
+  local.set $0
+  loop $loop|0
+   block $break|0
+    local.get $3
+    local.get $0
+    i32.ge_u
+    br_if $break|0
+    local.get $3
+    i32.load
+    local.tee $4
+    i32.load offset=4
+    local.tee $1
+    i32.const 1879048192
+    i32.and
+    i32.const 805306368
+    i32.eq
+    if (result i32)
+     local.get $1
+     i32.const 268435455
+     i32.and
+     i32.const 0
+     i32.gt_u
+    else
+     i32.const 0
+    end
+    if
+     local.get $4
+     call $~lib/rt/pure/markGray
+     local.get $2
+     local.get $4
+     i32.store
+     local.get $2
+     i32.const 4
+     i32.add
+     local.set $2
+    else
+     i32.const 0
+     local.get $1
+     i32.const 268435455
+     i32.and
+     i32.eqz
+     local.get $1
+     i32.const 1879048192
+     i32.and
+     select
+     if
+      global.get $~lib/rt/tlsf/ROOT
+      local.get $4
+      call $~lib/rt/tlsf/freeBlock
+     else
+      local.get $4
+      local.get $1
+      i32.const 2147483647
+      i32.and
+      i32.store offset=4
+     end
+    end
+    local.get $3
+    i32.const 4
+    i32.add
+    local.set $3
+    br $loop|0
+   end
+  end
+  local.get $2
+  global.set $~lib/rt/pure/CUR
+  local.get $5
+  local.set $0
+  loop $loop|1
+   block $break|1
+    local.get $0
+    local.get $2
+    i32.ge_u
+    br_if $break|1
+    local.get $0
+    i32.load
+    call $~lib/rt/pure/scan
+    local.get $0
+    i32.const 4
+    i32.add
+    local.set $0
+    br $loop|1
+   end
+  end
+  local.get $5
+  local.set $0
+  loop $loop|2
+   block $break|2
+    local.get $0
+    local.get $2
+    i32.ge_u
+    br_if $break|2
+    local.get $0
+    i32.load
+    local.tee $1
+    local.get $1
+    i32.load offset=4
+    i32.const 2147483647
+    i32.and
+    i32.store offset=4
+    local.get $1
+    call $~lib/rt/pure/collectWhite
+    local.get $0
+    i32.const 4
+    i32.add
+    local.set $0
+    br $loop|2
+   end
+  end
+  local.get $5
+  global.set $~lib/rt/pure/CUR
+ )
+ (func $~lib/rt/tlsf/growMemory (; 13 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  memory.size
+  local.tee $2
+  local.get $1
+  i32.const 536870904
+  i32.lt_u
+  if (result i32)
+   i32.const 1
+   i32.const 27
+   local.get $1
+   i32.clz
+   i32.sub
+   i32.shl
+   i32.const 1
+   i32.sub
+   local.get $1
+   i32.add
+  else
+   local.get $1
+  end
+  i32.const 16
+  local.get $0
+  i32.load offset=1568
+  local.get $2
+  i32.const 16
+  i32.shl
+  i32.const 16
+  i32.sub
+  i32.ne
+  i32.shl
+  i32.add
+  i32.const 65535
+  i32.add
+  i32.const -65536
+  i32.and
+  i32.const 16
+  i32.shr_u
+  local.tee $1
+  local.get $2
+  local.get $1
+  i32.gt_s
+  select
+  memory.grow
+  i32.const 0
+  i32.lt_s
+  if
+   local.get $1
+   memory.grow
    i32.const 0
    i32.lt_s
    if
-    local.get $2
-    grow_memory
-    i32.const 0
-    i32.lt_s
+    unreachable
+   end
+  end
+  local.get $0
+  local.get $2
+  i32.const 16
+  i32.shl
+  memory.size
+  i32.const 16
+  i32.shl
+  call $~lib/rt/tlsf/addMemory
+ )
+ (func $~lib/rt/tlsf/prepareBlock (; 14 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  local.get $1
+  i32.load
+  local.set $3
+  local.get $2
+  i32.const 15
+  i32.and
+  if
+   i32.const 0
+   i32.const 24
+   i32.const 365
+   i32.const 13
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $3
+  i32.const -4
+  i32.and
+  local.get $2
+  i32.sub
+  local.tee $4
+  i32.const 32
+  i32.ge_u
+  if
+   local.get $1
+   local.get $3
+   i32.const 2
+   i32.and
+   local.get $2
+   i32.or
+   i32.store
+   local.get $1
+   i32.const 16
+   i32.add
+   local.get $2
+   i32.add
+   local.tee $1
+   local.get $4
+   i32.const 16
+   i32.sub
+   i32.const 1
+   i32.or
+   i32.store
+   local.get $0
+   local.get $1
+   call $~lib/rt/tlsf/insertBlock
+  else
+   local.get $1
+   local.get $3
+   i32.const -2
+   i32.and
+   i32.store
+   local.get $1
+   i32.const 16
+   i32.add
+   local.get $1
+   i32.load
+   i32.const -4
+   i32.and
+   i32.add
+   local.get $1
+   i32.const 16
+   i32.add
+   local.get $1
+   i32.load
+   i32.const -4
+   i32.and
+   i32.add
+   i32.load
+   i32.const -3
+   i32.and
+   i32.store
+  end
+ )
+ (func $~lib/rt/tlsf/allocateBlock (; 15 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+  (local $2 i32)
+  (local $3 i32)
+  global.get $~lib/rt/tlsf/collectLock
+  if
+   i32.const 0
+   i32.const 24
+   i32.const 486
+   i32.const 13
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $0
+  local.get $1
+  call $~lib/rt/tlsf/prepareSize
+  local.tee $3
+  call $~lib/rt/tlsf/searchBlock
+  local.tee $2
+  i32.eqz
+  if
+   i32.const 1
+   global.set $~lib/rt/tlsf/collectLock
+   call $~lib/rt/pure/__collect
+   i32.const 0
+   global.set $~lib/rt/tlsf/collectLock
+   local.get $0
+   local.get $3
+   call $~lib/rt/tlsf/searchBlock
+   local.tee $2
+   i32.eqz
+   if
+    local.get $0
+    local.get $3
+    call $~lib/rt/tlsf/growMemory
+    local.get $0
+    local.get $3
+    call $~lib/rt/tlsf/searchBlock
+    local.tee $2
+    i32.eqz
     if
+     i32.const 0
+     i32.const 24
+     i32.const 498
+     i32.const 19
+     call $~lib/builtins/abort
      unreachable
     end
    end
   end
-  local.get $4
-  global.set $~lib/allocator/arena/offset
-  local.get $1
- )
- (func $~lib/internal/arraybuffer/allocateUnsafe (; 4 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  (local $1 i32)
-  (local $2 i32)
-  local.get $0
-  i32.const 1073741816
-  i32.le_u
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 184
-   i32.const 26
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  block $~lib/memory/memory.allocate|inlined.0 (result i32)
-   local.get $0
-   call $~lib/internal/arraybuffer/computeSize
-   local.set $2
-   local.get $2
-   call $~lib/allocator/arena/__memory_allocate
-   br $~lib/memory/memory.allocate|inlined.0
-  end
-  local.set $1
-  local.get $1
-  local.get $0
-  i32.store
-  local.get $1
- )
- (func $~lib/internal/memory/memset (; 5 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i64)
   local.get $2
-  i32.eqz
-  if
-   return
-  end
-  local.get $0
-  local.get $1
-  i32.store8
-  local.get $0
-  local.get $2
-  i32.add
-  i32.const 1
-  i32.sub
-  local.get $1
-  i32.store8
-  local.get $2
-  i32.const 2
-  i32.le_u
-  if
-   return
-  end
-  local.get $0
-  i32.const 1
-  i32.add
-  local.get $1
-  i32.store8
-  local.get $0
-  i32.const 2
-  i32.add
-  local.get $1
-  i32.store8
-  local.get $0
-  local.get $2
-  i32.add
-  i32.const 2
-  i32.sub
-  local.get $1
-  i32.store8
-  local.get $0
-  local.get $2
-  i32.add
-  i32.const 3
-  i32.sub
-  local.get $1
-  i32.store8
-  local.get $2
-  i32.const 6
-  i32.le_u
-  if
-   return
-  end
-  local.get $0
-  i32.const 3
-  i32.add
-  local.get $1
-  i32.store8
-  local.get $0
-  local.get $2
-  i32.add
-  i32.const 4
-  i32.sub
-  local.get $1
-  i32.store8
-  local.get $2
-  i32.const 8
-  i32.le_u
-  if
-   return
-  end
-  i32.const 0
-  local.get $0
-  i32.sub
-  i32.const 3
-  i32.and
-  local.set $3
-  local.get $0
-  local.get $3
-  i32.add
-  local.set $0
-  local.get $2
-  local.get $3
-  i32.sub
-  local.set $2
-  local.get $2
+  i32.load
   i32.const -4
   i32.and
-  local.set $2
-  i32.const -1
-  i32.const 255
-  i32.div_u
-  local.get $1
-  i32.const 255
-  i32.and
-  i32.mul
-  local.set $4
-  local.get $0
-  local.get $4
-  i32.store
-  local.get $0
-  local.get $2
-  i32.add
-  i32.const 4
-  i32.sub
-  local.get $4
-  i32.store
-  local.get $2
-  i32.const 8
-  i32.le_u
-  if
-   return
-  end
-  local.get $0
-  i32.const 4
-  i32.add
-  local.get $4
-  i32.store
-  local.get $0
-  i32.const 8
-  i32.add
-  local.get $4
-  i32.store
-  local.get $0
-  local.get $2
-  i32.add
-  i32.const 12
-  i32.sub
-  local.get $4
-  i32.store
-  local.get $0
-  local.get $2
-  i32.add
-  i32.const 8
-  i32.sub
-  local.get $4
-  i32.store
-  local.get $2
-  i32.const 24
-  i32.le_u
-  if
-   return
-  end
-  local.get $0
-  i32.const 12
-  i32.add
-  local.get $4
-  i32.store
-  local.get $0
-  i32.const 16
-  i32.add
-  local.get $4
-  i32.store
-  local.get $0
-  i32.const 20
-  i32.add
-  local.get $4
-  i32.store
-  local.get $0
-  i32.const 24
-  i32.add
-  local.get $4
-  i32.store
-  local.get $0
-  local.get $2
-  i32.add
-  i32.const 28
-  i32.sub
-  local.get $4
-  i32.store
-  local.get $0
-  local.get $2
-  i32.add
-  i32.const 24
-  i32.sub
-  local.get $4
-  i32.store
-  local.get $0
-  local.get $2
-  i32.add
-  i32.const 20
-  i32.sub
-  local.get $4
-  i32.store
-  local.get $0
-  local.get $2
-  i32.add
-  i32.const 16
-  i32.sub
-  local.get $4
-  i32.store
-  i32.const 24
-  local.get $0
-  i32.const 4
-  i32.and
-  i32.add
-  local.set $3
-  local.get $0
   local.get $3
-  i32.add
-  local.set $0
-  local.get $2
-  local.get $3
-  i32.sub
-  local.set $2
-  local.get $4
-  i64.extend_i32_u
-  local.get $4
-  i64.extend_i32_u
-  i64.const 32
-  i64.shl
-  i64.or
-  local.set $5
-  block $break|0
-   loop $continue|0
-    local.get $2
-    i32.const 32
-    i32.ge_u
-    if
-     block
-      local.get $0
-      local.get $5
-      i64.store
-      local.get $0
-      i32.const 8
-      i32.add
-      local.get $5
-      i64.store
-      local.get $0
-      i32.const 16
-      i32.add
-      local.get $5
-      i64.store
-      local.get $0
-      i32.const 24
-      i32.add
-      local.get $5
-      i64.store
-      local.get $2
-      i32.const 32
-      i32.sub
-      local.set $2
-      local.get $0
-      i32.const 32
-      i32.add
-      local.set $0
-     end
-     br $continue|0
-    end
-   end
-  end
- )
- (func $~lib/memory/memory.allocate (; 6 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  local.get $0
-  call $~lib/allocator/arena/__memory_allocate
-  return
- )
- (func $~lib/internal/typedarray/TypedArray<f64>#constructor (; 7 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  (local $6 i32)
-  local.get $1
-  i32.const 134217727
-  i32.gt_u
+  i32.lt_u
   if
    i32.const 0
-   i32.const 120
-   i32.const 23
-   i32.const 34
-   call $~lib/env/abort
+   i32.const 24
+   i32.const 506
+   i32.const 13
+   call $~lib/builtins/abort
    unreachable
   end
-  local.get $1
-  i32.const 3
-  i32.shl
-  local.set $2
   local.get $2
-  call $~lib/internal/arraybuffer/allocateUnsafe
-  local.set $3
-  block $~lib/memory/memory.fill|inlined.0
-   local.get $3
-   i32.const 8
-   i32.add
-   local.set $4
-   i32.const 0
-   local.set $5
-   local.get $2
-   local.set $6
-   local.get $4
-   local.get $5
-   local.get $6
-   call $~lib/internal/memory/memset
-  end
-  block (result i32)
-   local.get $0
-   i32.eqz
-   if
-    i32.const 12
-    call $~lib/memory/memory.allocate
-    local.set $0
-   end
-   local.get $0
-   i32.const 0
-   i32.store
-   local.get $0
-   i32.const 0
-   i32.store offset=4
-   local.get $0
-   i32.const 0
-   i32.store offset=8
-   local.get $0
-  end
-  local.get $3
-  i32.store
-  local.get $0
   i32.const 0
   i32.store offset=4
-  local.get $0
   local.get $2
-  i32.store offset=8
-  local.get $0
- )
- (func $~lib/typedarray/Float64Array#constructor (; 8 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
-  local.get $0
-  i32.eqz
-  if
-   i32.const 12
-   call $~lib/memory/memory.allocate
-   local.set $0
-  end
-  local.get $0
   local.get $1
-  call $~lib/internal/typedarray/TypedArray<f64>#constructor
-  local.set $0
-  local.get $0
- )
- (func $start:assembly/renderer/CanvasRenderingContext2D (; 9 ;) (type $FUNCSIG$v)
-  call $start:~lib/allocator/arena
-  i32.const 0
-  i32.const 0
-  call $~lib/typedarray/Float64Array#constructor
-  global.set $assembly/renderer/CanvasRenderingContext2D/defaultLineDash
- )
- (func $~lib/arraybuffer/ArrayBuffer#constructor (; 10 ;) (type $FUNCSIG$iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  (local $6 i32)
-  local.get $1
-  i32.const 1073741816
-  i32.gt_u
-  if
-   i32.const 0
-   i32.const 248
-   i32.const 47
-   i32.const 40
-   call $~lib/env/abort
-   unreachable
-  end
-  local.get $1
-  call $~lib/internal/arraybuffer/allocateUnsafe
-  local.set $3
-  local.get $2
-  i32.const 0
-  i32.ne
-  i32.eqz
-  if
-   local.get $3
-   i32.const 8
-   i32.add
-   local.set $4
-   i32.const 0
-   local.set $5
-   local.get $1
-   local.set $6
-   local.get $4
-   local.get $5
-   local.get $6
-   call $~lib/internal/memory/memset
-  end
-  local.get $3
- )
- (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#clear (; 11 ;) (type $FUNCSIG$vi) (param $0 i32)
-  local.get $0
-  i32.const 0
-  i32.const 16
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  i32.store
-  local.get $0
-  i32.const 4
-  i32.const 1
-  i32.sub
-  i32.store offset=4
-  local.get $0
-  i32.const 0
-  i32.const 48
-  i32.const 1
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  i32.store offset=8
-  local.get $0
-  i32.const 4
   i32.store offset=12
   local.get $0
-  i32.const 0
-  i32.store offset=16
+  local.get $2
+  call $~lib/rt/tlsf/removeBlock
   local.get $0
-  i32.const 0
-  i32.store offset=20
+  local.get $2
+  local.get $3
+  call $~lib/rt/tlsf/prepareBlock
+  local.get $2
  )
- (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#constructor (; 12 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  block (result i32)
-   local.get $0
-   i32.eqz
-   if
-    i32.const 24
-    call $~lib/memory/memory.allocate
-    local.set $0
-   end
-   local.get $0
-   i32.const 0
-   i32.store
-   local.get $0
-   i32.const 0
-   i32.store offset=4
-   local.get $0
-   i32.const 0
-   i32.store offset=8
-   local.get $0
-   i32.const 0
-   i32.store offset=12
-   local.get $0
-   i32.const 0
-   i32.store offset=16
-   local.get $0
-   i32.const 0
-   i32.store offset=20
-   local.get $0
-  end
-  call $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#clear
-  local.get $0
- )
- (func $start:assembly/internal/getContext (; 13 ;) (type $FUNCSIG$v)
-  call $start:assembly/renderer/CanvasRenderingContext2D
-  i32.const 0
-  call $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#constructor
-  global.set $assembly/internal/getContext/map
- )
- (func $start:assembly/glue (; 14 ;) (type $FUNCSIG$v)
-  call $start:assembly/internal/getContext
- )
- (func $assembly/internal/Buffer/Buffer<i32>#constructor (; 15 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  local.get $0
-  i32.eqz
-  if
-   i32.const 8
-   call $~lib/memory/memory.allocate
-   local.set $0
-  end
-  local.get $0
-  i32.const 0
-  i32.const 65536
-  i32.const 8
-  i32.mul
-  i32.const 1
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  i32.store
-  local.get $0
-  i32.const 0
-  i32.store offset=4
-  local.get $0
- )
- (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferIdentity (; 16 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  (local $1 i32)
+ (func $~lib/rt/tlsf/__alloc (; 16 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
-  (local $3 f64)
-  (local $4 i32)
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.0
-   local.get $0
-   local.set $1
-   i32.const 0
-   local.set $2
-   f64.const 1
-   local.set $3
-   i32.const 0
-   local.set $4
-   local.get $1
+  global.get $~lib/rt/tlsf/ROOT
+  local.tee $2
+  if (result i32)
    local.get $2
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $4
-   i32.add
-   local.get $3
-   f64.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.1
-   local.get $0
-   local.set $4
-   i32.const 1
-   local.set $2
-   f64.const 0
-   local.set $3
-   i32.const 0
-   local.set $1
-   local.get $4
-   local.get $2
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $1
-   i32.add
-   local.get $3
-   f64.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.2
-   local.get $0
-   local.set $1
-   i32.const 2
-   local.set $2
-   f64.const 0
-   local.set $3
-   i32.const 0
-   local.set $4
-   local.get $1
-   local.get $2
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $4
-   i32.add
-   local.get $3
-   f64.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.3
-   local.get $0
-   local.set $4
-   i32.const 3
-   local.set $2
-   f64.const 1
-   local.set $3
-   i32.const 0
-   local.set $1
-   local.get $4
-   local.get $2
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $1
-   i32.add
-   local.get $3
-   f64.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.4
-   local.get $0
-   local.set $1
-   i32.const 4
-   local.set $2
-   f64.const 0
-   local.set $3
-   i32.const 0
-   local.set $4
-   local.get $1
-   local.get $2
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $4
-   i32.add
-   local.get $3
-   f64.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.5
-   local.get $0
-   local.set $4
-   i32.const 5
-   local.set $2
-   f64.const 0
-   local.set $3
-   i32.const 0
-   local.set $1
-   local.get $4
-   local.get $2
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $1
-   i32.add
-   local.get $3
-   f64.store offset=8
+  else
+   call $~lib/rt/tlsf/initializeRoot
+   global.get $~lib/rt/tlsf/ROOT
   end
   local.get $0
- )
- (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<i32> (; 17 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  block $~lib/internal/arraybuffer/STORE<i32,i32>|inlined.0
-   local.get $0
-   local.set $2
-   i32.const 0
-   local.set $3
-   local.get $1
-   local.set $4
-   i32.const 0
-   local.set $5
-   local.get $2
-   local.get $3
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $5
-   i32.add
-   local.get $4
-   i32.store offset=8
-  end
-  local.get $0
- )
- (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue2<usize> (; 18 ;) (type $FUNCSIG$iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  (local $6 i32)
-  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.0
-   local.get $0
-   local.set $3
-   i32.const 0
-   local.set $4
-   local.get $1
-   local.set $5
-   i32.const 0
-   local.set $6
-   local.get $3
-   local.get $4
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $6
-   i32.add
-   local.get $5
-   i32.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.1
-   local.get $0
-   local.set $6
-   i32.const 1
-   local.set $5
-   local.get $2
-   local.set $4
-   i32.const 0
-   local.set $3
-   local.get $6
-   local.get $5
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $3
-   i32.add
-   local.get $4
-   i32.store offset=8
-  end
-  local.get $0
- )
- (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<usize> (; 19 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.2
-   local.get $0
-   local.set $2
-   i32.const 0
-   local.set $3
-   local.get $1
-   local.set $4
-   i32.const 0
-   local.set $5
-   local.get $2
-   local.get $3
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $5
-   i32.add
-   local.get $4
-   i32.store offset=8
-  end
-  local.get $0
- )
- (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<f64> (; 20 ;) (type $FUNCSIG$iid) (param $0 i32) (param $1 f64) (result i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 f64)
-  (local $5 i32)
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.6
-   local.get $0
-   local.set $2
-   i32.const 0
-   local.set $3
-   local.get $1
-   local.set $4
-   i32.const 0
-   local.set $5
-   local.get $2
-   local.get $3
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $5
-   i32.add
-   local.get $4
-   f64.store offset=8
-  end
-  local.get $0
- )
- (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<bool> (; 21 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  block $~lib/internal/arraybuffer/STORE<bool,bool>|inlined.0
-   local.get $0
-   local.set $2
-   i32.const 0
-   local.set $3
-   local.get $1
-   local.set $4
-   i32.const 0
-   local.set $5
-   local.get $2
-   local.get $3
-   i32.const 0
-   i32.shl
-   i32.add
-   local.get $5
-   i32.add
-   local.get $4
-   i32.store8 offset=8
-  end
-  local.get $0
- )
- (func $~lib/array/Array<assembly/internal/Path2DElement/Path2DElement>#constructor (; 22 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  (local $6 i32)
+  call $~lib/rt/tlsf/allocateBlock
+  local.tee $0
   local.get $1
-  i32.const 268435454
-  i32.gt_u
+  i32.store offset=8
+  local.get $0
+  i32.const 16
+  i32.add
+ )
+ (func $~lib/rt/pure/increment (; 17 ;) (type $FUNCSIG$vi) (param $0 i32)
+  (local $1 i32)
+  local.get $0
+  i32.load offset=4
+  local.tee $1
+  i32.const -268435456
+  i32.and
+  local.get $1
+  i32.const 1
+  i32.add
+  i32.const -268435456
+  i32.and
+  i32.ne
   if
    i32.const 0
-   i32.const 296
-   i32.const 45
-   i32.const 39
-   call $~lib/env/abort
+   i32.const 128
+   i32.const 104
+   i32.const 2
+   call $~lib/builtins/abort
    unreachable
   end
-  local.get $1
-  i32.const 2
-  i32.shl
-  local.set $2
-  local.get $2
-  call $~lib/internal/arraybuffer/allocateUnsafe
-  local.set $3
-  block (result i32)
-   local.get $0
-   i32.eqz
-   if
-    i32.const 8
-    call $~lib/memory/memory.allocate
-    local.set $0
-   end
-   local.get $0
-   i32.const 0
-   i32.store
-   local.get $0
-   i32.const 0
-   i32.store offset=4
-   local.get $0
-  end
-  local.get $3
-  i32.store
   local.get $0
   local.get $1
+  i32.const 1
+  i32.add
   i32.store offset=4
-  block $~lib/memory/memory.fill|inlined.2
-   local.get $3
-   i32.const 8
-   i32.add
-   local.set $4
-   i32.const 0
-   local.set $5
-   local.get $2
-   local.set $6
-   local.get $4
-   local.get $5
-   local.get $6
-   call $~lib/internal/memory/memset
-  end
   local.get $0
- )
- (func $assembly/internal/Path2DElement/Path2DElement#constructor (; 23 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  local.get $0
-  i32.eqz
+  i32.load
+  i32.const 1
+  i32.and
   if
+   i32.const 0
    i32.const 128
-   call $~lib/memory/memory.allocate
-   local.set $0
+   i32.const 107
+   i32.const 13
+   call $~lib/builtins/abort
+   unreachable
+  end
+ )
+ (func $~lib/rt/pure/__retain (; 18 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+  local.get $0
+  i32.const 1180
+  i32.gt_u
+  if
+   local.get $0
+   i32.const 16
+   i32.sub
+   call $~lib/rt/pure/increment
   end
   local.get $0
-  i32.const 6
-  i32.store
-  local.get $0
-  f64.const 1
-  f64.store offset=8
-  local.get $0
-  f64.const 0
-  f64.store offset=16
-  local.get $0
-  f64.const 0
-  f64.store offset=24
-  local.get $0
-  f64.const 1
-  f64.store offset=32
-  local.get $0
-  f64.const 0
-  f64.store offset=40
-  local.get $0
-  f64.const 0
-  f64.store offset=48
-  local.get $0
-  i32.const 0
-  i32.store offset=56
-  local.get $0
-  i32.const 0
-  i32.store8 offset=60
-  local.get $0
-  f64.const 0
-  f64.store offset=64
-  local.get $0
-  f64.const 0
-  f64.store offset=72
-  local.get $0
-  f64.const 0
-  f64.store offset=80
-  local.get $0
-  f64.const 0
-  f64.store offset=88
-  local.get $0
-  f64.const 0
-  f64.store offset=96
-  local.get $0
-  f64.const 0
-  f64.store offset=104
-  local.get $0
-  f64.const 0
-  f64.store offset=112
-  local.get $0
-  f64.const 0
-  f64.store offset=120
-  local.get $0
  )
- (func $~lib/internal/memory/memcpy (; 24 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/rt/__typeinfo (; 19 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+  local.get $0
+  i32.const 1088
+  i32.load
+  i32.gt_u
+  if
+   i32.const 176
+   i32.const 232
+   i32.const 22
+   i32.const 27
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $0
+  i32.const 3
+  i32.shl
+  i32.const 1092
+  i32.add
+  i32.load
+ )
+ (func $~lib/util/memory/memcpy (; 20 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
-  block $break|0
-   loop $continue|0
+  loop $continue|0
+   local.get $1
+   i32.const 3
+   i32.and
+   i32.const 0
+   local.get $2
+   select
+   if
+    local.get $0
+    local.tee $3
+    i32.const 1
+    i32.add
+    local.set $0
+    local.get $1
+    local.tee $4
+    i32.const 1
+    i32.add
+    local.set $1
+    local.get $3
+    local.get $4
+    i32.load8_u
+    i32.store8
     local.get $2
-    if (result i32)
-     local.get $1
-     i32.const 3
-     i32.and
-    else     
-     local.get $2
-    end
-    if
-     block
-      block (result i32)
-       local.get $0
-       local.tee $5
-       i32.const 1
-       i32.add
-       local.set $0
-       local.get $5
-      end
-      block (result i32)
-       local.get $1
-       local.tee $5
-       i32.const 1
-       i32.add
-       local.set $1
-       local.get $5
-      end
-      i32.load8_u
-      i32.store8
-      local.get $2
-      i32.const 1
-      i32.sub
-      local.set $2
-     end
-     br $continue|0
-    end
+    i32.const 1
+    i32.sub
+    local.set $2
+    br $continue|0
    end
   end
   local.get $0
   i32.const 3
   i32.and
-  i32.const 0
-  i32.eq
+  i32.eqz
   if
-   block $break|1
-    loop $continue|1
+   loop $continue|1
+    local.get $2
+    i32.const 16
+    i32.lt_u
+    i32.eqz
+    if
+     local.get $0
+     local.get $1
+     i32.load
+     i32.store
+     local.get $0
+     i32.const 4
+     i32.add
+     local.get $1
+     i32.const 4
+     i32.add
+     i32.load
+     i32.store
+     local.get $0
+     i32.const 8
+     i32.add
+     local.get $1
+     i32.const 8
+     i32.add
+     i32.load
+     i32.store
+     local.get $0
+     i32.const 12
+     i32.add
+     local.get $1
+     i32.const 12
+     i32.add
+     i32.load
+     i32.store
+     local.get $1
+     i32.const 16
+     i32.add
+     local.set $1
+     local.get $0
+     i32.const 16
+     i32.add
+     local.set $0
      local.get $2
      i32.const 16
-     i32.ge_u
-     if
-      block
-       local.get $0
-       local.get $1
-       i32.load
-       i32.store
-       local.get $0
-       i32.const 4
-       i32.add
-       local.get $1
-       i32.const 4
-       i32.add
-       i32.load
-       i32.store
-       local.get $0
-       i32.const 8
-       i32.add
-       local.get $1
-       i32.const 8
-       i32.add
-       i32.load
-       i32.store
-       local.get $0
-       i32.const 12
-       i32.add
-       local.get $1
-       i32.const 12
-       i32.add
-       i32.load
-       i32.store
-       local.get $1
-       i32.const 16
-       i32.add
-       local.set $1
-       local.get $0
-       i32.const 16
-       i32.add
-       local.set $0
-       local.get $2
-       i32.const 16
-       i32.sub
-       local.set $2
-      end
-      br $continue|1
-     end
+     i32.sub
+     local.set $2
+     br $continue|1
     end
    end
    local.get $2
@@ -1275,14 +1574,14 @@
     i32.add
     i32.load
     i32.store
-    local.get $0
-    i32.const 8
-    i32.add
-    local.set $0
     local.get $1
     i32.const 8
     i32.add
     local.set $1
+    local.get $0
+    i32.const 8
+    i32.add
+    local.set $0
    end
    local.get $2
    i32.const 4
@@ -1292,14 +1591,14 @@
     local.get $1
     i32.load
     i32.store
-    local.get $0
-    i32.const 4
-    i32.add
-    local.set $0
     local.get $1
     i32.const 4
     i32.add
     local.set $1
+    local.get $0
+    i32.const 4
+    i32.add
+    local.set $0
    end
    local.get $2
    i32.const 2
@@ -1309,35 +1608,21 @@
     local.get $1
     i32.load16_u
     i32.store16
-    local.get $0
-    i32.const 2
-    i32.add
-    local.set $0
     local.get $1
     i32.const 2
     i32.add
     local.set $1
+    local.get $0
+    i32.const 2
+    i32.add
+    local.set $0
    end
    local.get $2
    i32.const 1
    i32.and
    if
-    block (result i32)
-     local.get $0
-     local.tee $5
-     i32.const 1
-     i32.add
-     local.set $0
-     local.get $5
-    end
-    block (result i32)
-     local.get $1
-     local.tee $5
-     i32.const 1
-     i32.add
-     local.set $1
-     local.get $5
-    end
+    local.get $0
+    local.get $1
     i32.load8_u
     i32.store8
    end
@@ -1350,721 +1635,519 @@
    block $break|2
     block $case2|2
      block $case1|2
-      block $case0|2
-       local.get $0
-       i32.const 3
-       i32.and
-       local.set $5
-       local.get $5
-       i32.const 1
-       i32.eq
-       br_if $case0|2
-       local.get $5
+      local.get $0
+      i32.const 3
+      i32.and
+      local.tee $3
+      i32.const 1
+      i32.ne
+      if
+       local.get $3
        i32.const 2
        i32.eq
        br_if $case1|2
-       local.get $5
+       local.get $3
        i32.const 3
        i32.eq
        br_if $case2|2
        br $break|2
       end
-      block
-       local.get $1
-       i32.load
-       local.set $3
-       block (result i32)
-        local.get $0
-        local.tee $5
-        i32.const 1
-        i32.add
-        local.set $0
-        local.get $5
-       end
-       block (result i32)
-        local.get $1
-        local.tee $5
-        i32.const 1
-        i32.add
-        local.set $1
-        local.get $5
-       end
-       i32.load8_u
-       i32.store8
-       block (result i32)
-        local.get $0
-        local.tee $5
-        i32.const 1
-        i32.add
-        local.set $0
-        local.get $5
-       end
-       block (result i32)
-        local.get $1
-        local.tee $5
-        i32.const 1
-        i32.add
-        local.set $1
-        local.get $5
-       end
-       i32.load8_u
-       i32.store8
-       block (result i32)
-        local.get $0
-        local.tee $5
-        i32.const 1
-        i32.add
-        local.set $0
-        local.get $5
-       end
-       block (result i32)
-        local.get $1
-        local.tee $5
-        i32.const 1
-        i32.add
-        local.set $1
-        local.get $5
-       end
-       i32.load8_u
-       i32.store8
-       local.get $2
-       i32.const 3
-       i32.sub
-       local.set $2
-       block $break|3
-        loop $continue|3
-         local.get $2
-         i32.const 17
-         i32.ge_u
-         if
-          block
-           local.get $1
-           i32.const 1
-           i32.add
-           i32.load
-           local.set $4
-           local.get $0
-           local.get $3
-           i32.const 24
-           i32.shr_u
-           local.get $4
-           i32.const 8
-           i32.shl
-           i32.or
-           i32.store
-           local.get $1
-           i32.const 5
-           i32.add
-           i32.load
-           local.set $3
-           local.get $0
-           i32.const 4
-           i32.add
-           local.get $4
-           i32.const 24
-           i32.shr_u
-           local.get $3
-           i32.const 8
-           i32.shl
-           i32.or
-           i32.store
-           local.get $1
-           i32.const 9
-           i32.add
-           i32.load
-           local.set $4
-           local.get $0
-           i32.const 8
-           i32.add
-           local.get $3
-           i32.const 24
-           i32.shr_u
-           local.get $4
-           i32.const 8
-           i32.shl
-           i32.or
-           i32.store
-           local.get $1
-           i32.const 13
-           i32.add
-           i32.load
-           local.set $3
-           local.get $0
-           i32.const 12
-           i32.add
-           local.get $4
-           i32.const 24
-           i32.shr_u
-           local.get $3
-           i32.const 8
-           i32.shl
-           i32.or
-           i32.store
-           local.get $1
-           i32.const 16
-           i32.add
-           local.set $1
-           local.get $0
-           i32.const 16
-           i32.add
-           local.set $0
-           local.get $2
-           i32.const 16
-           i32.sub
-           local.set $2
-          end
-          br $continue|3
-         end
-        end
-       end
-       br $break|2
-       unreachable
-      end
-      unreachable
-     end
-     block
       local.get $1
       i32.load
-      local.set $3
-      block (result i32)
-       local.get $0
-       local.tee $5
-       i32.const 1
-       i32.add
-       local.set $0
-       local.get $5
-      end
-      block (result i32)
-       local.get $1
-       local.tee $5
-       i32.const 1
-       i32.add
-       local.set $1
-       local.get $5
-      end
-      i32.load8_u
-      i32.store8
-      block (result i32)
-       local.get $0
-       local.tee $5
-       i32.const 1
-       i32.add
-       local.set $0
-       local.get $5
-      end
-      block (result i32)
-       local.get $1
-       local.tee $5
-       i32.const 1
-       i32.add
-       local.set $1
-       local.get $5
-      end
-      i32.load8_u
-      i32.store8
-      local.get $2
-      i32.const 2
-      i32.sub
-      local.set $2
-      block $break|4
-       loop $continue|4
-        local.get $2
-        i32.const 18
-        i32.ge_u
-        if
-         block
-          local.get $1
-          i32.const 2
-          i32.add
-          i32.load
-          local.set $4
-          local.get $0
-          local.get $3
-          i32.const 16
-          i32.shr_u
-          local.get $4
-          i32.const 16
-          i32.shl
-          i32.or
-          i32.store
-          local.get $1
-          i32.const 6
-          i32.add
-          i32.load
-          local.set $3
-          local.get $0
-          i32.const 4
-          i32.add
-          local.get $4
-          i32.const 16
-          i32.shr_u
-          local.get $3
-          i32.const 16
-          i32.shl
-          i32.or
-          i32.store
-          local.get $1
-          i32.const 10
-          i32.add
-          i32.load
-          local.set $4
-          local.get $0
-          i32.const 8
-          i32.add
-          local.get $3
-          i32.const 16
-          i32.shr_u
-          local.get $4
-          i32.const 16
-          i32.shl
-          i32.or
-          i32.store
-          local.get $1
-          i32.const 14
-          i32.add
-          i32.load
-          local.set $3
-          local.get $0
-          i32.const 12
-          i32.add
-          local.get $4
-          i32.const 16
-          i32.shr_u
-          local.get $3
-          i32.const 16
-          i32.shl
-          i32.or
-          i32.store
-          local.get $1
-          i32.const 16
-          i32.add
-          local.set $1
-          local.get $0
-          i32.const 16
-          i32.add
-          local.set $0
-          local.get $2
-          i32.const 16
-          i32.sub
-          local.set $2
-         end
-         br $continue|4
-        end
-       end
-      end
-      br $break|2
-      unreachable
-     end
-     unreachable
-    end
-    block
-     local.get $1
-     i32.load
-     local.set $3
-     block (result i32)
+      local.set $5
       local.get $0
-      local.tee $5
+      local.get $1
+      i32.load8_u
+      i32.store8
+      local.get $0
+      i32.const 1
+      i32.add
+      local.tee $0
+      local.get $1
+      i32.const 1
+      i32.add
+      local.tee $1
+      i32.load8_u
+      i32.store8
+      local.get $0
+      i32.const 1
+      i32.add
+      local.tee $3
       i32.const 1
       i32.add
       local.set $0
-      local.get $5
-     end
-     block (result i32)
       local.get $1
-      local.tee $5
+      i32.const 1
+      i32.add
+      local.tee $4
       i32.const 1
       i32.add
       local.set $1
-      local.get $5
+      local.get $3
+      local.get $4
+      i32.load8_u
+      i32.store8
+      local.get $2
+      i32.const 3
+      i32.sub
+      local.set $2
+      loop $continue|3
+       local.get $2
+       i32.const 17
+       i32.lt_u
+       i32.eqz
+       if
+        local.get $0
+        local.get $1
+        i32.const 1
+        i32.add
+        i32.load
+        local.tee $3
+        i32.const 8
+        i32.shl
+        local.get $5
+        i32.const 24
+        i32.shr_u
+        i32.or
+        i32.store
+        local.get $0
+        i32.const 4
+        i32.add
+        local.get $3
+        i32.const 24
+        i32.shr_u
+        local.get $1
+        i32.const 5
+        i32.add
+        i32.load
+        local.tee $3
+        i32.const 8
+        i32.shl
+        i32.or
+        i32.store
+        local.get $0
+        i32.const 8
+        i32.add
+        local.get $3
+        i32.const 24
+        i32.shr_u
+        local.get $1
+        i32.const 9
+        i32.add
+        i32.load
+        local.tee $3
+        i32.const 8
+        i32.shl
+        i32.or
+        i32.store
+        local.get $0
+        i32.const 12
+        i32.add
+        local.get $1
+        i32.const 13
+        i32.add
+        i32.load
+        local.tee $5
+        i32.const 8
+        i32.shl
+        local.get $3
+        i32.const 24
+        i32.shr_u
+        i32.or
+        i32.store
+        local.get $1
+        i32.const 16
+        i32.add
+        local.set $1
+        local.get $0
+        i32.const 16
+        i32.add
+        local.set $0
+        local.get $2
+        i32.const 16
+        i32.sub
+        local.set $2
+        br $continue|3
+       end
+      end
+      br $break|2
      end
+     local.get $1
+     i32.load
+     local.set $5
+     local.get $0
+     local.get $1
+     i32.load8_u
+     i32.store8
+     local.get $0
+     i32.const 1
+     i32.add
+     local.tee $3
+     i32.const 1
+     i32.add
+     local.set $0
+     local.get $1
+     i32.const 1
+     i32.add
+     local.tee $4
+     i32.const 1
+     i32.add
+     local.set $1
+     local.get $3
+     local.get $4
      i32.load8_u
      i32.store8
      local.get $2
-     i32.const 1
+     i32.const 2
      i32.sub
      local.set $2
-     block $break|5
-      loop $continue|5
+     loop $continue|4
+      local.get $2
+      i32.const 18
+      i32.lt_u
+      i32.eqz
+      if
+       local.get $0
+       local.get $1
+       i32.const 2
+       i32.add
+       i32.load
+       local.tee $3
+       i32.const 16
+       i32.shl
+       local.get $5
+       i32.const 16
+       i32.shr_u
+       i32.or
+       i32.store
+       local.get $0
+       i32.const 4
+       i32.add
+       local.get $3
+       i32.const 16
+       i32.shr_u
+       local.get $1
+       i32.const 6
+       i32.add
+       i32.load
+       local.tee $3
+       i32.const 16
+       i32.shl
+       i32.or
+       i32.store
+       local.get $0
+       i32.const 8
+       i32.add
+       local.get $3
+       i32.const 16
+       i32.shr_u
+       local.get $1
+       i32.const 10
+       i32.add
+       i32.load
+       local.tee $3
+       i32.const 16
+       i32.shl
+       i32.or
+       i32.store
+       local.get $0
+       i32.const 12
+       i32.add
+       local.get $1
+       i32.const 14
+       i32.add
+       i32.load
+       local.tee $5
+       i32.const 16
+       i32.shl
+       local.get $3
+       i32.const 16
+       i32.shr_u
+       i32.or
+       i32.store
+       local.get $1
+       i32.const 16
+       i32.add
+       local.set $1
+       local.get $0
+       i32.const 16
+       i32.add
+       local.set $0
        local.get $2
-       i32.const 19
-       i32.ge_u
-       if
-        block
-         local.get $1
-         i32.const 3
-         i32.add
-         i32.load
-         local.set $4
-         local.get $0
-         local.get $3
-         i32.const 8
-         i32.shr_u
-         local.get $4
-         i32.const 24
-         i32.shl
-         i32.or
-         i32.store
-         local.get $1
-         i32.const 7
-         i32.add
-         i32.load
-         local.set $3
-         local.get $0
-         i32.const 4
-         i32.add
-         local.get $4
-         i32.const 8
-         i32.shr_u
-         local.get $3
-         i32.const 24
-         i32.shl
-         i32.or
-         i32.store
-         local.get $1
-         i32.const 11
-         i32.add
-         i32.load
-         local.set $4
-         local.get $0
-         i32.const 8
-         i32.add
-         local.get $3
-         i32.const 8
-         i32.shr_u
-         local.get $4
-         i32.const 24
-         i32.shl
-         i32.or
-         i32.store
-         local.get $1
-         i32.const 15
-         i32.add
-         i32.load
-         local.set $3
-         local.get $0
-         i32.const 12
-         i32.add
-         local.get $4
-         i32.const 8
-         i32.shr_u
-         local.get $3
-         i32.const 24
-         i32.shl
-         i32.or
-         i32.store
-         local.get $1
-         i32.const 16
-         i32.add
-         local.set $1
-         local.get $0
-         i32.const 16
-         i32.add
-         local.set $0
-         local.get $2
-         i32.const 16
-         i32.sub
-         local.set $2
-        end
-        br $continue|5
-       end
+       i32.const 16
+       i32.sub
+       local.set $2
+       br $continue|4
       end
      end
      br $break|2
-     unreachable
     end
-    unreachable
+    local.get $1
+    i32.load
+    local.set $5
+    local.get $0
+    local.tee $3
+    i32.const 1
+    i32.add
+    local.set $0
+    local.get $1
+    local.tee $4
+    i32.const 1
+    i32.add
+    local.set $1
+    local.get $3
+    local.get $4
+    i32.load8_u
+    i32.store8
+    local.get $2
+    i32.const 1
+    i32.sub
+    local.set $2
+    loop $continue|5
+     local.get $2
+     i32.const 19
+     i32.lt_u
+     i32.eqz
+     if
+      local.get $0
+      local.get $1
+      i32.const 3
+      i32.add
+      i32.load
+      local.tee $3
+      i32.const 24
+      i32.shl
+      local.get $5
+      i32.const 8
+      i32.shr_u
+      i32.or
+      i32.store
+      local.get $0
+      i32.const 4
+      i32.add
+      local.get $3
+      i32.const 8
+      i32.shr_u
+      local.get $1
+      i32.const 7
+      i32.add
+      i32.load
+      local.tee $3
+      i32.const 24
+      i32.shl
+      i32.or
+      i32.store
+      local.get $0
+      i32.const 8
+      i32.add
+      local.get $3
+      i32.const 8
+      i32.shr_u
+      local.get $1
+      i32.const 11
+      i32.add
+      i32.load
+      local.tee $3
+      i32.const 24
+      i32.shl
+      i32.or
+      i32.store
+      local.get $0
+      i32.const 12
+      i32.add
+      local.get $1
+      i32.const 15
+      i32.add
+      i32.load
+      local.tee $5
+      i32.const 24
+      i32.shl
+      local.get $3
+      i32.const 8
+      i32.shr_u
+      i32.or
+      i32.store
+      local.get $1
+      i32.const 16
+      i32.add
+      local.set $1
+      local.get $0
+      i32.const 16
+      i32.add
+      local.set $0
+      local.get $2
+      i32.const 16
+      i32.sub
+      local.set $2
+      br $continue|5
+     end
+    end
    end
   end
   local.get $2
   i32.const 16
   i32.and
   if
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   local.get $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $3
+   i32.const 1
+   i32.add
+   local.set $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $4
+   i32.const 1
+   i32.add
+   local.set $1
+   local.get $3
+   local.get $4
    i32.load8_u
    i32.store8
   end
@@ -2072,148 +2155,86 @@
   i32.const 8
   i32.and
   if
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   local.get $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $3
+   i32.const 1
+   i32.add
+   local.set $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $4
+   i32.const 1
+   i32.add
+   local.set $1
+   local.get $3
+   local.get $4
    i32.load8_u
    i32.store8
   end
@@ -2221,76 +2242,46 @@
   i32.const 4
   i32.and
   if
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   local.get $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $3
+   i32.const 1
+   i32.add
+   local.set $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $4
+   i32.const 1
+   i32.add
+   local.set $1
+   local.get $3
+   local.get $4
    i32.load8_u
    i32.store8
   end
@@ -2298,40 +2289,26 @@
   i32.const 2
   i32.and
   if
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   local.get $1
    i32.load8_u
    i32.store8
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   i32.const 1
+   i32.add
+   local.tee $3
+   i32.const 1
+   i32.add
+   local.set $0
+   local.get $1
+   i32.const 1
+   i32.add
+   local.tee $4
+   i32.const 1
+   i32.add
+   local.set $1
+   local.get $3
+   local.get $4
    i32.load8_u
    i32.store8
   end
@@ -2339,244 +2316,197 @@
   i32.const 1
   i32.and
   if
-   block (result i32)
-    local.get $0
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $0
-    local.get $5
-   end
-   block (result i32)
-    local.get $1
-    local.tee $5
-    i32.const 1
-    i32.add
-    local.set $1
-    local.get $5
-   end
+   local.get $0
+   local.get $1
    i32.load8_u
    i32.store8
   end
  )
- (func $~lib/internal/memory/memmove (; 25 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/memory/memory.copy (; 21 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
-  local.get $0
-  local.get $1
-  i32.eq
-  if
-   return
-  end
-  local.get $1
-  local.get $2
-  i32.add
-  local.get $0
-  i32.le_u
-  local.tee $3
-  if (result i32)
-   local.get $3
-  else   
-   local.get $0
+  (local $4 i32)
+  block $~lib/util/memory/memmove|inlined.0
    local.get $2
+   local.set $3
+   local.get $0
+   local.get $1
+   i32.eq
+   br_if $~lib/util/memory/memmove|inlined.0
+   i32.const 1
+   local.get $0
+   local.get $3
    i32.add
    local.get $1
    i32.le_u
-  end
-  if
-   local.get $0
    local.get $1
-   local.get $2
-   call $~lib/internal/memory/memcpy
-   return
-  end
-  local.get $0
-  local.get $1
-  i32.lt_u
-  if
-   local.get $1
-   i32.const 7
-   i32.and
+   local.get $3
+   i32.add
    local.get $0
-   i32.const 7
-   i32.and
-   i32.eq
+   i32.le_u
+   select
    if
-    block $break|0
+    local.get $0
+    local.get $1
+    local.get $3
+    call $~lib/util/memory/memcpy
+    br $~lib/util/memory/memmove|inlined.0
+   end
+   local.get $0
+   local.get $1
+   i32.lt_u
+   if
+    local.get $1
+    i32.const 7
+    i32.and
+    local.get $0
+    i32.const 7
+    i32.and
+    i32.eq
+    if
      loop $continue|0
       local.get $0
       i32.const 7
       i32.and
       if
-       block
-        local.get $2
-        i32.eqz
-        if
-         return
-        end
-        local.get $2
-        i32.const 1
-        i32.sub
-        local.set $2
-        block (result i32)
-         local.get $0
-         local.tee $3
-         i32.const 1
-         i32.add
-         local.set $0
-         local.get $3
-        end
-        block (result i32)
-         local.get $1
-         local.tee $3
-         i32.const 1
-         i32.add
-         local.set $1
-         local.get $3
-        end
-        i32.load8_u
-        i32.store8
-       end
+       local.get $3
+       i32.eqz
+       br_if $~lib/util/memory/memmove|inlined.0
+       local.get $3
+       i32.const 1
+       i32.sub
+       local.set $3
+       local.get $0
+       local.tee $2
+       i32.const 1
+       i32.add
+       local.set $0
+       local.get $1
+       local.tee $4
+       i32.const 1
+       i32.add
+       local.set $1
+       local.get $2
+       local.get $4
+       i32.load8_u
+       i32.store8
        br $continue|0
       end
      end
-    end
-    block $break|1
      loop $continue|1
-      local.get $2
+      local.get $3
       i32.const 8
-      i32.ge_u
+      i32.lt_u
+      i32.eqz
       if
-       block
-        local.get $0
-        local.get $1
-        i64.load
-        i64.store
-        local.get $2
-        i32.const 8
-        i32.sub
-        local.set $2
-        local.get $0
-        i32.const 8
-        i32.add
-        local.set $0
-        local.get $1
-        i32.const 8
-        i32.add
-        local.set $1
-       end
+       local.get $0
+       local.get $1
+       i64.load
+       i64.store
+       local.get $3
+       i32.const 8
+       i32.sub
+       local.set $3
+       local.get $0
+       i32.const 8
+       i32.add
+       local.set $0
+       local.get $1
+       i32.const 8
+       i32.add
+       local.set $1
        br $continue|1
       end
      end
     end
-   end
-   block $break|2
     loop $continue|2
-     local.get $2
+     local.get $3
      if
-      block
-       block (result i32)
-        local.get $0
-        local.tee $3
-        i32.const 1
-        i32.add
-        local.set $0
-        local.get $3
-       end
-       block (result i32)
-        local.get $1
-        local.tee $3
-        i32.const 1
-        i32.add
-        local.set $1
-        local.get $3
-       end
-       i32.load8_u
-       i32.store8
-       local.get $2
-       i32.const 1
-       i32.sub
-       local.set $2
-      end
+      local.get $0
+      local.tee $2
+      i32.const 1
+      i32.add
+      local.set $0
+      local.get $1
+      local.tee $4
+      i32.const 1
+      i32.add
+      local.set $1
+      local.get $2
+      local.get $4
+      i32.load8_u
+      i32.store8
+      local.get $3
+      i32.const 1
+      i32.sub
+      local.set $3
       br $continue|2
      end
     end
-   end
-  else   
-   local.get $1
-   i32.const 7
-   i32.and
-   local.get $0
-   i32.const 7
-   i32.and
-   i32.eq
-   if
-    block $break|3
+   else
+    local.get $1
+    i32.const 7
+    i32.and
+    local.get $0
+    i32.const 7
+    i32.and
+    i32.eq
+    if
      loop $continue|3
       local.get $0
-      local.get $2
+      local.get $3
       i32.add
       i32.const 7
       i32.and
       if
-       block
-        local.get $2
-        i32.eqz
-        if
-         return
-        end
-        local.get $0
-        local.get $2
-        i32.const 1
-        i32.sub
-        local.tee $2
-        i32.add
-        local.get $1
-        local.get $2
-        i32.add
-        i32.load8_u
-        i32.store8
-       end
+       local.get $3
+       i32.eqz
+       br_if $~lib/util/memory/memmove|inlined.0
+       local.get $0
+       local.get $3
+       i32.const 1
+       i32.sub
+       local.tee $3
+       i32.add
+       local.get $1
+       local.get $3
+       i32.add
+       i32.load8_u
+       i32.store8
        br $continue|3
       end
      end
-    end
-    block $break|4
      loop $continue|4
-      local.get $2
+      local.get $3
       i32.const 8
-      i32.ge_u
+      i32.lt_u
+      i32.eqz
       if
-       block
-        local.get $2
-        i32.const 8
-        i32.sub
-        local.set $2
-        local.get $0
-        local.get $2
-        i32.add
-        local.get $1
-        local.get $2
-        i32.add
-        i64.load
-        i64.store
-       end
+       local.get $0
+       local.get $3
+       i32.const 8
+       i32.sub
+       local.tee $3
+       i32.add
+       local.get $1
+       local.get $3
+       i32.add
+       i64.load
+       i64.store
        br $continue|4
       end
      end
     end
-   end
-   block $break|5
     loop $continue|5
-     local.get $2
+     local.get $3
      if
       local.get $0
-      local.get $2
+      local.get $3
       i32.const 1
       i32.sub
-      local.tee $2
+      local.tee $3
       i32.add
       local.get $1
-      local.get $2
+      local.get $3
       i32.add
       i32.load8_u
       i32.store8
@@ -2586,775 +2516,1253 @@
    end
   end
  )
- (func $~lib/allocator/arena/__memory_free (; 26 ;) (type $FUNCSIG$vi) (param $0 i32)
-  nop
- )
- (func $~lib/internal/arraybuffer/reallocateUnsafe (; 27 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  (local $6 i32)
-  local.get $0
-  i32.load
-  local.set $2
-  local.get $1
-  local.get $2
-  i32.gt_s
+ (func $~lib/rt/tlsf/__free (; 22 ;) (type $FUNCSIG$vi) (param $0 i32)
+  global.get $~lib/rt/tlsf/ROOT
+  i32.eqz
   if
-   local.get $1
-   i32.const 1073741816
-   i32.le_s
-   i32.eqz
-   if
-    i32.const 0
-    i32.const 184
-    i32.const 40
-    i32.const 4
-    call $~lib/env/abort
-    unreachable
-   end
-   local.get $1
-   local.get $2
-   call $~lib/internal/arraybuffer/computeSize
-   i32.const 8
-   i32.sub
-   i32.le_s
-   if
-    local.get $0
-    local.get $1
-    i32.store
-   else    
-    local.get $1
-    call $~lib/internal/arraybuffer/allocateUnsafe
-    local.set $3
-    block $~lib/memory/memory.copy|inlined.0
-     local.get $3
-     i32.const 8
-     i32.add
-     local.set $4
-     local.get $0
-     i32.const 8
-     i32.add
-     local.set $5
-     local.get $2
-     local.set $6
-     local.get $4
-     local.get $5
-     local.get $6
-     call $~lib/internal/memory/memmove
-    end
-    block $~lib/memory/memory.free|inlined.0
-     local.get $0
-     local.set $6
-     local.get $6
-     call $~lib/allocator/arena/__memory_free
-     br $~lib/memory/memory.free|inlined.0
-    end
-    local.get $3
-    local.set $0
-   end
-   block $~lib/memory/memory.fill|inlined.3
-    local.get $0
-    i32.const 8
-    i32.add
-    local.get $2
-    i32.add
-    local.set $3
-    i32.const 0
-    local.set $6
-    local.get $1
-    local.get $2
-    i32.sub
-    local.set $5
-    local.get $3
-    local.get $6
-    local.get $5
-    call $~lib/internal/memory/memset
-   end
-  else   
-   local.get $1
-   local.get $2
-   i32.lt_s
-   if
-    local.get $1
-    i32.const 0
-    i32.ge_s
-    i32.eqz
-    if
-     i32.const 0
-     i32.const 184
-     i32.const 62
-     i32.const 4
-     call $~lib/env/abort
-     unreachable
-    end
-    local.get $0
-    local.get $1
-    i32.store
-   end
-  end
-  local.get $0
- )
- (func $~lib/array/Array<assembly/internal/Path2DElement/Path2DElement>#__set (; 28 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  (local $6 i32)
-  (local $7 i32)
-  (local $8 i32)
-  local.get $0
-  i32.load
-  local.set $3
-  local.get $3
-  i32.load
-  i32.const 2
-  i32.shr_u
-  local.set $4
-  local.get $1
-  local.get $4
-  i32.ge_u
-  if
-   local.get $1
-   i32.const 268435454
-   i32.ge_u
-   if
-    i32.const 0
-    i32.const 296
-    i32.const 107
-    i32.const 41
-    call $~lib/env/abort
-    unreachable
-   end
-   local.get $3
-   local.get $1
-   i32.const 1
-   i32.add
-   i32.const 2
-   i32.shl
-   call $~lib/internal/arraybuffer/reallocateUnsafe
-   local.set $3
-   local.get $0
-   local.get $3
-   i32.store
-   local.get $0
-   local.get $1
-   i32.const 1
-   i32.add
-   i32.store offset=4
-  end
-  block $~lib/internal/arraybuffer/STORE<assembly/internal/Path2DElement/Path2DElement,assembly/internal/Path2DElement/Path2DElement>|inlined.0
-   local.get $3
-   local.set $5
-   local.get $1
-   local.set $6
-   local.get $2
-   local.set $7
    i32.const 0
-   local.set $8
-   local.get $5
-   local.get $6
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $8
-   i32.add
-   local.get $7
-   i32.store offset=8
+   i32.const 24
+   i32.const 593
+   i32.const 13
+   call $~lib/builtins/abort
+   unreachable
   end
- )
- (func $~lib/array/Array<assembly/internal/Path2DElement/Path2DElement>#__unchecked_get (; 29 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
   local.get $0
-  i32.load
-  local.set $2
-  local.get $1
-  local.set $3
+  i32.const 15
+  i32.and
+  i32.eqz
   i32.const 0
-  local.set $4
-  local.get $2
-  local.get $3
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $4
-  i32.add
-  i32.load offset=8
+  local.get $0
+  select
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 24
+   i32.const 594
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $~lib/rt/tlsf/ROOT
+  local.get $0
+  i32.const 16
+  i32.sub
+  call $~lib/rt/tlsf/freeBlock
  )
- (func $assembly/renderer/CanvasRenderingContext2D/createPathElements (; 30 ;) (type $FUNCSIG$i) (result i32)
+ (func $~lib/rt/pure/growRoots (; 23 ;) (type $FUNCSIG$v)
   (local $0 i32)
   (local $1 i32)
   (local $2 i32)
+  (local $3 i32)
+  global.get $~lib/rt/pure/CUR
+  global.get $~lib/rt/pure/ROOTS
+  local.tee $1
+  i32.sub
+  local.tee $2
+  i32.const 1
+  i32.shl
+  local.tee $0
+  i32.const 256
+  local.get $0
+  i32.const 256
+  i32.gt_u
+  select
+  local.tee $3
   i32.const 0
-  i32.const 255
-  call $~lib/array/Array<assembly/internal/Path2DElement/Path2DElement>#constructor
-  local.set $0
-  block $break|0
-   i32.const 0
+  call $~lib/rt/tlsf/__alloc
+  local.tee $0
+  local.get $1
+  local.get $2
+  call $~lib/memory/memory.copy
+  local.get $1
+  if
+   local.get $1
+   call $~lib/rt/tlsf/__free
+  end
+  local.get $0
+  global.set $~lib/rt/pure/ROOTS
+  local.get $0
+  local.get $2
+  i32.add
+  global.set $~lib/rt/pure/CUR
+  local.get $0
+  local.get $3
+  i32.add
+  global.set $~lib/rt/pure/END
+ )
+ (func $~lib/rt/pure/appendRoot (; 24 ;) (type $FUNCSIG$vi) (param $0 i32)
+  (local $1 i32)
+  global.get $~lib/rt/pure/CUR
+  local.tee $1
+  global.get $~lib/rt/pure/END
+  i32.ge_u
+  if
+   call $~lib/rt/pure/growRoots
+   global.get $~lib/rt/pure/CUR
    local.set $1
-   loop $repeat|0
-    local.get $1
-    i32.const 4096
-    i32.lt_s
-    i32.eqz
-    br_if $break|0
+  end
+  local.get $1
+  local.get $0
+  i32.store
+  local.get $1
+  i32.const 4
+  i32.add
+  global.set $~lib/rt/pure/CUR
+ )
+ (func $~lib/rt/pure/decrement (; 25 ;) (type $FUNCSIG$vi) (param $0 i32)
+  (local $1 i32)
+  (local $2 i32)
+  local.get $0
+  i32.load offset=4
+  local.tee $2
+  i32.const 268435455
+  i32.and
+  local.set $1
+  local.get $0
+  i32.load
+  i32.const 1
+  i32.and
+  if
+   i32.const 0
+   i32.const 128
+   i32.const 115
+   i32.const 13
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $1
+  i32.const 1
+  i32.eq
+  if
+   local.get $0
+   i32.const 16
+   i32.add
+   i32.const 1
+   call $~lib/rt/__visit_members
+   local.get $2
+   i32.const -2147483648
+   i32.and
+   if
     local.get $0
-    local.get $1
+    i32.const -2147483648
+    i32.store offset=4
+   else
+    global.get $~lib/rt/tlsf/ROOT
+    local.get $0
+    call $~lib/rt/tlsf/freeBlock
+   end
+  else
+   local.get $1
+   i32.const 0
+   i32.le_u
+   if
     i32.const 0
-    call $assembly/internal/Path2DElement/Path2DElement#constructor
-    call $~lib/array/Array<assembly/internal/Path2DElement/Path2DElement>#__set
-    local.get $1
-    i32.const 1
-    i32.add
-    local.set $1
-    br $repeat|0
+    i32.const 128
+    i32.const 124
+    i32.const 15
+    call $~lib/builtins/abort
     unreachable
    end
+   local.get $0
+   i32.load offset=8
+   call $~lib/rt/__typeinfo
+   i32.const 16
+   i32.and
+   if
+    local.get $0
+    local.get $1
+    i32.const 1
+    i32.sub
+    local.get $2
+    i32.const -268435456
+    i32.and
+    i32.or
+    i32.store offset=4
+   else
+    local.get $0
+    local.get $1
+    i32.const 1
+    i32.sub
+    i32.const -1342177280
+    i32.or
+    i32.store offset=4
+    local.get $2
+    i32.const -2147483648
+    i32.and
+    i32.eqz
+    if
+     local.get $0
+     call $~lib/rt/pure/appendRoot
+    end
+   end
+  end
+ )
+ (func $~lib/rt/pure/__release (; 26 ;) (type $FUNCSIG$vi) (param $0 i32)
+  local.get $0
+  i32.const 1180
+  i32.gt_u
+  if
+   local.get $0
+   i32.const 16
+   i32.sub
+   call $~lib/rt/pure/decrement
+  end
+ )
+ (func $~lib/memory/memory.fill (; 27 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
+  (local $3 i32)
+  (local $4 i64)
+  block $~lib/util/memory/memset|inlined.0
+   local.get $2
+   i32.eqz
+   br_if $~lib/util/memory/memset|inlined.0
+   local.get $0
+   local.get $1
+   i32.store8
+   local.get $0
+   local.get $2
+   i32.add
+   i32.const 1
+   i32.sub
+   local.get $1
+   i32.store8
+   local.get $2
+   i32.const 2
+   i32.le_u
+   br_if $~lib/util/memory/memset|inlined.0
+   local.get $0
+   i32.const 1
+   i32.add
+   local.get $1
+   i32.store8
+   local.get $0
+   i32.const 2
+   i32.add
+   local.get $1
+   i32.store8
+   local.get $0
+   local.get $2
+   i32.add
+   local.tee $3
+   i32.const 2
+   i32.sub
+   local.get $1
+   i32.store8
+   local.get $3
+   i32.const 3
+   i32.sub
+   local.get $1
+   i32.store8
+   local.get $2
+   i32.const 6
+   i32.le_u
+   br_if $~lib/util/memory/memset|inlined.0
+   local.get $0
+   i32.const 3
+   i32.add
+   local.get $1
+   i32.store8
+   local.get $0
+   local.get $2
+   i32.add
+   i32.const 4
+   i32.sub
+   local.get $1
+   i32.store8
+   local.get $2
+   i32.const 8
+   i32.le_u
+   br_if $~lib/util/memory/memset|inlined.0
+   local.get $2
+   i32.const 0
+   local.get $0
+   i32.sub
+   i32.const 3
+   i32.and
+   local.tee $2
+   i32.sub
+   local.get $0
+   local.get $2
+   i32.add
+   local.tee $2
+   local.get $1
+   i32.const 255
+   i32.and
+   i32.const 16843009
+   i32.mul
+   local.tee $0
+   i32.store
+   i32.const -4
+   i32.and
+   local.tee $3
+   local.get $2
+   i32.add
+   i32.const 4
+   i32.sub
+   local.get $0
+   i32.store
+   local.get $3
+   i32.const 8
+   i32.le_u
+   br_if $~lib/util/memory/memset|inlined.0
+   local.get $2
+   i32.const 4
+   i32.add
+   local.get $0
+   i32.store
+   local.get $2
+   i32.const 8
+   i32.add
+   local.get $0
+   i32.store
+   local.get $2
+   local.get $3
+   i32.add
+   local.tee $1
+   i32.const 12
+   i32.sub
+   local.get $0
+   i32.store
+   local.get $1
+   i32.const 8
+   i32.sub
+   local.get $0
+   i32.store
+   local.get $3
+   i32.const 24
+   i32.le_u
+   br_if $~lib/util/memory/memset|inlined.0
+   local.get $2
+   i32.const 12
+   i32.add
+   local.get $0
+   i32.store
+   local.get $2
+   i32.const 16
+   i32.add
+   local.get $0
+   i32.store
+   local.get $2
+   i32.const 20
+   i32.add
+   local.get $0
+   i32.store
+   local.get $2
+   i32.const 24
+   i32.add
+   local.get $0
+   i32.store
+   local.get $2
+   local.get $3
+   i32.add
+   local.tee $1
+   i32.const 28
+   i32.sub
+   local.get $0
+   i32.store
+   local.get $1
+   i32.const 24
+   i32.sub
+   local.get $0
+   i32.store
+   local.get $1
+   i32.const 20
+   i32.sub
+   local.get $0
+   i32.store
+   local.get $1
+   i32.const 16
+   i32.sub
+   local.get $0
+   i32.store
+   local.get $2
+   local.get $2
+   i32.const 4
+   i32.and
+   i32.const 24
+   i32.add
+   local.tee $2
+   i32.add
+   local.set $1
+   local.get $3
+   local.get $2
+   i32.sub
+   local.set $2
+   local.get $0
+   i64.extend_i32_u
+   local.tee $4
+   local.get $4
+   i64.const 32
+   i64.shl
+   i64.or
+   local.set $4
+   loop $continue|0
+    local.get $2
+    i32.const 32
+    i32.lt_u
+    i32.eqz
+    if
+     local.get $1
+     local.get $4
+     i64.store
+     local.get $1
+     i32.const 8
+     i32.add
+     local.get $4
+     i64.store
+     local.get $1
+     i32.const 16
+     i32.add
+     local.get $4
+     i64.store
+     local.get $1
+     i32.const 24
+     i32.add
+     local.get $4
+     i64.store
+     local.get $2
+     i32.const 32
+     i32.sub
+     local.set $2
+     local.get $1
+     i32.const 32
+     i32.add
+     local.set $1
+     br $continue|0
+    end
+   end
+  end
+ )
+ (func $~lib/arraybuffer/ArrayBufferView#constructor (; 28 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+  (local $2 i32)
+  (local $3 i32)
+  local.get $1
+  i32.const 134217726
+  i32.gt_u
+  if
+   i32.const 416
+   i32.const 464
+   i32.const 23
+   i32.const 56
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $1
+  i32.const 3
+  i32.shl
+  local.tee $2
+  i32.const 0
+  call $~lib/rt/tlsf/__alloc
+  local.tee $1
+  i32.const 0
+  local.get $2
+  call $~lib/memory/memory.fill
+  local.get $0
+  i32.eqz
+  if
+   i32.const 12
+   i32.const 2
+   call $~lib/rt/tlsf/__alloc
+   call $~lib/rt/pure/__retain
+   local.set $0
+  end
+  local.get $0
+  i32.const 0
+  i32.store
+  local.get $0
+  i32.const 0
+  i32.store offset=4
+  local.get $0
+  i32.const 0
+  i32.store offset=8
+  local.get $1
+  local.get $0
+  i32.load
+  local.tee $3
+  i32.ne
+  if
+   local.get $1
+   call $~lib/rt/pure/__retain
+   drop
+   local.get $3
+   call $~lib/rt/pure/__release
+  end
+  local.get $0
+  local.get $1
+  i32.store
+  local.get $0
+  local.get $1
+  i32.store offset=4
+  local.get $0
+  local.get $2
+  i32.store offset=8
+  local.get $0
+ )
+ (func $~lib/typedarray/Float64Array#constructor (; 29 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+  i32.const 12
+  i32.const 3
+  call $~lib/rt/tlsf/__alloc
+  call $~lib/rt/pure/__retain
+  local.get $0
+  call $~lib/arraybuffer/ArrayBufferView#constructor
+ )
+ (func $~lib/arraybuffer/ArrayBuffer#constructor (; 30 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+  (local $1 i32)
+  local.get $0
+  i32.const 1073741808
+  i32.gt_u
+  if
+   i32.const 416
+   i32.const 464
+   i32.const 54
+   i32.const 42
+   call $~lib/builtins/abort
    unreachable
   end
   local.get $0
   i32.const 0
-  call $~lib/array/Array<assembly/internal/Path2DElement/Path2DElement>#__unchecked_get
-  local.set $2
-  local.get $2
-  i32.const 2
-  i32.store
-  local.get $2
+  call $~lib/rt/tlsf/__alloc
+  local.tee $1
   i32.const 0
-  i32.store offset=56
-  local.get $2
-  i32.const 1
-  i32.store8 offset=60
   local.get $0
+  call $~lib/memory/memory.fill
+  local.get $1
+  call $~lib/rt/pure/__retain
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#constructor (; 31 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#clear (; 31 ;) (type $FUNCSIG$vi) (param $0 i32)
+  (local $1 i32)
+  i32.const 16
+  call $~lib/arraybuffer/ArrayBuffer#constructor
+  local.set $1
   local.get $0
-  i32.eqz
-  if
-   i32.const 268
-   call $~lib/memory/memory.allocate
-   local.set $0
-  end
+  i32.load
+  call $~lib/rt/pure/__release
   local.get $0
-  call $assembly/internal/Buffer/Buffer<i32>#constructor
-  local.set $0
+  local.get $1
+  i32.store
   local.get $0
-  i32.const -1
+  i32.const 3
+  i32.store offset=4
+  i32.const 48
+  call $~lib/arraybuffer/ArrayBuffer#constructor
+  local.set $1
+  local.get $0
+  i32.load offset=8
+  call $~lib/rt/pure/__release
+  local.get $0
+  local.get $1
   i32.store offset=8
   local.get $0
-  i32.const 0
-  i32.store8 offset=12
+  i32.const 4
+  i32.store offset=12
   local.get $0
   i32.const 0
-  i32.const 255
-  i32.const 8
-  i32.mul
-  i32.const 6
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferIdentity
   i32.store offset=16
   local.get $0
   i32.const 0
-  i32.const 8
-  i32.const 6
-  i32.mul
+  i32.store offset=20
+ )
+ (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#constructor (; 32 ;) (type $FUNCSIG$i) (result i32)
+  (local $0 i32)
+  i32.const 24
+  i32.const 9
+  call $~lib/rt/tlsf/__alloc
+  call $~lib/rt/pure/__retain
+  local.tee $0
   i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferIdentity
+  i32.store
+  local.get $0
+  i32.const 0
+  i32.store offset=4
+  local.get $0
+  i32.const 0
+  i32.store offset=8
+  local.get $0
+  i32.const 0
+  i32.store offset=12
+  local.get $0
+  i32.const 0
+  i32.store offset=16
+  local.get $0
+  i32.const 0
   i32.store offset=20
   local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 4
-  i32.mul
-  i32.const 0
+  call $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#clear
+  local.get $0
+ )
+ (func $assembly/internal/Buffer/Buffer<i32>#constructor (; 33 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+  local.get $0
+  i32.eqz
+  if
+   i32.const 16
+   i32.const 4
+   call $~lib/rt/tlsf/__alloc
+   call $~lib/rt/pure/__retain
+   local.set $0
+  end
+  local.get $0
+  i32.const 524288
   call $~lib/arraybuffer/ArrayBuffer#constructor
-  global.get $src/shared/CanvasDirection/CanvasDirection.inherit
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<i32>
+  i32.store
+  local.get $0
+  i32.const 262144
+  call $~lib/arraybuffer/ArrayBuffer#constructor
+  i32.store offset=4
+  local.get $0
+  i32.const 0
+  i32.store offset=8
+  local.get $0
+  i32.const 0
+  i32.store offset=12
+  local.get $0
+ )
+ (func $assembly/internal/StackPointer/StackPointer.create<assembly/renderer/CanvasStack/CanvasStack> (; 34 ;) (type $FUNCSIG$i) (result i32)
+  (local $0 i32)
+  i32.const 55335
+  i32.const 0
+  call $~lib/rt/tlsf/__alloc
+  local.tee $0
+  i32.const 0
+  i32.const 55335
+  call $~lib/memory/memory.fill
+  local.get $0
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/initializeStackPointer (; 35 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+  (local $1 i32)
+  local.get $0
+  f64.const 1
+  f64.store
+  local.get $0
+  f64.const 1
+  f64.store offset=24
+  local.get $0
+  i32.const 2
+  i32.store offset=48
+  local.get $0
+  i32.const 0
+  i32.store offset=52
+  local.get $0
+  i32.const 272
+  local.tee $1
+  i32.store offset=56
+  local.get $1
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $0
+  i32.const 296
+  local.tee $1
+  i32.store offset=80
+  local.get $1
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $0
+  i32.const 320
+  local.tee $1
+  i32.store offset=84
+  local.get $1
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $0
+  f64.const 1
+  f64.store offset=88
+  local.get $0
+  i32.const 0
+  i32.store offset=96
+  local.get $0
+  i32.const 1
+  i32.store8 offset=100
+  local.get $0
+  i32.const 0
+  i32.store offset=104
+  local.get $0
+  i32.const 0
+  i32.store offset=108
+  local.get $0
+  global.get $assembly/renderer/CanvasRenderingContext2D/defaultLineDash
+  i32.store offset=112
+  local.get $0
+  i32.const 2
+  i32.store offset=128
+  local.get $0
+  f64.const 1
+  f64.store offset=136
+  local.get $0
+  f64.const 10
+  f64.store offset=144
+  local.get $0
+  f64.const 0
+  f64.store offset=152
+  local.get $0
+  i32.const 368
+  i32.store offset=160
+  local.get $0
+  i32.const 272
+  local.tee $1
+  i32.store offset=188
+  local.get $1
+  call $~lib/rt/pure/__retain
+  drop
+  i32.const 368
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $0
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/setArrayBufferIdentity (; 36 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+  local.get $0
+  f64.const 1
+  f64.store
+  local.get $0
+  i32.const 8
+  i32.add
+  f64.const 0
+  f64.store
+  local.get $0
+  i32.const 16
+  i32.add
+  f64.const 0
+  f64.store
+  local.get $0
+  i32.const 24
+  i32.add
+  f64.const 1
+  f64.store
+  local.get $0
+  i32.const 32
+  i32.add
+  f64.const 0
+  f64.store
+  local.get $0
+  i32.const 40
+  i32.add
+  f64.const 0
+  f64.store
+  local.get $0
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/createPathElements (; 37 ;) (type $FUNCSIG$i) (result i32)
+  (local $0 i32)
+  i32.const 524288
+  i32.const 0
+  call $~lib/rt/tlsf/__alloc
+  local.tee $0
+  i32.const 0
+  i32.const 524288
+  call $~lib/memory/memory.fill
+  local.get $0
+  i32.const 2
+  i32.store
+  local.get $0
+  i32.const 0
+  i32.store offset=56
+  local.get $0
+  i32.const 1
+  i32.store8 offset=60
+  local.get $0
+  f64.const 1
+  f64.store offset=8
+  local.get $0
+  f64.const 1
+  f64.store offset=32
+  local.get $0
+ )
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#constructor (; 38 ;) (type $FUNCSIG$i) (result i32)
+  (local $0 i32)
+  (local $1 i32)
+  i32.const 184
+  i32.const 5
+  call $~lib/rt/tlsf/__alloc
+  call $~lib/rt/pure/__retain
+  call $assembly/internal/Buffer/Buffer<i32>#constructor
+  local.tee $0
+  i32.const -1
+  i32.store offset=16
+  local.get $0
+  i32.const 0
+  i32.store8 offset=20
+  local.get $0
+  call $assembly/internal/StackPointer/StackPointer.create<assembly/renderer/CanvasStack/CanvasStack>
+  call $assembly/renderer/CanvasRenderingContext2D/initializeStackPointer
   i32.store offset=24
   local.get $0
-  global.get $src/shared/CanvasDirection/CanvasDirection.inherit
+  i32.const 48
+  i32.const 0
+  call $~lib/rt/tlsf/__alloc
+  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferIdentity
+  call $~lib/rt/pure/__retain
   i32.store offset=28
   local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 4
-  i32.mul
   i32.const 2
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  i32.const 0
-  global.get $assembly/renderer/CanvasRenderingContext2D/defaultBlack
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue2<usize>
   i32.store offset=32
   local.get $0
   i32.const 0
   i32.store offset=36
   local.get $0
-  global.get $assembly/renderer/CanvasRenderingContext2D/defaultBlack
+  i32.const 272
   i32.store offset=40
   local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 4
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  global.get $assembly/renderer/CanvasRenderingContext2D/defaultNone
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<usize>
+  i32.const 296
+  call $~lib/rt/pure/__retain
   i32.store offset=44
   local.get $0
-  global.get $assembly/renderer/CanvasRenderingContext2D/defaultNone
+  i32.const 320
+  call $~lib/rt/pure/__retain
   i32.store offset=48
   local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 4
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  global.get $assembly/renderer/CanvasRenderingContext2D/defaultFont
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<usize>
-  i32.store offset=52
-  local.get $0
-  global.get $assembly/renderer/CanvasRenderingContext2D/defaultFont
-  i32.store offset=56
-  local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 8
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
   f64.const 1
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<f64>
-  i32.store offset=60
-  local.get $0
-  f64.const 1
-  f64.store offset=64
+  f64.store offset=56
   local.get $0
   i32.const 0
-  i32.const 255
-  i32.const 4
-  i32.mul
+  i32.store offset=64
+  local.get $0
+  i32.const 1
+  i32.store8 offset=68
+  local.get $0
   i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  global.get $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.source_over
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<i32>
   i32.store offset=72
   local.get $0
-  global.get $src/shared/GlobalCompositeOperation/GlobalCompositeOperation.source_over
+  i32.const 0
   i32.store offset=76
   local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 1
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  i32.const 1
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<bool>
+  global.get $assembly/renderer/CanvasRenderingContext2D/defaultLineDash
+  call $~lib/rt/pure/__retain
   i32.store offset=80
   local.get $0
-  i32.const 1
-  i32.store8 offset=84
+  f64.const 0
+  f64.store offset=88
   local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 4
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  global.get $src/shared/ImageSmoothingQuality/ImageSmoothingQuality.low
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<i32>
-  i32.store offset=88
-  local.get $0
-  global.get $src/shared/ImageSmoothingQuality/ImageSmoothingQuality.low
-  i32.store offset=92
-  local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 4
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  global.get $src/shared/LineCap/LineCap.butt
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<i32>
+  i32.const 2
   i32.store offset=96
   local.get $0
-  global.get $src/shared/LineCap/LineCap.butt
-  i32.store offset=100
+  f64.const 1
+  f64.store offset=104
   local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 4
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  global.get $assembly/renderer/CanvasRenderingContext2D/defaultLineDash
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<usize>
-  i32.store offset=104
-  local.get $0
-  global.get $assembly/renderer/CanvasRenderingContext2D/defaultLineDash
-  i32.store offset=108
-  local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 8
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  f64.const 0
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<f64>
-  i32.store offset=112
+  f64.const 10
+  f64.store offset=112
   local.get $0
   f64.const 0
   f64.store offset=120
   local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 4
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  global.get $src/shared/LineJoin/LineJoin.miter
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<i32>
+  i32.const 368
+  call $~lib/rt/pure/__retain
   i32.store offset=128
   local.get $0
-  global.get $src/shared/LineJoin/LineJoin.miter
-  i32.store offset=132
+  f64.const 0
+  f64.store offset=136
   local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 8
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  f64.const 1
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<f64>
-  i32.store offset=136
-  local.get $0
-  f64.const 1
+  f64.const 0
   f64.store offset=144
   local.get $0
   i32.const 0
-  i32.const 255
-  i32.const 8
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  f64.const 10
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<f64>
   i32.store offset=152
   local.get $0
-  f64.const 10
-  f64.store offset=160
+  i32.const 272
+  i32.store offset=156
   local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 8
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  i32.store offset=168
+  i32.const 3
+  i32.store offset=160
   local.get $0
-  f64.const 0
-  f64.store offset=176
-  local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 4
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  global.get $assembly/renderer/CanvasRenderingContext2D/defaultShadowColor
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<usize>
-  i32.store offset=184
-  local.get $0
-  global.get $assembly/renderer/CanvasRenderingContext2D/defaultShadowColor
-  i32.store offset=188
-  local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 8
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  i32.store offset=192
-  local.get $0
-  f64.const 0
-  f64.store offset=200
-  local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 8
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  i32.store offset=208
-  local.get $0
-  f64.const 0
-  f64.store offset=216
-  local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 4
-  i32.mul
-  i32.const 2
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  i32.const 0
-  global.get $assembly/renderer/CanvasRenderingContext2D/defaultBlack
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue2<usize>
-  i32.store offset=224
-  local.get $0
-  i32.const 0
-  i32.store offset=228
-  local.get $0
-  global.get $assembly/renderer/CanvasRenderingContext2D/defaultBlack
-  i32.store offset=232
-  local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 4
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  global.get $src/shared/TextAlign/TextAlign.start
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<i32>
-  i32.store offset=236
-  local.get $0
-  global.get $src/shared/TextAlign/TextAlign.start
-  i32.store offset=240
-  local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 4
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  global.get $src/shared/TextBaseline/TextBaseline.alphabetic
-  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferValue<i32>
-  i32.store offset=244
-  local.get $0
-  global.get $src/shared/TextBaseline/TextBaseline.alphabetic
-  i32.store offset=248
-  local.get $0
-  i32.const 0
-  i32.const 255
-  i32.const 1
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  i32.store offset=252
+  i32.const 3
+  i32.store offset=164
   local.get $0
   call $assembly/renderer/CanvasRenderingContext2D/createPathElements
-  i32.store offset=256
+  i32.const 128
+  i32.add
+  i32.store offset=168
   local.get $0
-  i32.const 1
-  i32.store offset=260
+  local.get $0
+  i32.eqz
+  if
+   i32.const 184
+   i32.const 5
+   call $~lib/rt/tlsf/__alloc
+   call $~lib/rt/pure/__retain
+   local.set $0
+  end
+  local.get $0
+  i32.const -1
+  i32.store offset=16
   local.get $0
   i32.const 0
-  i32.store offset=264
+  i32.store8 offset=20
+  local.get $0
+  call $assembly/internal/StackPointer/StackPointer.create<assembly/renderer/CanvasStack/CanvasStack>
+  call $assembly/renderer/CanvasRenderingContext2D/initializeStackPointer
+  i32.store offset=24
+  local.get $0
+  i32.const 48
+  i32.const 0
+  call $~lib/rt/tlsf/__alloc
+  call $assembly/renderer/CanvasRenderingContext2D/setArrayBufferIdentity
+  call $~lib/rt/pure/__retain
+  i32.store offset=28
+  local.get $0
+  i32.const 2
+  i32.store offset=32
+  local.get $0
+  i32.const 0
+  i32.store offset=36
+  local.get $0
+  i32.const 272
+  i32.store offset=40
+  local.get $0
+  i32.const 296
+  call $~lib/rt/pure/__retain
+  i32.store offset=44
+  local.get $0
+  i32.const 320
+  call $~lib/rt/pure/__retain
+  i32.store offset=48
+  local.get $0
+  f64.const 1
+  f64.store offset=56
+  local.get $0
+  i32.const 0
+  i32.store offset=64
+  local.get $0
+  i32.const 1
+  i32.store8 offset=68
+  local.get $0
+  i32.const 0
+  i32.store offset=72
+  local.get $0
+  i32.const 0
+  i32.store offset=76
+  local.get $0
+  global.get $assembly/renderer/CanvasRenderingContext2D/defaultLineDash
+  call $~lib/rt/pure/__retain
+  i32.store offset=80
+  local.get $0
+  f64.const 0
+  f64.store offset=88
+  local.get $0
+  i32.const 2
+  i32.store offset=96
+  local.get $0
+  f64.const 1
+  f64.store offset=104
+  local.get $0
+  f64.const 10
+  f64.store offset=112
+  local.get $0
+  f64.const 0
+  f64.store offset=120
+  local.get $0
+  i32.const 368
+  call $~lib/rt/pure/__retain
+  i32.store offset=128
+  local.get $0
+  f64.const 0
+  f64.store offset=136
+  local.get $0
+  f64.const 0
+  f64.store offset=144
+  local.get $0
+  i32.const 0
+  i32.store offset=152
+  local.get $0
+  i32.const 272
+  i32.store offset=156
+  local.get $0
+  i32.const 3
+  i32.store offset=160
+  local.get $0
+  i32.const 3
+  i32.store offset=164
+  local.get $0
+  call $assembly/renderer/CanvasRenderingContext2D/createPathElements
+  i32.const 128
+  i32.add
+  i32.store offset=168
+  local.get $0
+  local.get $0
+  i32.load offset=168
+  i32.const 128
+  i32.sub
+  i32.store offset=172
+  local.get $0
+  local.get $0
+  i32.load offset=172
+  i32.const 524288
+  i32.add
+  i32.store offset=176
+  local.get $0
+  local.get $0
+  i32.load offset=172
+  i32.store offset=180
+  local.get $0
+  i32.load offset=168
+  i32.const 128
+  i32.sub
+  i32.store offset=172
+  local.get $0
+  local.get $0
+  i32.load offset=172
+  i32.const 524288
+  i32.add
+  i32.store offset=176
+  local.get $0
+  local.get $0
+  i32.load offset=172
+  i32.store offset=180
   local.get $0
  )
- (func $~lib/internal/hash/hashStr (; 32 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $~lib/util/hash/hashStr (; 39 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
+  local.get $0
+  call $~lib/rt/pure/__retain
+  drop
   i32.const -2128831035
   local.set $1
-  block $break|0
-   block
-    i32.const 0
-    local.set $2
+  local.get $0
+  if
+   block $break|0
     local.get $0
-    i32.load
+    i32.const 16
+    i32.sub
+    i32.load offset=12
+    i32.const 1
+    i32.shr_u
     i32.const 1
     i32.shl
     local.set $3
-   end
-   loop $repeat|0
-    local.get $2
-    local.get $3
-    i32.lt_u
-    i32.eqz
-    br_if $break|0
-    local.get $1
-    local.get $0
-    local.get $2
-    i32.add
-    i32.load8_u offset=4
-    i32.xor
-    i32.const 16777619
-    i32.mul
-    local.set $1
-    local.get $2
-    i32.const 1
-    i32.add
-    local.set $2
-    br $repeat|0
+    loop $loop|0
+     local.get $2
+     local.get $3
+     i32.ge_u
+     br_if $break|0
+     local.get $0
+     local.get $2
+     i32.add
+     i32.load8_u
+     local.get $1
+     i32.xor
+     i32.const 16777619
+     i32.mul
+     local.set $1
+     local.get $2
+     i32.const 1
+     i32.add
+     local.set $2
+     br $loop|0
+    end
     unreachable
    end
-   unreachable
   end
+  local.get $0
+  call $~lib/rt/pure/__release
   local.get $1
  )
- (func $~lib/internal/string/compareUnsafe (; 33 ;) (type $FUNCSIG$iiiiii) (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (result i32)
+ (func $~lib/util/string/compareImpl (; 40 ;) (type $FUNCSIG$iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+  (local $3 i32)
+  (local $4 i32)
   (local $5 i32)
   (local $6 i32)
-  (local $7 i32)
-  i32.const 0
-  local.set $5
   local.get $0
+  call $~lib/rt/pure/__retain
+  drop
   local.get $1
-  i32.const 1
-  i32.shl
-  i32.add
-  local.set $6
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $0
+  local.set $3
+  local.get $1
+  local.set $4
   local.get $2
-  local.get $3
-  i32.const 1
-  i32.shl
-  i32.add
-  local.set $7
-  block $break|0
+  i32.const 4
+  i32.ge_u
+  if (result i32)
+   local.get $3
+   i32.const 7
+   i32.and
+   local.get $4
+   i32.const 7
+   i32.and
+   i32.or
+   i32.eqz
+  else
+   i32.const 0
+  end
+  if
    loop $continue|0
+    local.get $3
+    i64.load
     local.get $4
-    if (result i32)
-     local.get $6
-     i32.load16_u offset=4
-     local.get $7
-     i32.load16_u offset=4
-     i32.sub
-     local.tee $5
-     i32.eqz
-    else     
-     local.get $4
-    end
+    i64.load
+    i64.eq
     if
-     block
-      local.get $4
-      i32.const 1
-      i32.sub
-      local.set $4
-      local.get $6
-      i32.const 2
-      i32.add
-      local.set $6
-      local.get $7
-      i32.const 2
-      i32.add
-      local.set $7
-     end
-     br $continue|0
+     local.get $3
+     i32.const 8
+     i32.add
+     local.set $3
+     local.get $4
+     i32.const 8
+     i32.add
+     local.set $4
+     local.get $2
+     i32.const 4
+     i32.sub
+     local.tee $2
+     i32.const 4
+     i32.ge_u
+     br_if $continue|0
     end
    end
   end
-  local.get $5
+  loop $continue|1
+   block $break|1
+    local.get $2
+    local.tee $5
+    i32.const 1
+    i32.sub
+    local.set $2
+    local.get $5
+    i32.eqz
+    br_if $break|1
+    local.get $4
+    i32.load16_u
+    local.tee $5
+    local.get $3
+    i32.load16_u
+    local.tee $6
+    i32.ne
+    if
+     local.get $6
+     local.get $5
+     i32.sub
+     local.get $0
+     call $~lib/rt/pure/__release
+     local.get $1
+     call $~lib/rt/pure/__release
+     return
+    else
+     local.get $3
+     i32.const 2
+     i32.add
+     local.set $3
+     local.get $4
+     i32.const 2
+     i32.add
+     local.set $4
+     br $continue|1
+    end
+    unreachable
+   end
+  end
+  local.get $0
+  call $~lib/rt/pure/__release
+  local.get $1
+  call $~lib/rt/pure/__release
+  i32.const 0
  )
- (func $~lib/string/String.__eq (; 34 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/string/String.__eq (; 41 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
-  (local $3 i32)
+  local.get $0
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $1
+  call $~lib/rt/pure/__retain
+  drop
   local.get $0
   local.get $1
   i32.eq
   if
+   local.get $0
+   call $~lib/rt/pure/__release
+   local.get $1
+   call $~lib/rt/pure/__release
    i32.const 1
    return
   end
-  local.get $0
-  i32.const 0
-  i32.eq
-  local.tee $2
-  if (result i32)
-   local.get $2
-  else   
+  block $folding-inner0
    local.get $1
-   i32.const 0
-   i32.eq
-  end
-  if
-   i32.const 0
+   i32.eqz
+   i32.const 1
+   local.get $0
+   select
+   br_if $folding-inner0
+   local.get $0
+   i32.const 16
+   i32.sub
+   i32.load offset=12
+   i32.const 1
+   i32.shr_u
+   local.tee $2
+   local.get $1
+   i32.const 16
+   i32.sub
+   i32.load offset=12
+   i32.const 1
+   i32.shr_u
+   i32.ne
+   br_if $folding-inner0
+   local.get $0
+   local.get $1
+   local.get $2
+   call $~lib/util/string/compareImpl
+   i32.eqz
+   local.get $0
+   call $~lib/rt/pure/__release
+   local.get $1
+   call $~lib/rt/pure/__release
    return
   end
   local.get $0
-  i32.load
-  local.set $3
-  local.get $3
+  call $~lib/rt/pure/__release
   local.get $1
-  i32.load
-  i32.ne
-  if
-   i32.const 0
-   return
-  end
-  local.get $0
+  call $~lib/rt/pure/__release
   i32.const 0
-  local.get $1
-  i32.const 0
-  local.get $3
-  call $~lib/internal/string/compareUnsafe
-  i32.eqz
  )
- (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#find (; 35 ;) (type $FUNCSIG$iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
-  (local $3 i32)
-  (local $4 i32)
+ (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#find (; 42 ;) (type $FUNCSIG$iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+  local.get $1
+  call $~lib/rt/pure/__retain
+  drop
   local.get $0
   i32.load
-  local.get $2
   local.get $0
   i32.load offset=4
+  local.get $2
   i32.and
-  i32.const 4
-  i32.mul
+  i32.const 2
+  i32.shl
   i32.add
-  i32.load offset=8
-  local.set $3
-  block $break|0
-   loop $continue|0
-    local.get $3
+  i32.load
+  local.set $0
+  loop $continue|0
+   local.get $0
+   if
+    local.get $0
+    i32.load offset=8
+    i32.const 1
+    i32.and
+    if (result i32)
+     i32.const 0
+    else
+     local.get $0
+     i32.load
+     local.get $1
+     call $~lib/string/String.__eq
+    end
     if
-     block
-      local.get $3
-      i32.load offset=8
-      i32.const 1
-      i32.and
-      i32.eqz
-      local.tee $4
-      if (result i32)
-       local.get $3
-       i32.load
-       local.get $1
-       call $~lib/string/String.__eq
-      else       
-       local.get $4
-      end
-      if
-       local.get $3
-       return
-      end
-      local.get $3
-      i32.load offset=8
-      i32.const 1
-      i32.const -1
-      i32.xor
-      i32.and
-      local.set $3
-     end
+     local.get $1
+     call $~lib/rt/pure/__release
+     local.get $0
+     return
+    else
+     local.get $0
+     i32.load offset=8
+     i32.const -2
+     i32.and
+     local.set $0
      br $continue|0
     end
+    unreachable
    end
   end
+  local.get $1
+  call $~lib/rt/pure/__release
   i32.const 0
  )
- (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#rehash (; 36 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#rehash (; 43 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -3363,161 +3771,170 @@
   (local $7 i32)
   (local $8 i32)
   (local $9 i32)
-  (local $10 i32)
-  (local $11 i32)
-  (local $12 i32)
   local.get $1
   i32.const 1
   i32.add
-  local.set $2
-  i32.const 0
-  local.get $2
-  i32.const 4
-  i32.mul
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBuffer#constructor
-  local.set $3
-  local.get $2
-  f64.convert_i32_s
-  f64.const 2.6666666666666665
-  f64.mul
-  i32.trunc_f64_s
-  local.set $4
-  i32.const 0
-  local.get $4
-  block $~lib/map/ENTRY_SIZE<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>|inlined.1 (result i32)
-   i32.const 12
-  end
-  i32.mul
-  i32.const 1
+  local.tee $3
+  i32.const 2
+  i32.shl
   call $~lib/arraybuffer/ArrayBuffer#constructor
   local.set $5
+  local.get $3
+  i32.const 3
+  i32.shl
+  i32.const 3
+  i32.div_s
+  local.tee $7
+  i32.const 12
+  i32.mul
+  call $~lib/arraybuffer/ArrayBuffer#constructor
+  local.set $3
   local.get $0
   i32.load offset=8
-  i32.const 8
-  i32.add
-  local.set $6
-  local.get $6
+  local.tee $4
   local.get $0
   i32.load offset=16
-  block $~lib/map/ENTRY_SIZE<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>|inlined.2 (result i32)
-   i32.const 12
-  end
+  i32.const 12
   i32.mul
   i32.add
-  local.set $7
-  local.get $5
-  i32.const 8
-  i32.add
   local.set $8
-  block $break|0
-   loop $continue|0
-    local.get $6
-    local.get $7
-    i32.ne
+  local.get $3
+  local.set $2
+  loop $continue|0
+   local.get $4
+   local.get $8
+   i32.ne
+   if
+    local.get $4
+    i32.load offset=8
+    i32.const 1
+    i32.and
+    i32.eqz
     if
-     block
-      local.get $6
-      local.set $9
-      local.get $9
-      i32.load offset=8
-      i32.const 1
-      i32.and
-      i32.eqz
-      if
-       local.get $8
-       local.set $10
-       local.get $10
-       local.get $9
-       i32.load
-       i32.store
-       local.get $10
-       local.get $9
-       i32.load offset=4
-       i32.store offset=4
-       block $~lib/internal/hash/HASH<~lib/string/String>|inlined.1 (result i32)
-        local.get $9
-        i32.load
-        local.set $11
-        local.get $11
-        call $~lib/internal/hash/hashStr
-        br $~lib/internal/hash/HASH<~lib/string/String>|inlined.1
-       end
-       local.get $1
-       i32.and
-       local.set $11
-       local.get $3
-       local.get $11
-       i32.const 4
-       i32.mul
-       i32.add
-       local.set $12
-       local.get $10
-       local.get $12
-       i32.load offset=8
-       i32.store offset=8
-       local.get $12
-       local.get $8
-       i32.store offset=8
-       local.get $8
-       block $~lib/map/ENTRY_SIZE<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>|inlined.3 (result i32)
-        i32.const 12
-       end
-       i32.add
-       local.set $8
-      end
-      local.get $6
-      block $~lib/map/ENTRY_SIZE<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>|inlined.4 (result i32)
-       i32.const 12
-      end
-      i32.add
-      local.set $6
-     end
-     br $continue|0
+     local.get $2
+     local.get $4
+     i32.load
+     i32.store
+     local.get $2
+     local.get $4
+     i32.load offset=4
+     i32.store offset=4
+     local.get $4
+     i32.load
+     call $~lib/rt/pure/__retain
+     local.tee $6
+     call $~lib/util/hash/hashStr
+     local.set $9
+     local.get $6
+     call $~lib/rt/pure/__release
+     local.get $2
+     local.get $1
+     local.get $9
+     i32.and
+     i32.const 2
+     i32.shl
+     local.get $5
+     i32.add
+     local.tee $6
+     i32.load
+     i32.store offset=8
+     local.get $6
+     local.get $2
+     i32.store
+     local.get $2
+     i32.const 12
+     i32.add
+     local.set $2
     end
+    local.get $4
+    i32.const 12
+    i32.add
+    local.set $4
+    br $continue|0
    end
   end
   local.get $0
-  local.get $3
+  i32.load
+  local.tee $2
+  local.get $5
+  i32.ne
+  if
+   local.get $5
+   call $~lib/rt/pure/__retain
+   drop
+   local.get $2
+   call $~lib/rt/pure/__release
+  end
+  local.get $0
+  local.get $5
   i32.store
   local.get $0
   local.get $1
   i32.store offset=4
   local.get $0
-  local.get $5
+  i32.load offset=8
+  local.tee $1
+  local.get $3
+  i32.ne
+  if
+   local.get $3
+   call $~lib/rt/pure/__retain
+   drop
+   local.get $1
+   call $~lib/rt/pure/__release
+  end
+  local.get $0
+  local.get $3
   i32.store offset=8
   local.get $0
-  local.get $4
+  local.get $7
   i32.store offset=12
   local.get $0
   local.get $0
   i32.load offset=20
   i32.store offset=16
+  local.get $5
+  call $~lib/rt/pure/__release
+  local.get $3
+  call $~lib/rt/pure/__release
  )
- (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#set (; 37 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#set (; 44 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
-  (local $6 i32)
-  block $~lib/internal/hash/HASH<~lib/string/String>|inlined.0 (result i32)
-   local.get $1
-   local.set $3
-   local.get $3
-   call $~lib/internal/hash/hashStr
-   br $~lib/internal/hash/HASH<~lib/string/String>|inlined.0
-  end
+  local.get $1
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $2
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $1
+  call $~lib/rt/pure/__retain
+  local.tee $3
+  call $~lib/util/hash/hashStr
   local.set $4
+  local.get $3
+  call $~lib/rt/pure/__release
   local.get $0
   local.get $1
   local.get $4
   call $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#find
-  local.set $5
-  local.get $5
+  local.tee $3
   if
-   local.get $5
+   local.get $3
+   i32.load offset=4
+   local.tee $0
    local.get $2
-   i32.store offset=4
-  else   
+   i32.ne
+   if
+    local.get $3
+    local.get $2
+    call $~lib/rt/pure/__retain
+    i32.store offset=4
+    local.get $0
+    call $~lib/rt/pure/__release
+   end
+  else
    local.get $0
    i32.load offset=16
    local.get $0
@@ -3529,15 +3946,15 @@
     i32.load offset=20
     local.get $0
     i32.load offset=12
-    f64.convert_i32_s
-    f64.const 0.75
-    f64.mul
-    i32.trunc_f64_s
+    i32.const 3
+    i32.mul
+    i32.const 4
+    i32.div_s
     i32.lt_s
     if (result i32)
      local.get $0
      i32.load offset=4
-    else     
+    else
      local.get $0
      i32.load offset=4
      i32.const 1
@@ -3549,31 +3966,27 @@
    end
    local.get $0
    i32.load offset=8
-   local.set $3
-   local.get $3
-   i32.const 8
-   i32.add
-   block (result i32)
-    local.get $0
-    local.get $0
-    i32.load offset=16
-    local.tee $6
-    i32.const 1
-    i32.add
-    i32.store offset=16
-    local.get $6
-   end
-   block $~lib/map/ENTRY_SIZE<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>|inlined.5 (result i32)
-    i32.const 12
-   end
-   i32.mul
-   i32.add
+   call $~lib/rt/pure/__retain
    local.set $5
+   local.get $0
+   local.get $0
+   i32.load offset=16
+   local.tee $3
+   i32.const 1
+   i32.add
+   i32.store offset=16
+   local.get $3
+   i32.const 12
+   i32.mul
    local.get $5
+   i32.add
+   local.tee $3
    local.get $1
+   call $~lib/rt/pure/__retain
    i32.store
-   local.get $5
+   local.get $3
    local.get $2
+   call $~lib/rt/pure/__retain
    i32.store offset=4
    local.get $0
    local.get $0
@@ -3581,32 +3994,38 @@
    i32.const 1
    i32.add
    i32.store offset=20
+   local.get $3
    local.get $0
    i32.load
-   local.get $4
    local.get $0
    i32.load offset=4
+   local.get $4
    i32.and
-   i32.const 4
-   i32.mul
+   i32.const 2
+   i32.shl
    i32.add
-   local.set $6
-   local.get $5
-   local.get $6
-   i32.load offset=8
+   local.tee $0
+   i32.load
    i32.store offset=8
-   local.get $6
+   local.get $0
+   local.get $3
+   i32.store
    local.get $5
-   i32.store offset=8
+   call $~lib/rt/pure/__release
   end
- )
- (func $assembly/internal/getContext/__use_context (; 38 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
-  (local $2 i32)
-  i32.const 0
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#constructor
-  local.set $2
+  local.get $1
+  call $~lib/rt/pure/__release
   local.get $2
-  i32.const 8
+  call $~lib/rt/pure/__release
+ )
+ (func $assembly/internal/getContext/__use_context (; 45 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  local.get $0
+  call $~lib/rt/pure/__retain
+  drop
+  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#constructor
+  local.tee $2
+  i32.const 16
   i32.add
   local.get $1
   i32.store
@@ -3614,8 +4033,15 @@
   local.get $0
   local.get $2
   call $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#set
+  local.get $0
+  call $~lib/rt/pure/__release
+  local.get $2
+  call $~lib/rt/pure/__release
  )
- (func $assembly/renderer/Image/__image_loaded (; 39 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $assembly/renderer/Image/__image_loaded (; 46 ;) (type $FUNCSIG$viii) (param $0 i32) (param $1 i32) (param $2 i32)
+  local.get $0
+  call $~lib/rt/pure/__retain
+  drop
   local.get $0
   i32.const 4
   i32.add
@@ -3631,37 +4057,159 @@
   i32.add
   i32.const 1
   i32.store8
- )
- (func $~lib/internal/memory/memcmp (; 40 ;) (type $FUNCSIG$iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
-  (local $3 i32)
   local.get $0
-  local.get $1
-  i32.eq
-  if
-   i32.const 0
-   return
-  end
-  block $break|0
-   loop $continue|0
+  call $~lib/rt/pure/__release
+ )
+ (func $~lib/memory/memory.init (; 47 ;) (type $FUNCSIG$viiii) (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32)
+  i32.const 608
+  i32.const 656
+  i32.const 35
+  i32.const 4
+  call $~lib/builtins/abort
+  unreachable
+ )
+ (func $~lib/memory/memory.drop (; 48 ;) (type $FUNCSIG$vi) (param $0 i32)
+  i32.const 608
+  i32.const 656
+  i32.const 42
+  i32.const 4
+  call $~lib/builtins/abort
+  unreachable
+ )
+ (func $~lib/memory/memory.repeat (; 49 ;) (type $FUNCSIG$viiii) (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32)
+  (local $4 i32)
+  local.get $2
+  local.get $3
+  i32.mul
+  local.set $3
+  loop $continue|0
+   local.get $4
+   local.get $3
+   i32.lt_u
+   if
+    local.get $0
+    local.get $4
+    i32.add
+    local.get $1
     local.get $2
-    i32.const 0
-    i32.ne
-    local.tee $3
-    if (result i32)
+    call $~lib/memory/memory.copy
+    local.get $2
+    local.get $4
+    i32.add
+    local.set $4
+    br $continue|0
+   end
+  end
+ )
+ (func $~lib/memory/memory.compare (; 50 ;) (type $FUNCSIG$iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+  (local $3 i32)
+  (local $4 i32)
+  block $~lib/util/memory/memcmp|inlined.0 (result i32)
+   i32.const 0
+   local.get $0
+   local.get $1
+   i32.eq
+   br_if $~lib/util/memory/memcmp|inlined.0
+   drop
+   local.get $0
+   i32.const 7
+   i32.and
+   local.get $1
+   i32.const 7
+   i32.and
+   i32.eq
+   if
+    loop $continue|0
      local.get $0
-     i32.load8_u
-     local.get $1
-     i32.load8_u
-     i32.eq
-    else     
-     local.get $3
-    end
-    if
-     block
+     i32.const 7
+     i32.and
+     if
+      i32.const 0
       local.get $2
-      i32.const 1
+      i32.eqz
+      br_if $~lib/util/memory/memcmp|inlined.0
+      drop
+      local.get $0
+      i32.load8_u
+      local.tee $3
+      local.get $1
+      i32.load8_u
+      local.tee $4
+      i32.ne
+      if
+       local.get $3
+       local.get $4
+       i32.sub
+       br $~lib/util/memory/memcmp|inlined.0
+      else
+       local.get $2
+       i32.const 1
+       i32.sub
+       local.set $2
+       local.get $0
+       i32.const 1
+       i32.add
+       local.set $0
+       local.get $1
+       i32.const 1
+       i32.add
+       local.set $1
+       br $continue|0
+      end
+      unreachable
+     end
+    end
+    loop $continue|1
+     block $break|1
+      local.get $2
+      i32.const 8
+      i32.lt_u
+      br_if $break|1
+      local.get $0
+      i64.load
+      local.get $1
+      i64.load
+      i64.ne
+      br_if $break|1
+      local.get $0
+      i32.const 8
+      i32.add
+      local.set $0
+      local.get $1
+      i32.const 8
+      i32.add
+      local.set $1
+      local.get $2
+      i32.const 8
       i32.sub
       local.set $2
+      br $continue|1
+     end
+    end
+   end
+   loop $continue|2
+    block $break|2
+     local.get $2
+     local.tee $3
+     i32.const 1
+     i32.sub
+     local.set $2
+     local.get $3
+     i32.eqz
+     br_if $break|2
+     local.get $0
+     i32.load8_u
+     local.tee $3
+     local.get $1
+     i32.load8_u
+     local.tee $4
+     i32.ne
+     if
+      local.get $3
+      local.get $4
+      i32.sub
+      br $~lib/util/memory/memcmp|inlined.0
+     else
       local.get $0
       i32.const 1
       i32.add
@@ -3670,2265 +4218,592 @@
       i32.const 1
       i32.add
       local.set $1
+      br $continue|2
      end
-     br $continue|0
+     unreachable
     end
    end
-  end
-  local.get $2
-  if (result i32)
-   local.get $0
-   i32.load8_u
-   local.get $1
-   i32.load8_u
-   i32.sub
-  else   
    i32.const 0
   end
  )
- (func $~lib/memory/memory.compare (; 41 ;) (type $FUNCSIG$iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
-  local.get $0
-  local.get $1
-  local.get $2
-  call $~lib/internal/memory/memcmp
- )
- (func $~lib/memory/memory.free (; 42 ;) (type $FUNCSIG$vi) (param $0 i32)
-  local.get $0
-  call $~lib/allocator/arena/__memory_free
-  return
- )
- (func $~lib/allocator/arena/__memory_reset (; 43 ;) (type $FUNCSIG$v)
-  global.get $~lib/allocator/arena/startOffset
-  global.set $~lib/allocator/arena/offset
- )
- (func $~lib/memory/memory.reset (; 44 ;) (type $FUNCSIG$v)
-  call $~lib/allocator/arena/__memory_reset
-  return
- )
- (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#has (; 45 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#has (; 51 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+  (local $1 i32)
   (local $2 i32)
-  local.get $0
+  i32.const 704
+  call $~lib/rt/pure/__retain
+  drop
+  i32.const 704
+  call $~lib/rt/pure/__retain
+  local.tee $1
+  call $~lib/util/hash/hashStr
+  local.set $2
   local.get $1
-  block $~lib/internal/hash/HASH<~lib/string/String>|inlined.2 (result i32)
-   local.get $1
-   local.set $2
-   local.get $2
-   call $~lib/internal/hash/hashStr
-   br $~lib/internal/hash/HASH<~lib/string/String>|inlined.2
-  end
+  call $~lib/rt/pure/__release
+  local.get $0
+  i32.const 704
+  local.get $2
   call $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#find
   i32.const 0
   i32.ne
+  i32.const 704
+  call $~lib/rt/pure/__release
  )
- (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#get (; 46 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/string/String#concat (; 52 ;) (type $FUNCSIG$i) (result i32)
+  (local $0 i32)
+  (local $1 i32)
   (local $2 i32)
-  (local $3 i32)
+  i32.const 704
+  call $~lib/rt/pure/__retain
+  drop
+  i32.const 700
+  i32.load
+  i32.const 1
+  i32.shr_u
+  i32.const 1
+  i32.shl
+  local.tee $2
+  i32.const 724
+  i32.load
+  i32.const 1
+  i32.shr_u
+  i32.const 1
+  i32.shl
+  local.tee $0
+  i32.add
+  local.tee $1
+  i32.eqz
+  if
+   i32.const 832
+   call $~lib/rt/pure/__retain
+   i32.const 704
+   call $~lib/rt/pure/__release
+   return
+  end
+  local.get $1
+  i32.const 1
+  call $~lib/rt/tlsf/__alloc
+  call $~lib/rt/pure/__retain
+  local.tee $1
+  i32.const 728
+  local.get $0
+  call $~lib/memory/memory.copy
   local.get $0
   local.get $1
-  block $~lib/internal/hash/HASH<~lib/string/String>|inlined.3 (result i32)
-   local.get $1
-   local.set $2
-   local.get $2
-   call $~lib/internal/hash/hashStr
-   br $~lib/internal/hash/HASH<~lib/string/String>|inlined.3
-  end
+  i32.add
+  i32.const 704
+  local.get $2
+  call $~lib/memory/memory.copy
+  i32.const 704
+  call $~lib/rt/pure/__release
+  local.get $1
+ )
+ (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#get (; 53 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+  (local $1 i32)
+  (local $2 i32)
+  i32.const 704
+  call $~lib/rt/pure/__retain
+  drop
+  i32.const 704
+  call $~lib/rt/pure/__retain
+  local.tee $1
+  call $~lib/util/hash/hashStr
+  local.set $2
+  local.get $1
+  call $~lib/rt/pure/__release
+  local.get $0
+  i32.const 704
+  local.get $2
   call $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#find
-  local.set $3
-  local.get $3
-  if (result i32)
-   local.get $3
-   i32.load offset=4
-  else   
+  local.tee $0
+  i32.eqz
+  if
+   i32.const 704
+   call $~lib/rt/pure/__release
+   i32.const 928
+   i32.const 984
+   i32.const 111
+   i32.const 16
+   call $~lib/builtins/abort
    unreachable
   end
- )
- (func $assembly/internal/getContext/getContextById (; 47 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  global.get $assembly/internal/getContext/map
   local.get $0
+  i32.load offset=4
+  call $~lib/rt/pure/__retain
+  i32.const 704
+  call $~lib/rt/pure/__release
+ )
+ (func $assembly/internal/getContext/getContextById (; 54 ;) (type $FUNCSIG$i) (result i32)
+  (local $0 i32)
+  i32.const 704
+  call $~lib/rt/pure/__retain
+  drop
+  global.get $assembly/internal/getContext/map
   call $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#has
   i32.eqz
   if
-   i32.const 0
-   i32.const 344
+   i32.const 704
+   call $~lib/rt/pure/__release
+   i32.const 728
+   call $~lib/rt/pure/__retain
+   drop
+   i32.const 704
+   call $~lib/rt/pure/__retain
+   drop
+   call $~lib/string/String#concat
+   i32.const 728
+   call $~lib/rt/pure/__release
+   i32.const 704
+   call $~lib/rt/pure/__release
+   i32.const 848
    i32.const 26
    i32.const 22
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/internal/getContext/map
-  local.get $0
   call $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#get
+  local.set $0
+  i32.const 704
+  call $~lib/rt/pure/__release
+  local.get $0
+  call $~lib/rt/pure/__release
+  local.get $0
  )
- (func $assembly/save-restore.test/init (; 48 ;) (type $FUNCSIG$v)
-  i32.const 328
+ (func $assembly/save-restore.test/init (; 55 ;) (type $FUNCSIG$v)
+  (local $0 i32)
   call $assembly/internal/getContext/getContextById
+  global.get $assembly/save-restore.test/ctx
+  call $~lib/rt/pure/__release
   global.set $assembly/save-restore.test/ctx
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 27
+   i32.const 1024
+   i32.const 25
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#save (; 49 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#save (; 56 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
-  (local $5 i32)
-  (local $6 i32)
-  (local $7 i32)
-  (local $8 i32)
-  (local $9 i32)
-  (local $10 i32)
-  (local $11 i32)
-  (local $12 i32)
-  (local $13 i32)
-  (local $14 f64)
-  (local $15 i32)
-  (local $16 i32)
-  (local $17 i32)
-  (local $18 i32)
   local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  local.get $2
+  i32.load8_u offset=20
   i32.const 1
   i32.add
-  local.set $3
-  local.get $3
-  global.get $~lib/builtins/u8.MAX_VALUE
+  local.tee $3
+  i32.const 255
   i32.ge_s
   if
    unreachable
   end
-  local.get $2
-  i32.const 6
-  i32.mul
-  local.set $4
-  local.get $4
-  i32.const 6
-  i32.add
-  local.set $5
-  local.get $2
-  i32.const 1
-  i32.shl
-  local.set $6
-  local.get $6
-  i32.const 2
-  i32.add
-  local.set $7
-  local.get $0
-  i32.load offset=16
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.7
-   local.get $8
-   local.set $9
-   local.get $5
-   local.set $10
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.0 (result f64)
-    local.get $8
-    local.set $11
-    local.get $4
-    local.set $12
-    i32.const 0
-    local.set $13
-    local.get $11
-    local.get $12
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $13
-    i32.add
-    f64.load offset=8
-   end
-   local.set $14
-   i32.const 0
-   local.set $13
-   local.get $9
-   local.get $10
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $13
-   i32.add
-   local.get $14
-   f64.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.8
-   local.get $8
-   local.set $13
-   local.get $5
-   i32.const 1
-   i32.add
-   local.set $10
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.1 (result f64)
-    local.get $8
-    local.set $9
-    local.get $4
-    i32.const 1
-    i32.add
-    local.set $12
-    i32.const 0
-    local.set $11
-    local.get $9
-    local.get $12
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $11
-    i32.add
-    f64.load offset=8
-   end
-   local.set $14
-   i32.const 0
-   local.set $11
-   local.get $13
-   local.get $10
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $11
-   i32.add
-   local.get $14
-   f64.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.9
-   local.get $8
-   local.set $11
-   local.get $5
-   i32.const 2
-   i32.add
-   local.set $10
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.2 (result f64)
-    local.get $8
-    local.set $13
-    local.get $4
-    i32.const 2
-    i32.add
-    local.set $12
-    i32.const 0
-    local.set $9
-    local.get $13
-    local.get $12
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    f64.load offset=8
-   end
-   local.set $14
-   i32.const 0
-   local.set $9
-   local.get $11
-   local.get $10
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $9
-   i32.add
-   local.get $14
-   f64.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.10
-   local.get $8
-   local.set $9
-   local.get $5
-   i32.const 3
-   i32.add
-   local.set $10
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.3 (result f64)
-    local.get $8
-    local.set $11
-    local.get $4
-    i32.const 3
-    i32.add
-    local.set $12
-    i32.const 0
-    local.set $13
-    local.get $11
-    local.get $12
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $13
-    i32.add
-    f64.load offset=8
-   end
-   local.set $14
-   i32.const 0
-   local.set $13
-   local.get $9
-   local.get $10
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $13
-   i32.add
-   local.get $14
-   f64.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.11
-   local.get $8
-   local.set $13
-   local.get $5
-   i32.const 4
-   i32.add
-   local.set $10
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.4 (result f64)
-    local.get $8
-    local.set $9
-    local.get $4
-    i32.const 4
-    i32.add
-    local.set $12
-    i32.const 0
-    local.set $11
-    local.get $9
-    local.get $12
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $11
-    i32.add
-    f64.load offset=8
-   end
-   local.set $14
-   i32.const 0
-   local.set $11
-   local.get $13
-   local.get $10
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $11
-   i32.add
-   local.get $14
-   f64.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.12
-   local.get $8
-   local.set $11
-   local.get $5
-   i32.const 5
-   i32.add
-   local.set $10
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.5 (result f64)
-    local.get $8
-    local.set $13
-    local.get $4
-    i32.const 5
-    i32.add
-    local.set $12
-    i32.const 0
-    local.set $9
-    local.get $13
-    local.get $12
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    f64.load offset=8
-   end
-   local.set $14
-   i32.const 0
-   local.set $9
-   local.get $11
-   local.get $10
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $9
-   i32.add
-   local.get $14
-   f64.store offset=8
-  end
   local.get $0
   i32.load offset=24
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<i32,i32>|inlined.1
-   local.get $8
-   local.set $9
-   local.get $3
-   local.set $10
-   block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.0 (result i32)
-    local.get $8
-    local.set $11
-    local.get $2
-    local.set $12
-    i32.const 0
-    local.set $13
-    local.get $11
-    local.get $12
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $13
-    i32.add
-    i32.load offset=8
-   end
-   local.set $13
-   i32.const 0
-   local.set $12
-   local.get $9
-   local.get $10
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $12
-   i32.add
-   local.get $13
-   i32.store offset=8
-  end
+  local.tee $4
+  i32.const 217
+  i32.add
+  local.tee $2
+  local.get $4
+  i32.const 217
+  call $~lib/memory/memory.copy
   local.get $0
-  i32.load offset=32
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.3
-   local.get $8
-   local.set $12
-   local.get $7
-   local.set $13
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.0 (result i32)
-    local.get $8
-    local.set $10
-    local.get $6
-    local.set $9
-    i32.const 0
-    local.set $11
-    local.get $10
-    local.get $9
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $11
-    i32.add
-    i32.load offset=8
-   end
-   local.set $11
-   i32.const 0
-   local.set $9
-   local.get $12
-   local.get $13
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $9
-   i32.add
-   local.get $11
-   i32.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.4
-   local.get $8
-   local.set $9
-   local.get $7
-   i32.const 1
-   i32.add
-   local.set $11
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.1 (result i32)
-    local.get $8
-    local.set $13
-    local.get $6
-    i32.const 1
-    i32.add
-    local.set $12
-    i32.const 0
-    local.set $10
-    local.get $13
-    local.get $12
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $10
-    i32.add
-    i32.load offset=8
-   end
-   local.set $10
-   i32.const 0
-   local.set $12
-   local.get $9
-   local.get $11
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $12
-   i32.add
-   local.get $10
-   i32.store offset=8
-  end
-  local.get $0
-  i32.load offset=44
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.5
-   local.get $8
-   local.set $12
-   local.get $3
-   local.set $10
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.2 (result i32)
-    local.get $8
-    local.set $11
-    local.get $2
-    local.set $9
-    i32.const 0
-    local.set $13
-    local.get $11
-    local.get $9
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $13
-    i32.add
-    i32.load offset=8
-   end
-   local.set $13
-   i32.const 0
-   local.set $9
-   local.get $12
-   local.get $10
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $9
-   i32.add
-   local.get $13
-   i32.store offset=8
-  end
-  local.get $0
-  i32.load offset=52
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.6
-   local.get $8
-   local.set $9
-   local.get $3
-   local.set $13
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.3 (result i32)
-    local.get $8
-    local.set $10
-    local.get $2
-    local.set $12
-    i32.const 0
-    local.set $11
-    local.get $10
-    local.get $12
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $11
-    i32.add
-    i32.load offset=8
-   end
-   local.set $11
-   i32.const 0
-   local.set $12
-   local.get $9
-   local.get $13
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $12
-   i32.add
-   local.get $11
-   i32.store offset=8
-  end
-  local.get $0
-  i32.load offset=60
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.13
-   local.get $8
-   local.set $12
-   local.get $3
-   local.set $11
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.6 (result f64)
-    local.get $8
-    local.set $13
-    local.get $2
-    local.set $9
-    i32.const 0
-    local.set $10
-    local.get $13
-    local.get $9
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $10
-    i32.add
-    f64.load offset=8
-   end
-   local.set $14
-   i32.const 0
-   local.set $10
-   local.get $12
-   local.get $11
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $10
-   i32.add
-   local.get $14
-   f64.store offset=8
-  end
-  local.get $0
-  i32.load offset=72
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<i32,i32>|inlined.2
-   local.get $8
-   local.set $10
-   local.get $3
-   local.set $11
-   block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.1 (result i32)
-    local.get $8
-    local.set $12
-    local.get $2
-    local.set $9
-    i32.const 0
-    local.set $13
-    local.get $12
-    local.get $9
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $13
-    i32.add
-    i32.load offset=8
-   end
-   local.set $13
-   i32.const 0
-   local.set $9
-   local.get $10
-   local.get $11
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $9
-   i32.add
-   local.get $13
-   i32.store offset=8
-  end
-  local.get $0
-  i32.load offset=80
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<bool,bool>|inlined.1
-   local.get $8
-   local.set $9
-   local.get $3
-   local.set $13
-   block $~lib/internal/arraybuffer/LOAD<bool,bool>|inlined.0 (result i32)
-    local.get $8
-    local.set $11
-    local.get $2
-    local.set $10
-    i32.const 0
-    local.set $12
-    local.get $11
-    local.get $10
-    i32.const 0
-    i32.shl
-    i32.add
-    local.get $12
-    i32.add
-    i32.load8_u offset=8
-   end
-   local.set $12
-   i32.const 0
-   local.set $10
-   local.get $9
-   local.get $13
-   i32.const 0
-   i32.shl
-   i32.add
-   local.get $10
-   i32.add
-   local.get $12
-   i32.store8 offset=8
-  end
-  local.get $0
-  i32.load offset=88
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<i32,i32>|inlined.3
-   local.get $8
-   local.set $10
-   local.get $3
-   local.set $12
-   block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.2 (result i32)
-    local.get $8
-    local.set $13
-    local.get $2
-    local.set $9
-    i32.const 0
-    local.set $11
-    local.get $13
-    local.get $9
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $11
-    i32.add
-    i32.load offset=8
-   end
-   local.set $11
-   i32.const 0
-   local.set $9
-   local.get $10
-   local.get $12
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $9
-   i32.add
-   local.get $11
-   i32.store offset=8
-  end
-  local.get $0
-  i32.load offset=96
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<i32,i32>|inlined.4
-   local.get $8
-   local.set $9
-   local.get $3
-   local.set $11
-   block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.3 (result i32)
-    local.get $8
-    local.set $12
-    local.get $2
-    local.set $10
-    i32.const 0
-    local.set $13
-    local.get $12
-    local.get $10
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $13
-    i32.add
-    i32.load offset=8
-   end
-   local.set $13
-   i32.const 0
-   local.set $10
-   local.get $9
-   local.get $11
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $10
-   i32.add
-   local.get $13
-   i32.store offset=8
-  end
-  block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.4 (result i32)
-   local.get $0
-   i32.load offset=104
-   local.set $10
-   local.get $3
-   local.set $13
-   i32.const 0
-   local.set $11
-   local.get $10
-   local.get $13
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $11
-   i32.add
-   i32.load offset=8
-  end
-  local.set $15
-  local.get $15
-  i32.const 0
-  i32.ne
-  if
-   block $~lib/memory/memory.free|inlined.1
-    local.get $15
-    i32.load
-    local.set $11
-    local.get $11
-    call $~lib/allocator/arena/__memory_free
-    br $~lib/memory/memory.free|inlined.1
-   end
-   block $~lib/memory/memory.free|inlined.2
-    local.get $15
-    local.set $11
-    local.get $11
-    call $~lib/allocator/arena/__memory_free
-    br $~lib/memory/memory.free|inlined.2
-   end
-  end
-  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.7
-   local.get $0
-   i32.load offset=104
-   local.set $11
-   local.get $3
-   local.set $13
-   i32.const 0
-   local.set $10
-   i32.const 0
-   local.set $9
-   local.get $11
-   local.get $13
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $9
-   i32.add
-   local.get $10
-   i32.store offset=8
-  end
-  local.get $0
-  i32.load offset=112
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.14
-   local.get $8
-   local.set $9
-   local.get $3
-   local.set $10
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.7 (result f64)
-    local.get $8
-    local.set $13
-    local.get $2
-    local.set $11
-    i32.const 0
-    local.set $12
-    local.get $13
-    local.get $11
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $12
-    i32.add
-    f64.load offset=8
-   end
-   local.set $14
-   i32.const 0
-   local.set $12
-   local.get $9
-   local.get $10
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $12
-   i32.add
-   local.get $14
-   f64.store offset=8
-  end
-  local.get $0
-  i32.load offset=128
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<i32,i32>|inlined.5
-   local.get $8
-   local.set $12
-   local.get $3
-   local.set $10
-   block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.4 (result i32)
-    local.get $8
-    local.set $9
-    local.get $2
-    local.set $11
-    i32.const 0
-    local.set $13
-    local.get $9
-    local.get $11
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $13
-    i32.add
-    i32.load offset=8
-   end
-   local.set $13
-   i32.const 0
-   local.set $11
-   local.get $12
-   local.get $10
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $11
-   i32.add
-   local.get $13
-   i32.store offset=8
-  end
-  local.get $0
-  i32.load offset=136
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.15
-   local.get $8
-   local.set $11
-   local.get $3
-   local.set $13
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.8 (result f64)
-    local.get $8
-    local.set $10
-    local.get $2
-    local.set $12
-    i32.const 0
-    local.set $9
-    local.get $10
-    local.get $12
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    f64.load offset=8
-   end
-   local.set $14
-   i32.const 0
-   local.set $9
-   local.get $11
-   local.get $13
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $9
-   i32.add
-   local.get $14
-   f64.store offset=8
-  end
-  local.get $0
-  i32.load offset=152
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.16
-   local.get $8
-   local.set $9
-   local.get $3
-   local.set $13
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.9 (result f64)
-    local.get $8
-    local.set $11
-    local.get $2
-    local.set $12
-    i32.const 0
-    local.set $10
-    local.get $11
-    local.get $12
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $10
-    i32.add
-    f64.load offset=8
-   end
-   local.set $14
-   i32.const 0
-   local.set $10
-   local.get $9
-   local.get $13
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $10
-   i32.add
-   local.get $14
-   f64.store offset=8
-  end
-  local.get $0
-  i32.load offset=168
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.17
-   local.get $8
-   local.set $10
-   local.get $3
-   local.set $13
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.10 (result f64)
-    local.get $8
-    local.set $9
-    local.get $2
-    local.set $12
-    i32.const 0
-    local.set $11
-    local.get $9
-    local.get $12
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $11
-    i32.add
-    f64.load offset=8
-   end
-   local.set $14
-   i32.const 0
-   local.set $11
-   local.get $10
-   local.get $13
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $11
-   i32.add
-   local.get $14
-   f64.store offset=8
-  end
-  local.get $0
-  i32.load offset=184
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.8
-   local.get $8
-   local.set $11
-   local.get $3
-   local.set $13
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.5 (result i32)
-    local.get $8
-    local.set $10
-    local.get $2
-    local.set $12
-    i32.const 0
-    local.set $9
-    local.get $10
-    local.get $12
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    i32.load offset=8
-   end
-   local.set $9
-   i32.const 0
-   local.set $12
-   local.get $11
-   local.get $13
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $12
-   i32.add
-   local.get $9
-   i32.store offset=8
-  end
-  local.get $0
-  i32.load offset=192
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.18
-   local.get $8
-   local.set $12
-   local.get $3
-   local.set $9
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.11 (result f64)
-    local.get $8
-    local.set $13
-    local.get $2
-    local.set $11
-    i32.const 0
-    local.set $10
-    local.get $13
-    local.get $11
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $10
-    i32.add
-    f64.load offset=8
-   end
-   local.set $14
-   i32.const 0
-   local.set $10
-   local.get $12
-   local.get $9
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $10
-   i32.add
-   local.get $14
-   f64.store offset=8
-  end
-  local.get $0
-  i32.load offset=208
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.19
-   local.get $8
-   local.set $10
-   local.get $3
-   local.set $9
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.12 (result f64)
-    local.get $8
-    local.set $12
-    local.get $2
-    local.set $11
-    i32.const 0
-    local.set $13
-    local.get $12
-    local.get $11
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $13
-    i32.add
-    f64.load offset=8
-   end
-   local.set $14
-   i32.const 0
-   local.set $13
-   local.get $10
-   local.get $9
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $13
-   i32.add
-   local.get $14
-   f64.store offset=8
-  end
-  local.get $0
-  i32.load offset=224
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.9
-   local.get $8
-   local.set $13
-   local.get $7
-   local.set $9
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.6 (result i32)
-    local.get $8
-    local.set $10
-    local.get $6
-    local.set $11
-    i32.const 0
-    local.set $12
-    local.get $10
-    local.get $11
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $12
-    i32.add
-    i32.load offset=8
-   end
-   local.set $12
-   i32.const 0
-   local.set $11
-   local.get $13
-   local.get $9
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $11
-   i32.add
-   local.get $12
-   i32.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.10
-   local.get $8
-   local.set $11
-   local.get $7
-   i32.const 1
-   i32.add
-   local.set $12
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.7 (result i32)
-    local.get $8
-    local.set $9
-    local.get $6
-    i32.const 1
-    i32.add
-    local.set $13
-    i32.const 0
-    local.set $10
-    local.get $9
-    local.get $13
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $10
-    i32.add
-    i32.load offset=8
-   end
-   local.set $10
-   i32.const 0
-   local.set $13
-   local.get $11
-   local.get $12
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $13
-   i32.add
-   local.get $10
-   i32.store offset=8
-  end
-  local.get $0
-  i32.load offset=244
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<i32,i32>|inlined.6
-   local.get $8
-   local.set $13
-   local.get $3
-   local.set $10
-   block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.5 (result i32)
-    local.get $8
-    local.set $12
-    local.get $2
-    local.set $11
-    i32.const 0
-    local.set $9
-    local.get $12
-    local.get $11
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    i32.load offset=8
-   end
-   local.set $9
-   i32.const 0
-   local.set $11
-   local.get $13
-   local.get $10
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $11
-   i32.add
-   local.get $9
-   i32.store offset=8
-  end
-  local.get $0
-  i32.load offset=236
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<i32,i32>|inlined.7
-   local.get $8
-   local.set $11
-   local.get $3
-   local.set $9
-   block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.6 (result i32)
-    local.get $8
-    local.set $10
-    local.get $2
-    local.set $13
-    i32.const 0
-    local.set $12
-    local.get $10
-    local.get $13
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $12
-    i32.add
-    i32.load offset=8
-   end
-   local.set $12
-   i32.const 0
-   local.set $13
-   local.get $11
-   local.get $9
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $13
-   i32.add
-   local.get $12
-   i32.store offset=8
-  end
+  local.get $2
+  i32.store offset=24
+  local.get $2
   local.get $1
-  i32.const 0
-  i32.ne
+  i32.store8 offset=216
+  local.get $2
+  i32.load offset=60
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $2
+  i32.load offset=64
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $2
+  i32.load offset=56
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $2
+  i32.load offset=80
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $2
+  i32.load offset=84
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $2
+  i32.load offset=112
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $2
+  i32.load offset=160
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $2
+  i32.load offset=192
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $2
+  i32.load offset=196
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $2
+  i32.load offset=188
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $1
   if
-   block $~lib/internal/arraybuffer/STORE<bool,bool>|inlined.2
-    local.get $0
-    i32.load offset=252
-    local.set $13
-    local.get $3
-    local.set $12
-    i32.const 1
-    local.set $9
-    i32.const 0
-    local.set $11
-    local.get $13
-    local.get $12
-    i32.const 0
-    i32.shl
-    i32.add
-    local.get $11
-    i32.add
-    local.get $9
-    i32.store8 offset=8
-   end
-   block $assembly/internal/Buffer/Buffer<i32>#_writeZero|inlined.0
-    local.get $0
-    local.set $11
-    i32.const 38
-    local.set $9
-    local.get $11
-    i32.load
-    local.set $12
-    local.get $11
-    i32.load offset=4
-    local.set $13
-    local.get $13
-    i32.const 2
-    i32.add
-    local.set $10
-    block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.20
-     local.get $12
-     local.set $16
-     local.get $13
-     local.set $17
-     local.get $9
-     f64.convert_i32_s
-     local.set $14
-     i32.const 0
-     local.set $18
-     local.get $16
-     local.get $17
-     i32.const 3
-     i32.shl
-     i32.add
-     local.get $18
-     i32.add
-     local.get $14
-     f64.store offset=8
-    end
-    block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.21
-     local.get $12
-     local.set $18
-     local.get $13
-     i32.const 1
-     i32.add
-     local.set $17
-     local.get $10
-     f64.convert_i32_s
-     local.set $14
-     i32.const 0
-     local.set $16
-     local.get $18
-     local.get $17
-     i32.const 3
-     i32.shl
-     i32.add
-     local.get $16
-     i32.add
-     local.get $14
-     f64.store offset=8
-    end
-    local.get $11
-    local.get $10
-    i32.store offset=4
-   end
+   local.get $0
+   i32.load
+   local.tee $1
+   local.get $0
+   i32.load offset=12
+   local.tee $2
+   i32.const 3
+   i32.shl
+   i32.add
+   f64.const 38
+   f64.store
+   local.get $2
+   i32.const 1
+   i32.add
+   i32.const 3
+   i32.shl
+   local.get $1
+   i32.add
+   local.get $2
+   i32.const 2
+   i32.add
+   local.tee $1
+   f64.convert_i32_s
+   f64.store
+   local.get $0
+   local.get $1
+   i32.store offset=12
   end
   local.get $0
   local.get $3
-  i32.store8 offset=12
+  i32.store8 offset=20
  )
- (func $assembly/save-restore.test/save (; 50 ;) (type $FUNCSIG$v)
+ (func $assembly/save-restore.test/save (; 57 ;) (type $FUNCSIG$v)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 31
+   i32.const 1024
+   i32.const 29
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
   i32.const 0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#save
  )
- (func $assembly/save-restore.test/hardSave (; 51 ;) (type $FUNCSIG$v)
+ (func $assembly/save-restore.test/hardSave (; 58 ;) (type $FUNCSIG$v)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 36
+   i32.const 1024
+   i32.const 34
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
   i32.const 1
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#save
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#restore (; 52 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#restore (; 59 ;) (type $FUNCSIG$vi) (param $0 i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  (local $6 i32)
-  (local $7 i32)
-  (local $8 i32)
-  (local $9 i32)
-  (local $10 i32)
-  (local $11 i32)
-  (local $12 f64)
-  (local $13 i32)
-  (local $14 i32)
-  (local $15 i32)
   local.get $0
-  i32.load8_u offset=12
-  i32.const 0
-  i32.eq
+  i32.load8_u offset=20
+  i32.eqz
   if
    return
   end
   local.get $0
-  i32.load8_u offset=12
-  local.set $1
-  local.get $1
-  i32.const 1
+  local.get $0
+  i32.load offset=24
+  local.tee $1
+  i32.const 217
   i32.sub
-  local.set $2
-  local.get $2
-  i32.const 2
-  i32.mul
-  local.set $3
-  local.get $2
-  i32.const 6
-  i32.mul
-  local.set $6
-  block $~lib/internal/arraybuffer/LOAD<bool,bool>|inlined.2 (result i32)
-   local.get $0
-   i32.load offset=252
-   local.set $9
-   local.get $1
-   local.set $8
-   i32.const 0
-   local.set $7
-   local.get $9
-   local.get $8
-   i32.const 0
-   i32.shl
-   i32.add
-   local.get $7
-   i32.add
-   i32.load8_u offset=8
-  end
-  i32.const 0
-  i32.ne
+  local.tee $2
+  i32.store offset=24
+  local.get $1
+  i32.load offset=60
+  call $~lib/rt/pure/__release
+  local.get $1
+  i32.load offset=64
+  call $~lib/rt/pure/__release
+  local.get $1
+  i32.load offset=56
+  call $~lib/rt/pure/__release
+  local.get $1
+  i32.load offset=80
+  call $~lib/rt/pure/__release
+  local.get $1
+  i32.load offset=84
+  call $~lib/rt/pure/__release
+  local.get $1
+  i32.load offset=112
+  call $~lib/rt/pure/__release
+  local.get $1
+  i32.load offset=160
+  call $~lib/rt/pure/__release
+  local.get $1
+  i32.load offset=192
+  call $~lib/rt/pure/__release
+  local.get $1
+  i32.load offset=196
+  call $~lib/rt/pure/__release
+  local.get $1
+  i32.load offset=188
+  call $~lib/rt/pure/__release
+  local.get $1
+  i32.load8_u offset=216
   if
    local.get $0
-   i32.load offset=20
-   local.set $4
+   i32.load
+   local.tee $1
    local.get $0
-   i32.load offset=16
-   local.set $5
-   block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.22
-    local.get $4
-    local.set $7
-    i32.const 0
-    local.set $8
-    block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.13 (result f64)
-     local.get $5
-     local.set $9
-     local.get $6
-     local.set $10
-     i32.const 0
-     local.set $11
-     local.get $9
-     local.get $10
-     i32.const 3
-     i32.shl
-     i32.add
-     local.get $11
-     i32.add
-     f64.load offset=8
-    end
-    local.set $12
-    i32.const 0
-    local.set $11
-    local.get $7
-    local.get $8
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $11
-    i32.add
-    local.get $12
-    f64.store offset=8
-   end
-   block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.23
-    local.get $4
-    local.set $11
-    i32.const 1
-    local.set $8
-    block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.14 (result f64)
-     local.get $5
-     local.set $7
-     local.get $6
-     i32.const 1
-     i32.add
-     local.set $10
-     i32.const 0
-     local.set $9
-     local.get $7
-     local.get $10
-     i32.const 3
-     i32.shl
-     i32.add
-     local.get $9
-     i32.add
-     f64.load offset=8
-    end
-    local.set $12
-    i32.const 0
-    local.set $9
-    local.get $11
-    local.get $8
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    local.get $12
-    f64.store offset=8
-   end
-   block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.24
-    local.get $4
-    local.set $9
-    i32.const 2
-    local.set $8
-    block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.15 (result f64)
-     local.get $5
-     local.set $11
-     local.get $6
-     i32.const 2
-     i32.add
-     local.set $10
-     i32.const 0
-     local.set $7
-     local.get $11
-     local.get $10
-     i32.const 3
-     i32.shl
-     i32.add
-     local.get $7
-     i32.add
-     f64.load offset=8
-    end
-    local.set $12
-    i32.const 0
-    local.set $7
-    local.get $9
-    local.get $8
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $7
-    i32.add
-    local.get $12
-    f64.store offset=8
-   end
-   block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.25
-    local.get $4
-    local.set $7
-    i32.const 3
-    local.set $8
-    block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.16 (result f64)
-     local.get $5
-     local.set $9
-     local.get $6
-     i32.const 3
-     i32.add
-     local.set $10
-     i32.const 0
-     local.set $11
-     local.get $9
-     local.get $10
-     i32.const 3
-     i32.shl
-     i32.add
-     local.get $11
-     i32.add
-     f64.load offset=8
-    end
-    local.set $12
-    i32.const 0
-    local.set $11
-    local.get $7
-    local.get $8
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $11
-    i32.add
-    local.get $12
-    f64.store offset=8
-   end
-   block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.26
-    local.get $4
-    local.set $11
-    i32.const 4
-    local.set $8
-    block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.17 (result f64)
-     local.get $5
-     local.set $7
-     local.get $6
-     i32.const 4
-     i32.add
-     local.set $10
-     i32.const 0
-     local.set $9
-     local.get $7
-     local.get $10
-     i32.const 3
-     i32.shl
-     i32.add
-     local.get $9
-     i32.add
-     f64.load offset=8
-    end
-    local.set $12
-    i32.const 0
-    local.set $9
-    local.get $11
-    local.get $8
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    local.get $12
-    f64.store offset=8
-   end
-   block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.27
-    local.get $4
-    local.set $9
-    i32.const 5
-    local.set $8
-    block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.18 (result f64)
-     local.get $5
-     local.set $11
-     local.get $6
-     i32.const 5
-     i32.add
-     local.set $10
-     i32.const 0
-     local.set $7
-     local.get $11
-     local.get $10
-     i32.const 3
-     i32.shl
-     i32.add
-     local.get $7
-     i32.add
-     f64.load offset=8
-    end
-    local.set $12
-    i32.const 0
-    local.set $7
-    local.get $9
-    local.get $8
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $7
-    i32.add
-    local.get $12
-    f64.store offset=8
-   end
+   i32.load offset=12
+   local.tee $3
+   i32.const 3
+   i32.shl
+   i32.add
+   f64.const 36
+   f64.store
+   local.get $3
+   i32.const 1
+   i32.add
+   i32.const 3
+   i32.shl
+   local.get $1
+   i32.add
+   local.get $3
+   i32.const 2
+   i32.add
+   local.tee $1
+   f64.convert_i32_s
+   f64.store
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.7 (result i32)
-    local.get $0
-    i32.load offset=24
-    local.set $7
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $9
-    local.get $7
-    local.get $8
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    i32.load offset=8
-   end
-   i32.store offset=28
+   local.get $1
+   i32.store offset=12
    local.get $0
-   i32.load offset=32
-   local.set $5
+   i32.load offset=28
+   local.get $2
+   i32.const 48
+   call $~lib/memory/memory.copy
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.8 (result i32)
-    local.get $5
-    local.set $9
-    local.get $3
-    local.set $8
-    i32.const 0
-    local.set $7
-    local.get $9
-    local.get $8
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $7
-    i32.add
-    i32.load offset=8
-   end
+   local.get $2
+   i32.load offset=48
+   i32.store offset=32
+   local.get $0
+   local.get $2
+   i32.load offset=52
    i32.store offset=36
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.9 (result i32)
-    local.get $5
-    local.set $7
-    local.get $3
-    i32.const 1
-    i32.add
-    local.set $8
-    i32.const 0
-    local.set $9
-    local.get $7
-    local.get $8
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    i32.load offset=8
-   end
+   local.get $2
+   f64.load offset=72
+   i32.trunc_f64_u
    i32.store offset=40
+   local.get $2
+   i32.load offset=80
+   local.tee $3
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.10 (result i32)
-    local.get $0
-    i32.load offset=44
-    local.set $9
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $7
-    local.get $9
-    local.get $8
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $7
-    i32.add
-    i32.load offset=8
+   i32.load offset=44
+   local.tee $1
+   i32.ne
+   if
+    local.get $3
+    call $~lib/rt/pure/__retain
+    drop
+    local.get $1
+    call $~lib/rt/pure/__release
    end
+   local.get $0
+   local.get $3
+   i32.store offset=44
+   local.get $2
+   i32.load offset=84
+   local.tee $3
+   local.get $0
+   i32.load offset=48
+   local.tee $1
+   i32.ne
+   if
+    local.get $3
+    call $~lib/rt/pure/__retain
+    drop
+    local.get $1
+    call $~lib/rt/pure/__release
+   end
+   local.get $0
+   local.get $3
    i32.store offset=48
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.11 (result i32)
-    local.get $0
-    i32.load offset=52
-    local.set $7
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $9
-    local.get $7
-    local.get $8
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    i32.load offset=8
-   end
-   i32.store offset=56
+   local.get $2
+   f64.load offset=88
+   f64.store offset=56
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.19 (result f64)
-    local.get $0
-    i32.load offset=60
-    local.set $9
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $7
-    local.get $9
-    local.get $8
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $7
-    i32.add
-    f64.load offset=8
-   end
-   f64.store offset=64
+   local.get $2
+   i32.load offset=96
+   i32.store offset=64
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.8 (result i32)
-    local.get $0
-    i32.load offset=72
-    local.set $7
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $9
-    local.get $7
-    local.get $8
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    i32.load offset=8
-   end
+   local.get $2
+   i32.load8_u offset=100
+   i32.store8 offset=68
+   local.get $0
+   local.get $2
+   i32.load offset=104
+   i32.store offset=72
+   local.get $0
+   local.get $2
+   i32.load offset=108
    i32.store offset=76
+   local.get $2
+   i32.load offset=112
+   local.tee $3
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<bool,bool>|inlined.3 (result i32)
-    local.get $0
-    i32.load offset=80
-    local.set $9
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $7
-    local.get $9
-    local.get $8
-    i32.const 0
-    i32.shl
-    i32.add
-    local.get $7
-    i32.add
-    i32.load8_u offset=8
-   end
-   i32.const 0
+   i32.load offset=80
+   local.tee $1
    i32.ne
-   i32.store8 offset=84
-   local.get $0
-   block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.9 (result i32)
-    local.get $0
-    i32.load offset=88
-    local.set $7
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $9
-    local.get $7
-    local.get $8
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    i32.load offset=8
+   if
+    local.get $3
+    call $~lib/rt/pure/__retain
+    drop
+    local.get $1
+    call $~lib/rt/pure/__release
    end
-   i32.store offset=92
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.10 (result i32)
-    local.get $0
-    i32.load offset=96
-    local.set $9
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $7
-    local.get $9
-    local.get $8
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $7
-    i32.add
-    i32.load offset=8
-   end
-   i32.store offset=100
+   local.get $3
+   i32.store offset=80
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.12 (result i32)
-    local.get $0
-    i32.load offset=104
-    local.set $7
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $9
-    local.get $7
-    local.get $8
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    i32.load offset=8
-   end
-   i32.store offset=108
+   local.get $2
+   i32.load offset=128
+   i32.store offset=96
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.20 (result f64)
-    local.get $0
-    i32.load offset=112
-    local.set $9
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $7
-    local.get $9
-    local.get $8
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $7
-    i32.add
-    f64.load offset=8
-   end
+   local.get $2
+   f64.load offset=136
+   f64.store offset=104
+   local.get $0
+   local.get $2
+   f64.load offset=144
+   f64.store offset=112
+   local.get $0
+   local.get $2
+   f64.load offset=152
    f64.store offset=120
+   local.get $2
+   i32.load offset=160
+   local.tee $3
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.11 (result i32)
-    local.get $0
-    i32.load offset=128
-    local.set $7
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $9
-    local.get $7
-    local.get $8
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    i32.load offset=8
+   i32.load offset=128
+   local.tee $1
+   i32.ne
+   if
+    local.get $3
+    call $~lib/rt/pure/__retain
+    drop
+    local.get $1
+    call $~lib/rt/pure/__release
    end
-   i32.store offset=132
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.21 (result f64)
-    local.get $0
-    i32.load offset=136
-    local.set $9
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $7
-    local.get $9
-    local.get $8
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $7
-    i32.add
-    f64.load offset=8
-   end
+   local.get $3
+   i32.store offset=128
+   local.get $0
+   local.get $2
+   f64.load offset=168
+   f64.store offset=136
+   local.get $0
+   local.get $2
+   f64.load offset=176
    f64.store offset=144
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.22 (result f64)
-    local.get $0
-    i32.load offset=152
-    local.set $7
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $9
-    local.get $7
-    local.get $8
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    f64.load offset=8
-   end
-   f64.store offset=160
+   local.get $2
+   i32.load offset=184
+   i32.store offset=152
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.23 (result f64)
-    local.get $0
-    i32.load offset=168
-    local.set $9
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $7
-    local.get $9
-    local.get $8
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $7
-    i32.add
-    f64.load offset=8
-   end
-   f64.store offset=176
+   local.get $2
+   f64.load offset=200
+   i32.trunc_f64_u
+   i32.store offset=156
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.13 (result i32)
-    local.get $0
-    i32.load offset=184
-    local.set $7
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $9
-    local.get $7
-    local.get $8
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    i32.load offset=8
-   end
-   i32.store offset=188
+   local.get $2
+   i32.load offset=208
+   i32.store offset=160
    local.get $0
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.24 (result f64)
-    local.get $0
-    i32.load offset=192
-    local.set $9
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $7
-    local.get $9
-    local.get $8
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $7
-    i32.add
-    f64.load offset=8
-   end
-   f64.store offset=200
-   local.get $0
-   block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.25 (result f64)
-    local.get $0
-    i32.load offset=208
-    local.set $7
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $9
-    local.get $7
-    local.get $8
-    i32.const 3
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    f64.load offset=8
-   end
-   f64.store offset=216
-   local.get $0
-   i32.load offset=224
-   local.set $5
-   local.get $0
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.14 (result i32)
-    local.get $5
-    local.set $9
-    local.get $3
-    local.set $8
-    i32.const 0
-    local.set $7
-    local.get $9
-    local.get $8
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $7
-    i32.add
-    i32.load offset=8
-   end
-   i32.store offset=228
-   local.get $0
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.15 (result i32)
-    local.get $5
-    local.set $7
-    local.get $3
-    i32.const 1
-    i32.add
-    local.set $8
-    i32.const 0
-    local.set $9
-    local.get $7
-    local.get $8
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    i32.load offset=8
-   end
-   i32.store offset=232
-   local.get $0
-   block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.12 (result i32)
-    local.get $0
-    i32.load offset=236
-    local.set $9
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $7
-    local.get $9
-    local.get $8
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $7
-    i32.add
-    i32.load offset=8
-   end
-   i32.store offset=240
-   local.get $0
-   block $~lib/internal/arraybuffer/LOAD<i32,i32>|inlined.13 (result i32)
-    local.get $0
-    i32.load offset=244
-    local.set $7
-    local.get $2
-    local.set $8
-    i32.const 0
-    local.set $9
-    local.get $7
-    local.get $8
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $9
-    i32.add
-    i32.load offset=8
-   end
-   i32.store offset=248
-   block $assembly/internal/Buffer/Buffer<i32>#_writeZero|inlined.1
-    local.get $0
-    local.set $9
-    i32.const 36
-    local.set $8
-    local.get $9
-    i32.load
-    local.set $7
-    local.get $9
-    i32.load offset=4
-    local.set $10
-    local.get $10
-    i32.const 2
-    i32.add
-    local.set $11
-    block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.28
-     local.get $7
-     local.set $13
-     local.get $10
-     local.set $14
-     local.get $8
-     f64.convert_i32_s
-     local.set $12
-     i32.const 0
-     local.set $15
-     local.get $13
-     local.get $14
-     i32.const 3
-     i32.shl
-     i32.add
-     local.get $15
-     i32.add
-     local.get $12
-     f64.store offset=8
-    end
-    block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.29
-     local.get $7
-     local.set $15
-     local.get $10
-     i32.const 1
-     i32.add
-     local.set $14
-     local.get $11
-     f64.convert_i32_s
-     local.set $12
-     i32.const 0
-     local.set $13
-     local.get $15
-     local.get $14
-     i32.const 3
-     i32.shl
-     i32.add
-     local.get $13
-     i32.add
-     local.get $12
-     f64.store offset=8
-    end
-    local.get $9
-    local.get $11
-    i32.store offset=4
-   end
+   local.get $2
+   i32.load offset=212
+   i32.store offset=164
   end
   local.get $0
-  local.get $2
-  i32.store8 offset=12
+  local.get $0
+  i32.load8_u offset=20
+  i32.const 1
+  i32.sub
+  i32.store8 offset=20
  )
- (func $assembly/save-restore.test/restore (; 53 ;) (type $FUNCSIG$v)
+ (func $assembly/save-restore.test/restore (; 60 ;) (type $FUNCSIG$v)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 41
+   i32.const 1024
+   i32.const 39
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#restore
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:direction (; 54 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  local.get $0
-  i32.load offset=24
-  local.set $2
-  local.get $0
-  i32.load8_u offset=12
-  local.set $3
-  local.get $1
-  local.set $4
-  i32.const 0
-  local.set $5
-  local.get $2
-  local.get $3
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $5
-  i32.add
-  local.get $4
-  i32.store offset=8
- )
- (func $assembly/save-restore.test/setDirection (; 55 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/save-restore.test/setDirection (; 61 ;) (type $FUNCSIG$vi) (param $0 i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 46
+   i32.const 1024
+   i32.const 44
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
-  local.get $0
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:direction
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:direction (; 56 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  local.get $0
   i32.load offset=24
-  local.set $1
   local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $1
-  local.get $2
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  i32.load offset=8
+  i32.store offset=48
  )
- (func $assembly/save-restore.test/getDirection (; 57 ;) (type $FUNCSIG$i) (result i32)
+ (func $assembly/save-restore.test/getDirection (; 62 ;) (type $FUNCSIG$i) (result i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 51
+   i32.const 1024
+   i32.const 49
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:direction
+  i32.load offset=24
+  i32.load offset=48
  )
- (func $assembly/renderer/DOMMatrix/DOMMatrix#constructor (; 58 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  local.get $0
-  i32.eqz
-  if
-   i32.const 136
-   call $~lib/memory/memory.allocate
-   local.set $0
-  end
-  local.get $0
+ (func $assembly/renderer/DOMMatrix/DOMMatrix#constructor (; 63 ;) (type $FUNCSIG$i) (result i32)
+  (local $0 i32)
+  i32.const 136
+  i32.const 8
+  call $~lib/rt/tlsf/__alloc
+  call $~lib/rt/pure/__retain
+  local.tee $0
   i32.const 1
   i32.store8
   local.get $0
@@ -5981,333 +4856,101 @@
   f64.store offset=128
   local.get $0
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#getTransform (; 59 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#getTransform (; 64 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
   (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  (local $6 i32)
-  (local $7 i32)
-  local.get $0
-  local.set $1
-  i32.const 0
   call $assembly/renderer/DOMMatrix/DOMMatrix#constructor
-  local.set $2
-  i32.const 6
-  local.get $1
-  i32.load8_u offset=12
-  i32.mul
-  local.set $3
-  local.get $1
-  i32.load offset=16
-  local.set $4
-  local.get $2
-  block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.26 (result f64)
-   local.get $4
-   local.set $5
-   local.get $3
-   local.set $6
-   i32.const 0
-   local.set $7
-   local.get $5
-   local.get $6
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $7
-   i32.add
-   f64.load offset=8
-  end
+  local.tee $1
+  local.get $0
+  i32.load offset=24
+  local.tee $0
+  f64.load
   f64.store offset=8
-  local.get $2
-  block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.27 (result f64)
-   local.get $4
-   local.set $7
-   local.get $3
-   i32.const 1
-   i32.add
-   local.set $6
-   i32.const 0
-   local.set $5
-   local.get $7
-   local.get $6
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $5
-   i32.add
-   f64.load offset=8
-  end
+  local.get $1
+  local.get $0
+  f64.load offset=8
   f64.store offset=16
-  local.get $2
-  block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.28 (result f64)
-   local.get $4
-   local.set $5
-   local.get $3
-   i32.const 2
-   i32.add
-   local.set $6
-   i32.const 0
-   local.set $7
-   local.get $5
-   local.get $6
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $7
-   i32.add
-   f64.load offset=8
-  end
-  f64.store offset=40
-  local.get $2
-  block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.29 (result f64)
-   local.get $4
-   local.set $7
-   local.get $3
-   i32.const 3
-   i32.add
-   local.set $6
-   i32.const 0
-   local.set $5
-   local.get $7
-   local.get $6
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $5
-   i32.add
-   f64.load offset=8
-  end
-  f64.store offset=48
-  local.get $2
-  block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.30 (result f64)
-   local.get $4
-   local.set $5
-   local.get $3
-   i32.const 4
-   i32.add
-   local.set $6
-   i32.const 0
-   local.set $7
-   local.get $5
-   local.get $6
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $7
-   i32.add
-   f64.load offset=8
-  end
-  f64.store offset=104
-  local.get $2
-  block $~lib/internal/arraybuffer/LOAD<f64,f64>|inlined.31 (result f64)
-   local.get $4
-   local.set $7
-   local.get $3
-   i32.const 5
-   i32.add
-   local.set $6
-   i32.const 0
-   local.set $5
-   local.get $7
-   local.get $6
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $5
-   i32.add
-   f64.load offset=8
-  end
-  f64.store offset=112
-  local.get $2
- )
- (func $assembly/renderer/DOMMatrix/DOMMatrix#get:a (; 60 ;) (type $FUNCSIG$di) (param $0 i32) (result f64)
-  local.get $0
-  f64.load offset=8
- )
- (func $~lib/internal/typedarray/TypedArray<f64>#__unchecked_set (; 61 ;) (type $FUNCSIG$viid) (param $0 i32) (param $1 i32) (param $2 f64)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 f64)
-  (local $6 i32)
-  local.get $0
-  i32.load
-  local.set $3
   local.get $1
-  local.set $4
-  local.get $2
-  local.set $5
-  local.get $0
-  i32.load offset=4
-  local.set $6
-  local.get $3
-  local.get $4
-  i32.const 3
-  i32.shl
-  i32.add
-  local.get $6
-  i32.add
-  local.get $5
-  f64.store offset=8
- )
- (func $~lib/internal/typedarray/TypedArray<f64>#__unchecked_get (; 62 ;) (type $FUNCSIG$dii) (param $0 i32) (param $1 i32) (result f64)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  local.get $0
-  i32.load
-  local.set $2
-  local.get $1
-  local.set $3
-  local.get $0
-  i32.load offset=4
-  local.set $4
-  local.get $2
-  local.get $3
-  i32.const 3
-  i32.shl
-  i32.add
-  local.get $4
-  i32.add
-  f64.load offset=8
- )
- (func $assembly/renderer/DOMMatrix/DOMMatrix#get:b (; 63 ;) (type $FUNCSIG$di) (param $0 i32) (result f64)
   local.get $0
   f64.load offset=16
- )
- (func $assembly/renderer/DOMMatrix/DOMMatrix#get:c (; 64 ;) (type $FUNCSIG$di) (param $0 i32) (result f64)
+  f64.store offset=40
+  local.get $1
+  local.get $0
+  f64.load offset=24
+  f64.store offset=48
+  local.get $1
+  local.get $0
+  f64.load offset=32
+  f64.store offset=104
+  local.get $1
   local.get $0
   f64.load offset=40
+  f64.store offset=112
+  local.get $1
  )
- (func $assembly/renderer/DOMMatrix/DOMMatrix#get:d (; 65 ;) (type $FUNCSIG$di) (param $0 i32) (result f64)
-  local.get $0
-  f64.load offset=48
- )
- (func $assembly/renderer/DOMMatrix/DOMMatrix#get:e (; 66 ;) (type $FUNCSIG$di) (param $0 i32) (result f64)
-  local.get $0
-  f64.load offset=104
- )
- (func $assembly/renderer/DOMMatrix/DOMMatrix#get:f (; 67 ;) (type $FUNCSIG$di) (param $0 i32) (result f64)
-  local.get $0
-  f64.load offset=112
- )
- (func $assembly/save-restore.test/getTransform (; 68 ;) (type $FUNCSIG$i) (result i32)
+ (func $assembly/save-restore.test/getTransform (; 65 ;) (type $FUNCSIG$i) (result i32)
   (local $0 i32)
   (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 56
+   i32.const 1024
+   i32.const 54
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#getTransform
   local.set $0
-  i32.const 0
   i32.const 6
   call $~lib/typedarray/Float64Array#constructor
-  local.set $1
-  block (result f64)
-   local.get $1
-   local.tee $2
-   i32.const 0
-   local.tee $3
-   local.get $0
-   call $assembly/renderer/DOMMatrix/DOMMatrix#get:a
-   call $~lib/internal/typedarray/TypedArray<f64>#__unchecked_set
-   local.get $2
-   local.get $3
-   call $~lib/internal/typedarray/TypedArray<f64>#__unchecked_get
-  end
-  drop
-  block (result f64)
-   local.get $1
-   local.tee $2
-   i32.const 1
-   local.tee $3
-   local.get $0
-   call $assembly/renderer/DOMMatrix/DOMMatrix#get:b
-   call $~lib/internal/typedarray/TypedArray<f64>#__unchecked_set
-   local.get $2
-   local.get $3
-   call $~lib/internal/typedarray/TypedArray<f64>#__unchecked_get
-  end
-  drop
-  block (result f64)
-   local.get $1
-   local.tee $2
-   i32.const 2
-   local.tee $3
-   local.get $0
-   call $assembly/renderer/DOMMatrix/DOMMatrix#get:c
-   call $~lib/internal/typedarray/TypedArray<f64>#__unchecked_set
-   local.get $2
-   local.get $3
-   call $~lib/internal/typedarray/TypedArray<f64>#__unchecked_get
-  end
-  drop
-  block (result f64)
-   local.get $1
-   local.tee $2
-   i32.const 3
-   local.tee $3
-   local.get $0
-   call $assembly/renderer/DOMMatrix/DOMMatrix#get:d
-   call $~lib/internal/typedarray/TypedArray<f64>#__unchecked_set
-   local.get $2
-   local.get $3
-   call $~lib/internal/typedarray/TypedArray<f64>#__unchecked_get
-  end
-  drop
-  block (result f64)
-   local.get $1
-   local.tee $2
-   i32.const 4
-   local.tee $3
-   local.get $0
-   call $assembly/renderer/DOMMatrix/DOMMatrix#get:e
-   call $~lib/internal/typedarray/TypedArray<f64>#__unchecked_set
-   local.get $2
-   local.get $3
-   call $~lib/internal/typedarray/TypedArray<f64>#__unchecked_get
-  end
-  drop
-  block (result f64)
-   local.get $1
-   local.tee $2
-   i32.const 5
-   local.tee $3
-   local.get $0
-   call $assembly/renderer/DOMMatrix/DOMMatrix#get:f
-   call $~lib/internal/typedarray/TypedArray<f64>#__unchecked_set
-   local.get $2
-   local.get $3
-   call $~lib/internal/typedarray/TypedArray<f64>#__unchecked_get
-  end
-  drop
+  local.tee $1
+  i32.load offset=4
+  local.get $0
+  f64.load offset=8
+  f64.store
+  local.get $1
+  i32.load offset=4
+  i32.const 8
+  i32.add
+  local.get $0
+  f64.load offset=16
+  f64.store
+  local.get $1
+  i32.load offset=4
+  i32.const 16
+  i32.add
+  local.get $0
+  f64.load offset=40
+  f64.store
+  local.get $1
+  i32.load offset=4
+  i32.const 24
+  i32.add
+  local.get $0
+  f64.load offset=48
+  f64.store
+  local.get $1
+  i32.load offset=4
+  i32.const 32
+  i32.add
+  local.get $0
+  f64.load offset=104
+  f64.store
+  local.get $1
+  i32.load offset=4
+  i32.const 40
+  i32.add
+  local.get $0
+  f64.load offset=112
+  f64.store
+  local.get $0
+  call $~lib/rt/pure/__release
   local.get $1
  )
- (func $~lib/builtins/isFinite<f64> (; 69 ;) (type $FUNCSIG$id) (param $0 f64) (result i32)
-  local.get $0
-  local.get $0
-  f64.sub
-  f64.const 0
-  f64.eq
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#setTransform (; 70 ;) (type $FUNCSIG$vidddddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64)
-  (local $7 i32)
-  (local $8 i32)
-  (local $9 i32)
-  (local $10 i32)
-  (local $11 f64)
-  (local $12 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#setTransform (; 66 ;) (type $FUNCSIG$vidddddd) (param $0 i32) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64)
+  (local $7 f64)
   local.get $1
   local.get $2
   f64.add
@@ -6319,155 +4962,44 @@
   f64.add
   local.get $6
   f64.add
-  call $~lib/builtins/isFinite<f64>
-  i32.eqz
+  local.tee $7
+  local.get $7
+  f64.sub
+  f64.const 0
+  f64.ne
   if
    return
   end
   local.get $0
-  i32.load8_u offset=12
-  i32.const 6
-  i32.mul
-  i32.const 255
-  i32.and
-  local.set $7
+  i32.load offset=24
+  local.tee $0
+  local.get $1
+  f64.store
   local.get $0
-  i32.load offset=16
-  local.set $8
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.31
-   local.get $8
-   local.set $9
-   local.get $7
-   local.set $10
-   local.get $1
-   local.set $11
-   i32.const 0
-   local.set $12
-   local.get $9
-   local.get $10
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $12
-   i32.add
-   local.get $11
-   f64.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.32
-   local.get $8
-   local.set $12
-   local.get $7
-   i32.const 1
-   i32.add
-   local.set $10
-   local.get $2
-   local.set $11
-   i32.const 0
-   local.set $9
-   local.get $12
-   local.get $10
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $9
-   i32.add
-   local.get $11
-   f64.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.33
-   local.get $8
-   local.set $9
-   local.get $7
-   i32.const 2
-   i32.add
-   local.set $10
-   local.get $3
-   local.set $11
-   i32.const 0
-   local.set $12
-   local.get $9
-   local.get $10
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $12
-   i32.add
-   local.get $11
-   f64.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.34
-   local.get $8
-   local.set $12
-   local.get $7
-   i32.const 3
-   i32.add
-   local.set $10
-   local.get $4
-   local.set $11
-   i32.const 0
-   local.set $9
-   local.get $12
-   local.get $10
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $9
-   i32.add
-   local.get $11
-   f64.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.35
-   local.get $8
-   local.set $9
-   local.get $7
-   i32.const 4
-   i32.add
-   local.set $10
-   local.get $5
-   local.set $11
-   i32.const 0
-   local.set $12
-   local.get $9
-   local.get $10
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $12
-   i32.add
-   local.get $11
-   f64.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.36
-   local.get $8
-   local.set $12
-   local.get $7
-   i32.const 5
-   i32.add
-   local.set $10
-   local.get $6
-   local.set $11
-   i32.const 0
-   local.set $9
-   local.get $12
-   local.get $10
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $9
-   i32.add
-   local.get $11
-   f64.store offset=8
-  end
+  local.get $2
+  f64.store offset=8
+  local.get $0
+  local.get $3
+  f64.store offset=16
+  local.get $0
+  local.get $4
+  f64.store offset=24
+  local.get $0
+  local.get $5
+  f64.store offset=32
+  local.get $0
+  local.get $6
+  f64.store offset=40
  )
- (func $assembly/save-restore.test/setTransform (; 71 ;) (type $FUNCSIG$vdddddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
+ (func $assembly/save-restore.test/setTransform (; 67 ;) (type $FUNCSIG$vdddddd) (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 69
+   i32.const 1024
+   i32.const 67
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
@@ -6479,1695 +5011,1272 @@
   local.get $5
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#setTransform
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:fillStyle (; 72 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $assembly/save-restore.test/getFillStyle (; 68 ;) (type $FUNCSIG$i) (result i32)
+  (local $0 i32)
   (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  local.get $0
-  i32.load8_u offset=12
-  i32.const 2
-  i32.mul
-  i32.const 255
-  i32.and
-  local.set $1
-  block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.16 (result i32)
-   local.get $0
-   i32.load offset=32
-   local.set $2
-   local.get $1
-   local.set $3
-   i32.const 0
-   local.set $4
-   local.get $2
-   local.get $3
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $4
-   i32.add
-   i32.load offset=8
-  end
-  local.set $5
-  local.get $5
-  i32.const 0
-  i32.eq
-  if
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.17 (result i32)
-    local.get $0
-    i32.load offset=32
-    local.set $4
-    local.get $1
-    i32.const 1
-    i32.add
-    local.set $3
-    i32.const 0
-    local.set $2
-    local.get $4
-    local.get $3
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $2
-    i32.add
-    i32.load offset=8
-   end
-   return
-  end
-  i32.const 0
- )
- (func $assembly/save-restore.test/getFillStyle (; 73 ;) (type $FUNCSIG$i) (result i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 74
+   i32.const 1024
+   i32.const 72
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:fillStyle
+  i32.load offset=24
+  local.tee $0
+  local.set $1
+  local.get $0
+  i32.load offset=52
+  if (result i32)
+   i32.const 0
+   call $~lib/rt/pure/__retain
+  else
+   local.get $1
+   i32.load offset=56
+   call $~lib/rt/pure/__retain
+  end
+  call $~lib/rt/pure/__retain
+  local.tee $0
+  call $~lib/rt/pure/__retain
+  local.get $0
+  call $~lib/rt/pure/__release
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillStyle (; 74 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillStyle (; 69 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  (local $6 i32)
-  (local $7 i32)
+  local.get $1
+  call $~lib/rt/pure/__retain
+  drop
   local.get $1
   i32.const 0
   call $~lib/string/String.__eq
   if
-   global.get $assembly/renderer/CanvasRenderingContext2D/defaultBlack
+   i32.const 272
+   local.tee $2
+   local.get $1
+   i32.ne
+   if
+    local.get $2
+    call $~lib/rt/pure/__retain
+    drop
+    local.get $1
+    call $~lib/rt/pure/__release
+   end
+   local.get $2
    local.set $1
   end
   local.get $0
-  i32.load8_u offset=12
-  i32.const 2
-  i32.mul
-  i32.const 255
-  i32.and
+  i32.load offset=24
+  local.tee $0
+  i32.load offset=52
   local.set $2
   local.get $0
-  i32.load offset=32
-  local.set $3
-  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.11
-   local.get $3
-   local.set $4
-   local.get $2
-   local.set $5
+  i32.const 0
+  i32.store offset=52
+  local.get $1
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $2
+  i32.const 2
+  i32.eq
+  if
+   local.get $0
+   i32.load offset=60
+   call $~lib/rt/pure/__release
+   local.get $0
    i32.const 0
-   local.set $6
-   i32.const 0
-   local.set $7
-   local.get $4
-   local.get $5
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $7
-   i32.add
-   local.get $6
-   i32.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.12
-   local.get $3
-   local.set $7
+   i32.store offset=60
+  else
    local.get $2
    i32.const 1
-   i32.add
-   local.set $6
-   local.get $1
-   local.set $5
-   i32.const 0
-   local.set $4
-   local.get $7
-   local.get $6
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $4
-   i32.add
-   local.get $5
-   i32.store offset=8
+   i32.eq
+   if
+    local.get $0
+    i32.load offset=64
+    call $~lib/rt/pure/__release
+    local.get $0
+    i32.const 0
+    i32.store offset=64
+   else
+    local.get $0
+    i32.load offset=56
+    call $~lib/rt/pure/__release
+   end
   end
+  local.get $1
+  i32.eqz
+  if
+   unreachable
+  end
+  local.get $0
+  local.get $1
+  i32.store offset=56
+  local.get $0
+  local.get $1
+  f64.convert_i32_u
+  f64.store offset=72
+  local.get $1
+  call $~lib/rt/pure/__release
  )
- (func $assembly/save-restore.test/setFillStyle (; 75 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/save-restore.test/setFillStyle (; 70 ;) (type $FUNCSIG$vi) (param $0 i32)
+  local.get $0
+  call $~lib/rt/pure/__retain
+  drop
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 79
+   i32.const 1024
+   i32.const 77
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
   local.get $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:fillStyle
+  local.get $0
+  call $~lib/rt/pure/__release
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:filter (; 76 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $assembly/save-restore.test/getFilter (; 71 ;) (type $FUNCSIG$i) (result i32)
+  (local $0 i32)
   (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  local.get $0
-  i32.load offset=44
-  local.set $1
-  local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $1
-  local.get $2
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  i32.load offset=8
- )
- (func $assembly/save-restore.test/getFilter (; 77 ;) (type $FUNCSIG$i) (result i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 84
+   i32.const 1024
+   i32.const 82
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:filter
+  i32.load offset=24
+  i32.load offset=80
+  call $~lib/rt/pure/__retain
+  local.tee $0
+  call $~lib/rt/pure/__retain
+  local.get $0
+  call $~lib/rt/pure/__release
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:filter (; 78 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  local.get $0
-  i32.load offset=44
-  local.set $2
-  local.get $0
-  i32.load8_u offset=12
-  local.set $3
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:filter (; 72 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   local.get $1
-  local.set $4
-  i32.const 0
-  local.set $5
-  local.get $2
-  local.get $3
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $5
-  i32.add
-  local.get $4
-  i32.store offset=8
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $0
+  i32.load offset=24
+  local.set $0
+  local.get $1
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $0
+  i32.load offset=80
+  call $~lib/rt/pure/__release
+  local.get $0
+  local.get $1
+  i32.store offset=80
+  local.get $1
+  call $~lib/rt/pure/__release
  )
- (func $assembly/save-restore.test/setFilter (; 79 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/save-restore.test/setFilter (; 73 ;) (type $FUNCSIG$vi) (param $0 i32)
+  local.get $0
+  call $~lib/rt/pure/__retain
+  drop
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 89
+   i32.const 1024
+   i32.const 87
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
   local.get $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:filter
+  local.get $0
+  call $~lib/rt/pure/__release
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:font (; 80 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $assembly/save-restore.test/getFont (; 74 ;) (type $FUNCSIG$i) (result i32)
+  (local $0 i32)
   (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  local.get $0
-  i32.load offset=52
-  local.set $1
-  local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $1
-  local.get $2
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  i32.load offset=8
- )
- (func $assembly/save-restore.test/getFont (; 81 ;) (type $FUNCSIG$i) (result i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 94
+   i32.const 1024
+   i32.const 92
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:font
+  i32.load offset=24
+  i32.load offset=84
+  call $~lib/rt/pure/__retain
+  local.tee $0
+  call $~lib/rt/pure/__retain
+  local.get $0
+  call $~lib/rt/pure/__release
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:font (; 82 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  local.get $0
-  i32.load offset=52
-  local.set $2
-  local.get $0
-  i32.load8_u offset=12
-  local.set $3
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:font (; 75 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   local.get $1
-  local.set $4
-  i32.const 0
-  local.set $5
-  local.get $2
-  local.get $3
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $5
-  i32.add
-  local.get $4
-  i32.store offset=8
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $0
+  i32.load offset=24
+  local.set $0
+  local.get $1
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $0
+  i32.load offset=84
+  call $~lib/rt/pure/__release
+  local.get $0
+  local.get $1
+  i32.store offset=84
+  local.get $1
+  call $~lib/rt/pure/__release
  )
- (func $assembly/save-restore.test/setFont (; 83 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/save-restore.test/setFont (; 76 ;) (type $FUNCSIG$vi) (param $0 i32)
+  local.get $0
+  call $~lib/rt/pure/__retain
+  drop
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 99
+   i32.const 1024
+   i32.const 97
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
   local.get $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:font
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:globalAlpha (; 84 ;) (type $FUNCSIG$di) (param $0 i32) (result f64)
-  (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
   local.get $0
-  i32.load offset=60
-  local.set $1
-  local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $1
-  local.get $2
-  i32.const 3
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  f64.load offset=8
+  call $~lib/rt/pure/__release
  )
- (func $assembly/save-restore.test/getGlobalAlpha (; 85 ;) (type $FUNCSIG$d) (result f64)
+ (func $assembly/save-restore.test/getGlobalAlpha (; 77 ;) (type $FUNCSIG$d) (result f64)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 104
+   i32.const 1024
+   i32.const 102
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:globalAlpha
+  i32.load offset=24
+  f64.load offset=88
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:globalAlpha (; 86 ;) (type $FUNCSIG$vid) (param $0 i32) (param $1 f64)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 f64)
-  (local $5 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:globalAlpha (; 78 ;) (type $FUNCSIG$vid) (param $0 i32) (param $1 f64)
+  i32.const 1
   local.get $1
-  call $~lib/builtins/isFinite<f64>
-  i32.eqz
-  local.tee $2
-  if (result i32)
-   local.get $2
-  else   
-   local.get $1
-   f64.const 0
-   f64.lt
-  end
-  local.tee $2
-  if (result i32)
-   local.get $2
-  else   
-   local.get $1
-   f64.const 1
-   f64.gt
-  end
+  f64.const 1
+  f64.gt
+  i32.const 1
+  local.get $1
+  f64.const 0
+  f64.lt
+  local.get $1
+  local.get $1
+  f64.sub
+  f64.const 0
+  f64.ne
+  select
+  select
   if
    return
   end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.37
-   local.get $0
-   i32.load offset=60
-   local.set $2
-   local.get $0
-   i32.load8_u offset=12
-   local.set $3
-   local.get $1
-   local.set $4
-   i32.const 0
-   local.set $5
-   local.get $2
-   local.get $3
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $5
-   i32.add
-   local.get $4
-   f64.store offset=8
-  end
+  local.get $0
+  i32.load offset=24
+  local.get $1
+  f64.store offset=88
  )
- (func $assembly/save-restore.test/setGlobalAlpha (; 87 ;) (type $FUNCSIG$vd) (param $0 f64)
+ (func $assembly/save-restore.test/setGlobalAlpha (; 79 ;) (type $FUNCSIG$vd) (param $0 f64)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 109
+   i32.const 1024
+   i32.const 107
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
   local.get $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:globalAlpha
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:globalCompositeOperation (; 88 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  local.get $0
-  i32.load offset=72
-  local.set $1
-  local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $1
-  local.get $2
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  i32.load offset=8
- )
- (func $assembly/save-restore.test/getGlobalCompositeOperation (; 89 ;) (type $FUNCSIG$i) (result i32)
+ (func $assembly/save-restore.test/getGlobalCompositeOperation (; 80 ;) (type $FUNCSIG$i) (result i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 114
+   i32.const 1024
+   i32.const 112
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:globalCompositeOperation
+  i32.load offset=24
+  i32.load offset=96
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:globalCompositeOperation (; 90 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  local.get $0
-  i32.load offset=72
-  local.set $2
-  local.get $0
-  i32.load8_u offset=12
-  local.set $3
-  local.get $1
-  local.set $4
-  i32.const 0
-  local.set $5
-  local.get $2
-  local.get $3
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $5
-  i32.add
-  local.get $4
-  i32.store offset=8
- )
- (func $assembly/save-restore.test/setGlobalCompositeOperation (; 91 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/save-restore.test/setGlobalCompositeOperation (; 81 ;) (type $FUNCSIG$vi) (param $0 i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 119
+   i32.const 1024
+   i32.const 117
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
+  i32.load offset=24
   local.get $0
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:globalCompositeOperation
+  i32.store offset=96
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:imageSmoothingEnabled (; 92 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  local.get $0
-  i32.load offset=80
-  local.set $1
-  local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $1
-  local.get $2
-  i32.const 0
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  i32.load8_u offset=8
- )
- (func $assembly/save-restore.test/getImageSmoothingEnabled (; 93 ;) (type $FUNCSIG$i) (result i32)
+ (func $assembly/save-restore.test/getImageSmoothingEnabled (; 82 ;) (type $FUNCSIG$i) (result i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 124
+   i32.const 1024
+   i32.const 122
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:imageSmoothingEnabled
+  i32.load offset=24
+  i32.load8_u offset=100
   i32.const 0
   i32.ne
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:imageSmoothingEnabled (; 94 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  local.get $0
-  i32.load offset=80
-  local.set $2
-  local.get $0
-  i32.load8_u offset=12
-  local.set $3
-  local.get $1
-  local.set $4
-  i32.const 0
-  local.set $5
-  local.get $2
-  local.get $3
-  i32.const 0
-  i32.shl
-  i32.add
-  local.get $5
-  i32.add
-  local.get $4
-  i32.store8 offset=8
- )
- (func $assembly/save-restore.test/setImageSmoothingEnabled (; 95 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/save-restore.test/setImageSmoothingEnabled (; 83 ;) (type $FUNCSIG$vi) (param $0 i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 129
+   i32.const 1024
+   i32.const 127
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
+  i32.load offset=24
   local.get $0
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:imageSmoothingEnabled
+  i32.store8 offset=100
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:imageSmoothingQuality (; 96 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  local.get $0
-  i32.load offset=88
-  local.set $2
-  local.get $0
-  i32.load8_u offset=12
-  local.set $3
-  local.get $1
-  local.set $4
-  i32.const 0
-  local.set $5
-  local.get $2
-  local.get $3
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $5
-  i32.add
-  local.get $4
-  i32.store offset=8
- )
- (func $assembly/save-restore.test/setImageSmoothingQuality (; 97 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/save-restore.test/setImageSmoothingQuality (; 84 ;) (type $FUNCSIG$vi) (param $0 i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 134
+   i32.const 1024
+   i32.const 132
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
+  i32.load offset=24
   local.get $0
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:imageSmoothingQuality
+  i32.store offset=104
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:imageSmoothingQuality (; 98 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $assembly/save-restore.test/getImageSmoothingQuality (; 85 ;) (type $FUNCSIG$i) (result i32)
+  global.get $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1024
+   i32.const 137
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $assembly/save-restore.test/ctx
+  i32.load offset=24
+  i32.load offset=104
+ )
+ (func $assembly/save-restore.test/getLineCap (; 86 ;) (type $FUNCSIG$i) (result i32)
+  global.get $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1024
+   i32.const 142
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $assembly/save-restore.test/ctx
+  i32.load offset=24
+  i32.load offset=108
+ )
+ (func $assembly/save-restore.test/setLineCap (; 87 ;) (type $FUNCSIG$vi) (param $0 i32)
+  global.get $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1024
+   i32.const 147
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $assembly/save-restore.test/ctx
+  i32.load offset=24
+  local.get $0
+  i32.store offset=108
+ )
+ (func $assembly/save-restore.test/getLineDashOffset (; 88 ;) (type $FUNCSIG$d) (result f64)
+  global.get $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1024
+   i32.const 152
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $assembly/save-restore.test/ctx
+  i32.load offset=24
+  f64.load offset=120
+ )
+ (func $assembly/save-restore.test/setLineDashOffset (; 89 ;) (type $FUNCSIG$vd) (param $0 f64)
   (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  local.get $0
-  i32.load offset=88
+  global.get $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1024
+   i32.const 157
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $assembly/save-restore.test/ctx
   local.set $1
   local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $1
-  local.get $2
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  i32.load offset=8
- )
- (func $assembly/save-restore.test/getImageSmoothingQuality (; 99 ;) (type $FUNCSIG$i) (result i32)
-  global.get $assembly/save-restore.test/ctx
-  i32.eqz
+  local.get $0
+  f64.sub
+  f64.const 0
+  f64.eq
   if
-   i32.const 0
-   i32.const 416
-   i32.const 139
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:imageSmoothingQuality
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:lineCap (; 100 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  local.get $0
-  i32.load offset=96
-  local.set $1
-  local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $1
-  local.get $2
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  i32.load offset=8
- )
- (func $assembly/save-restore.test/getLineCap (; 101 ;) (type $FUNCSIG$i) (result i32)
-  global.get $assembly/save-restore.test/ctx
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 416
-   i32.const 144
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:lineCap
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineCap (; 102 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  local.get $0
-  i32.load offset=96
-  local.set $2
-  local.get $0
-  i32.load8_u offset=12
-  local.set $3
-  local.get $1
-  local.set $4
-  i32.const 0
-  local.set $5
-  local.get $2
-  local.get $3
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $5
-  i32.add
-  local.get $4
-  i32.store offset=8
- )
- (func $assembly/save-restore.test/setLineCap (; 103 ;) (type $FUNCSIG$vi) (param $0 i32)
-  global.get $assembly/save-restore.test/ctx
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 416
-   i32.const 149
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  global.get $assembly/save-restore.test/ctx
-  local.get $0
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineCap
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:lineDashOffset (; 104 ;) (type $FUNCSIG$di) (param $0 i32) (result f64)
-  (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  local.get $0
-  i32.load offset=112
-  local.set $1
-  local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $1
-  local.get $2
-  i32.const 3
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  f64.load offset=8
- )
- (func $assembly/save-restore.test/getLineDashOffset (; 105 ;) (type $FUNCSIG$d) (result f64)
-  global.get $assembly/save-restore.test/ctx
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 416
-   i32.const 154
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:lineDashOffset
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineDashOffset (; 106 ;) (type $FUNCSIG$vid) (param $0 i32) (param $1 f64)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 f64)
-  (local $5 i32)
-  local.get $1
-  call $~lib/builtins/isFinite<f64>
-  i32.eqz
-  if
-   return
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.38
-   local.get $0
-   i32.load offset=112
-   local.set $2
-   local.get $0
-   i32.load8_u offset=12
-   local.set $3
    local.get $1
-   local.set $4
-   i32.const 0
-   local.set $5
-   local.get $2
-   local.get $3
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $5
-   i32.add
-   local.get $4
-   f64.store offset=8
+   i32.load offset=24
+   local.get $0
+   f64.store offset=120
   end
  )
- (func $assembly/save-restore.test/setLineDashOffset (; 107 ;) (type $FUNCSIG$vd) (param $0 f64)
+ (func $assembly/save-restore.test/getLineJoin (; 90 ;) (type $FUNCSIG$i) (result i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 159
+   i32.const 1024
+   i32.const 162
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
-  local.get $0
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineDashOffset
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:lineJoin (; 108 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  local.get $0
+  i32.load offset=24
   i32.load offset=128
-  local.set $1
-  local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $1
-  local.get $2
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  i32.load offset=8
  )
- (func $assembly/save-restore.test/getLineJoin (; 109 ;) (type $FUNCSIG$i) (result i32)
+ (func $assembly/save-restore.test/setLineJoin (; 91 ;) (type $FUNCSIG$vi) (param $0 i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 164
+   i32.const 1024
+   i32.const 167
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:lineJoin
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineJoin (; 110 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
+  i32.load offset=24
   local.get $0
-  i32.load offset=128
-  local.set $2
-  local.get $0
-  i32.load8_u offset=12
-  local.set $3
-  local.get $1
-  local.set $4
-  i32.const 0
-  local.set $5
-  local.get $2
-  local.get $3
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $5
-  i32.add
-  local.get $4
-  i32.store offset=8
+  i32.store offset=128
  )
- (func $assembly/save-restore.test/setLineJoin (; 111 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/save-restore.test/getLineWidth (; 92 ;) (type $FUNCSIG$d) (result f64)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 169
+   i32.const 1024
+   i32.const 172
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
-  local.get $0
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineJoin
+  i32.load offset=24
+  f64.load offset=136
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:lineWidth (; 112 ;) (type $FUNCSIG$di) (param $0 i32) (result f64)
+ (func $assembly/save-restore.test/setLineWidth (; 93 ;) (type $FUNCSIG$vd) (param $0 f64)
   (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  local.get $0
-  i32.load offset=136
+  global.get $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1024
+   i32.const 177
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $assembly/save-restore.test/ctx
   local.set $1
+  i32.const 1
   local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $1
-  local.get $2
-  i32.const 3
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  f64.load offset=8
+  f64.const 0
+  f64.lt
+  local.get $0
+  local.get $0
+  f64.sub
+  f64.const 0
+  f64.ne
+  select
+  i32.eqz
+  if
+   local.get $1
+   i32.load offset=24
+   local.get $0
+   f64.store offset=136
+  end
  )
- (func $assembly/save-restore.test/getLineWidth (; 113 ;) (type $FUNCSIG$d) (result f64)
+ (func $assembly/save-restore.test/getMiterLimit (; 94 ;) (type $FUNCSIG$d) (result f64)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 174
+   i32.const 1024
+   i32.const 182
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:lineWidth
+  i32.load offset=24
+  f64.load offset=144
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineWidth (; 114 ;) (type $FUNCSIG$vid) (param $0 i32) (param $1 f64)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 f64)
-  (local $5 i32)
-  local.get $1
-  call $~lib/builtins/isFinite<f64>
-  i32.eqz
-  local.tee $2
-  if (result i32)
-   local.get $2
-  else   
-   local.get $1
-   f64.const 0
-   f64.lt
-  end
-  if
-   return
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.39
-   local.get $0
-   i32.load offset=136
-   local.set $2
-   local.get $0
-   i32.load8_u offset=12
-   local.set $3
-   local.get $1
-   local.set $4
-   i32.const 0
-   local.set $5
-   local.get $2
-   local.get $3
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $5
-   i32.add
-   local.get $4
-   f64.store offset=8
-  end
- )
- (func $assembly/save-restore.test/setLineWidth (; 115 ;) (type $FUNCSIG$vd) (param $0 f64)
-  global.get $assembly/save-restore.test/ctx
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 416
-   i32.const 179
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  global.get $assembly/save-restore.test/ctx
-  local.get $0
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:lineWidth
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:miterLimit (; 116 ;) (type $FUNCSIG$di) (param $0 i32) (result f64)
+ (func $assembly/save-restore.test/setMiterLimit (; 95 ;) (type $FUNCSIG$vd) (param $0 f64)
   (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  local.get $0
-  i32.load offset=152
+  global.get $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1024
+   i32.const 187
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $assembly/save-restore.test/ctx
   local.set $1
+  i32.const 1
   local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $1
-  local.get $2
-  i32.const 3
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  f64.load offset=8
+  f64.const 0
+  f64.lt
+  local.get $0
+  local.get $0
+  f64.sub
+  f64.const 0
+  f64.ne
+  select
+  i32.eqz
+  if
+   local.get $1
+   i32.load offset=24
+   local.get $0
+   f64.store offset=144
+  end
  )
- (func $assembly/save-restore.test/getMiterLimit (; 117 ;) (type $FUNCSIG$d) (result f64)
+ (func $assembly/save-restore.test/getShadowBlur (; 96 ;) (type $FUNCSIG$d) (result f64)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 184
+   i32.const 1024
+   i32.const 192
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:miterLimit
+  i32.load offset=24
+  f64.load offset=152
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:miterLimit (; 118 ;) (type $FUNCSIG$vid) (param $0 i32) (param $1 f64)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 f64)
-  (local $5 i32)
-  local.get $1
-  call $~lib/builtins/isFinite<f64>
-  i32.eqz
-  local.tee $2
-  if (result i32)
-   local.get $2
-  else   
-   local.get $1
-   f64.const 0
-   f64.lt
-  end
-  if
-   return
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.40
-   local.get $0
-   i32.load offset=152
-   local.set $2
-   local.get $0
-   i32.load8_u offset=12
-   local.set $3
-   local.get $1
-   local.set $4
-   i32.const 0
-   local.set $5
-   local.get $2
-   local.get $3
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $5
-   i32.add
-   local.get $4
-   f64.store offset=8
-  end
- )
- (func $assembly/save-restore.test/setMiterLimit (; 119 ;) (type $FUNCSIG$vd) (param $0 f64)
-  global.get $assembly/save-restore.test/ctx
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 416
-   i32.const 189
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  global.get $assembly/save-restore.test/ctx
-  local.get $0
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:miterLimit
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:shadowBlur (; 120 ;) (type $FUNCSIG$di) (param $0 i32) (result f64)
+ (func $assembly/save-restore.test/setShadowBlur (; 97 ;) (type $FUNCSIG$vd) (param $0 f64)
   (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  local.get $0
-  i32.load offset=168
+  global.get $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1024
+   i32.const 197
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $assembly/save-restore.test/ctx
   local.set $1
+  i32.const 1
   local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $1
-  local.get $2
-  i32.const 3
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  f64.load offset=8
- )
- (func $assembly/save-restore.test/getShadowBlur (; 121 ;) (type $FUNCSIG$d) (result f64)
-  global.get $assembly/save-restore.test/ctx
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 416
-   i32.const 194
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:shadowBlur
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowBlur (; 122 ;) (type $FUNCSIG$vid) (param $0 i32) (param $1 f64)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 f64)
-  (local $5 i32)
-  local.get $1
-  call $~lib/builtins/isFinite<f64>
-  i32.eqz
-  local.tee $2
-  if (result i32)
-   local.get $2
-  else   
-   local.get $1
-   f64.const 0
-   f64.lt
-  end
-  if
-   return
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.41
-   local.get $0
-   i32.load offset=168
-   local.set $2
-   local.get $0
-   i32.load8_u offset=12
-   local.set $3
-   local.get $1
-   local.set $4
-   i32.const 0
-   local.set $5
-   local.get $2
-   local.get $3
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $5
-   i32.add
-   local.get $4
-   f64.store offset=8
-  end
- )
- (func $assembly/save-restore.test/setShadowBlur (; 123 ;) (type $FUNCSIG$vd) (param $0 f64)
-  global.get $assembly/save-restore.test/ctx
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 416
-   i32.const 199
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  global.get $assembly/save-restore.test/ctx
+  f64.const 0
+  f64.lt
   local.get $0
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowBlur
+  local.get $0
+  f64.sub
+  f64.const 0
+  f64.ne
+  select
+  i32.eqz
+  if
+   local.get $1
+   i32.load offset=24
+   local.get $0
+   f64.store offset=152
+  end
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:shadowColor (; 124 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $assembly/save-restore.test/getShadowColor (; 98 ;) (type $FUNCSIG$i) (result i32)
+  (local $0 i32)
   (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  local.get $0
-  i32.load offset=184
-  local.set $1
-  local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $1
-  local.get $2
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  i32.load offset=8
- )
- (func $assembly/save-restore.test/getShadowColor (; 125 ;) (type $FUNCSIG$i) (result i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 204
+   i32.const 1024
+   i32.const 202
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:shadowColor
+  i32.load offset=24
+  i32.load offset=160
+  call $~lib/rt/pure/__retain
+  local.tee $0
+  call $~lib/rt/pure/__retain
+  local.get $0
+  call $~lib/rt/pure/__release
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowColor (; 126 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowColor (; 99 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
+  local.get $1
+  call $~lib/rt/pure/__retain
+  drop
   local.get $1
   i32.const 0
   call $~lib/string/String.__eq
   if
-   global.get $assembly/renderer/CanvasRenderingContext2D/defaultShadowColor
-   local.set $1
-  end
-  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.15
-   local.get $0
-   i32.load offset=184
-   local.set $2
-   local.get $0
-   i32.load8_u offset=12
-   local.set $3
    local.get $1
-   local.set $4
-   i32.const 0
-   local.set $5
+   local.set $2
    local.get $2
-   local.get $3
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $5
-   i32.add
-   local.get $4
-   i32.store offset=8
+   i32.const 368
+   local.tee $1
+   i32.ne
+   if
+    local.get $1
+    call $~lib/rt/pure/__retain
+    drop
+    local.get $2
+    call $~lib/rt/pure/__release
+   end
   end
+  local.get $0
+  i32.load offset=24
+  local.set $0
+  local.get $1
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $0
+  i32.load offset=160
+  call $~lib/rt/pure/__release
+  local.get $0
+  local.get $1
+  i32.store offset=160
+  local.get $1
+  call $~lib/rt/pure/__release
  )
- (func $assembly/save-restore.test/setShadowColor (; 127 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/save-restore.test/setShadowColor (; 100 ;) (type $FUNCSIG$vi) (param $0 i32)
+  local.get $0
+  call $~lib/rt/pure/__retain
+  drop
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 209
+   i32.const 1024
+   i32.const 207
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
   local.get $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowColor
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:shadowOffsetX (; 128 ;) (type $FUNCSIG$di) (param $0 i32) (result f64)
-  (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
   local.get $0
-  i32.load offset=192
+  call $~lib/rt/pure/__release
+ )
+ (func $assembly/save-restore.test/getShadowOffsetX (; 101 ;) (type $FUNCSIG$d) (result f64)
+  global.get $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1024
+   i32.const 212
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $assembly/save-restore.test/ctx
+  i32.load offset=24
+  f64.load offset=168
+ )
+ (func $assembly/save-restore.test/setShadowOffsetX (; 102 ;) (type $FUNCSIG$vd) (param $0 f64)
+  (local $1 i32)
+  global.get $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1024
+   i32.const 217
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $assembly/save-restore.test/ctx
   local.set $1
   local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $1
-  local.get $2
-  i32.const 3
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  f64.load offset=8
- )
- (func $assembly/save-restore.test/getShadowOffsetX (; 129 ;) (type $FUNCSIG$d) (result f64)
-  global.get $assembly/save-restore.test/ctx
-  i32.eqz
+  local.get $0
+  f64.sub
+  f64.const 0
+  f64.eq
   if
-   i32.const 0
-   i32.const 416
-   i32.const 214
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:shadowOffsetX
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowOffsetX (; 130 ;) (type $FUNCSIG$vid) (param $0 i32) (param $1 f64)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 f64)
-  (local $5 i32)
-  local.get $1
-  call $~lib/builtins/isFinite<f64>
-  i32.eqz
-  if
-   return
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.42
-   local.get $0
-   i32.load offset=192
-   local.set $2
-   local.get $0
-   i32.load8_u offset=12
-   local.set $3
    local.get $1
-   local.set $4
-   i32.const 0
-   local.set $5
-   local.get $2
-   local.get $3
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $5
-   i32.add
-   local.get $4
-   f64.store offset=8
+   i32.load offset=24
+   local.get $0
+   f64.store offset=168
   end
  )
- (func $assembly/save-restore.test/setShadowOffsetX (; 131 ;) (type $FUNCSIG$vd) (param $0 f64)
+ (func $assembly/save-restore.test/getShadowOffsetY (; 103 ;) (type $FUNCSIG$d) (result f64)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 219
+   i32.const 1024
+   i32.const 222
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
-  local.get $0
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowOffsetX
+  i32.load offset=24
+  f64.load offset=176
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:shadowOffsetY (; 132 ;) (type $FUNCSIG$di) (param $0 i32) (result f64)
+ (func $assembly/save-restore.test/setShadowOffsetY (; 104 ;) (type $FUNCSIG$vd) (param $0 f64)
   (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  local.get $0
-  i32.load offset=208
+  global.get $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1024
+   i32.const 227
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $assembly/save-restore.test/ctx
   local.set $1
   local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
-  local.get $1
-  local.get $2
-  i32.const 3
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  f64.load offset=8
- )
- (func $assembly/save-restore.test/getShadowOffsetY (; 133 ;) (type $FUNCSIG$d) (result f64)
-  global.get $assembly/save-restore.test/ctx
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 416
-   i32.const 224
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:shadowOffsetY
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowOffsetY (; 134 ;) (type $FUNCSIG$vid) (param $0 i32) (param $1 f64)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 f64)
-  (local $5 i32)
-  local.get $1
-  call $~lib/builtins/isFinite<f64>
-  i32.eqz
-  if
-   return
-  end
-  block $~lib/internal/arraybuffer/STORE<f64,f64>|inlined.43
-   local.get $0
-   i32.load offset=208
-   local.set $2
-   local.get $0
-   i32.load8_u offset=12
-   local.set $3
-   local.get $1
-   local.set $4
-   i32.const 0
-   local.set $5
-   local.get $2
-   local.get $3
-   i32.const 3
-   i32.shl
-   i32.add
-   local.get $5
-   i32.add
-   local.get $4
-   f64.store offset=8
-  end
- )
- (func $assembly/save-restore.test/setShadowOffsetY (; 135 ;) (type $FUNCSIG$vd) (param $0 f64)
-  global.get $assembly/save-restore.test/ctx
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 416
-   i32.const 229
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  global.get $assembly/save-restore.test/ctx
   local.get $0
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:shadowOffsetY
+  f64.sub
+  f64.const 0
+  f64.eq
+  if
+   local.get $1
+   i32.load offset=24
+   local.get $0
+   f64.store offset=176
+  end
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:strokeStyle (; 136 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $assembly/save-restore.test/getStrokeStyle (; 105 ;) (type $FUNCSIG$i) (result i32)
+  (local $0 i32)
   (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  local.get $0
-  i32.load8_u offset=12
-  i32.const 2
-  i32.mul
-  i32.const 255
-  i32.and
-  local.set $1
-  block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.21 (result i32)
-   local.get $0
-   i32.load offset=224
-   local.set $2
-   local.get $1
-   local.set $3
-   i32.const 0
-   local.set $4
-   local.get $2
-   local.get $3
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $4
-   i32.add
-   i32.load offset=8
-  end
-  local.set $5
-  local.get $5
-  i32.const 0
-  i32.eq
-  if
-   block $~lib/internal/arraybuffer/LOAD<usize,usize>|inlined.22 (result i32)
-    local.get $0
-    i32.load offset=224
-    local.set $4
-    local.get $1
-    i32.const 1
-    i32.add
-    local.set $3
-    i32.const 0
-    local.set $2
-    local.get $4
-    local.get $3
-    i32.const 2
-    i32.shl
-    i32.add
-    local.get $2
-    i32.add
-    i32.load offset=8
-   end
-   return
-  end
-  i32.const 0
- )
- (func $assembly/save-restore.test/getStrokeStyle (; 137 ;) (type $FUNCSIG$i) (result i32)
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 234
+   i32.const 1024
+   i32.const 232
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:strokeStyle
+  i32.load offset=24
+  local.tee $0
+  local.set $1
+  local.get $0
+  i32.load offset=184
+  if (result i32)
+   i32.const 0
+   call $~lib/rt/pure/__retain
+  else
+   local.get $1
+   i32.load offset=188
+   call $~lib/rt/pure/__retain
+  end
+  call $~lib/rt/pure/__retain
+  local.tee $0
+  call $~lib/rt/pure/__retain
+  local.get $0
+  call $~lib/rt/pure/__release
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokeStyle (; 138 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokeStyle (; 106 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  (local $6 i32)
-  (local $7 i32)
+  local.get $1
+  call $~lib/rt/pure/__retain
+  drop
   local.get $1
   i32.const 0
   call $~lib/string/String.__eq
   if
-   global.get $assembly/renderer/CanvasRenderingContext2D/defaultBlack
+   i32.const 272
+   local.tee $2
+   local.get $1
+   i32.ne
+   if
+    local.get $2
+    call $~lib/rt/pure/__retain
+    drop
+    local.get $1
+    call $~lib/rt/pure/__release
+   end
+   local.get $2
    local.set $1
   end
   local.get $0
-  i32.load8_u offset=12
-  i32.const 2
-  i32.mul
-  i32.const 255
-  i32.and
+  i32.load offset=24
+  local.tee $0
+  i32.load offset=184
   local.set $2
   local.get $0
-  i32.load offset=224
-  local.set $3
-  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.16
-   local.get $3
-   local.set $4
-   local.get $2
-   local.set $5
+  i32.const 0
+  i32.store offset=184
+  local.get $1
+  call $~lib/rt/pure/__retain
+  drop
+  local.get $2
+  i32.const 2
+  i32.eq
+  if
+   local.get $0
+   i32.load offset=192
+   call $~lib/rt/pure/__release
+   local.get $0
    i32.const 0
-   local.set $6
-   i32.const 0
-   local.set $7
-   local.get $4
-   local.get $5
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $7
-   i32.add
-   local.get $6
-   i32.store offset=8
-  end
-  block $~lib/internal/arraybuffer/STORE<usize,usize>|inlined.17
-   local.get $3
-   local.set $7
+   i32.store offset=192
+  else
    local.get $2
    i32.const 1
-   i32.add
-   local.set $6
-   local.get $1
-   local.set $5
-   i32.const 0
-   local.set $4
-   local.get $7
-   local.get $6
-   i32.const 2
-   i32.shl
-   i32.add
-   local.get $4
-   i32.add
-   local.get $5
-   i32.store offset=8
+   i32.eq
+   if
+    local.get $0
+    i32.load offset=196
+    call $~lib/rt/pure/__release
+    local.get $0
+    i32.const 0
+    i32.store offset=196
+   else
+    local.get $0
+    i32.load offset=188
+    call $~lib/rt/pure/__release
+   end
   end
+  local.get $1
+  i32.eqz
+  if
+   unreachable
+  end
+  local.get $0
+  local.get $1
+  i32.store offset=188
+  local.get $0
+  local.get $1
+  f64.convert_i32_u
+  f64.store offset=200
+  local.get $1
+  call $~lib/rt/pure/__release
  )
- (func $assembly/save-restore.test/setStrokeStyle (; 139 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $assembly/save-restore.test/setStrokeStyle (; 107 ;) (type $FUNCSIG$vi) (param $0 i32)
+  local.get $0
+  call $~lib/rt/pure/__retain
+  drop
   global.get $assembly/save-restore.test/ctx
   i32.eqz
   if
    i32.const 0
-   i32.const 416
-   i32.const 239
+   i32.const 1024
+   i32.const 237
    i32.const 2
-   call $~lib/env/abort
+   call $~lib/builtins/abort
    unreachable
   end
   global.get $assembly/save-restore.test/ctx
   local.get $0
   call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:strokeStyle
+  local.get $0
+  call $~lib/rt/pure/__release
  )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:textAlign (; 140 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  (local $1 i32)
+ (func $assembly/save-restore.test/getTextAlign (; 108 ;) (type $FUNCSIG$i) (result i32)
+  global.get $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1024
+   i32.const 242
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $assembly/save-restore.test/ctx
+  i32.load offset=24
+  i32.load offset=208
+ )
+ (func $assembly/save-restore.test/setTextAlign (; 109 ;) (type $FUNCSIG$vi) (param $0 i32)
+  global.get $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1024
+   i32.const 247
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $assembly/save-restore.test/ctx
+  i32.load offset=24
+  local.get $0
+  i32.store offset=208
+ )
+ (func $assembly/save-restore.test/getTextBaseline (; 110 ;) (type $FUNCSIG$i) (result i32)
+  global.get $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1024
+   i32.const 252
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $assembly/save-restore.test/ctx
+  i32.load offset=24
+  i32.load offset=212
+ )
+ (func $assembly/save-restore.test/setTextBaseline (; 111 ;) (type $FUNCSIG$vi) (param $0 i32)
+  global.get $assembly/save-restore.test/ctx
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1024
+   i32.const 257
+   i32.const 2
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $assembly/save-restore.test/ctx
+  i32.load offset=24
+  local.get $0
+  i32.store offset=212
+ )
+ (func $start (; 112 ;) (type $FUNCSIG$v)
+  i32.const 0
+  call $~lib/typedarray/Float64Array#constructor
+  global.set $assembly/renderer/CanvasRenderingContext2D/defaultLineDash
+  call $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#constructor
+  global.set $assembly/internal/getContext/map
+ )
+ (func $~lib/rt/pure/__visit (; 113 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+  local.get $0
+  i32.const 1180
+  i32.lt_u
+  if
+   return
+  end
+  local.get $0
+  i32.const 16
+  i32.sub
+  local.set $0
+  block $break|0
+   block $case5|0
+    block $case4|0
+     block $case3|0
+      block $case2|0
+       block $case1|0
+        local.get $1
+        i32.const 1
+        i32.ne
+        if
+         local.get $1
+         i32.const 2
+         i32.eq
+         br_if $case1|0
+         block $tablify|0
+          local.get $1
+          i32.const 3
+          i32.sub
+          br_table $case2|0 $case3|0 $case4|0 $tablify|0
+         end
+         br $case5|0
+        end
+        local.get $0
+        call $~lib/rt/pure/decrement
+        br $break|0
+       end
+       local.get $0
+       i32.load offset=4
+       i32.const 268435455
+       i32.and
+       i32.const 0
+       i32.le_u
+       if
+        i32.const 0
+        i32.const 128
+        i32.const 75
+        i32.const 17
+        call $~lib/builtins/abort
+        unreachable
+       end
+       local.get $0
+       local.get $0
+       i32.load offset=4
+       i32.const 1
+       i32.sub
+       i32.store offset=4
+       local.get $0
+       call $~lib/rt/pure/markGray
+       br $break|0
+      end
+      local.get $0
+      call $~lib/rt/pure/scan
+      br $break|0
+     end
+     local.get $0
+     i32.load offset=4
+     local.tee $1
+     i32.const -268435456
+     i32.and
+     local.get $1
+     i32.const 1
+     i32.add
+     i32.const -268435456
+     i32.and
+     i32.ne
+     if
+      i32.const 0
+      i32.const 128
+      i32.const 86
+      i32.const 6
+      call $~lib/builtins/abort
+      unreachable
+     end
+     local.get $0
+     local.get $1
+     i32.const 1
+     i32.add
+     i32.store offset=4
+     local.get $1
+     i32.const 1879048192
+     i32.and
+     if
+      local.get $0
+      call $~lib/rt/pure/scanBlack
+     end
+     br $break|0
+    end
+    local.get $0
+    call $~lib/rt/pure/collectWhite
+    br $break|0
+   end
+   i32.const 0
+   i32.const 128
+   i32.const 97
+   i32.const 24
+   call $~lib/builtins/abort
+   unreachable
+  end
+ )
+ (func $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#__visit_impl (; 114 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
-  i32.load offset=236
-  local.set $1
-  local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
+  i32.load
   local.get $1
-  local.get $2
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
+  call $~lib/rt/pure/__visit
+  local.get $0
   i32.load offset=8
- )
- (func $assembly/save-restore.test/getTextAlign (; 141 ;) (type $FUNCSIG$i) (result i32)
-  global.get $assembly/save-restore.test/ctx
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 416
-   i32.const 244
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
+  local.tee $3
+  local.tee $2
+  local.get $0
+  i32.load offset=16
+  i32.const 12
+  i32.mul
+  i32.add
+  local.set $0
+  loop $continue|0
+   local.get $2
+   local.get $0
+   i32.lt_u
+   if
+    local.get $2
+    i32.load offset=8
+    i32.const 1
+    i32.and
+    i32.eqz
+    if
+     local.get $2
+     i32.load
+     local.get $1
+     call $~lib/rt/pure/__visit
+     local.get $2
+     i32.load offset=4
+     local.get $1
+     call $~lib/rt/pure/__visit
+    end
+    local.get $2
+    i32.const 12
+    i32.add
+    local.set $2
+    br $continue|0
+   end
   end
-  global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:textAlign
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:textAlign (; 142 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  local.get $0
-  i32.load offset=236
-  local.set $2
-  local.get $0
-  i32.load8_u offset=12
-  local.set $3
-  local.get $1
-  local.set $4
-  i32.const 0
-  local.set $5
-  local.get $2
   local.get $3
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $5
-  i32.add
-  local.get $4
-  i32.store offset=8
- )
- (func $assembly/save-restore.test/setTextAlign (; 143 ;) (type $FUNCSIG$vi) (param $0 i32)
-  global.get $assembly/save-restore.test/ctx
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 416
-   i32.const 249
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  global.get $assembly/save-restore.test/ctx
-  local.get $0
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:textAlign
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:textBaseline (; 144 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
-  (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  local.get $0
-  i32.load offset=244
-  local.set $1
-  local.get $0
-  i32.load8_u offset=12
-  local.set $2
-  i32.const 0
-  local.set $3
   local.get $1
-  local.get $2
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $3
-  i32.add
-  i32.load offset=8
+  call $~lib/rt/pure/__visit
  )
- (func $assembly/save-restore.test/getTextBaseline (; 145 ;) (type $FUNCSIG$i) (result i32)
-  global.get $assembly/save-restore.test/ctx
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 416
-   i32.const 254
-   i32.const 2
-   call $~lib/env/abort
-   unreachable
-  end
-  global.get $assembly/save-restore.test/ctx
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#get:textBaseline
- )
- (func $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:textBaseline (; 146 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $~lib/rt/__visit_members (; 115 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  local.get $0
-  i32.load offset=244
-  local.set $2
-  local.get $0
-  i32.load8_u offset=12
-  local.set $3
-  local.get $1
-  local.set $4
-  i32.const 0
-  local.set $5
-  local.get $2
-  local.get $3
-  i32.const 2
-  i32.shl
-  i32.add
-  local.get $5
-  i32.add
-  local.get $4
-  i32.store offset=8
- )
- (func $assembly/save-restore.test/setTextBaseline (; 147 ;) (type $FUNCSIG$vi) (param $0 i32)
-  global.get $assembly/save-restore.test/ctx
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 416
-   i32.const 259
-   i32.const 2
-   call $~lib/env/abort
+  block $block$6$break
+   block $switch$1$default
+    block $switch$1$case$12
+     block $switch$1$case$11
+      block $switch$1$case$7
+       block $switch$1$case$4
+        block $switch$1$case$2
+         local.get $0
+         i32.const 8
+         i32.sub
+         i32.load
+         br_table $switch$1$case$2 $switch$1$case$2 $switch$1$case$4 $switch$1$case$4 $block$6$break $switch$1$case$7 $switch$1$case$2 $switch$1$case$2 $switch$1$case$2 $switch$1$case$11 $switch$1$case$12 $switch$1$default
+        end
+        return
+       end
+       local.get $0
+       i32.load
+       local.tee $0
+       if
+        local.get $0
+        local.get $1
+        call $~lib/rt/pure/__visit
+       end
+       return
+      end
+      local.get $0
+      i32.load offset=28
+      local.tee $2
+      if
+       local.get $2
+       local.get $1
+       call $~lib/rt/pure/__visit
+      end
+      local.get $0
+      i32.load offset=44
+      local.tee $2
+      if
+       local.get $2
+       local.get $1
+       call $~lib/rt/pure/__visit
+      end
+      local.get $0
+      i32.load offset=48
+      local.tee $2
+      if
+       local.get $2
+       local.get $1
+       call $~lib/rt/pure/__visit
+      end
+      local.get $0
+      i32.load offset=80
+      local.tee $2
+      if
+       local.get $2
+       local.get $1
+       call $~lib/rt/pure/__visit
+      end
+      local.get $0
+      i32.load offset=128
+      local.tee $2
+      if
+       local.get $2
+       local.get $1
+       call $~lib/rt/pure/__visit
+      end
+      br $block$6$break
+     end
+     local.get $0
+     local.get $1
+     call $~lib/map/Map<~lib/string/String,assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D>#__visit_impl
+     return
+    end
+    local.get $0
+    i32.load offset=16
+    local.tee $0
+    if
+     local.get $0
+     local.get $1
+     call $~lib/rt/pure/__visit
+    end
+    return
+   end
    unreachable
   end
-  global.get $assembly/save-restore.test/ctx
   local.get $0
-  call $assembly/renderer/CanvasRenderingContext2D/CanvasRenderingContext2D#set:textBaseline
+  i32.load
+  local.tee $2
+  if
+   local.get $2
+   local.get $1
+   call $~lib/rt/pure/__visit
+  end
+  local.get $0
+  i32.load offset=4
+  local.tee $0
+  if
+   local.get $0
+   local.get $1
+   call $~lib/rt/pure/__visit
+  end
  )
- (func $start (; 148 ;) (type $FUNCSIG$v)
-  call $start:assembly/glue
- )
- (func $null (; 149 ;) (type $FUNCSIG$v)
+ (func $null (; 116 ;) (type $FUNCSIG$v)
+  nop
  )
 )

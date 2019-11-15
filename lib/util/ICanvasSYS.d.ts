@@ -1,4 +1,3 @@
-/// <reference types="webassembly-js-api" />
 export interface ICanvasSYS {
     __use_context(name: number, id: number): void;
     __image_loaded(img: number, width: number, height: number): void;
