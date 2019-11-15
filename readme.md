@@ -7,26 +7,16 @@
 ![Pull Requests](https://img.shields.io/github/issues-pr/as2d/as2d.svg?style=flat)
 ![License](https://img.shields.io/github/license/as2d/as2d.svg?style=flat)
 
-# Warning
-
-This package has not been tested with `AssemblyScript version 0.7.0`. Please advise that this will
-require an entire backwards compatible rewrite to the entire `as2d` package. This will come with
-optimizations and a better set of unit tests using the `as-pect` testing suite instead of just making
-some changes.
-
-This is expected to be completed by July 7th, 2019. In the meantime, this software requires the use of a
-`pre-runtime` AssemblyScript compiler.
-
-# Description
+## Description
 
 This project brings the utility of the `CanvasRenderingContext2D` prototype into `AssemblyScript` in
 a very optimized way.
 
 Please see the wiki for instructions on how to get started!
 
-# LICENSE
+## LICENSE
 
-```
+```txt
 Copyright (c) 2019 jtenner
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
