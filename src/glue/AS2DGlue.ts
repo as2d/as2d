@@ -1,43 +1,26 @@
 import { ASUtil, instantiateSync as instantiateBuffer, instantiate, instantiateStreaming } from "assemblyscript/lib/loader";
 import { ICanvasSYS } from "../util/ICanvasSYS";
 import { CanvasInstruction } from "../shared/CanvasInstruction";
+import { enumKeysToArray } from "../util/EnumKeysToArray";
+import { CanvasDirection as CD } from '../shared/CanvasDirection';
+import { TextAlign } from '../shared/TextAlign';
+import { TextBaseline } from '../shared/TextBaseline';
+import { LineJoin } from '../shared/LineJoin';
+import { LineCap } from '../shared/LineCap';
+import { FillRule } from '../shared/FillRule';
+import { CanvasPatternRepetition } from '../shared/CanvasPatternRepetition';
+import { ImageSmoothingQuality } from '../shared/ImageSmoothingQuality';
+import { GlobalCompositeOperationValue } from '../shared/GlobalCompositeOperationValue';
 
-const CanvasPatternRepetitionValues = ["repeat", "repeat_x", "repeat_y", "no_repeat"];
-const FillRuleValues = ["nonzero", "evenodd"];
-const LineCapValues = ["butt", "round", "square"];
-const LineJoinValues = ["bevel", "round", "miter"];
-const TextBaselineValues = ["top", "hanging", "middle", "alphabetic", "ideographic", "bottom"];
-const TextAlignValues = ["left", "right", "center", "start", "end"];
-const CanvasDirectionValues = ["ltr", "rtl", "inherit"];
-const ImageSmoothingQualityValues = ["low", "medium", "high"];
-const GlobalCompositeOperationValues = [
-  "source-over",
-  "source-in",
-  "source-out",
-  "source-atop",
-  "destination-over",
-  "destination-in",
-  "destination-out",
-  "destination-atop",
-  "lighter",
-  "copy",
-  "xor",
-  "multiply",
-  "screen",
-  "overlay",
-  "darken",
-  "lighten",
-  "color-dodge",
-  "color-burn",
-  "hard-light",
-  "soft-light",
-  "difference",
-  "exclusion",
-  "hue",
-  "saturation",
-  "color",
-  "luminosity",
-];
+const CanvasPatternRepetitionValues = enumKeysToArray(CanvasPatternRepetition);
+const FillRuleValues = enumKeysToArray(FillRule);
+const LineCapValues = enumKeysToArray(LineCap)
+const LineJoinValues = enumKeysToArray(LineJoin);
+const TextBaselineValues = enumKeysToArray(TextBaseline);
+const TextAlignValues = enumKeysToArray(TextAlign);
+const CanvasDirectionValues = enumKeysToArray(CD);
+const ImageSmoothingQualityValues = enumKeysToArray(ImageSmoothingQuality);
+const GlobalCompositeOperationValues = enumKeysToArray(GlobalCompositeOperationValue);
 
 const bool = {
   "true": 1,
