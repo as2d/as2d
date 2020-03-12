@@ -1,4 +1,19 @@
-import { STORE } from "./util";
+@unmanaged
+class Writer {
+  inst: f64;
+  next: f64;
+  a: f64;
+  b: f64;
+  c: f64;
+  d: f64;
+  e: f64;
+  f: f64;
+  g: f64;
+  h: f64;
+  i: f64;
+}
+
+
 /**
  * The Buffer class is an ArrayBuffer backed data writer that utilizes the internal STORE function
  * provided by AssemblyScript to write data as fast as possible to memory. The generic type
@@ -15,12 +30,12 @@ export class Buffer<T extends i32> {
    * currently written values to the buffer. The browser eventually should obtain a pointer to this
    * block and read the values from it to perform actions.
    */
-  protected _buffer: ArrayBuffer = new ArrayBuffer(0x10000 * sizeof<f64>());
+  protected _buffer: StaticArray<f64> = new StaticArray<f64>(0x10000);
 
   /**
    * The set of retained pointers that need to be cleaned up after a commit().
    */
-  protected _retained: ArrayBuffer = new ArrayBuffer(0x10000 << alignof<usize>());
+  protected _retained: StaticArray<usize> = new StaticArray<usize>(0x10000);
 
   /**
    * The offset into the _retained pointer list.
@@ -40,12 +55,11 @@ export class Buffer<T extends i32> {
    */
   @inline
   protected _writeZero(inst: T): void {
-    var buff = changetype<usize>(this._buffer);
-    var index: i32 = this._offset;
-    var next: i32 = index + 2;
-    STORE<f64>(buff, index, <f64>inst);
-    STORE<f64>(buff, index + 1, <f64>next);
-    this._offset = next;
+    var buffer = changetype<usize>(this._buffer);
+    var index = this._offset;
+    var writer = changetype<Writer>(buffer + <usize>index << alignof<f64>());
+    writer.inst = <f64>inst;
+    writer.next = <f64>(this._offset = index + 2);
   }
 
   /**
@@ -57,13 +71,12 @@ export class Buffer<T extends i32> {
    */
   @inline
   protected _writeOne(inst: T, a: f64): void {
-    var buff = changetype<usize>(this._buffer);
-    var index: i32 = this._offset;
-    var next: i32 = index + 3;
-    STORE<f64>(buff, index, <f64>inst);
-    STORE<f64>(buff, index + 1, <f64>next);
-    STORE<f64>(buff, index + 2, a);
-    this._offset = next;
+    var buffer = changetype<usize>(this._buffer);
+    var index = this._offset;
+    var writer = changetype<Writer>(buffer + <usize>index << alignof<f64>());
+    writer.inst = <f64>inst;
+    writer.next = <f64>(this._offset = index + 3);
+    writer.a = a;
   }
 
   /**
@@ -76,14 +89,13 @@ export class Buffer<T extends i32> {
    */
   @inline
   protected _writeTwo(inst: T, a: f64, b: f64): void {
-    var buff = changetype<usize>(this._buffer);
-    var index: i32 = this._offset;
-    var next: i32 = index + 4;
-    STORE<f64>(buff, index, <f64>inst);
-    STORE<f64>(buff, index + 1, <f64>next);
-    STORE<f64>(buff, index + 2, a);
-    STORE<f64>(buff, index + 3, b);
-    this._offset = next;
+    var buffer = changetype<usize>(this._buffer);
+    var index = this._offset;
+    var writer = changetype<Writer>(buffer + <usize>index << alignof<f64>());
+    writer.inst = <f64>inst;
+    writer.next = <f64>(this._offset = index + 4);
+    writer.a = a;
+    writer.b = b;
   }
 
   /**
@@ -97,15 +109,14 @@ export class Buffer<T extends i32> {
    */
   @inline
   protected _writeThree(inst: T, a: f64, b: f64, c: f64): void {
-    var buff = changetype<usize>(this._buffer);
-    var index: i32 = this._offset;
-    var next: i32 = index + 5;
-    STORE<f64>(buff, index, <f64>inst);
-    STORE<f64>(buff, index + 1, <f64>next);
-    STORE<f64>(buff, index + 2, a);
-    STORE<f64>(buff, index + 3, b);
-    STORE<f64>(buff, index + 4, c);
-    this._offset = next;
+    var buffer = changetype<usize>(this._buffer);
+    var index = this._offset;
+    var writer = changetype<Writer>(buffer + <usize>index << alignof<f64>());
+    writer.inst = <f64>inst;
+    writer.next = <f64>(this._offset = index + 5);
+    writer.a = a;
+    writer.b = b;
+    writer.c = c;
   }
 
   /**
@@ -120,16 +131,15 @@ export class Buffer<T extends i32> {
    */
   @inline
   protected _writeFour(inst: T, a: f64, b: f64, c: f64, d: f64): void {
-    var buff = changetype<usize>(this._buffer);
-    var index: i32 = this._offset;
-    var next: i32 = index + 6;
-    STORE<f64>(buff, index, <f64>inst);
-    STORE<f64>(buff, index + 1, <f64>next);
-    STORE<f64>(buff, index + 2, a);
-    STORE<f64>(buff, index + 3, b);
-    STORE<f64>(buff, index + 4, c);
-    STORE<f64>(buff, index + 5, d);
-    this._offset = next;
+    var buffer = changetype<usize>(this._buffer);
+    var index = this._offset;
+    var writer = changetype<Writer>(buffer + <usize>index << alignof<f64>());
+    writer.inst = <f64>inst;
+    writer.next = <f64>(this._offset = index + 6);
+    writer.a = a;
+    writer.b = b;
+    writer.c = c;
+    writer.d = d;
   }
 
   /**
@@ -141,21 +151,20 @@ export class Buffer<T extends i32> {
    * @param {f64} b - The second parameter for the instruction to be written to the buffer.
    * @param {f64} c - The third parameter for the instruction to be written to the buffer.
    * @param {f64} d - The fourth parameter for the instruction to be written to the buffer.
-   * @param {f64} d - The fifth parameter for the instruction to be written to the buffer.
+   * @param {f64} e - The fifth parameter for the instruction to be written to the buffer.
    */
   @inline
   protected _writeFive(inst: T, a: f64, b: f64, c: f64, d: f64, e: f64): void {
-    var buff = changetype<usize>(this._buffer);
-    var index: i32 = this._offset;
-    var next: i32 = index + 7;
-    STORE<f64>(buff, index, <f64>inst);
-    STORE<f64>(buff, index + 1, <f64>next);
-    STORE<f64>(buff, index + 2, a);
-    STORE<f64>(buff, index + 3, b);
-    STORE<f64>(buff, index + 4, c);
-    STORE<f64>(buff, index + 5, d);
-    STORE<f64>(buff, index + 6, e);
-    this._offset = next;
+    var buffer = changetype<usize>(this._buffer);
+    var index = this._offset;
+    var writer = changetype<Writer>(buffer + <usize>index << alignof<f64>());
+    writer.inst = <f64>inst;
+    writer.next = <f64>(this._offset = index + 7);
+    writer.a = a;
+    writer.b = b;
+    writer.c = c;
+    writer.d = d;
+    writer.e = e;
   }
 
   /**
@@ -172,18 +181,17 @@ export class Buffer<T extends i32> {
    */
   @inline
   protected _writeSix(inst: T, a: f64, b: f64, c: f64, d: f64, e: f64, f: f64): void {
-    var buff = changetype<usize>(this._buffer);
-    var index: i32 = this._offset;
-    var next: i32 = index + 8;
-    STORE<f64>(buff, index, <f64>inst);
-    STORE<f64>(buff, index + 1, <f64>next);
-    STORE<f64>(buff, index + 2, a);
-    STORE<f64>(buff, index + 3, b);
-    STORE<f64>(buff, index + 4, c);
-    STORE<f64>(buff, index + 5, d);
-    STORE<f64>(buff, index + 6, e);
-    STORE<f64>(buff, index + 7, f);
-    this._offset = next;
+    var buffer = changetype<usize>(this._buffer);
+    var index = this._offset;
+    var writer = changetype<Writer>(buffer + <usize>index << alignof<f64>());
+    writer.inst = <f64>inst;
+    writer.next = <f64>(this._offset = index + 8);
+    writer.a = a;
+    writer.b = b;
+    writer.c = c;
+    writer.d = d;
+    writer.e = e;
+    writer.f = f;
   }
 
   /**
@@ -202,20 +210,19 @@ export class Buffer<T extends i32> {
    */
   @inline
   protected _writeEight(inst: T, a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64): void {
-    var buff = changetype<usize>(this._buffer);
-    var index: i32 = this._offset;
-    var next: i32 = index + 10;
-    STORE<f64>(buff, index, <f64>inst);
-    STORE<f64>(buff, index + 1, <f64>next);
-    STORE<f64>(buff, index + 2, a);
-    STORE<f64>(buff, index + 3, b);
-    STORE<f64>(buff, index + 4, c);
-    STORE<f64>(buff, index + 5, d);
-    STORE<f64>(buff, index + 6, e);
-    STORE<f64>(buff, index + 7, f);
-    STORE<f64>(buff, index + 8, g);
-    STORE<f64>(buff, index + 9, h);
-    this._offset = next;
+    var buffer = changetype<usize>(this._buffer);
+    var index = this._offset;
+    var writer = changetype<Writer>(buffer + <usize>index << alignof<f64>());
+    writer.inst = <f64>inst;
+    writer.next = <f64>(this._offset = index + 10);
+    writer.a = a;
+    writer.b = b;
+    writer.c = c;
+    writer.d = d;
+    writer.e = e;
+    writer.f = f;
+    writer.g = g;
+    writer.h = h;
   }
 
   /**
@@ -235,21 +242,20 @@ export class Buffer<T extends i32> {
    */
   @inline
   protected _writeNine(inst: T, a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64, i: f64): void {
-    var buff = changetype<usize>(this._buffer);
-    var index: i32 = this._offset;
-    var next: i32 = index + 11;
-    STORE<f64>(buff, index, <f64>inst);
-    STORE<f64>(buff, index + 1, <f64>next);
-    STORE<f64>(buff, index + 2, a);
-    STORE<f64>(buff, index + 3, b);
-    STORE<f64>(buff, index + 4, c);
-    STORE<f64>(buff, index + 5, d);
-    STORE<f64>(buff, index + 6, e);
-    STORE<f64>(buff, index + 7, f);
-    STORE<f64>(buff, index + 8, g);
-    STORE<f64>(buff, index + 9, h);
-    STORE<f64>(buff, index + 10, i);
-    this._offset = next;
+    var buffer = changetype<usize>(this._buffer);
+    var index = this._offset;
+    var writer = changetype<Writer>(buffer + <usize>index << alignof<f64>());
+    writer.inst = <f64>inst;
+    writer.next = <f64>(this._offset = index + 11);
+    writer.a = a;
+    writer.b = b;
+    writer.c = c;
+    writer.d = d;
+    writer.e = e;
+    writer.f = f;
+    writer.g = g;
+    writer.h = h;
+    writer.i = i;
   }
 
   /**
@@ -259,9 +265,9 @@ export class Buffer<T extends i32> {
   protected _resetBuffer(): void {
     this._offset = 0;
     let length = this._retainedOffset;
-    let pointer = changetype<usize>(this._retained);
+    let retained = this._retained;
     for (let i = 0; i < length; i++) {
-      __release(load<usize>(pointer + (<usize>i << alignof<usize>())));
+      __release(retained[i]);
     }
     // all the pointers are released
     this._retainedOffset = 0;
@@ -273,10 +279,6 @@ export class Buffer<T extends i32> {
    * @param {usize} pointer - The pointer to be retained and released after the buffer is reset.
    */
   protected _retain(pointer: usize): void {
-    __retain(pointer);
-    var retained = changetype<usize>(this._retained);
-    var index = this._retainedOffset;
-    store<usize>(retained + (index << alignof<usize>()), pointer);
-    this._retainedOffset = index + 1;
+    this._retained[this._retainedOffset++] = __retain(pointer);
   }
 }

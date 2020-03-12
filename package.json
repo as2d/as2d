@@ -27,19 +27,19 @@
   "author": "Joshua Tenner <tenner.joshua@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "assemblyscript": "^0.8.0"
+    "assemblyscript": "^0.9.4"
   },
   "devDependencies": {
-    "@types/jest": "24.0.23",
-    "@types/node": "12.12.7",
-    "coveralls": "3.0.7",
-    "cross-env": "6.0.3",
-    "jest": "24.9.0",
+    "@types/jest": "25.1.4",
+    "@types/node": "13.9.0",
+    "coveralls": "3.0.9",
+    "cross-env": "7.0.2",
+    "jest": "25.1.0",
     "jest-canvas-mock": "2.2.0",
-    "jest-fetch-mock": "2.1.2",
+    "jest-fetch-mock": "3.0.3",
     "npm-run-all": "4.1.5",
     "onchange": "6.1.0",
-    "ts-jest": "24.1.0",
-    "typescript": "3.7.2"
+    "ts-jest": "25.2.1",
+    "typescript": "3.8.3"
   }
 }
