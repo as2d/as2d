@@ -53,6 +53,16 @@ var defaultFont: string = "10px sans-serif";
 var defaultShadowColor: string = "rgba(0, 0, 0, 0)";
 var defaultLineDash: Float64Array = new Float64Array(0);
 
+@unmanaged
+class Matrix2D {
+  a: f64;
+  b: f64;
+  c: f64;
+  d: f64;
+  e: f64;
+  f: f64;
+}
+
 //#region ARRAYBUFFERINITIALIZER
 /**
  * Utility function for setting the given ArrayBuffer to the identity 2d transform matrix inline.
@@ -61,12 +71,13 @@ var defaultLineDash: Float64Array = new Float64Array(0);
  */
 // @ts-ignore: Decorators are valid here
 function setArrayBufferIdentity(buff: usize): usize {
-  STORE<f64>(buff, 0, 1.0);
-  STORE<f64>(buff, 1, 0.0);
-  STORE<f64>(buff, 2, 0.0);
-  STORE<f64>(buff, 3, 1.0);
-  STORE<f64>(buff, 4, 0.0);
-  STORE<f64>(buff, 5, 0.0);
+  let matrix = changetype<Matrix2D>(buff);
+  matrix.a = 1.0;
+  matrix.b = 0.0;
+  matrix.c = 0.0;
+  matrix.d = 1.0;
+  matrix.e = 0.0;
+  matrix.f = 0.0;
   return buff;
 }
 
@@ -144,8 +155,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param {f64} y1 - A float number representing the second y coordinate point of the gradient.
    */
   public createLinearGradient(x0: f64, y0: f64, x1: f64, y1: f64): CanvasGradient {
-    var id: i32 = createLinearGradient(this.id, x0, y0, x1, y1);
-    var result: CanvasGradient = new CanvasGradient();
+    var id = createLinearGradient(this.id, x0, y0, x1, y1);
+    var result = new CanvasGradient();
     store<i32>(changetype<usize>(result), id, offsetof<CanvasGradient>("id"));
     return result;
   }
@@ -164,8 +175,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param {f64} r1 - The radius of the end circle. Must be non-negative and finite.
    */
   public createRadialGradient(x0: f64, y0: f64, r0: f64, x1: f64, y1: f64, r1: f64): CanvasGradient {
-    var id: i32 = createRadialGradient(this.id, x0, y0, r0, x1, y1, r1);
-    var result: CanvasGradient = new CanvasGradient();
+    var id = createRadialGradient(this.id, x0, y0, r0, x1, y1, r1);
+    var result = new CanvasGradient();
     store<i32>(changetype<usize>(result), id, offsetof<CanvasGradient>("id"));
     return result;
   }
@@ -186,7 +197,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _getTransform(): DOMMatrix {
-    var result: DOMMatrix = new DOMMatrix();
+    var result = new DOMMatrix();
     var stack = this._stack.reference();
     result.m11 = stack.a;
     result.m12 = stack.b;
@@ -252,20 +263,20 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var e = stack.e;
     var f = stack.f;
 
-    var current = changetype<usize>(this._currentTransform);
-    if ( a != LOAD<f64>(current, 0)
-      || b != LOAD<f64>(current, 1)
-      || c != LOAD<f64>(current, 2)
-      || d != LOAD<f64>(current, 3)
-      || e != LOAD<f64>(current, 4)
-      || f != LOAD<f64>(current, 5)) {
+    var current = changetype<Matrix2D>(this._currentTransform);
+    if ( a != current.a
+      || b != current.b
+      || c != current.c
+      || d != current.d
+      || e != current.e
+      || f != current.f) {
       super._writeSix(CanvasInstruction.SetTransform, a, b, c, d, e, f);
-      STORE<f64>(current, 0, a);
-      STORE<f64>(current, 1, b);
-      STORE<f64>(current, 2, c);
-      STORE<f64>(current, 3, d);
-      STORE<f64>(current, 4, e);
-      STORE<f64>(current, 5, f);
+      current.a = a;
+      current.b = b;
+      current.c = c;
+      current.d = d;
+      current.e = e;
+      current.f = f;
     }
   }
   //#endregion TRANSFORM
@@ -296,7 +307,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateDirection(): void {
-    var value: CanvasDirection = this._stack.reference().direction;
+    var value = this._stack.reference().direction;
     if (value != this._currentDirection) {
       this._currentDirection = value;
       super._writeOne(CanvasInstruction.Direction, <f64>value);
@@ -343,7 +354,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     } else {
       __release(changetype<usize>(stack.fillStyleString));
     }
-    stack.fillStyleString = value!;
+    stack.fillStyleString = value;
     stack.fillStyleValue = changetype<usize>(value);
   }
 
@@ -442,7 +453,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   public createPattern(img: Image, repetition: CanvasPatternRepetition): CanvasPattern {
     var result = new CanvasPattern();
-    var id: i32 = load<i32>(changetype<usize>(img), offsetof<Image>("_id"));
+    var id = load<i32>(changetype<usize>(img), offsetof<Image>("_id"));
     store<i32>(changetype<usize>(result), createPattern(this.id, id, repetition), offsetof<CanvasPattern>("id"));
     return result;
   }
@@ -477,7 +488,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateFilter(): void {
-    var value: string = this._stack.reference().filter;
+    var value = this._stack.reference().filter;
     if (value != this._currentFilter) {
       this._currentFilter = value;
       super._retain(changetype<usize>(value));
@@ -514,7 +525,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateFont(): void {
-    var value: string = this._stack.reference().font;
+    var value = this._stack.reference().font;
     if (value != this._currentFont) {
       this._currentFont = value;
       super._retain(changetype<usize>(value));
@@ -550,7 +561,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateGlobalAlpha(): void {
-    var value: f64 = this._stack.reference().globalAlpha;
+    var value = this._stack.reference().globalAlpha;
     if (value != this._currentGlobalAlpha) {
       this._currentGlobalAlpha = value;
       super._writeOne(CanvasInstruction.GlobalAlpha, value);
@@ -620,7 +631,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateImageSmoothingEnabled(): void {
-    var value: bool = this._stack.reference().imageSmoothingEnabled;
+    var value = this._stack.reference().imageSmoothingEnabled;
     if (value != this._currentImageSmoothingEnabled) {
       this._currentImageSmoothingEnabled = value;
       super._writeOne(CanvasInstruction.ImageSmoothingEnabled, value ? 1.0 : 0.0);
@@ -747,8 +758,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateLineDash(): void {
-    var lineDash: Float64Array = this._getLineDash();
-    var current: Float64Array = this._currentLineDash;
+    var lineDash = this._getLineDash();
+    var current = this._currentLineDash;
 
     if (!arraysEqual(current, lineDash)) {
       this._currentLineDash = lineDash;
@@ -785,7 +796,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateLineDashOffset(): void {
-    var value: f64 = this._stack.reference().lineDashOffset;
+    var value = this._stack.reference().lineDashOffset;
     if (value != this._currentLineDashOffset) {
       this._currentLineDashOffset = value;
       super._writeOne(CanvasInstruction.LineDashOffset, value);
@@ -822,7 +833,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateLineJoin(): void {
-    var value: LineJoin = this._stack.reference().lineJoin;
+    var value = this._stack.reference().lineJoin;
     if (value != this._currentLineJoin) {
       this._currentLineJoin = value;
       super._writeOne(CanvasInstruction.LineJoin, <f64>value);
@@ -856,7 +867,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateLineWidth(): void {
-    var value: f64 = this._stack.reference().lineWidth;
+    var value = this._stack.reference().lineWidth;
     if (value != this._currentLineWidth) {
       this._currentLineWidth = value;
       super._writeOne(CanvasInstruction.LineWidth, value);
@@ -891,7 +902,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateMiterLimit(): void {
-    var value: f64 = this._stack.reference().miterLimit;
+    var value = this._stack.reference().miterLimit;
     if (value != this._currentMiterLimit) {
       this._currentMiterLimit = value;
       super._writeOne(CanvasInstruction.MiterLimit, value);
@@ -930,7 +941,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateShadowBlur(): void {
-    var value: f64 = this._stack.reference().shadowBlur;
+    var value = this._stack.reference().shadowBlur;
     if (value != this._currentShadowBlur) {
       this._currentShadowBlur = value;
       super._writeOne(CanvasInstruction.ShadowBlur, value);
@@ -954,7 +965,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   }
 
   public set shadowColor(value: string) {
-    if (value == null) value = defaultShadowColor;
+    if (changetype<usize>(value) == <usize>0) value = defaultShadowColor;
     var stack = this._stack.reference();
     __retain(changetype<usize>(value));
     __release(changetype<usize>(stack.shadowColor));
@@ -967,7 +978,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateShadowColor(): void {
-    var value: string = this._stack.reference().shadowColor;
+    var value = this._stack.reference().shadowColor;
     if (value != this._currentShadowColor) {
       this._currentFilter = value;
       super._retain(changetype<usize>(value));
@@ -1006,7 +1017,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateShadowOffsetX(): void {
-    var value: f64 = this._stack.reference().shadowOffsetX;
+    var value = this._stack.reference().shadowOffsetX;
     if (value != this._currentShadowOffsetX) {
       this._currentShadowOffsetX = value;
       super._writeOne(CanvasInstruction.ShadowOffsetX, value);
@@ -1044,7 +1055,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateShadowOffsetY(): void {
-    var value: f64 = this._stack.reference().shadowOffsetY;
+    var value = this._stack.reference().shadowOffsetY;
     if (value != this._currentShadowOffsetY) {
       this._currentShadowOffsetY = value;
       super._writeOne(CanvasInstruction.ShadowOffsetY, value);
@@ -1209,7 +1220,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateTextAlign(): void {
-    var value: TextAlign = this._stack.reference().textAlign;
+    var value = this._stack.reference().textAlign;
     if (value != this._currentTextAlign) {
       this._currentTextAlign = value;
       super._writeOne(CanvasInstruction.TextAlign, <f64>value);
@@ -1242,7 +1253,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   @inline
   private _updateTextBaseline(): void {
-    var value: TextBaseline = this._stack.reference().textBaseline;
+    var value = this._stack.reference().textBaseline;
     if (value != this._currentTextBaseline) {
       this._currentTextBaseline = value;
       super._writeOne(CanvasInstruction.TextBaseline, <f64>value);
@@ -1265,8 +1276,8 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param {bool} hard - Tells the context to perform an actual `save()` operation. Default value is false.
    */
   public save(hard: bool = false): void {
-    var offset: i32 = <i32>this._stackOffset;
-    var nextOffset: i32 = offset + 1;
+    var offset = <i32>this._stackOffset;
+    var nextOffset = offset + 1;
     if (nextOffset >= <i32>u8.MAX_VALUE) unreachable();
     let stack = this._stack.push();
     this._stack = stack;
@@ -1561,7 +1572,17 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    */
   public arc(x: f64, y: f64, radius: f64, startAngle: f64, endAngle: f64 , anticlockwise: bool = false): void {
     if (!isFinite(x + y + radius + startAngle + endAngle) || radius < 0) return;
-    this._writePath(CanvasInstruction.Arc, true, 6, x, y, radius, startAngle, endAngle, anticlockwise ? 1.0 : 0.0);
+    this._writePath(
+      CanvasInstruction.Arc,
+      true,
+      6,
+      x,
+      y,
+      radius,
+      startAngle,
+      endAngle,
+      select<f64>(1.0, 0.0, anticlockwise),
+    );
   }
   //#endregion ARC
 
@@ -1796,7 +1817,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
       CanvasInstruction.Ellipse,
       true, 8,
       x, y, radiusX, radiusY,
-      rotation, startAngle, endAngle, anticlockwise ? 1.0 : 0.0,
+      rotation, startAngle, endAngle, select<f64>(1.0, 0.0, anticlockwise),
     );
   }
   //#endregion ELLIPSE
@@ -1891,7 +1912,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param y - The y-axis coordinate of the point at which to begin drawing the text, in pixels.
    */
   public fillText(text: string, x: f64, y: f64): void {
-    if (!isFinite(x + y) || text == null || text.length == 0) return;
+    if (i32(!isFinite(x + y)) | i32(text == null) | i32(text.length == 0)) return;
     this._updateDirection();
     this._updateFillStyle();
     this._updateFilter();
@@ -1932,7 +1953,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * user agent will adjust the kerning, select a more horizontally condensed font (if one is available or can be generated without loss of quality), or scale down to a smaller font size in order to fit the text in the specified width.
    */
   public fillTextWidth(text: string, x: f64, y: f64, maxWidth: f64): void {
-    if (!isFinite(x + y + maxWidth) || text == null || text.length == 0 || maxWidth < 0) return;
+    if (i32(!isFinite(x + y + maxWidth)) | i32(text == null) | i32(text.length == 0) | i32(maxWidth < 0)) return;
     this._updateDirection();
     this._updateFillStyle();
     this._updateFilter();
@@ -2102,24 +2123,18 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     var sin: f64 = NativeMath.sincos_sin;
 
     if (ASC_FEATURE_SIMD) {
-      let stack = this._stack.dereference();
+      let stack = this._stack.reference();
       let cossplat = v128.splat<f64>(cos);
       let sinsplat = v128.splat<f64>(sin);
-      let ab = v128.load(stack, offsetof<CanvasStack>("a"));
-      let cb = v128.load(stack, offsetof<CanvasStack>("c"));
-      v128.store(stack,
-        v128.add<f64>(
-          v128.mul<f64>(ab, cossplat),
-          v128.mul<f64>(cb, sinsplat),
-        ),
-        offsetof<CanvasStack>("a"),
+      let ab = stack.ab;
+      let cd = stack.cd;
+      stack.ab = v128.add<f64>(
+        v128.mul<f64>(ab, cossplat),
+        v128.mul<f64>(cd, sinsplat),
       );
-      v128.store(stack,
-        v128.sub<f64>(
-          v128.mul<f64>(cb, cossplat),
-          v128.mul<f64>(ab, sinsplat),
-        ),
-        offsetof<CanvasStack>("c"),
+      stack.cd = v128.sub<f64>(
+        v128.mul<f64>(cd, cossplat),
+        v128.mul<f64>(ab, sinsplat),
       );
     } else {
       var stack = this._stack.reference();
@@ -2152,20 +2167,15 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   public scale(x: f64, y: f64): void {
     if (!isFinite(x + y)) return;
     if (ASC_FEATURE_SIMD) {
-      let stack = this._stack.dereference();
-      v128.store(stack,
-        v128.mul<f64>(
-          v128.load(stack, offsetof<CanvasStack>("a")),
-          v128.splat<f64>(x),
-        ),
-        offsetof<CanvasStack>("a"),
+      let stack = this._stack.reference();
+      stack.ab = v128.mul<f64>(
+        stack.ab,
+        v128.splat<f64>(x),
       );
-      v128.store(stack,
-        v128.mul<f64>(
-          v128.load(stack, offsetof<CanvasStack>("c")),
-          v128.splat<f64>(y),
-        ),
-        offsetof<CanvasStack>("c"),
+
+      stack.cd = v128.mul<f64>(
+        stack.cd,
+        v128.splat<f64>(y),
       );
     } else {
       let stack = this._stack.reference();
@@ -2300,7 +2310,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * @param {f64} y - The y-axis coordinate of the point at which to begin drawing the text.
    */
   public strokeText(text: string, x: f64, y: f64): void {
-    if (!isFinite(x + y) || text == null || text.length == 0) return;
+    if (i32(!isFinite(x + y)) | i32(text == null) | i32(text.length == 0)) return;
     this._updateDirection();
     this._updateFilter();
     this._updateFont();
@@ -2346,7 +2356,7 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
    * text in the specified width.
    */
   public strokeTextWidth(text: string, x: f64, y: f64, maxWidth: f64): void {
-    if (!isFinite(x + y + maxWidth) || text == null || text.length == 0 || maxWidth < 0) return;
+    if (i32(!isFinite(x + y + maxWidth)) | i32(text == null) | i32(text.length == 0) | i32(maxWidth < 0)) return;
     this._updateDirection();
     this._updateFilter();
     this._updateFont();
@@ -2389,36 +2399,24 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   public transform(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64): void {
     if (!isFinite(a + b + c + d + e + f)) return;
     if (ASC_FEATURE_SIMD) {
-      let stack = this._stack.dereference();
-      let ab = v128.load(stack, offsetof<CanvasStack>("a"));
-      let cd = v128.load(stack, offsetof<CanvasStack>("c"));
-      let ef = v128.load(stack, offsetof<CanvasStack>("e"));
-      v128.store(
-        stack,
-        v128.add<f64>(
-          v128.mul<f64>(ab, v128.splat<f64>(a)),
-          v128.mul<f64>(cd, v128.splat<f64>(b)),
-        ),
-        offsetof<CanvasStack>("a"),
+      let stack = this._stack.reference();
+      let ab = stack.ab;
+      let cd = stack.cd;
+      let ef = stack.ef;
+      stack.ab = v128.add<f64>(
+        v128.mul<f64>(ab, v128.splat<f64>(a)),
+        v128.mul<f64>(cd, v128.splat<f64>(b)),
       );
-      v128.store(
-        stack,
-        v128.add<f64>(
-          v128.mul<f64>(ab, v128.splat<f64>(c)),
-          v128.mul<f64>(cd, v128.splat<f64>(d)),
-        ),
-        offsetof<CanvasStack>("c"),
+      stack.cd = v128.add<f64>(
+        v128.mul<f64>(ab, v128.splat<f64>(c)),
+        v128.mul<f64>(cd, v128.splat<f64>(d)),
       );
-      v128.store(
-        stack,
+      stack.ef = v128.add<f64>(
         v128.add<f64>(
-          v128.add<f64>(
-            v128.mul<f64>(ab, v128.splat<f64>(e)),
-            v128.mul<f64>(cd, v128.splat<f64>(f)),
-          ),
-          ef,
+          v128.mul<f64>(ab, v128.splat<f64>(e)),
+          v128.mul<f64>(cd, v128.splat<f64>(f)),
         ),
-        offsetof<CanvasStack>("e"),
+        ef,
       );
     } else {
       let stack = this._stack.reference();
@@ -2451,20 +2449,16 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
     if (!isFinite(x + y)) return;
 
     if (ASC_FEATURE_SIMD) {
-      let stack = this._stack.dereference();
-      v128.store(
-        stack,
-        v128.add<f64>(
-          v128.mul<f64>(
-            v128.load(stack, offsetof<CanvasStack>("a")),
-            v128.splat<f64>(x),
-          ),
-          v128.mul<f64>(
-            v128.load(stack, offsetof<CanvasStack>("c")),
-            v128.splat<f64>(y),
-          ),
+      let stack = this._stack.reference();
+      stack.ef = v128.add<f64>(
+        v128.mul<f64>(
+          stack.ab,
+          v128.splat<f64>(x),
         ),
-        offsetof<CanvasStack>("e"),
+        v128.mul<f64>(
+          stack.cd,
+          v128.splat<f64>(y),
+        ),
       );
     } else {
       let stack = this._stack.reference();

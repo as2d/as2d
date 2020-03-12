@@ -47,4 +47,40 @@ export class CanvasStack {
   textAlign: TextAlign;
   textBaseline: TextBaseline;
   save: bool;
+
+  /** Get or set a v128 of ab. */
+  @inline
+  get ab(): v128 {
+    return v128.load(changetype<usize>(this), offsetof<CanvasStack>("a"));
+  }
+
+  // @ts-ignore: decorator
+  @inline
+  set ab(value: v128) {
+    v128.store(changetype<usize>(this), value, offsetof<CanvasStack>("a"));
+  }
+
+  @inline
+  /** Get a v128 of cd. */
+  get cd(): v128 {
+    return v128.load(changetype<usize>(this), offsetof<CanvasStack>("c"));
+  }
+
+  // @ts-ignore: decorator
+  @inline
+  set cd(value: v128) {
+    v128.store(changetype<usize>(this), value, offsetof<CanvasStack>("c"));
+  }
+
+  /** Get a v128 of cd. */
+  @inline
+  get ef(): v128 {
+    return v128.load(changetype<usize>(this), offsetof<CanvasStack>("e"));
+  }
+
+  // @ts-ignore: decorator
+  @inline
+  set ef(value: v128) {
+    v128.store(changetype<usize>(this), value, offsetof<CanvasStack>("e"));
+  }
 }
