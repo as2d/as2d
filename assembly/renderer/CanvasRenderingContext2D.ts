@@ -1398,18 +1398,18 @@ export class CanvasRenderingContext2D extends Buffer<CanvasInstruction> {
   /**
    * A reference to the path start for quick path resetting.
    */
-  private _pathStart: StackPointer<Path2DElement> = this._path.decrement();
+  private _pathStart: StackPointer<Path2DElement> = (changetype<CanvasRenderingContext2D>(this))._path.decrement();
 
   /**
    * A pointer that points to the end of the path.
    */
   private _pathEnd: StackPointer<Path2DElement> =
-    changetype<StackPointer<Path2DElement>>(changetype<usize>(this._pathStart) + offsetof<Path2DElement>() * 0x1000);
+    changetype<StackPointer<Path2DElement>>(changetype<usize>((changetype<CanvasRenderingContext2D>(this))._pathStart) + offsetof<Path2DElement>() * 0x1000);
 
   /**
    * A reference to the next path item that should be written to the buffer.
    */
-  private _pathCurrent: StackPointer<Path2DElement> = this._pathStart;
+  private _pathCurrent: StackPointer<Path2DElement> = (changetype<CanvasRenderingContext2D>(this))._pathStart;
 
   /**
    * An internal function that writes a single path item to the _path.
